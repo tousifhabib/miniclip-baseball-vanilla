@@ -310,3 +310,92 @@ fn a_ball_that_is_hit_leaves_the_bat_at_the_size_it_had_grown_to() {
         "the ball is drawn at {size} times the art's size"
     );
 }
+
+#[test]
+fn the_landing_pointer_follows_the_ring_before_the_pitch_is_shown() {
+    let Some(mut script) = game("match") else {
+        return;
+    };
+    // The pitcher has not begun his wind-up, so nothing has been shown yet.
+    script.run("wait 20; move 150 250; wait 30").unwrap();
+    let pointer_x = |script: &bb_game::script::Script| {
+        let stage = &script.runner.stage;
+        let main = stage.find_named(&[], "gameMain").unwrap();
+        let area = stage.find(&main, &["aimArea"]).unwrap();
+        stage.child(&area).unwrap().matrix.tx
+    };
+    let ring_left = pointer_x(&script);
+    script.run("move 420 250; wait 30").unwrap();
+    let ring_right = pointer_x(&script);
+    assert!(
+        script.run("state").unwrap()[0].contains("Settling"),
+        "the pitch should not have been shown yet"
+    );
+    // Aiming to one side sends the ball the other way.
+    assert!(
+        ring_left > ring_right + 100.0,
+        "ring left gave {ring_left}, ring right gave {ring_right}"
+    );
+}
+
+#[test]
+fn a_fielder_throws_once_and_then_stands() {
+    use bb_engine::display::Content;
+
+    let Some(mut script) = game("match") else {
+        return;
+    };
+    let state = |script: &mut bb_game::script::Script| {
+        script.run("state").unwrap().pop().unwrap_or_default()
+    };
+    // Seed 1's first pitch, met poorly, stays in the field and is thrown in.
+    loop {
+        let look = seen(&state(&mut script));
+        if look.phase == "Flight" {
+            let (x, y) = look.crossing.unwrap();
+            let wait = look.frames - 16;
+            script
+                .run(&format!("move {x} {y}; wait {wait}; click {x} {y}"))
+                .unwrap();
+            break;
+        }
+        if let Some((x, y)) = look.crossing {
+            script.run(&format!("move {x} {y}")).unwrap();
+        }
+        script.run("wait 1").unwrap();
+    }
+    for _ in 0..3000 {
+        if seen(&state(&mut script)).phase == "Ready" {
+            break;
+        }
+        script.run("wait 1").unwrap();
+    }
+    assert_eq!(seen(&state(&mut script)).phase, "Ready");
+    // Long enough for any throw to have played out, and to have begun
+    // again if nothing stopped it.
+    script.run("wait 240").unwrap();
+
+    let stage = &script.runner.stage;
+    let main = stage.find_named(&[], "gameMain").unwrap();
+    let mut threw = 0;
+    for number in 1..=9 {
+        let path = stage
+            .find(&main, &["field", &format!("fielder{number}")])
+            .unwrap();
+        let fielder = stage.clip(&path).unwrap();
+        if !(46..=145).contains(&fielder.frame) {
+            continue;
+        }
+        threw += 1;
+        for child in fielder.children.values() {
+            if let Content::Clip(part) = &child.content {
+                assert!(
+                    !part.playing || part.frame_count(&script.runner.library) <= 1,
+                    "fielder {number} is still going through frame {}",
+                    part.frame
+                );
+            }
+        }
+    }
+    assert!(threw > 0, "nobody was left in a throwing pose to check");
+}

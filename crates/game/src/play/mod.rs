@@ -639,11 +639,17 @@ impl Match {
 
     /// Works out where a hit made now would go sideways, and shows it.
     fn point_hit(at_bat: &mut AtBat, pull: f32, stage: &mut Stage, library: &Library) {
-        if !at_bat.marker_shown || at_bat.contact.is_some() {
+        if at_bat.contact.is_some() {
             return;
         }
         let parts = &at_bat.parts;
-        let crosses = at_bat.pitch.crosses.0;
+        // Until the player has been shown where this pitch will cross, the
+        // pointer answers the ring as if it were coming down the middle.
+        let crosses = if at_bat.marker_shown {
+            at_bat.pitch.crosses.0
+        } else {
+            parts.centre_x
+        };
         // Aiming to one side sends the ball the other way, and a ball that
         // comes in off-centre goes off further still.
         let off = (crosses - at_bat.aim.0) + (crosses - parts.centre_x);
@@ -676,6 +682,7 @@ impl Match {
         stage.clip(&at_bat.parts.main)?;
         let rules = &game.rules;
         Match::still_batter(stage, &at_bat.parts.hitter, library);
+        Match::settle_fielders(&at_bat.parts, stage, library);
         if at_bat.contact.is_none() {
             Match::aim(&mut at_bat, stage);
             Match::point_hit(&mut at_bat, rules.hit.pull, stage, library);

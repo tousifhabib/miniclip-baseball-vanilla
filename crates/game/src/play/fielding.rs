@@ -1,7 +1,7 @@
 //! The overhead view: the ball in play, the fielder going after it, the
 //! throws to the bases, and the runners.
 
-use bb_engine::display::Path;
+use bb_engine::display::{Content, Path};
 use bb_engine::library::Library;
 use bb_engine::stage::Stage;
 use bb_format::SymbolId;
@@ -72,7 +72,44 @@ const FIRST_SLIDE_FRAME: u16 = 850;
 const RUN_BUTTONS: [SymbolId; 3] = [1501, 1503, 1520];
 const SLIDE_BUTTONS: [SymbolId; 5] = [1494, 1495, 1502, 1519, 1521];
 
+/// The frames of a fielder on which he picks the ball up, throws it or
+/// catches it. Each shows a clip inside him that is meant to play once.
+const ONCE_ONLY: std::ops::RangeInclusive<u16> = 46..=145;
+
 impl Match {
+    /// Stops a fielder's pick-up, throw or catch when it has played.
+    ///
+    /// Each is a clip inside the fielder, and the art stopped most of them
+    /// from scripts on their last frames. Left alone they start again, and
+    /// he throws the same ball over and over.
+    pub(crate) fn settle_fielders(parts: &Parts, stage: &mut Stage, library: &Library) {
+        let mut played = Vec::new();
+        for fielder in &parts.fielders {
+            let Some(clip) = stage.clip(fielder) else {
+                continue;
+            };
+            if !ONCE_ONLY.contains(&clip.frame) {
+                continue;
+            }
+            for (&depth, child) in &clip.children {
+                if let Content::Clip(part) = &child.content
+                    && part.playing
+                    && part.frame_count(library) > 1
+                    && part.frame >= part.frame_count(library)
+                {
+                    let mut path = fielder.clone();
+                    path.push(depth);
+                    played.push(path);
+                }
+            }
+        }
+        for path in played {
+            if let Some(part) = stage.clip_mut(&path) {
+                part.playing = false;
+            }
+        }
+    }
+
     /// Sets a runner off for a base.
     fn send(&mut self, runner: usize, to: u8, stage: &mut Stage, library: &Library) {
         self.runners[runner].running_to = Some(to);
