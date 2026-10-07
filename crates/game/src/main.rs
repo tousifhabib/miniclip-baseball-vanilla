@@ -9,14 +9,17 @@ use bb_engine::library::Library;
 use bb_engine::stage::Stage;
 use bb_engine::window::{self, Options};
 use bb_game::baseball::{Baseball, Screen};
+use bb_game::locate;
 use bb_game::script::Script;
 use clap::Parser;
 
 #[derive(Parser)]
 #[command(about = "Plays the baseball game")]
 struct Args {
-    /// The folder `bb-extract` wrote.
-    dir: PathBuf,
+    /// The folder `bb-extract` wrote. Without this, the game looks inside
+    /// its own app bundle, then in its folder under Application Support,
+    /// then beside the program, then for `extracted` where it was started.
+    dir: Option<PathBuf>,
     /// Play no sound.
     #[arg(long)]
     mute: bool,
@@ -43,7 +46,7 @@ struct Args {
 
 fn main() -> Result<()> {
     let args = Args::parse();
-    let library = Library::load(&args.dir)?;
+    let library = Library::load(&locate::find(args.dir.as_deref())?)?;
     let stage = Stage::new(None, &library);
     let mut logic = Box::new(Baseball::new(&library));
     if let Some(label) = &args.screen {

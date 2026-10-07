@@ -3,5 +3,6 @@
 
 pub mod art;
 pub mod baseball;
+pub mod locate;
 pub mod rng;
 pub mod script;
