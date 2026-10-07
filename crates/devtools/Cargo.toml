@@ -26,6 +26,10 @@ path = "src/frame_diff.rs"
 name = "clip-sheet"
 path = "src/clip_sheet.rs"
 
+[[bin]]
+name = "svg-png"
+path = "src/svg_png.rs"
+
 [dependencies]
 anyhow.workspace = true
 bb-engine = { path = "../engine" }

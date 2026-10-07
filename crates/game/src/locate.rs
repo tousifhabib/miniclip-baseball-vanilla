@@ -54,6 +54,16 @@ pub fn candidates(
     places
 }
 
+/// Whether the program is running from inside an app bundle, and so has no
+/// terminal to speak through.
+pub fn in_app_bundle() -> bool {
+    std::env::current_exe()
+        .ok()
+        .as_deref()
+        .and_then(Path::parent)
+        .is_some_and(|folder| folder.ends_with("Contents/MacOS"))
+}
+
 /// Whether `dir` holds extracted art.
 fn holds_art(dir: &Path) -> bool {
     dir.join("manifest.json").is_file()

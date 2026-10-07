@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The app's icon. Drawn for this project; nothing in it comes from the game. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b82c4"/>
+      <stop offset="1" stop-color="#0f3566"/>
+    </linearGradient>
+    <radialGradient id="leather" cx="0.36" cy="0.30" r="0.85">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.7" stop-color="#f1ede2"/>
+      <stop offset="1" stop-color="#cfc8b6"/>
+    </radialGradient>
+    <clipPath id="ball">
+      <circle cx="512" cy="512" r="292"/>
+    </clipPath>
+  </defs>
+  <rect x="100" y="100" width="824" height="824" rx="186" fill="url(#tile)"/>
+  <ellipse cx="512" cy="836" rx="230" ry="26" fill="#000000" fill-opacity="0.22"/>
+  <circle cx="512" cy="512" r="292" fill="url(#leather)"/>
+  <g clip-path="url(#ball)" fill="none" stroke="#c4202e" stroke-width="13" stroke-linecap="round">
+    <circle cx="140.0" cy="512.0" r="330.0"/>
+    <path d="M383.3 289.1 L369.1 324.5"/>
+    <path d="M383.3 289.1 L421.7 281.4"/>
+    <path d="M413.6 327.5 L394.3 360.4"/>
+    <path d="M413.6 327.5 L452.7 325.6"/>
+    <path d="M437.9 369.9 L413.9 399.7"/>
+    <path d="M437.9 369.9 L476.8 373.9"/>
+    <path d="M455.6 415.5 L427.5 441.4"/>
+    <path d="M455.6 415.5 L493.5 425.2"/>
+    <path d="M466.4 463.2 L434.7 484.7"/>
+    <path d="M466.4 463.2 L502.4 478.4"/>
+    <path d="M470.0 512.0 L435.5 528.5"/>
+    <path d="M470.0 512.0 L503.4 532.3"/>
+    <path d="M466.4 560.8 L429.8 572.0"/>
+    <path d="M466.4 560.8 L496.4 585.8"/>
+    <path d="M455.6 608.5 L417.8 614.2"/>
+    <path d="M455.6 608.5 L481.6 637.7"/>
+    <path d="M437.9 654.1 L399.6 654.1"/>
+    <path d="M437.9 654.1 L459.3 686.8"/>
+    <path d="M413.6 696.5 L375.8 691.0"/>
+    <path d="M413.6 696.5 L429.9 732.1"/>
+    <path d="M383.3 734.9 L346.7 723.8"/>
+    <path d="M383.3 734.9 L394.2 772.5"/>
+    <circle cx="884.0" cy="512.0" r="330.0"/>
+    <path d="M640.7 289.1 L654.9 324.5"/>
+    <path d="M640.7 289.1 L602.3 281.4"/>
+    <path d="M610.4 327.5 L629.7 360.4"/>
+    <path d="M610.4 327.5 L571.3 325.6"/>
+    <path d="M586.1 369.9 L610.1 399.7"/>
+    <path d="M586.1 369.9 L547.2 373.9"/>
+    <path d="M568.4 415.5 L596.5 441.4"/>
+    <path d="M568.4 415.5 L530.5 425.2"/>
+    <path d="M557.6 463.2 L589.3 484.7"/>
+    <path d="M557.6 463.2 L521.6 478.4"/>
+    <path d="M554.0 512.0 L588.5 528.5"/>
+    <path d="M554.0 512.0 L520.6 532.3"/>
+    <path d="M557.6 560.8 L594.2 572.0"/>
+    <path d="M557.6 560.8 L527.6 585.8"/>
+    <path d="M568.4 608.5 L606.2 614.2"/>
+    <path d="M568.4 608.5 L542.4 637.7"/>
+    <path d="M586.1 654.1 L624.4 654.1"/>
+    <path d="M586.1 654.1 L564.7 686.8"/>
+    <path d="M610.4 696.5 L648.2 691.0"/>
+    <path d="M610.4 696.5 L594.1 732.1"/>
+    <path d="M640.7 734.9 L677.3 723.8"/>
+    <path d="M640.7 734.9 L629.8 772.5"/>
+  </g>
+  <circle cx="512" cy="512" r="292" fill="none" stroke="#8d8672" stroke-opacity="0.55" stroke-width="5"/>
+</svg>

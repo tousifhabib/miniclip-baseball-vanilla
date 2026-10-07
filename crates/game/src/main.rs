@@ -1,6 +1,7 @@
 //! Plays the baseball game, in a window or from a script.
 
 use std::path::PathBuf;
+use std::process::{Command, ExitCode};
 
 use anyhow::{Context, Result};
 use bb_engine::app::Runner;
@@ -44,7 +45,35 @@ struct Args {
     scale: f32,
 }
 
-fn main() -> Result<()> {
+fn main() -> ExitCode {
+    match run() {
+        Ok(()) => ExitCode::SUCCESS,
+        Err(error) => {
+            let message = format!("{error:#}");
+            eprintln!("Error: {message}");
+            // An app has no terminal for that to be read in.
+            if locate::in_app_bundle() {
+                alert(&message);
+            }
+            ExitCode::FAILURE
+        }
+    }
+}
+
+/// Puts up a system alert saying `message`, and waits for it to be
+/// dismissed.
+fn alert(message: &str) {
+    // AppleScript strings escape only the backslash and the double quote.
+    let quoted = message.replace('\\', "\\\\").replace('"', "\\\"");
+    let script =
+        format!("display alert \"The game could not start\" message \"{quoted}\" as critical");
+    // If this fails too there is nothing more to be done about it.
+    let _ = Command::new("/usr/bin/osascript")
+        .args(["-e", &script])
+        .status();
+}
+
+fn run() -> Result<()> {
     let args = Args::parse();
     let library = Library::load(&locate::find(args.dir.as_deref())?)?;
     let stage = Stage::new(None, &library);

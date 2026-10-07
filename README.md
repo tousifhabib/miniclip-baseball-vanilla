@@ -18,7 +18,7 @@ project is not affiliated with or endorsed by Miniclip.
 | 4 | Check the engine's output against an independent renderer | Done |
 | 5 | Game logic: the rules, written fresh on top of the original art | In progress |
 | 6 | Restructure for modding: data files, mod folders, hot reload | |
-| 7 | Package as a Mac app | |
+| 7 | Package as a Mac app | In progress: the app builds and runs |
 
 ## Layout
 
@@ -29,6 +29,8 @@ project is not affiliated with or endorsed by Miniclip.
 | `crates/engine` | Plays the extracted timelines and draws them; `bb-player` and `bb-shot` |
 | `crates/game` | The baseball game itself: `bb-game` |
 | `crates/devtools` | Checks used while developing |
+| `scripts/bundle-mac.sh` | Builds the Mac app |
+| `assets/icon.svg` | The app's icon, drawn for this project |
 
 ## Extracting the game
 
@@ -122,6 +124,29 @@ every object on the stage, and `shot FILE` saves a picture.
 The same steps drive the tests in `crates/game/tests`, which play the real
 game with no window. They need the extracted art in `extracted/`, and pass
 without checking anything where it is missing.
+
+## Making the Mac app
+
+```bash
+scripts/bundle-mac.sh
+open target/app/Baseball.app
+```
+
+This builds the game with its slowest, smallest settings, draws the icon in
+every size, and puts the art from `extracted/` inside the app, so the app
+runs on its own. It is signed for the Mac it was built on, which is enough
+to run it there. Giving it to anyone else would need a Developer ID
+signature and notarising.
+
+`--no-art` leaves the art out. The app then looks for it in
+`~/Library/Application Support/io.github.tousifhabib.baseball/extracted`.
+`--universal` builds for both Apple and Intel Macs, once both targets have
+been added with `rustup target add`.
+
+Started with no folder named, the game looks for the art inside its own
+app, then in that Application Support folder, then beside the program, then
+for `extracted` in the folder it was started from. If it cannot start, the
+app says why in an alert.
 
 ## Checking the engine
 
