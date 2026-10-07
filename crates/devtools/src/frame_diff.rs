@@ -2,8 +2,8 @@
 //! pictures of the same frames from another renderer.
 //!
 //! The reference pictures are laid out as JPEXS Free Flash Decompiler exports
-//! sprites: `DefineSprite_<id>/<frame>.png`, every frame of a clip the same
-//! size. JPEXS runs no scripts, so the engine plays every timeline straight
+//! sprites: `DefineSprite_<id>/<frame>.png` (with the clip's export name
+//! added to the folder, if it has one), every frame of a clip the same size. JPEXS runs no scripts, so the engine plays every timeline straight
 //! through too.
 
 use std::collections::{BTreeMap, HashMap};
@@ -112,7 +112,7 @@ fn main() -> Result<()> {
         if !args.clips.is_empty() && !args.clips.contains(&id) {
             continue;
         }
-        let frames = reference_frames(&args.reference.join(format!("DefineSprite_{id}")));
+        let frames = reference_frames(&reference_dir(&args.reference, id));
         let (Some(&first), Some(&last)) = (frames.keys().next(), frames.keys().next_back()) else {
             continue;
         };
@@ -224,6 +224,27 @@ fn main() -> Result<()> {
         }
     }
     Ok(())
+}
+
+/// The folder holding one clip's reference pictures. A clip that has an
+/// export name gets it added to its folder's name, as in
+/// `DefineSprite_1539_runner`.
+fn reference_dir(root: &Path, clip: u16) -> PathBuf {
+    let plain = root.join(format!("DefineSprite_{clip}"));
+    if plain.is_dir() {
+        return plain;
+    }
+    let prefix = format!("DefineSprite_{clip}_");
+    fs::read_dir(root)
+        .into_iter()
+        .flatten()
+        .filter_map(|entry| Some(entry.ok()?.path()))
+        .find(|path| {
+            path.file_name()
+                .and_then(|name| name.to_str())
+                .is_some_and(|name| name.starts_with(&prefix))
+        })
+        .unwrap_or(plain)
 }
 
 /// The reference pictures of one clip, by frame number.
@@ -613,7 +634,7 @@ fn save_pair(
     diff: &Diff,
     dir: &Path,
 ) -> Result<()> {
-    let folder = args.reference.join(format!("DefineSprite_{}", diff.clip));
+    let folder = reference_dir(&args.reference, diff.clip);
     let reference = image::open(folder.join(format!("{}.png", diff.frame)))?.to_rgba8();
     let (width, height) = reference.dimensions();
 

@@ -92,8 +92,8 @@ catches anything missing, misplaced or the wrong colour. `--save` writes
 three panels for each of the worst clips: the engine's picture, the
 reference, and a map of where they disagree.
 
-On 1,040 frames sampled across all 267 clips that have pictures, 1,015 are
-within 1% and 1,038 within 5%. Looking into the rest found two faults in
+On 1,056 frames sampled across all 268 clips, 1,031 are within 1% and
+1,054 within 5%. Looking into the rest found two faults in
 the engine, both fixed:
 
 - A stroke was stretched and skewed along with its shape. Flash draws
