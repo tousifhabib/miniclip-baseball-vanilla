@@ -21,7 +21,7 @@ run or support this project.
 | 3 | Engine: a Flash-style tree of clips with timelines, drawn with `wgpu` | Done |
 | 4 | Check the engine's output against an independent renderer | Done |
 | 5 | Game logic: the rules, written fresh on top of the original art | In progress: both games can be played from the first pitch to the result |
-| 6 | Restructure for modding: data files, mod folders, hot reload | Started: the game's numbers live in a data file |
+| 6 | Restructure for modding: data files, mod folders, hot reload | The numbers live in a data file here. The rest is for [miniclip-baseball-mod](https://github.com/tousifhabib/miniclip-baseball-mod), the project for changing the game |
 | 7 | Package as a Mac app | In progress: the app builds and runs |
 
 ## Layout
@@ -142,8 +142,9 @@ Numbers such as how many outs an innings has are not in the code. They are
 in `data/rules.toml`, which is built into the program. A change is made by
 laying another file of the same shape over it, holding only the numbers to
 change; a number the game does not have, or one of the wrong kind, is
-refused with the name of the file that had it. Loading such files from mod
-folders, and picking up changes while the game runs, is step 6.
+refused with the name of the file that had it. Here that file holds the
+original's numbers and is meant to stay that way. Loading other files over
+it from mod folders is the business of the project for changing the game.
 
 ### How the rules meet the engine
 
