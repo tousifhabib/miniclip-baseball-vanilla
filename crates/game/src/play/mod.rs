@@ -10,7 +10,7 @@ pub mod field;
 mod fielding;
 pub mod pitch;
 
-use bb_engine::display::{ButtonEvent, Event, Path, child_bounds};
+use bb_engine::display::{ButtonEvent, Content, Event, Path, child_bounds};
 use bb_engine::library::Library;
 use bb_engine::math::Matrix;
 use bb_engine::stage::Stage;
@@ -116,6 +116,7 @@ pub(crate) struct Parts {
     pub shadow: Path,
     pub fly: Path,
     pub fly_ball: Path,
+    pub fly_shadow: Option<Path>,
     pub aim_area: Path,
     pub field: Path,
     pub scoreboard: Option<Path>,
@@ -159,6 +160,8 @@ pub(crate) struct AtBat {
     /// The ball leaving the bat, in the batting view: where it is, how high,
     /// and how fast it is rising.
     pub fly: (Point, f32, f32),
+    /// The size the ball had grown to when the bat met it.
+    pub fly_size: f32,
     pub fly_target: Point,
     /// Frames until the batter drops his bat and runs.
     pub run_in: Option<u32>,
@@ -182,6 +185,9 @@ pub struct Match {
     pub(crate) announce: bool,
     pub(crate) at: Option<AtBat>,
     pub(crate) cues: Vec<Cue>,
+    /// Clips to send back to their first frame, where they show nothing,
+    /// once this many more frames have gone by.
+    put_away: Vec<(Path, u32)>,
     /// The arcade game's own state, when that is what is being played.
     pub(crate) arcade: Option<arcade::Arcade>,
     was_down: bool,
@@ -240,6 +246,7 @@ impl Match {
             announce: false,
             at: None,
             cues: Vec::new(),
+            put_away: Vec::new(),
             arcade: None,
             was_down: false,
             runner_symbol: library.manifest.exports.get("runner").copied(),
@@ -358,6 +365,17 @@ impl Match {
     }
 
     fn run_cues(&mut self, stage: &mut Stage, library: &Library) {
+        self.put_away.retain_mut(|(path, left)| {
+            if *left > 0 {
+                *left -= 1;
+                return true;
+            }
+            stage.goto_clip(path, 1, library);
+            if let Some(clip) = stage.clip_mut(path) {
+                clip.playing = false;
+            }
+            false
+        });
         let mut due = Vec::new();
         self.cues.retain(|cue| match stage.clip(&cue.path) {
             Some(clip) if clip.frame >= cue.frame => {
@@ -398,6 +416,7 @@ impl Match {
             ball: part(&["ballAll"])?,
             shadow: part(&["ballShadow"])?,
             fly_ball: stage.find(&fly, &["ball"])?,
+            fly_shadow: stage.find(&fly, &["ballShadow"]),
             fly,
             aim_area: part(&["aimArea"])?,
             scoreboard: part(&["scoreboard"]),
@@ -459,6 +478,7 @@ impl Match {
     fn set_up(&mut self, game: &Game, stage: &mut Stage, library: &Library) -> Option<Outcome> {
         let parts = Match::parts(stage, library)?;
         self.cues.clear();
+        self.put_away.clear();
         if let Some(outcome) = self.outcome() {
             self.phase = Phase::Over;
             return Some(outcome);
@@ -543,12 +563,51 @@ impl Match {
             under: 0.0,
             contact: None,
             fly: ((0.0, 0.0), 0.0, 0.0),
+            fly_size: 1.0,
             fly_target: (0.0, 0.0),
             run_in: None,
             ball: None,
             fielding: None,
         });
         None
+    }
+
+    /// Stills the batter once his swing is done.
+    ///
+    /// The swing is a clip that stops on its last frame, with his skin,
+    /// shirt and helmet as clips of their own inside it, moving in step.
+    /// The art stopped those from a script. Left alone they go round again
+    /// over a body that has stopped, and he swings on for ever.
+    fn still_batter(stage: &mut Stage, hitter: &[u16], library: &Library) {
+        let Some(clip) = stage.clip(hitter) else {
+            return;
+        };
+        let mut moving = Vec::new();
+        for (&depth, child) in &clip.children {
+            let Content::Clip(swing) = &child.content else {
+                continue;
+            };
+            let last = swing.frame_count(library);
+            if swing.playing || last <= 1 || swing.frame != last {
+                continue;
+            }
+            for (&inner_depth, inner) in &swing.children {
+                if let Content::Clip(part) = &inner.content
+                    && part.playing
+                    && part.frame_count(library) > 1
+                {
+                    let mut path = hitter.to_vec();
+                    path.extend([depth, inner_depth]);
+                    moving.push((path, part.frame_count(library)));
+                }
+            }
+        }
+        for (path, last) in moving {
+            stage.goto_clip(&path, last, library);
+            if let Some(part) = stage.clip_mut(&path) {
+                part.playing = false;
+            }
+        }
     }
 
     /// Moves the aiming ring a step towards the pointer, and with it the
@@ -616,6 +675,7 @@ impl Match {
         // The view has gone: the screen was left.
         stage.clip(&at_bat.parts.main)?;
         let rules = &game.rules;
+        Match::still_batter(stage, &at_bat.parts.hitter, library);
         if at_bat.contact.is_none() {
             Match::aim(&mut at_bat, stage);
             Match::point_hit(&mut at_bat, rules.hit.pull, stage, library);
@@ -773,6 +833,13 @@ impl Match {
                 sample.shadow.1 - sample.ball.1,
                 contact.lift(&rules.hit),
             );
+            // It leaves the bat the size it had come to, and shrinks from
+            // there as it goes away.
+            at_bat.fly_size = sample.size;
+            if let Some(shadow) = &parts.fly_shadow {
+                let place = at(stage, shadow);
+                put(stage, shadow, place, sample.size);
+            }
             at_bat.fly_target = (
                 at_bat.aim_area_x,
                 parts.fly_mark.1 + power + contact.miss() / 2.0,
@@ -838,6 +905,9 @@ impl Match {
         if let Some(anim) = &parts.strike_anim {
             let label = format!("strike{}", self.strikes.min(3));
             stage.goto_label(anim, &label, false, library);
+            // The badge plays for 69 frames and is then taken down. Left
+            // up, it would play again and again over the scoreboard.
+            self.put_away.push((anim.clone(), 68));
         }
         if let Some(board) = &parts.scoreboard {
             self.play_section(board, "strike", 136, stage, library);
@@ -884,9 +954,8 @@ impl Match {
         }
         let size = (1.0 + (at_point.1 - parts.ground_y) / 190.0).max(0.05);
         put(stage, &parts.fly, *at_point, size);
-        if let Some(inner) = stage.child_mut(&parts.fly_ball) {
-            inner.move_to(inner.matrix.tx, -*height);
-        }
+        let across = at(stage, &parts.fly_ball).0;
+        put(stage, &parts.fly_ball, (across, -*height), at_bat.fly_size);
         if let Some(left) = at_bat.run_in {
             if left == 0 {
                 at_bat.run_in = None;

@@ -229,3 +229,84 @@ fn an_arcade_game_is_ten_pitches_and_the_target_can_be_hit() {
     }
     assert!(best > 0, "nobody hit the target");
 }
+
+#[test]
+fn after_a_swing_the_batter_is_still_and_the_strike_badge_is_taken_down() {
+    let Some(mut script) = game("match") else {
+        return;
+    };
+    let state = |script: &mut bb_game::script::Script| {
+        script.run("state").unwrap().pop().unwrap_or_default()
+    };
+    // Swing as the ball leaves the pitcher's hand, which is far too early.
+    for _ in 0..2000 {
+        if seen(&state(&mut script)).phase == "Flight" {
+            break;
+        }
+        script.run("wait 1").unwrap();
+    }
+    script.run("click 300 250; wait 220").unwrap();
+    assert!(state(&mut script).contains("count 0-1"));
+
+    let tree = script.run("tree").unwrap();
+    // The parts of him that move with the swing have stopped with it. Left
+    // running they swing on for ever over a body that has stopped.
+    for part in ["skinMovie", "helmetMovie", "tShirtMovie"] {
+        let name = format!("\"{part}\"");
+        let lines: Vec<&String> = tree.iter().filter(|line| line.contains(&name)).collect();
+        assert!(!lines.is_empty(), "no {part} on the stage");
+        for line in lines {
+            assert!(line.contains("stopped"), "{line}");
+        }
+    }
+    // The badge has played once and gone back to showing nothing.
+    let badge = tree
+        .iter()
+        .find(|line| line.contains("\"strikeAnim"))
+        .expect("the strike badge");
+    assert!(badge.contains("on frame 1 of"), "{badge}");
+}
+
+#[test]
+fn a_ball_that_is_hit_leaves_the_bat_at_the_size_it_had_grown_to() {
+    let Some(mut script) = game("match") else {
+        return;
+    };
+    let state = |script: &mut bb_game::script::Script| {
+        script.run("state").unwrap().pop().unwrap_or_default()
+    };
+    // Seed 1's first pitch is met by a swing 16 frames before it is gone.
+    loop {
+        let now = state(&mut script);
+        let look = seen(&now);
+        if look.phase == "Flight" {
+            let (x, y) = look.crossing.unwrap();
+            let wait = look.frames - 16;
+            script
+                .run(&format!(
+                    "move {x} {y}; wait {wait}; click {x} {y}; wait 14"
+                ))
+                .unwrap();
+            break;
+        }
+        if let Some((x, y)) = look.crossing {
+            script.run(&format!("move {x} {y}")).unwrap();
+        }
+        script.run("wait 1").unwrap();
+    }
+    assert!(
+        state(&mut script).contains("Watching"),
+        "{}",
+        state(&mut script)
+    );
+    let stage = &script.runner.stage;
+    let main = stage.find_named(&[], "gameMain").unwrap();
+    let ball = stage.find(&main, &["ballFly", "ball"]).unwrap();
+    let size = stage.child(&ball).unwrap().matrix.a;
+    // The art's ball is three pixels across. By the plate the pitch has
+    // grown to several times that, and the hit starts from there.
+    assert!(
+        size > 2.5,
+        "the ball is drawn at {size} times the art's size"
+    );
+}
