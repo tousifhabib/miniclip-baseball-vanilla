@@ -23,6 +23,26 @@ pub const QUIT_PROMPT: SymbolId = 1675;
 /// of every page.
 pub const INSTRUCTIONS: [SymbolId; 3] = [2026, 1988, 2000];
 
+/// The strips of colour on the setup pages that a click picks from.
+pub const CLOTHES_STRIP: SymbolId = 247;
+pub const SKIN_STRIP: SymbolId = 439;
+/// The unseen buttons lying over those strips.
+pub const CLOTHES_STRIP_BUTTONS: [SymbolId; 2] = [248, 449];
+pub const SKIN_STRIP_BUTTONS: [SymbolId; 1] = [450];
+/// Buttons that choose one set colour: the button, and the colour.
+pub const CLOTHES_BUTTON: (SymbolId, [u8; 3]) = (445, [0x00, 0x33, 0x66]);
+pub const SKIN_BUTTON: (SymbolId, [u8; 3]) = (446, [0xbb, 0xa6, 0x74]);
+/// Buttons that choose the logo on the bat: the button, and the frame of the
+/// art's logo clip it shows.
+pub const LOGO_BUTTONS: [(SymbolId, &str); 6] = [
+    (447, "fire"),
+    (448, "eagle"),
+    (451, "miniclip"),
+    (452, "sweetspot"),
+    (453, "bigbat"),
+    (454, "warclub"),
+];
+
 /// Buttons whose words are drawn as artwork, not text, so they have to be
 /// known by number: the ones on the result screens that lead back to the
 /// menu, such as the "restart game" badge.

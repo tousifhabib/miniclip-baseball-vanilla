@@ -111,9 +111,15 @@ What works so far:
   by the ring it comes down in, the first ring on a pitch counts double,
   and the total is multiplied by the skill level at the end.
 
-Not written yet: the team's colours and bat logo, a high-score table, and
-the instruction pages shown before each kind of game. Sounds all play at
-full volume, where the original turned some down.
+- The team's look. A click on the Team Colours strip takes the colour
+  under the pointer for the shirts and helmets, on the setup page and in
+  the game. In a match each batter has a skin of his own and they carry
+  the bat logos in turn; the arcade game's batter is as chosen on its
+  setup page.
+
+Not written yet: a high-score table, and the instruction pages shown
+before each kind of game. Sounds all play at full volume, where the
+original turned some down, and the pointer is not hidden while aiming.
 
 ### The numbers the game is played by
 

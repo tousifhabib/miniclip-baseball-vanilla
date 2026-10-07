@@ -212,3 +212,13 @@ first_bonus = 2
 easy = 1
 medium = 2
 hard = 3
+
+# ---------------------------------------------------------------------------
+# What the batting side looks like.
+[team]
+# The skin tones batters come in. In a match each batter is given one at
+# random.
+skins = ["#3c311a", "#594926", "#73652f", "#ab8b43", "#9e8650", "#bba674", "#cbbc81", "#e2ccad"]
+# The logos on their bats, in the order the batters come up. Each is the
+# name of a frame of the logo in the art.
+logos = ["fire", "eagle", "miniclip", "sweetspot", "warclub", "bigbat"]

@@ -10,6 +10,7 @@ use bb_engine::stage::Stage;
 use bb_format::SymbolId;
 
 use crate::art::{self, ButtonLabels};
+use crate::look::{self, Look, Rgb, Swatch};
 use crate::menu::{Game, Leave, Menu, MenuPage};
 use crate::play::{Match, Outcome};
 use crate::rng::Rng;
@@ -80,6 +81,9 @@ pub struct Baseball {
     play: Option<Match>,
     /// What the game's chances are worked out from, if not the clock.
     seed: Option<u64>,
+    /// The strips on the setup pages that colours are picked from.
+    clothes_strip: Option<Swatch>,
+    skin_strip: Option<Swatch>,
     /// Clips that are playing an animation and must stop when they reach
     /// this frame, where the art has no stop of its own.
     holds: Vec<(Path, u16)>,
@@ -95,7 +99,54 @@ impl Baseball {
             first: None,
             play: None,
             seed: None,
+            // A game whose art has no such strip is played in the art's own
+            // colours.
+            clothes_strip: Swatch::of_clip(library, art::CLOTHES_STRIP).ok(),
+            skin_strip: Swatch::of_clip(library, art::SKIN_STRIP).ok(),
             holds: Vec::new(),
+        }
+    }
+
+    /// The colour under the pointer on one of the setup pages' strips.
+    fn picked(stage: &Stage, strip: &Option<Swatch>, name: &str) -> Option<Rgb> {
+        let shell = art::shell(stage)?;
+        let path = stage.find_named(&shell, name)?;
+        let (x, y) = stage.from_stage(&path, stage.pointer.x, stage.pointer.y)?;
+        strip.as_ref()?.at(x, y)
+    }
+
+    /// Acts on a click on one of the setup pages' colour and logo choices.
+    fn choose_look(&mut self, button: SymbolId, stage: &Stage) {
+        let settings = &mut self.game.settings;
+        if art::CLOTHES_STRIP_BUTTONS.contains(&button) {
+            if let Some(colour) = Baseball::picked(stage, &self.clothes_strip, "clothesPicker") {
+                settings.clothes = Some(colour);
+            }
+        } else if art::SKIN_STRIP_BUTTONS.contains(&button) {
+            if let Some(colour) = Baseball::picked(stage, &self.skin_strip, "skinPicker") {
+                settings.skin = Some(colour);
+            }
+        } else if button == art::CLOTHES_BUTTON.0 {
+            settings.clothes = Some(art::CLOTHES_BUTTON.1);
+        } else if button == art::SKIN_BUTTON.0 {
+            settings.skin = Some(art::SKIN_BUTTON.1);
+        } else if let Some((_, logo)) = art::LOGO_BUTTONS.iter().find(|(id, _)| *id == button) {
+            settings.logo = Some((*logo).to_owned());
+        }
+    }
+
+    /// How the batting side should look on the screen that is showing.
+    fn look(&self) -> Look {
+        let settings = &self.game.settings;
+        match (&self.play, self.screen) {
+            (Some(play), Screen::Match) => play.look(settings.clothes),
+            // The arcade game and the setup pages show what was chosen.
+            _ => Look {
+                clothes: settings.clothes,
+                skin: settings.skin,
+                logo: settings.logo.clone(),
+                second_skin: None,
+            },
         }
     }
 
@@ -249,6 +300,7 @@ impl Logic for Baseball {
             ..
         } = event
         {
+            self.choose_look(*symbol, stage);
             self.clicked(*symbol, stage, library);
         }
     }
@@ -294,6 +346,9 @@ impl Logic for Baseball {
                     clip.playing = false;
                 }
             }
+        }
+        if let Some(shell) = art::shell(stage) {
+            look::dress(stage, &shell, &self.look(), library);
         }
         match self.screen {
             Screen::Loading => {

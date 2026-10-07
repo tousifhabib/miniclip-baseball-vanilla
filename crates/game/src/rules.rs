@@ -31,6 +31,16 @@ pub struct Rules {
     /// The ball over the field.
     pub field: FieldRules,
     pub arcade: ArcadeRules,
+    pub team: TeamRules,
+}
+
+#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct TeamRules {
+    /// Colours written as `#rrggbb`.
+    pub skins: Vec<String>,
+    /// Frame labels of the art's logo clip.
+    pub logos: Vec<String>,
 }
 
 #[derive(Clone, Debug, PartialEq, Deserialize)]

@@ -17,6 +17,7 @@ use bb_engine::stage::Stage;
 use bb_format::SymbolId;
 
 use crate::art;
+use crate::look::{self, Look, Rgb};
 use crate::menu::Game;
 use crate::rng::Rng;
 use crate::rules::{HitRules, PitchRules};
@@ -52,6 +53,8 @@ pub(crate) struct Runner {
     pub running_to: Option<u8>,
     pub sliding: bool,
     pub runs: u32,
+    pub skin: Option<Rgb>,
+    pub logo: Option<String>,
     /// His clip on the field, for as long as this pitch's view lasts.
     pub path: Option<Path>,
 }
@@ -297,6 +300,17 @@ impl Match {
             .any(|runner| runner.running_to.is_some())
     }
 
+    /// How the side should look just now, given the team's own colour.
+    pub fn look(&self, clothes: Option<Rgb>) -> Look {
+        let batter = self.batter().map(|index| &self.runners[index]);
+        Look {
+            clothes,
+            skin: batter.and_then(|runner| runner.skin),
+            logo: batter.and_then(|runner| runner.logo.clone()),
+            second_skin: self.on_base(2).and_then(|index| self.runners[index].skin),
+        }
+    }
+
     /// The batter's turn is over: the next one starts with a clean count.
     pub(crate) fn clear_count(&mut self) {
         self.strikes = 0;
@@ -484,11 +498,27 @@ impl Match {
             return Some(outcome);
         }
         if self.batter().is_none() {
+            // Each batter in a match has his own skin, and they carry the
+            // bat logos in turn. The arcade game's one batter is as chosen.
+            let team = &game.rules.team;
+            let (skin, logo) = if self.arcade.is_some() {
+                (game.settings.skin, game.settings.logo.clone())
+            } else {
+                let pick = self.rng.below(team.skins.len() as u32) as usize;
+                (
+                    team.skins.get(pick).and_then(|skin| look::rgb(skin)),
+                    team.logos
+                        .get(self.runners.len() % team.logos.len().max(1))
+                        .cloned(),
+                )
+            };
             self.runners.push(Runner {
                 place: Place::AtBat,
                 running_to: None,
                 sliding: false,
                 runs: 0,
+                skin,
+                logo,
                 path: None,
             });
             self.clear_count();

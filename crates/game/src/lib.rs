@@ -4,6 +4,7 @@
 pub mod art;
 pub mod baseball;
 pub mod locate;
+pub mod look;
 pub mod menu;
 pub mod play;
 pub mod rng;

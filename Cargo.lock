@@ -314,6 +314,7 @@ dependencies = [
  "bb-engine",
  "bb-format",
  "clap",
+ "resvg",
  "serde",
  "toml",
 ]
