@@ -122,10 +122,12 @@ impl Baseball {
         self.holds.clear();
         stage.goto_label(&shell, label, false, library);
         self.screen = screen;
-        self.play = (screen == Screen::Match).then(|| {
-            let seed = self.seed.unwrap_or_else(Rng::seed_from_clock);
-            Match::new(&self.game, seed, library)
-        });
+        let seed = self.seed.unwrap_or_else(Rng::seed_from_clock);
+        self.play = match screen {
+            Screen::Match => Some(Match::new(&self.game, seed, library)),
+            Screen::Arcade => Some(Match::new_arcade(&self.game, seed, library)),
+            _ => None,
+        };
         if screen == Screen::Menu {
             self.menu.shown(from_intro, &self.game, stage, library);
         }
@@ -265,10 +267,12 @@ impl Logic for Baseball {
             && let Some(outcome) = play.tick(&self.game, stage, library)
         {
             play.show_result(stage);
+            play.show_arcade_result(&self.game, stage);
             let screen = match outcome {
                 Outcome::Won => Screen::MatchWon,
                 Outcome::Lost => Screen::MatchLost,
                 Outcome::Tied => Screen::InningsTied,
+                Outcome::ArcadeOver => Screen::ArcadeFinish,
             };
             self.show(screen, stage, library);
         }

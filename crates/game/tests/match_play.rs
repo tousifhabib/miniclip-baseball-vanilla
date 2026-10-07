@@ -41,7 +41,7 @@ fn seen(state: &str) -> Seen {
 
 /// Whether the match is still going, or has not yet begun.
 fn in_match(state: &str) -> bool {
-    state.starts_with("Match,") || state.starts_with("Loading")
+    state.starts_with("Match,") || state.starts_with("Arcade,") || state.starts_with("Loading")
 }
 
 /// Plays a match to its end, swinging at every pitch in the zone, and
@@ -49,8 +49,19 @@ fn in_match(state: &str) -> bool {
 /// held `off` away from where the ball will cross, and the swing comes
 /// `swing_early_by` frames before the ball is gone.
 fn play_out(seed: u64, swing_early_by: u32, off: (f32, f32)) -> (String, u32) {
-    let Some(mut script) = game_seeded("match", seed) else {
-        return (String::new(), 0);
+    let (end, pitches, _) = play_screen("match", seed, swing_early_by, off);
+    (end, pitches)
+}
+
+/// The same for any game screen. Also returns the arcade game's points.
+fn play_screen(
+    screen: &str,
+    seed: u64,
+    swing_early_by: u32,
+    off: (f32, f32),
+) -> (String, u32, u32) {
+    let Some(mut script) = game_seeded(screen, seed) else {
+        return (String::new(), 0, 0);
     };
     let state = |script: &mut bb_game::script::Script| {
         script.run("state").unwrap().pop().unwrap_or_default()
@@ -61,7 +72,13 @@ fn play_out(seed: u64, swing_early_by: u32, off: (f32, f32)) -> (String, u32) {
     for _ in 0..200_000 {
         let now = state(&mut script);
         if !in_match(&now) {
-            return (now, pitches);
+            let points = script
+                .runner
+                .stage
+                .text("points_total")
+                .and_then(|points| points.parse().ok())
+                .unwrap_or(0);
+            return (now, pitches, points);
         }
         let look = seen(&now);
         match look.phase.as_str() {
@@ -94,6 +111,11 @@ fn play_out(seed: u64, swing_early_by: u32, off: (f32, f32)) -> (String, u32) {
                 }
             }
             "Ready" => {
+                // In the arcade game the next pitch is offered while the
+                // ball is still in the air, and taking it loses the points.
+                if now.starts_with("Arcade") {
+                    script.run("wait 400").unwrap();
+                }
                 script.run("click 545 355; wait 2").unwrap();
             }
             _ => {
@@ -185,4 +207,25 @@ fn matches_played_badly_come_to_an_end_too() {
     }
     // Between them they should not all go the same way.
     assert!(seen_ends.len() > 1, "{seen_ends:?}");
+}
+
+#[test]
+fn an_arcade_game_is_ten_pitches_and_the_target_can_be_hit() {
+    // Swings aimed under the ball by different amounts drop it at different
+    // depths, so between them some come down on the target.
+    let mut best = 0;
+    for (index, under) in [0.0, 10.0, 18.0, 26.0, 34.0, 42.0, -15.0, -30.0]
+        .into_iter()
+        .enumerate()
+    {
+        let (end, pitches, points) = play_screen("arcade", 40 + index as u64, 24, (0.0, under));
+        if end.is_empty() {
+            return;
+        }
+        eprintln!("ring {under} under: {pitches} pitches, {points} points, then {end}");
+        assert!(end.starts_with("ArcadeFinish"), "{end}");
+        assert_eq!(pitches, 10);
+        best = best.max(points);
+    }
+    assert!(best > 0, "nobody hit the target");
 }

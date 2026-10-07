@@ -16,7 +16,7 @@ project is not affiliated with or endorsed by Miniclip.
 | 2 | Extractor: turn the SWF into open, editable files | Done |
 | 3 | Engine: a Flash-style tree of clips with timelines, drawn with `wgpu` | Done |
 | 4 | Check the engine's output against an independent renderer | Done |
-| 5 | Game logic: the rules, written fresh on top of the original art | In progress: a match can be played from the first pitch to the result |
+| 5 | Game logic: the rules, written fresh on top of the original art | In progress: both games can be played from the first pitch to the result |
 | 6 | Restructure for modding: data files, mod folders, hot reload | Started: the game's numbers live in a data file |
 | 7 | Package as a Mac app | In progress: the app builds and runs |
 
@@ -104,8 +104,13 @@ What works so far:
   runners are forced on, can be sent on or made to slide with their own
   buttons, and are safe or out. A ball over the wall is a home run.
 
-Not written yet: the arcade game, the team's colours and bat logo, and a
-high-score table.
+- The arcade game: ten pitches at a target on the outfield. A ball scores
+  by the ring it comes down in, the first ring on a pitch counts double,
+  and the total is multiplied by the skill level at the end.
+
+Not written yet: the team's colours and bat logo, a high-score table, and
+the instruction pages shown before each kind of game. Sounds all play at
+full volume, where the original turned some down.
 
 ### The numbers the game is played by
 

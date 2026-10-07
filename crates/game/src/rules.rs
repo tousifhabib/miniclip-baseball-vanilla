@@ -30,6 +30,27 @@ pub struct Rules {
     pub hit: HitRules,
     /// The ball over the field.
     pub field: FieldRules,
+    pub arcade: ArcadeRules,
+}
+
+#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ArcadeRules {
+    pub pitches: u32,
+    pub watch: u32,
+    pub target: Area,
+    pub depth_weight: f32,
+    /// From the centre out.
+    pub rings: Vec<Ring>,
+    pub first_bonus: u32,
+    pub multiplier: BySkill<u32>,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Ring {
+    pub within: f32,
+    pub points: u32,
 }
 
 #[derive(Clone, Debug, PartialEq, Deserialize)]

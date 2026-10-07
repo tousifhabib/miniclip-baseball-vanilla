@@ -5,6 +5,7 @@
 //! that lasts from one pitch to the next is kept here: the score, the count,
 //! the outs, and where every runner stands.
 
+mod arcade;
 pub mod field;
 mod fielding;
 pub mod pitch;
@@ -28,6 +29,8 @@ pub enum Outcome {
     Won,
     Lost,
     Tied,
+    /// The arcade game's pitches are used up.
+    ArcadeOver,
 }
 
 /// Where a batter has got to.
@@ -115,14 +118,14 @@ pub(crate) struct Parts {
     pub fly_ball: Path,
     pub aim_area: Path,
     pub field: Path,
-    pub scoreboard: Path,
+    pub scoreboard: Option<Path>,
     pub strike_anim: Option<Path>,
     pub transitions: Path,
     pub next: Path,
     pub flare: Option<Path>,
     pub field_ball: Path,
     pub field_ball_inner: Path,
-    pub holder: Path,
+    pub holder: Option<Path>,
     pub fielders: Vec<Path>,
     pub umpires: Vec<Path>,
     pub field_scoreboard: Option<Path>,
@@ -179,6 +182,8 @@ pub struct Match {
     pub(crate) announce: bool,
     pub(crate) at: Option<AtBat>,
     pub(crate) cues: Vec<Cue>,
+    /// The arcade game's own state, when that is what is being played.
+    pub(crate) arcade: Option<arcade::Arcade>,
     was_down: bool,
     runner_symbol: Option<SymbolId>,
 }
@@ -235,13 +240,24 @@ impl Match {
             announce: false,
             at: None,
             cues: Vec::new(),
+            arcade: None,
             was_down: false,
             runner_symbol: library.manifest.exports.get("runner").copied(),
         }
     }
 
+    /// The arcade game instead of a match.
+    pub fn new_arcade(game: &Game, seed: u64, library: &Library) -> Match {
+        let mut arcade = Match::new(game, seed, library);
+        arcade.arcade = Some(arcade::Arcade::new(game.rules.arcade.pitches));
+        arcade
+    }
+
     /// How the match stands, if it is over.
     fn outcome(&self) -> Option<Outcome> {
+        if let Some(arcade) = &self.arcade {
+            return (arcade.left == 0).then_some(Outcome::ArcadeOver);
+        }
         let level = self.target - 1;
         if self.score >= self.target {
             Some(Outcome::Won)
@@ -293,6 +309,10 @@ impl Match {
             ("maximumOuts", self.max_outs),
             ("runsToGet", self.target.saturating_sub(self.score)),
             ("ballsPitched", self.pitched),
+            (
+                "points_total",
+                self.arcade.as_ref().map_or(0, |arcade| arcade.points),
+            ),
             ("batsmanOnStrike", batter as u32),
         ] {
             stage.set_text(name, value.to_string());
@@ -380,20 +400,20 @@ impl Match {
             fly_ball: stage.find(&fly, &["ball"])?,
             fly,
             aim_area: part(&["aimArea"])?,
-            scoreboard: part(&["scoreboard"])?,
+            scoreboard: part(&["scoreboard"]),
             strike_anim: part(&["strikeAnim_old"]).or_else(|| part(&["strikeAnim"])),
             transitions: part(&["transitions"])?,
             next: part(&["btn_nextBall"])?,
             flare: part(&["lightFlare"]),
             field_ball_inner: stage.find(&field_ball, &["ball"])?,
             field_ball,
-            holder: in_field("runnerHolder")?,
+            holder: in_field("runnerHolder"),
             fielders: (1..=9)
-                .map(|number| in_field(&format!("fielder{number}")))
-                .collect::<Option<_>>()?,
+                .filter_map(|number| in_field(&format!("fielder{number}")))
+                .collect(),
             umpires: (1..=3)
-                .map(|number| in_field(&format!("umpire{number}")))
-                .collect::<Option<_>>()?,
+                .filter_map(|number| in_field(&format!("umpire{number}")))
+                .collect(),
             field_scoreboard: in_field("scoreboard"),
             centre_x: point(part(&["centreMarker"]))?.0,
             fly_mark: point(part(&["shadowFlyMarker"]))?,
@@ -401,16 +421,13 @@ impl Match {
             aim_box,
             home: point(in_field("startPointMarker"))?,
             field_mark: point(in_field("shadowFlyMarker"))?,
+            // The arcade game's field has no foul lines and no bases.
             foul: (
-                point(in_field("foulMarkerLeft"))?.0,
-                point(in_field("foulMarkerRight"))?.0,
+                point(in_field("foulMarkerLeft")).map_or(f32::MIN, |at| at.0),
+                point(in_field("foulMarkerRight")).map_or(f32::MAX, |at| at.0),
             ),
-            bases: [
-                point(in_field("base1"))?,
-                point(in_field("base2"))?,
-                point(in_field("base3"))?,
-                point(in_field("base4"))?,
-            ],
+            bases: [1, 2, 3, 4]
+                .map(|base| point(in_field(&format!("base{base}"))).unwrap_or_default()),
             field,
             main,
         })
@@ -420,10 +437,13 @@ impl Match {
     fn mound(parts: &Parts, stage: &Stage, library: &Library) -> Option<Mound> {
         let test = stage.find(&parts.main, &["test"])?;
         let point = |name: &str| stage.find(&test, &[name]).map(|path| at(stage, &path));
+        // With no strike zone to miss, as in the arcade game, no pitch is
+        // ever outside it.
         let zone = stage
             .find(&parts.main, &["strikeZone"])
             .and_then(|path| stage.child(&path))
-            .and_then(|child| child_bounds(child, Matrix::IDENTITY, library))?;
+            .and_then(|child| child_bounds(child, Matrix::IDENTITY, library))
+            .unwrap_or([f32::MIN, f32::MIN, f32::MAX, f32::MAX]);
         Some(Mound {
             ball: point("ballAll")?,
             shadow: point("ballShadow")?,
@@ -475,9 +495,12 @@ impl Match {
             let Some(symbol) = self.runner_symbol else {
                 continue;
             };
+            let Some(holder) = &parts.holder else {
+                continue;
+            };
             let depth = Stage::RULES_DEPTH + index as u16;
             let name = format!("runner{}", index + 1);
-            if let Some(path) = stage.attach(&parts.holder, symbol, depth, &name, library) {
+            if let Some(path) = stage.attach(holder, symbol, depth, &name, library) {
                 stage.goto_label(&path, &label, false, library);
                 self.runners[index].path = Some(path);
             }
@@ -491,13 +514,16 @@ impl Match {
             stage.goto_label(&mark, label, false, library);
         }
         // The fielders who mind the bases stand ready at them.
-        for fielder in &parts.fielders[5..] {
+        for fielder in parts.fielders.iter().skip(5) {
             stage.goto_label(fielder, "baseWaiting", false, library);
         }
         if self.announce {
             self.announce = false;
-            self.play_section(&parts.scoreboard.clone(), "runsToGet", 361, stage, library);
+            if let Some(board) = parts.scoreboard.clone() {
+                self.play_section(&board, "runsToGet", 361, stage, library);
+            }
         }
+        self.set_up_arcade(&parts, game, stage, library);
         self.show_numbers(stage);
 
         let mound = Match::mound(&parts, stage, library)?;
@@ -595,6 +621,11 @@ impl Match {
             Match::point_hit(&mut at_bat, rules.hit.pull, stage, library);
         }
 
+        // In the arcade game the ball goes on over the field while the next
+        // pitch is already on offer.
+        if matches!(self.phase, Phase::Ready | Phase::Leaving { .. }) {
+            self.arcade_ball(&mut at_bat, game, stage, library);
+        }
         match self.phase {
             Phase::Settling { left } => {
                 if left == 0 {
@@ -614,6 +645,9 @@ impl Match {
                     show(stage, &at_bat.parts.ball, true);
                     show(stage, &at_bat.parts.shadow, true);
                     self.pitched += 1;
+                    if let Some(arcade) = &mut self.arcade {
+                        arcade.left = arcade.left.saturating_sub(1);
+                    }
                     self.show_numbers(stage);
                     self.phase = Phase::Flight { step: 0 };
                 }
@@ -630,7 +664,9 @@ impl Match {
             }
             Phase::Watching { left } => {
                 self.watch(&mut at_bat, game, stage, library);
-                if left == 0 {
+                if left == 0 && self.arcade.is_some() {
+                    self.show_arcade_field(&mut at_bat, game, stage, library);
+                } else if left == 0 {
                     self.show_field(&mut at_bat, false, game, stage, library);
                 } else {
                     self.phase = Phase::Watching { left: left - 1 };
@@ -699,7 +735,9 @@ impl Match {
                 _ => "hitLow",
             };
             stage.goto_label(&at_bat.parts.hitter, label, true, library);
-            Match::sound(stage, library, "batSwing_fast");
+            if self.arcade.is_none() {
+                Match::sound(stage, library, "batSwing_fast");
+            }
             at_bat.swing = Some(0);
             at_bat.under = at_bat.aim.1 - at_bat.pitch.crosses.1;
         } else if let Some(frames) = &mut at_bat.swing {
@@ -758,7 +796,12 @@ impl Match {
             // He is 34 frames into his swing when he drops the bat.
             at_bat.run_in = Some(34u32.saturating_sub(at_bat.swing.unwrap_or(0)));
             self.phase = Phase::Watching {
-                left: rules.hit.watch,
+                left: if self.arcade.is_some() {
+                    at_bat.run_in = None;
+                    rules.arcade.watch
+                } else {
+                    rules.hit.watch
+                },
             };
             return;
         }
@@ -769,12 +812,18 @@ impl Match {
     fn call(&mut self, at_bat: &mut AtBat, game: &Game, stage: &mut Stage, library: &Library) {
         let rules = &game.rules;
         let parts = at_bat.parts.clone();
-        Match::sound(stage, library, "ballCatch_1");
         show(stage, &parts.ball, false);
         show(stage, &parts.shadow, false);
+        if self.arcade.is_some() {
+            // No count in the arcade game: a miss is just a pitch gone.
+            return self.ready(&parts, stage, library);
+        }
+        Match::sound(stage, library, "ballCatch_1");
         if !at_bat.pitch.in_zone && at_bat.swing.is_none() {
             self.balls += 1;
-            self.play_section(&parts.scoreboard, "noBall", 261, stage, library);
+            if let Some(board) = &parts.scoreboard {
+                self.play_section(board, "noBall", 261, stage, library);
+            }
             self.show_numbers(stage);
             if self.balls >= rules.count.balls {
                 self.phase = Phase::Walking {
@@ -790,7 +839,9 @@ impl Match {
             let label = format!("strike{}", self.strikes.min(3));
             stage.goto_label(anim, &label, false, library);
         }
-        self.play_section(&parts.scoreboard, "strike", 136, stage, library);
+        if let Some(board) = &parts.scoreboard {
+            self.play_section(board, "strike", 136, stage, library);
+        }
         if self.strikes >= rules.count.strikes {
             let call = ["1", "2", "3"][self.rng.below(3) as usize];
             Match::sound(stage, library, &format!("umpire_yourOuttaHere_{call}"));
@@ -925,6 +976,12 @@ impl Match {
                 },
             )
         });
+        if let Some(arcade) = &self.arcade {
+            return format!(
+                "{:?}, {} points, {} pitches left{pitch}",
+                self.phase, arcade.points, arcade.left
+            );
+        }
         format!(
             "{:?}, score {} of {}, outs {}, count {}-{}, bases {bases}, pitched {}{pitch}",
             self.phase, self.score, self.target, self.outs, self.balls, self.strikes, self.pitched
@@ -938,6 +995,7 @@ pub fn result_screen(outcome: Outcome) -> &'static str {
         Outcome::Won => "matchWon",
         Outcome::Lost => "matchLost",
         Outcome::Tied => "inningsTied",
+        Outcome::ArcadeOver => "arcadeFinish",
     }
 }
 
