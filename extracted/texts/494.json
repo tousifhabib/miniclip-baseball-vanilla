@@ -1,0 +1,42 @@
+{
+  "id": 494,
+  "bounds": {
+    "x_min": 12.3,
+    "y_min": 0.9,
+    "x_max": 44.85,
+    "y_max": 15.8
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 490,
+      "color": "#ffffffff",
+      "x": 12.0,
+      "y": 15.0,
+      "height": 18.0,
+      "text": "Start",
+      "glyphs": [
+        {
+          "glyph": 20,
+          "advance": 8.05
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 24,
+          "advance": 8.8
+        },
+        {
+          "glyph": 37,
+          "advance": 6.3
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        }
+      ]
+    }
+  ]
+}

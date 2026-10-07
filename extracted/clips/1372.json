@@ -1,0 +1,59 @@
+{
+  "id": 1372,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 1367
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 1368
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 1369
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 1370
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.1, -0.3]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "replace": 1371
+          }
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": "modify",
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    }
+  ]
+}

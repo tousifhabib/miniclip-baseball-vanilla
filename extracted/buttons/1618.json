@@ -1,0 +1,49 @@
+{
+  "id": 1618,
+  "track_as_menu": false,
+  "records": [
+    {
+      "states": [
+        "over"
+      ],
+      "symbol": 1615,
+      "depth": 1,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "down"
+      ],
+      "symbol": 1616,
+      "depth": 1,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "hit"
+      ],
+      "symbol": 1617,
+      "depth": 1,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    }
+  ],
+  "actions": [
+    {
+      "conditions": [
+        "release"
+      ]
+    }
+  ],
+  "sounds": {
+    "up_to_over": {
+      "sound": 80,
+      "event": "event",
+      "loops": 1
+    },
+    "over_to_down": {
+      "sound": 81,
+      "event": "event",
+      "loops": 1
+    }
+  }
+}

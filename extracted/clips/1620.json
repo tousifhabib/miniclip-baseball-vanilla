@@ -1,0 +1,60 @@
+{
+  "id": 1620,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 161
+          },
+          "matrix": [0.5999908447265625, 0.0, 0.0, 0.5999908447265625, 0.95, -14.35]
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "place": 1591
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -9.7, 4.85]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "remove",
+          "depth": 9
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1592
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -55.0, -36.2],
+          "ratio": 1
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 1619
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -0.45, -74.05],
+          "ratio": 1
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    }
+  ]
+}

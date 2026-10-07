@@ -1,0 +1,54 @@
+{
+  "id": 495,
+  "bounds": {
+    "x_min": 100.4,
+    "y_min": 2.1,
+    "x_max": 194.75,
+    "y_max": 21.6
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 490,
+      "color": "#ffffffff",
+      "x": 100.0,
+      "y": 20.0,
+      "height": 25.0,
+      "text": "BASEBALL",
+      "glyphs": [
+        {
+          "glyph": 10,
+          "advance": 11.6
+        },
+        {
+          "glyph": 9,
+          "advance": 15.2
+        },
+        {
+          "glyph": 20,
+          "advance": 11.2
+        },
+        {
+          "glyph": 13,
+          "advance": 11.2
+        },
+        {
+          "glyph": 10,
+          "advance": 11.6
+        },
+        {
+          "glyph": 9,
+          "advance": 15.2
+        },
+        {
+          "glyph": 15,
+          "advance": 9.6
+        },
+        {
+          "glyph": 15,
+          "advance": 9.6
+        }
+      ]
+    }
+  ]
+}

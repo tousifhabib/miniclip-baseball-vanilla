@@ -1,0 +1,54 @@
+{
+  "id": 1730,
+  "bounds": {
+    "x_min": 100.9,
+    "y_min": 2.1,
+    "x_max": 193.7,
+    "y_max": 21.65
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 490,
+      "color": "#ffffffff",
+      "x": 100.0,
+      "y": 20.0,
+      "height": 25.0,
+      "text": "UNLUCKY!",
+      "glyphs": [
+        {
+          "glyph": 21,
+          "advance": 13.1
+        },
+        {
+          "glyph": 17,
+          "advance": 14.55
+        },
+        {
+          "glyph": 15,
+          "advance": 9.6
+        },
+        {
+          "glyph": 21,
+          "advance": 13.1
+        },
+        {
+          "glyph": 11,
+          "advance": 16.35
+        },
+        {
+          "glyph": 14,
+          "advance": 11.4
+        },
+        {
+          "glyph": 23,
+          "advance": 11.55
+        },
+        {
+          "glyph": 1,
+          "advance": 4.55
+        }
+      ]
+    }
+  ]
+}

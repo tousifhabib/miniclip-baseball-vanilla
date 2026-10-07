@@ -1,0 +1,86 @@
+{
+  "id": 1866,
+  "bounds": {
+    "x_min": -44.0,
+    "y_min": 2.3,
+    "x_max": 161.55,
+    "y_max": 24.4
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, -44.75, 0.0],
+  "runs": [
+    {
+      "font": 1677,
+      "color": "#fcf4bcff",
+      "x": 0.0,
+      "y": 23.0,
+      "height": 25.0,
+      "text": "DIFFICULTY LEVEL",
+      "glyphs": [
+        {
+          "glyph": 18,
+          "advance": 15.8
+        },
+        {
+          "glyph": 22,
+          "advance": 6.4
+        },
+        {
+          "glyph": 20,
+          "advance": 13.7
+        },
+        {
+          "glyph": 20,
+          "advance": 13.7
+        },
+        {
+          "glyph": 22,
+          "advance": 6.4
+        },
+        {
+          "glyph": 17,
+          "advance": 14.05
+        },
+        {
+          "glyph": 32,
+          "advance": 15.8
+        },
+        {
+          "glyph": 23,
+          "advance": 13.3
+        },
+        {
+          "glyph": 31,
+          "advance": 14.5
+        },
+        {
+          "glyph": 34,
+          "advance": 15.5
+        },
+        {
+          "glyph": 0,
+          "advance": 8.1
+        },
+        {
+          "glyph": 23,
+          "advance": 13.3
+        },
+        {
+          "glyph": 19,
+          "advance": 13.7
+        },
+        {
+          "glyph": 33,
+          "advance": 16.1
+        },
+        {
+          "glyph": 19,
+          "advance": 13.7
+        },
+        {
+          "glyph": 23,
+          "advance": 13.3
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2.5 -1.35 180.1 21.05" width="180.1" height="21.05">
+<defs>
+<pattern id="p1" patternUnits="userSpaceOnUse" width="290" height="196" patternTransform="matrix(0.6214447021484375 0 0 0.10345458984375 -2.5 -1.35)"><image href="../bitmaps/244.png" width="290" height="196" style="image-rendering:pixelated"/></pattern>
+<linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="-819.2" x2="819.2" gradientTransform="matrix(0.106719970703125 0 0 0.00201416015625 90.15 18.05)">
+<stop offset="0.0863" stop-color="#ffffff"/>
+<stop offset="0.9255" stop-color="#000000"/>
+</linearGradient>
+</defs>
+<path d="M177.1 18.95 L-2.5 18.95 L-2.5 -1.35 L177.1 -1.35 L177.1 18.95 Z" fill="url(#p1)" fill-rule="evenodd"/>
+<path d="M177.6 19.7 L2.75 19.7 L2.75 16.4 L177.6 16.4 L177.6 19.7 Z" fill="url(#g2)" fill-rule="evenodd"/>
+</svg>

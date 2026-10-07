@@ -1,0 +1,78 @@
+{
+  "id": 222,
+  "bounds": {
+    "x_min": 15.5,
+    "y_min": 1.15,
+    "x_max": 94.85,
+    "y_max": 11.6
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 166,
+      "color": "#85d5dcff",
+      "x": 15.0,
+      "y": 10.0,
+      "height": 11.0,
+      "text": "LUKE WHITTAKER",
+      "glyphs": [
+        {
+          "glyph": 21,
+          "advance": 4.55
+        },
+        {
+          "glyph": 29,
+          "advance": 6.05
+        },
+        {
+          "glyph": 20,
+          "advance": 5.65
+        },
+        {
+          "glyph": 16,
+          "advance": 5.1
+        },
+        {
+          "glyph": 0,
+          "advance": 2.1
+        },
+        {
+          "glyph": 30,
+          "advance": 7.75
+        },
+        {
+          "glyph": 18,
+          "advance": 6.05
+        },
+        {
+          "glyph": 19,
+          "advance": 2.65
+        },
+        {
+          "glyph": 28,
+          "advance": 4.2
+        },
+        {
+          "glyph": 28,
+          "advance": 4.2
+        },
+        {
+          "glyph": 12,
+          "advance": 5.5
+        },
+        {
+          "glyph": 20,
+          "advance": 5.65
+        },
+        {
+          "glyph": 16,
+          "advance": 5.1
+        },
+        {
+          "glyph": 26,
+          "advance": 5.85
+        }
+      ]
+    }
+  ]
+}

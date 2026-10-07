@@ -1,0 +1,42 @@
+{
+  "id": 1848,
+  "bounds": {
+    "x_min": 12.35,
+    "y_min": 1.15,
+    "x_max": 48.95,
+    "y_max": 15.85
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 490,
+      "color": "#ffffffff",
+      "x": 7.0,
+      "y": 15.0,
+      "height": 18.0,
+      "text": " Menu",
+      "glyphs": [
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 16,
+          "advance": 12.25
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 35,
+          "advance": 8.35
+        },
+        {
+          "glyph": 40,
+          "advance": 8.35
+        }
+      ]
+    }
+  ]
+}

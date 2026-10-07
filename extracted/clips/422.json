@@ -1,0 +1,89 @@
+{
+  "id": 422,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 411
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -184.3, -128.0],
+          "name": "mcHighscores",
+          "clip_events": [
+            "load"
+          ]
+        }
+      ],
+      "has_script": true
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 412
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "ratio": 1,
+          "name": "mcTarget"
+        }
+      ],
+      "has_script": true
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 3
+        },
+        {
+          "op": "place",
+          "depth": 17,
+          "action": {
+            "place": 413
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "place": 414
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -176.9, -121.3]
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 415
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": {
+            "place": 420
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.000732421875, -123.4, 57.2],
+          "ratio": 2
+        },
+        {
+          "op": "place",
+          "depth": 35,
+          "action": {
+            "place": 421
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 //! Starts the real game with no window, for tests that drive it with
 //! written steps.
 //!
-//! These tests need the extracted art, which is not part of the repository.
-//! Where it is missing they pass without checking anything, and say so.
+//! These tests need the extracted art. Where it is missing they pass
+//! without checking anything, and say so.
 
 #![allow(dead_code)]
 

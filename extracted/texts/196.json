@@ -1,0 +1,98 @@
+{
+  "id": 196,
+  "bounds": {
+    "x_min": 41.65,
+    "y_min": 3.55,
+    "x_max": 298.15,
+    "y_max": 18.2
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 40.85, 0.0],
+  "runs": [
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 17.0,
+      "height": 18.0,
+      "text": "BOTTOM OF THE NINTH",
+      "glyphs": [
+        {
+          "glyph": 34,
+          "advance": 15.35
+        },
+        {
+          "glyph": 47,
+          "advance": 15.55
+        },
+        {
+          "glyph": 52,
+          "advance": 13.5
+        },
+        {
+          "glyph": 52,
+          "advance": 13.5
+        },
+        {
+          "glyph": 47,
+          "advance": 15.55
+        },
+        {
+          "glyph": 45,
+          "advance": 19.85
+        },
+        {
+          "glyph": 0,
+          "advance": 4.5
+        },
+        {
+          "glyph": 47,
+          "advance": 15.55
+        },
+        {
+          "glyph": 38,
+          "advance": 12.75
+        },
+        {
+          "glyph": 0,
+          "advance": 4.5
+        },
+        {
+          "glyph": 52,
+          "advance": 13.5
+        },
+        {
+          "glyph": 40,
+          "advance": 15.75
+        },
+        {
+          "glyph": 37,
+          "advance": 13.5
+        },
+        {
+          "glyph": 0,
+          "advance": 4.5
+        },
+        {
+          "glyph": 46,
+          "advance": 15.35
+        },
+        {
+          "glyph": 41,
+          "advance": 8.25
+        },
+        {
+          "glyph": 46,
+          "advance": 15.35
+        },
+        {
+          "glyph": 52,
+          "advance": 13.5
+        },
+        {
+          "glyph": 40,
+          "advance": 15.75
+        }
+      ]
+    }
+  ]
+}

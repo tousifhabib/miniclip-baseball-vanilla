@@ -1,0 +1,178 @@
+{
+  "id": 700,
+  "labels": {
+    "easy": 11,
+    "hard": 69,
+    "med": 40
+  },
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 698
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 699
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -206.0, 87.9]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "easy"
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "has_script": true
+    },
+    {
+      "label": "med"
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "has_script": true
+    },
+    {
+      "label": "hard"
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {
+      "has_script": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "has_script": true
+    }
+  ]
+}

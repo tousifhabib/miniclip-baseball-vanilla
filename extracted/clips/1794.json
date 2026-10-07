@@ -1,0 +1,54 @@
+{
+  "id": 1794,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1773
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 1784
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -83.95, -33.0],
+          "name": "ring1"
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 1787
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -64.0, -25.1],
+          "name": "ring2"
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "place": 1790
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -42.0, -16.7],
+          "name": "ring3"
+        },
+        {
+          "op": "place",
+          "depth": 11,
+          "action": {
+            "place": 1793
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -10.0, -3.8],
+          "name": "ring4"
+        }
+      ]
+    }
+  ]
+}

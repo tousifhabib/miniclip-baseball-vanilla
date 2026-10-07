@@ -1,0 +1,286 @@
+{
+  "id": 1811,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 6,
+          "action": {
+            "place": 1796
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 7,
+          "action": {
+            "place": 1800
+          },
+          "matrix": [0.0613555908203125, 0.0, 0.0, 0.04998779296875, 231.0, 332.35]
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "place": 1801
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 245.45, 22.9]
+        },
+        {
+          "op": "place",
+          "depth": 15,
+          "action": {
+            "place": 1802
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 16,
+          "action": {
+            "place": 597
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 240.8, 336.85],
+          "name": "startPointMarker"
+        },
+        {
+          "op": "place",
+          "depth": 18,
+          "action": {
+            "place": 597
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 303.8, 168.7],
+          "color": {
+            "mult": [0.0, 0.0, 0.0, 1.0],
+            "add": [255, 255, 0, 0]
+          },
+          "name": "shadowFlyMarker"
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 602
+          },
+          "matrix": [0.0, 1.0, -1.0, 0.0, 267.95, 342.45],
+          "name": "uMarker"
+        },
+        {
+          "op": "place",
+          "depth": 22,
+          "action": {
+            "place": 591
+          },
+          "matrix": [1.2000274658203125, 0.0, 0.0, 1.2000274658203125, 598.1, 433.05],
+          "name": "ballFlyTest",
+          "clip_events": [
+            "mouse_move",
+            "press",
+            "release"
+          ]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "place": 602
+          },
+          "matrix": [0.0, 1.0, -1.0, 0.0, 280.95, 108.45],
+          "name": "bMarker"
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": {
+            "place": 602
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 301.45, 95.95],
+          "name": "centreMarker"
+        },
+        {
+          "op": "place",
+          "depth": 31,
+          "action": {
+            "place": 597
+          },
+          "matrix": [0.7071075439453125, 0.7071075439453125, -0.7071075439453125, 0.7071075439453125, 264.45, 144.25],
+          "color": {
+            "mult": [0.0, 0.0, 0.0, 1.0],
+            "add": [255, 255, 0, 0]
+          },
+          "name": "runToMarker"
+        },
+        {
+          "op": "place",
+          "depth": 33,
+          "action": {
+            "place": 602
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -40.35, 167.8],
+          "name": "foulMarkerLeft"
+        },
+        {
+          "op": "place",
+          "depth": 35,
+          "action": {
+            "place": 602
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 638.3, 168.35],
+          "name": "foulMarkerRight"
+        },
+        {
+          "op": "place",
+          "depth": 37,
+          "action": {
+            "place": 597
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 258.3, 265.7],
+          "color": {
+            "mult": [0.0, 0.0, 0.0, 1.0],
+            "add": [255, 255, 0, 0]
+          },
+          "name": "pitcherMoundMarker"
+        },
+        {
+          "op": "place",
+          "depth": 39,
+          "action": {
+            "place": 1794
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 132.85, 123.7],
+          "name": "landMarker"
+        },
+        {
+          "op": "place",
+          "depth": 51,
+          "action": {
+            "place": 1117
+          },
+          "matrix": [0.5, 0.0, 0.0, 0.5, 261.35, 262.7],
+          "name": "highlightCircle",
+          "clip_events": [
+            "load"
+          ]
+        },
+        {
+          "op": "place",
+          "depth": 53,
+          "action": {
+            "place": 1119
+          },
+          "matrix": [0.2302093505859375, 0.0, 0.0, 0.038330078125, 263.4, 260.85],
+          "name": "pickBox"
+        },
+        {
+          "op": "place",
+          "depth": 55,
+          "action": {
+            "place": 616
+          },
+          "matrix": [0.0620269775390625, 0.0, 0.0, 0.0620269775390625, 247.85, 241.5],
+          "color": {
+            "mult": [0.80078125, 0.80078125, 0.80078125, 1.0],
+            "add": [51, 51, 51, 0]
+          }
+        },
+        {
+          "op": "place",
+          "depth": 73,
+          "action": {
+            "place": 1547
+          },
+          "matrix": [0.5999908447265625, 0.0, 0.0, 0.5999908447265625, 242.45, 335.15],
+          "name": "ballFly"
+        },
+        {
+          "op": "place",
+          "depth": 77,
+          "action": {
+            "place": 697
+          },
+          "matrix": [0.5999908447265625, 0.0, 0.0, 0.5999908447265625, 285.6, 416.75],
+          "name": "test_ballFly"
+        },
+        {
+          "op": "place",
+          "depth": 81,
+          "action": {
+            "place": 597
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 364.5, 177.9],
+          "color": {
+            "mult": [0.0, 0.0, 0.0, 1.0],
+            "add": [51, 255, 255, 0]
+          },
+          "name": "landSpot"
+        },
+        {
+          "op": "place",
+          "depth": 83,
+          "action": {
+            "place": 1803
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 641.5, 161.45]
+        },
+        {
+          "op": "place",
+          "depth": 84,
+          "action": {
+            "place": 1804
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 641.5, 190.45]
+        },
+        {
+          "op": "place",
+          "depth": 85,
+          "action": {
+            "place": 1805
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 606.2, 324.2]
+        },
+        {
+          "op": "place",
+          "depth": 86,
+          "action": {
+            "place": 1806
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 731.85, 62.35]
+        },
+        {
+          "op": "place",
+          "depth": 87,
+          "action": {
+            "place": 1807
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 891.95, 39.5]
+        },
+        {
+          "op": "place",
+          "depth": 88,
+          "action": {
+            "place": 1808
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 891.95, 62.35]
+        },
+        {
+          "op": "place",
+          "depth": 89,
+          "action": {
+            "place": 1809
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 948.3, 324.7]
+        },
+        {
+          "op": "place",
+          "depth": 90,
+          "action": {
+            "place": 1810
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 687.45, 242.9]
+        }
+      ]
+    }
+  ]
+}

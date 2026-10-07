@@ -1,0 +1,28 @@
+{
+  "id": 1451,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1448
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 1450
+          },
+          "matrix": [0.9450836181640625, 0.0, 0.0, 0.9450836181640625, 6.25, 4.0],
+          "name": "helmet"
+        }
+      ],
+      "has_script": true
+    }
+  ]
+}

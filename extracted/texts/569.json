@@ -1,0 +1,25 @@
+{
+  "id": 569,
+  "bounds": {
+    "x_min": -2.0,
+    "y_min": -2.0,
+    "x_max": 22.6,
+    "y_max": 16.25
+  },
+  "font": 504,
+  "height": 12.0,
+  "color": "#00003380",
+  "layout": {
+    "align": "center",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent._parent.scoreTarget",
+  "initial_text": "0",
+  "flags": [
+    "read_only",
+    "use_outlines"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "id": 252,
+  "labels": {
+    "easy": 1,
+    "hard": 19,
+    "medium": 11
+  },
+  "frames": [
+    {
+      "label": "easy",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 249
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "medium",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 250
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "hard",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 251
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+}

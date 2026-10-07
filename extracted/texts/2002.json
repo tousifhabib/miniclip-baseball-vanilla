@@ -1,0 +1,38 @@
+{
+  "id": 2002,
+  "bounds": {
+    "x_min": 41.6,
+    "y_min": 3.75,
+    "x_max": 113.9,
+    "y_max": 18.2
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 40.85, 0.0],
+  "runs": [
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 17.0,
+      "height": 18.0,
+      "text": "MENU",
+      "glyphs": [
+        {
+          "glyph": 45,
+          "advance": 19.85
+        },
+        {
+          "glyph": 37,
+          "advance": 13.5
+        },
+        {
+          "glyph": 46,
+          "advance": 15.35
+        },
+        {
+          "glyph": 53,
+          "advance": 13.1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": 411,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 410
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ],
+      "has_script": true
+    }
+  ]
+}

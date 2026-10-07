@@ -1,0 +1,476 @@
+{
+  "id": 482,
+  "bounds": {
+    "x_min": 15.45,
+    "y_min": 2.55,
+    "x_max": 290.45,
+    "y_max": 124.95
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 15.0,
+      "y": 13.0,
+      "height": 14.0,
+      "text": "IT'S THE BOTTOM OF THE NINTH!",
+      "glyphs": [
+        {
+          "glyph": 41,
+          "advance": 6.4
+        },
+        {
+          "glyph": 52,
+          "advance": 10.5
+        },
+        {
+          "glyph": 7,
+          "advance": 3.9
+        },
+        {
+          "glyph": 51,
+          "advance": 8.75
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 52,
+          "advance": 10.5
+        },
+        {
+          "glyph": 40,
+          "advance": 12.25
+        },
+        {
+          "glyph": 37,
+          "advance": 10.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 34,
+          "advance": 11.95
+        },
+        {
+          "glyph": 47,
+          "advance": 12.1
+        },
+        {
+          "glyph": 52,
+          "advance": 10.5
+        },
+        {
+          "glyph": 52,
+          "advance": 10.5
+        },
+        {
+          "glyph": 47,
+          "advance": 12.1
+        },
+        {
+          "glyph": 45,
+          "advance": 15.45
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 47,
+          "advance": 12.1
+        },
+        {
+          "glyph": 38,
+          "advance": 9.9
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 52,
+          "advance": 10.5
+        },
+        {
+          "glyph": 40,
+          "advance": 12.25
+        },
+        {
+          "glyph": 37,
+          "advance": 10.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 46,
+          "advance": 11.95
+        },
+        {
+          "glyph": 41,
+          "advance": 6.4
+        },
+        {
+          "glyph": 46,
+          "advance": 11.95
+        },
+        {
+          "glyph": 52,
+          "advance": 10.5
+        },
+        {
+          "glyph": 40,
+          "advance": 12.25
+        },
+        {
+          "glyph": 1,
+          "advance": 5.55
+        }
+      ]
+    },
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 57.0,
+      "y": 50.0,
+      "height": 14.0,
+      "text": "You are       runs down.",
+      "glyphs": [
+        {
+          "glyph": 57,
+          "advance": 10.2
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 85,
+          "advance": 11.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 82,
+          "advance": 7.6
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 82,
+          "advance": 7.6
+        },
+        {
+          "glyph": 85,
+          "advance": 11.1
+        },
+        {
+          "glyph": 78,
+          "advance": 11.2
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 68,
+          "advance": 11.2
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 87,
+          "advance": 14.3
+        },
+        {
+          "glyph": 78,
+          "advance": 11.2
+        },
+        {
+          "glyph": 14,
+          "advance": 5.55
+        }
+      ]
+    },
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 30.0,
+      "y": 87.0,
+      "height": 14.0,
+      "text": "Can you  come back and win ",
+      "glyphs": [
+        {
+          "glyph": 35,
+          "advance": 11.2
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 78,
+          "advance": 11.2
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 89,
+          "advance": 9.2
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 85,
+          "advance": 11.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 67,
+          "advance": 9.65
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 77,
+          "advance": 16.8
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 66,
+          "advance": 11.1
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 67,
+          "advance": 9.65
+        },
+        {
+          "glyph": 75,
+          "advance": 10.35
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 78,
+          "advance": 11.2
+        },
+        {
+          "glyph": 68,
+          "advance": 11.2
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 87,
+          "advance": 14.3
+        },
+        {
+          "glyph": 73,
+          "advance": 5.7
+        },
+        {
+          "glyph": 78,
+          "advance": 11.2
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        }
+      ]
+    },
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 59.0,
+      "y": 106.0,
+      "height": 14.0,
+      "text": "with only       outs left?",
+      "glyphs": [
+        {
+          "glyph": 87,
+          "advance": 14.3
+        },
+        {
+          "glyph": 73,
+          "advance": 5.7
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 72,
+          "advance": 11.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 78,
+          "advance": 11.2
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 89,
+          "advance": 9.2
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 85,
+          "advance": 11.1
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 70,
+          "advance": 6.4
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 31,
+          "advance": 8.9
+        }
+      ]
+    }
+  ]
+}

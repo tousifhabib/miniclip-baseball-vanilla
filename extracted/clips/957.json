@@ -1,0 +1,204 @@
+{
+  "id": 957,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 943
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 944
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 945
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 946
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 947
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 948
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 949
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 950
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 951
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 952
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 953
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 954
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 955
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 956
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+}

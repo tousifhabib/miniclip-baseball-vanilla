@@ -1,0 +1,153 @@
+{
+  "id": 341,
+  "labels": {
+    "bigbat": 40,
+    "eagle": 2,
+    "fire": 9,
+    "miniclip": 16,
+    "sweetspot": 24,
+    "warclub": 32
+  },
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 332
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {
+      "label": "eagle"
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "fire",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "replace": 333
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "miniclip",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 5
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 334
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "sweetspot",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 4
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 336
+          },
+          "matrix": [0.560699462890625, 0.0, 0.0, 0.418212890625, -15.1, -8.15],
+          "ratio": 23
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "warclub",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 338
+          },
+          "matrix": [0.5501251220703125, 0.0, 0.0, 0.5501251220703125, -10.55, -51.85],
+          "ratio": 31
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "bigbat",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 340
+          },
+          "matrix": [0.4112396240234375, 0.0, 0.0, 0.44805908203125, 40.05, -12.9],
+          "ratio": 39
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+}

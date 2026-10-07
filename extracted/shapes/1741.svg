@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-281 -150.1 561 298.1" width="561" height="298.1">
+<defs>
+<pattern id="p1" patternUnits="userSpaceOnUse" width="561" height="298" patternTransform="matrix(1 0 0 1 -281 -150)"><image href="../bitmaps/1692.png" width="561" height="298" style="image-rendering:pixelated"/></pattern>
+<pattern id="p2" patternUnits="userSpaceOnUse" width="514" height="297" patternTransform="matrix(1 0 0 1 -234 -150.1)"><image href="../bitmaps/1740.png" width="514" height="297" style="image-rendering:pixelated"/></pattern>
+</defs>
+<path d="M280 148 L-281 148 L-281 -150 L280 -150 L280 148 Z" fill="url(#p1)" fill-rule="evenodd"/>
+<path d="M280 146.9 L-234 146.9 L-234 -150.1 L280 -150.1 L280 146.9 Z" fill="url(#p2)" fill-rule="evenodd"/>
+</svg>

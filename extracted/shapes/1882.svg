@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="157.45 7 17.150000000000006 17.3" width="17.150000000000006" height="17.3">
+<defs>
+<radialGradient id="g1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="819.2" fx="0" fy="0" gradientTransform="matrix(-0.0101776123046875 0 0 0.0101776123046875 164.9 14.15)">
+<stop offset="0" stop-color="#ffffff"/>
+<stop offset="1" stop-color="#2e9ba7"/>
+</radialGradient>
+<radialGradient id="g2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="819.2" fx="0" fy="0" gradientTransform="matrix(-0.0001678466796875 0 0 0.0001678466796875 174.05 15.45)">
+<stop offset="0" stop-color="#b2dfef"/>
+<stop offset="1" stop-color="#e8f5f9"/>
+</radialGradient>
+</defs>
+<path d="M174.1 15.6 L174.1 15.65 L174.05 15.95 L173.3 17.1 L168.15 22.3 Q166.3 24.15 165.3 23.7 Q164.45 23.35 164.45 22 L164.45 19.7 L159.6 19.7 Q157.95 19.65 157.95 18 L157.95 13.3 Q157.95 11.6 159.6 11.6 L164.45 11.6 L164.45 9.3 Q164.45 7.9 165.3 7.6 Q166.3 7.15 168.15 9 L173.3 14.2 L174.05 15.35 L174.1 15.6 Z" fill="url(#g1)" fill-rule="evenodd"/>
+<path d="M174.05 15.35 L174.1 15.4 L174.1 15.6 L174.05 15.35 Z" fill="url(#g2)" fill-rule="evenodd"/>
+<path d="M174.1 15.6 L174.1 15.65 L174.05 15.95 L173.3 17.1 L168.15 22.3 Q166.3 24.15 165.3 23.7 Q164.45 23.35 164.45 22 L164.45 19.7 L159.6 19.7 Q157.95 19.65 157.95 18 L157.95 13.3 Q157.95 11.6 159.6 11.6 L164.45 11.6 L164.45 9.3 Q164.45 7.9 165.3 7.6 Q166.3 7.15 168.15 9 L173.3 14.2 L174.05 15.35 M174.1 15.6 L174.05 15.35" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

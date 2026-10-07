@@ -1,0 +1,76 @@
+{
+  "id": 1557,
+  "bounds": {
+    "x_min": 29.35,
+    "y_min": 1.65,
+    "x_max": 80.15,
+    "y_max": 31.4
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 628,
+      "color": "#ffffffff",
+      "x": 29.0,
+      "y": 13.0,
+      "height": 14.0,
+      "text": "sound",
+      "glyphs": [
+        {
+          "glyph": 21,
+          "advance": 7.8
+        },
+        {
+          "glyph": 19,
+          "advance": 8.55
+        },
+        {
+          "glyph": 23,
+          "advance": 8.55
+        },
+        {
+          "glyph": 18,
+          "advance": 8.55
+        },
+        {
+          "glyph": 10,
+          "advance": 8.55
+        }
+      ]
+    },
+    {
+      "font": 628,
+      "color": "#ffffffff",
+      "x": 29.0,
+      "y": 30.0,
+      "height": 14.0,
+      "text": "holder",
+      "glyphs": [
+        {
+          "glyph": 13,
+          "advance": 8.55
+        },
+        {
+          "glyph": 19,
+          "advance": 8.55
+        },
+        {
+          "glyph": 16,
+          "advance": 3.9
+        },
+        {
+          "glyph": 10,
+          "advance": 8.55
+        },
+        {
+          "glyph": 11,
+          "advance": 7.8
+        },
+        {
+          "glyph": 20,
+          "advance": 5.45
+        }
+      ]
+    }
+  ]
+}

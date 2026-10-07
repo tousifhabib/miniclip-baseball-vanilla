@@ -1,0 +1,26 @@
+{
+  "id": 1777,
+  "bounds": {
+    "x_min": -2.0,
+    "y_min": -2.0,
+    "x_max": 38.25,
+    "y_max": 22.0
+  },
+  "font": 204,
+  "height": 16.0,
+  "color": "#003300ff",
+  "layout": {
+    "align": "center",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent._parent.thisScore",
+  "initial_text": "100",
+  "flags": [
+    "read_only",
+    "selectable",
+    "use_outlines"
+  ]
+}

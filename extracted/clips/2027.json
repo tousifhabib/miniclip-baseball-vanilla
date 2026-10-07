@@ -1,0 +1,534 @@
+{
+  "id": 2027,
+  "labels": {
+    "arcade": 42,
+    "arcadeFinish": 51,
+    "inningsTied": 34,
+    "instructionsAll": 82,
+    "instructionsArcade": 72,
+    "instructionsMatch": 62,
+    "intro": 1,
+    "match": 12,
+    "matchLost": 18,
+    "matchWon": 26,
+    "menu": 6
+  },
+  "frames": [
+    {
+      "label": "intro",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 165
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 296.0, 200.7]
+        },
+        {
+          "op": "place",
+          "depth": 221,
+          "action": {
+            "place": 167
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -107.55, 20.8]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "menu",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 489
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.45],
+          "ratio": 5
+        },
+        {
+          "op": "place",
+          "depth": 222,
+          "action": {
+            "place": 491
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 719.65, 135.1]
+        },
+        {
+          "op": "place",
+          "depth": 223,
+          "action": {
+            "place": 493
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 604.35, 261.1],
+          "ratio": 5
+        },
+        {
+          "op": "place",
+          "depth": 225,
+          "action": {
+            "place": 494
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 620.0, 265.35]
+        },
+        {
+          "op": "place",
+          "depth": 226,
+          "action": {
+            "place": 495
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 719.65, 91.15]
+        },
+        {
+          "op": "place",
+          "depth": 227,
+          "action": {
+            "place": 496
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 607.75, 331.1],
+          "ratio": 5
+        },
+        {
+          "op": "place",
+          "depth": 229,
+          "action": {
+            "place": 497
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 616.4, 336.35]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "match",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "remove",
+          "depth": 222
+        },
+        {
+          "op": "remove",
+          "depth": 223
+        },
+        {
+          "op": "remove",
+          "depth": 225
+        },
+        {
+          "op": "remove",
+          "depth": 226
+        },
+        {
+          "op": "remove",
+          "depth": 227
+        },
+        {
+          "op": "remove",
+          "depth": 229
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1687
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -105.45, -400.0],
+          "ratio": 11
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "matchLost",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1727
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 294.5, 199.55],
+          "ratio": 17
+        },
+        {
+          "op": "place",
+          "depth": 222,
+          "action": {
+            "place": 1728
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 625.65, 135.1]
+        },
+        {
+          "op": "place",
+          "depth": 223,
+          "action": {
+            "place": 493
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 721.35, 257.2],
+          "ratio": 17
+        },
+        {
+          "op": "place",
+          "depth": 225,
+          "action": {
+            "place": 1729
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 737.0, 261.45]
+        },
+        {
+          "op": "place",
+          "depth": 226,
+          "action": {
+            "place": 1730
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 625.65, 91.15]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "matchWon",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1757
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 295.0, 199.55],
+          "ratio": 25
+        },
+        {
+          "op": "place",
+          "depth": 222,
+          "action": {
+            "replace": 1758
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 605.65, 135.1]
+        },
+        {
+          "op": "place",
+          "depth": 223,
+          "action": "modify",
+          "matrix": [1.0, 0.0, 0.0, 1.0, 632.35, 256.4]
+        },
+        {
+          "op": "place",
+          "depth": 225,
+          "action": "modify",
+          "matrix": [1.0, 0.0, 0.0, 1.0, 648.0, 260.65]
+        },
+        {
+          "op": "place",
+          "depth": 226,
+          "action": {
+            "replace": 1759
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 605.65, 91.15]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "inningsTied",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "remove",
+          "depth": 222
+        },
+        {
+          "op": "remove",
+          "depth": 223
+        },
+        {
+          "op": "remove",
+          "depth": 225
+        },
+        {
+          "op": "remove",
+          "depth": 226
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1769
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 294.5, 199.55],
+          "ratio": 33
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "arcade",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1845
+          },
+          "matrix": [0.9998626708984375, 0.0, 0.0, 1.0, -105.35, -400.0],
+          "ratio": 41
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "arcadeFinish",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1846
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 618.7, 80.9]
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 1847
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 714.4, 203.0],
+          "ratio": 50
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 1848
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 730.05, 207.25]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 1759
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 618.7, 36.95]
+        },
+        {
+          "op": "place",
+          "depth": 6,
+          "action": {
+            "place": 1849
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 756.05, 81.05],
+          "ratio": 50
+        },
+        {
+          "op": "place",
+          "depth": 222,
+          "action": {
+            "place": 1896
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 295.0, 199.55],
+          "ratio": 50
+        }
+      ],
+      "has_script": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "instructionsMatch",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "remove",
+          "depth": 2
+        },
+        {
+          "op": "remove",
+          "depth": 4
+        },
+        {
+          "op": "remove",
+          "depth": 5
+        },
+        {
+          "op": "remove",
+          "depth": 6
+        },
+        {
+          "op": "remove",
+          "depth": 221
+        },
+        {
+          "op": "remove",
+          "depth": 222
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1988
+          },
+          "matrix": [0.9998779296875, 0.0, 0.0, 1.000091552734375, 288.5, 246.15],
+          "ratio": 61
+        }
+      ],
+      "has_script": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "instructionsArcade",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 2000
+          },
+          "matrix": [0.99993896484375, 0.0, 0.0, 1.000091552734375, 288.45, 246.15],
+          "ratio": 71
+        }
+      ],
+      "has_script": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "instructionsAll",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 2026
+          },
+          "matrix": [0.9998779296875, 0.0, 0.0, 1.000091552734375, 288.5, 246.15],
+          "ratio": 81
+        }
+      ],
+      "has_script": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": 1762,
+  "bounds": {
+    "x_min": -21.1,
+    "y_min": -2.0,
+    "x_max": 556.7,
+    "y_max": 23.3
+  },
+  "font": 504,
+  "height": 18.0,
+  "color": "#fdf6c0ff",
+  "layout": {
+    "align": "center",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent.teamName",
+  "initial_text": "YOU",
+  "flags": [
+    "read_only",
+    "selectable",
+    "use_outlines"
+  ]
+}

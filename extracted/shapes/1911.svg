@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-12.35 -12.35 24.75 24.75" width="24.75" height="24.75">
+<defs>
+<radialGradient id="g1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="819.2" fx="0" fy="0" gradientTransform="matrix(0.01763916015625 0 0 0.01763916015625 2.7 -3.5)">
+<stop offset="0" stop-color="#66fafa"/>
+<stop offset="0.4941" stop-color="#00cccc"/>
+<stop offset="1" stop-color="#052350"/>
+</radialGradient>
+<radialGradient id="g2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="819.2" fx="0" fy="0" gradientTransform="matrix(0.0126800537109375 0 0 0.0126800537109375 0.2 -0.05)">
+<stop offset="0.4588" stop-color="#052350" stop-opacity="0.451"/>
+<stop offset="1" stop-color="#052350" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="g3" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="819.2" fx="0" fy="0" gradientTransform="matrix(0.0178680419921875 0 0 0.0178680419921875 -2.55 2.95)">
+<stop offset="0.7882" stop-color="#ffffff" stop-opacity="0"/>
+<stop offset="1" stop-color="#ffffff"/>
+</radialGradient>
+</defs>
+<path d="M8.2 -8.2 L8.15 -8.2 Q4.8 -11.55 0 -11.55 Q-4.8 -11.55 -8.15 -8.2 L-8.2 -8.2 Q-11.55 -4.8 -11.55 0 Q-11.55 4.8 -8.2 8.15 Q-4.8 11.55 0 11.55 Q4.8 11.55 8.15 8.15 L8.2 8.15 Q11.55 4.75 11.55 0 Q11.55 -4.8 8.2 -8.2 Z M8.75 -8.8 Q12.4 -5.15 12.4 0 Q12.4 5.1 8.75 8.75 Q5.15 12.35 0 12.4 Q-5.15 12.35 -8.75 8.75 Q-12.4 5.1 -12.35 0 Q-12.4 -5.15 -8.8 -8.75 L-8.75 -8.8 Q-5.1 -12.4 0 -12.35 Q5.15 -12.4 8.75 -8.8 Z" fill="#000066" fill-opacity="0.3294" fill-rule="evenodd"/>
+<path d="M10.75 0 Q10.75 -4.45 7.6 -7.6 Q4.45 -10.75 0 -10.7 Q-4.45 -10.75 -7.6 -7.65 L-7.6 -7.6 Q-10.75 -4.45 -10.7 0 Q-10.75 4.45 -7.6 7.55 Q-4.45 10.7 0 10.75 Q4.45 10.7 7.6 7.55 Q10.7 4.45 10.75 0 Z M8.15 -8.2 L8.2 -8.2 Q11.55 -4.8 11.55 0 Q11.55 4.75 8.2 8.15 L8.15 8.15 Q4.8 11.55 0 11.55 Q-4.8 11.55 -8.2 8.15 Q-11.55 4.8 -11.55 0 Q-11.55 -4.8 -8.2 -8.2 L-8.15 -8.2 Q-4.8 -11.55 0 -11.55 Q4.8 -11.55 8.15 -8.2 Z" fill="#000066" fill-opacity="0.6627" fill-rule="evenodd"/>
+<path d="M7.6 -7.6 Q10.75 -4.45 10.75 0 Q10.7 4.45 7.6 7.55 Q4.45 10.7 0 10.75 Q-4.45 10.7 -7.6 7.55 Q-10.75 4.45 -10.7 0 Q-10.75 -4.45 -7.6 -7.6 L-7.6 -7.65 Q-4.45 -10.75 0 -10.7 Q4.45 -10.75 7.6 -7.6 Z" fill="#000066" fill-rule="evenodd"/>
+<path d="M7.7 -7.75 Q10.9 -4.55 10.9 0 Q10.9 4.5 7.7 7.7 Q4.5 10.9 0 10.9 Q-4.5 10.9 -7.7 7.7 Q-10.9 4.5 -10.9 0 Q-10.9 -4.55 -7.7 -7.75 Q-4.5 -10.9 0 -10.9 Q4.5 -10.9 7.7 -7.75 Z" fill="url(#g1)" fill-rule="evenodd"/>
+<path d="M6.5 -6.4 Q9.15 -3.75 9.15 -0.05 Q9.15 3.65 6.5 6.25 Q3.9 8.9 0.2 8.9 Q-3.5 8.9 -6.15 6.25 Q-8.75 3.65 -8.75 -0.05 Q-8.75 -3.75 -6.15 -6.4 Q-3.5 -9 0.2 -9 Q3.9 -9 6.5 -6.4 Z" fill="url(#g2)" fill-rule="evenodd"/>
+<path d="M7.7 -7.75 Q10.9 -4.55 10.9 0 Q10.9 4.5 7.7 7.7 Q4.5 10.9 0 10.9 Q-4.5 10.9 -7.7 7.7 Q-10.9 4.5 -10.9 0 Q-10.9 -4.55 -7.7 -7.75 Q-4.5 -10.9 0 -10.9 Q4.5 -10.9 7.7 -7.75 Z" fill="url(#g3)" fill-rule="evenodd"/>
+</svg>

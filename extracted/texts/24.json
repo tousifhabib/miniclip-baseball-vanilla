@@ -1,0 +1,154 @@
+{
+  "id": 24,
+  "bounds": {
+    "x_min": -18.6,
+    "y_min": 0.85,
+    "x_max": 199.45,
+    "y_max": 11.0
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, -19.4, 0.0],
+  "runs": [
+    {
+      "font": 23,
+      "color": "#333366ff",
+      "x": 0.0,
+      "y": 10.0,
+      "height": 11.0,
+      "text": "MINICLIP.COM INTRO COMPONENT v1.7",
+      "glyphs": [
+        {
+          "glyph": 8,
+          "advance": 9.15
+        },
+        {
+          "glyph": 6,
+          "advance": 3.05
+        },
+        {
+          "glyph": 9,
+          "advance": 7.95
+        },
+        {
+          "glyph": 6,
+          "advance": 3.05
+        },
+        {
+          "glyph": 4,
+          "advance": 7.95
+        },
+        {
+          "glyph": 7,
+          "advance": 6.1
+        },
+        {
+          "glyph": 6,
+          "advance": 3.05
+        },
+        {
+          "glyph": 11,
+          "advance": 7.35
+        },
+        {
+          "glyph": 1,
+          "advance": 3.05
+        },
+        {
+          "glyph": 4,
+          "advance": 7.95
+        },
+        {
+          "glyph": 10,
+          "advance": 8.55
+        },
+        {
+          "glyph": 8,
+          "advance": 9.15
+        },
+        {
+          "glyph": 0,
+          "advance": 3.05
+        },
+        {
+          "glyph": 6,
+          "advance": 3.05
+        },
+        {
+          "glyph": 9,
+          "advance": 7.95
+        },
+        {
+          "glyph": 13,
+          "advance": 6.7
+        },
+        {
+          "glyph": 12,
+          "advance": 7.95
+        },
+        {
+          "glyph": 10,
+          "advance": 8.55
+        },
+        {
+          "glyph": 0,
+          "advance": 3.05
+        },
+        {
+          "glyph": 4,
+          "advance": 7.95
+        },
+        {
+          "glyph": 10,
+          "advance": 8.55
+        },
+        {
+          "glyph": 8,
+          "advance": 9.15
+        },
+        {
+          "glyph": 11,
+          "advance": 7.35
+        },
+        {
+          "glyph": 10,
+          "advance": 8.55
+        },
+        {
+          "glyph": 9,
+          "advance": 7.95
+        },
+        {
+          "glyph": 5,
+          "advance": 7.35
+        },
+        {
+          "glyph": 9,
+          "advance": 7.95
+        },
+        {
+          "glyph": 13,
+          "advance": 6.7
+        },
+        {
+          "glyph": 0,
+          "advance": 3.05
+        },
+        {
+          "glyph": 31,
+          "advance": 5.5
+        },
+        {
+          "glyph": 2,
+          "advance": 6.1
+        },
+        {
+          "glyph": 1,
+          "advance": 3.05
+        },
+        {
+          "glyph": 3,
+          "advance": 6.1
+        }
+      ]
+    }
+  ]
+}

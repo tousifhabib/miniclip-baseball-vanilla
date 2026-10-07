@@ -1,0 +1,50 @@
+{
+  "id": 629,
+  "bounds": {
+    "x_min": 49.25,
+    "y_min": 0.65,
+    "x_max": 104.5,
+    "y_max": 13.8
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 48.15, 0.0],
+  "runs": [
+    {
+      "font": 628,
+      "color": "#fefefeff",
+      "x": 0.0,
+      "y": 13.0,
+      "height": 14.0,
+      "text": "Pitcher",
+      "glyphs": [
+        {
+          "glyph": 4,
+          "advance": 9.35
+        },
+        {
+          "glyph": 14,
+          "advance": 3.9
+        },
+        {
+          "glyph": 22,
+          "advance": 4.65
+        },
+        {
+          "glyph": 9,
+          "advance": 7.8
+        },
+        {
+          "glyph": 13,
+          "advance": 8.55
+        },
+        {
+          "glyph": 11,
+          "advance": 7.8
+        },
+        {
+          "glyph": 20,
+          "advance": 5.45
+        }
+      ]
+    }
+  ]
+}

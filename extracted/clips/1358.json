@@ -1,0 +1,235 @@
+{
+  "id": 1358,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 1341
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1342
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1343
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1344
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1345
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1346
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1347
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1348
+          }
+        }
+      ]
+    },
+    {
+      "has_script": true
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1349
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1350
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1351
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1352
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 4
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 1353
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "replace": 1354
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 3
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 1355
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1356
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1357
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "has_script": true
+    }
+  ]
+}

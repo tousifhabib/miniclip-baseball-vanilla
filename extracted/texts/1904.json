@@ -1,0 +1,78 @@
+{
+  "id": 1904,
+  "bounds": {
+    "x_min": 0.3,
+    "y_min": 2.55,
+    "x_max": 128.95,
+    "y_max": 14.45
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 67,
+      "color": "#01354bff",
+      "x": 0.0,
+      "y": 13.0,
+      "height": 14.0,
+      "text": "white fade out",
+      "glyphs": [
+        {
+          "glyph": 87,
+          "advance": 14.3
+        },
+        {
+          "glyph": 72,
+          "advance": 11.1
+        },
+        {
+          "glyph": 73,
+          "advance": 5.7
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 70,
+          "advance": 6.4
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 68,
+          "advance": 11.2
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 85,
+          "advance": 11.1
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        }
+      ]
+    }
+  ]
+}

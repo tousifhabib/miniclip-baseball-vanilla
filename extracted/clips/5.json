@@ -1,0 +1,178 @@
+{
+  "id": 5,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 261.5, 187.1]
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 2
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 4
+          },
+          "matrix": [1.275604248046875, 0.0, 0.0, 2.73211669921875, 261.5, 187.15]
+        }
+      ]
+    },
+    {
+      "has_script": true,
+      "stops": true
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.98828125],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.9609375],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.91015625],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.83984375],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.75],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.640625],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.51171875],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.359375],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.19140625],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.0],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    }
+  ]
+}

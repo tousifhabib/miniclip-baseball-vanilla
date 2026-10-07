@@ -1,0 +1,23 @@
+{
+  "id": 4,
+  "track_as_menu": false,
+  "records": [
+    {
+      "states": [
+        "over",
+        "down",
+        "hit"
+      ],
+      "symbol": 3,
+      "depth": 1,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    }
+  ],
+  "actions": [
+    {
+      "conditions": [
+        "release"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": 1817,
+  "bounds": {
+    "x_min": 71.95,
+    "y_min": 1.9,
+    "x_max": 128.35,
+    "y_max": 17.7
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 68.8, 0.0],
+  "runs": [
+    {
+      "font": 166,
+      "color": "#000000ff",
+      "x": 2.0,
+      "y": 17.0,
+      "height": 18.0,
+      "text": "Points",
+      "glyphs": [
+        {
+          "glyph": 25,
+          "advance": 8.95
+        },
+        {
+          "glyph": 44,
+          "advance": 8.35
+        },
+        {
+          "glyph": 40,
+          "advance": 4.05
+        },
+        {
+          "glyph": 43,
+          "advance": 8.35
+        },
+        {
+          "glyph": 47,
+          "advance": 4.95
+        },
+        {
+          "glyph": 46,
+          "advance": 7.1
+        }
+      ]
+    }
+  ]
+}

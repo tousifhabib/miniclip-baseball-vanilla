@@ -1,0 +1,25 @@
+{
+  "id": 1721,
+  "bounds": {
+    "x_min": 60.75,
+    "y_min": -2.0,
+    "x_max": 139.6,
+    "y_max": 37.5
+  },
+  "font": 1677,
+  "height": 30.0,
+  "color": "#fcf4bcff",
+  "layout": {
+    "align": "center",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent._parent.ballsPitched",
+  "initial_text": "0",
+  "flags": [
+    "read_only",
+    "use_outlines"
+  ]
+}

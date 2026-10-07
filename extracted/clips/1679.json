@@ -1,0 +1,104 @@
+{
+  "id": 1679,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 488
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 1676
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 1678
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -292.95, -291.0]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 3
+        },
+        {
+          "op": "remove",
+          "depth": 4
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.75],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.5],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.25],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.0],
+            "add": [0, 0, 0, 0]
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    }
+  ]
+}

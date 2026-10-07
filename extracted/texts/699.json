@@ -1,0 +1,128 @@
+{
+  "id": 699,
+  "bounds": {
+    "x_min": 5.1,
+    "y_min": 1.55,
+    "x_max": 102.75,
+    "y_max": 30.4
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 628,
+      "color": "#ffffffff",
+      "x": 25.0,
+      "y": 11.0,
+      "height": 12.0,
+      "text": "hitTester",
+      "glyphs": [
+        {
+          "glyph": 13,
+          "advance": 7.35
+        },
+        {
+          "glyph": 14,
+          "advance": 3.35
+        },
+        {
+          "glyph": 22,
+          "advance": 4.0
+        },
+        {
+          "glyph": 7,
+          "advance": 7.35
+        },
+        {
+          "glyph": 11,
+          "advance": 6.65
+        },
+        {
+          "glyph": 21,
+          "advance": 6.65
+        },
+        {
+          "glyph": 22,
+          "advance": 4.0
+        },
+        {
+          "glyph": 11,
+          "advance": 6.65
+        },
+        {
+          "glyph": 20,
+          "advance": 4.65
+        }
+      ]
+    },
+    {
+      "font": 628,
+      "color": "#ffffffff",
+      "x": 5.0,
+      "y": 27.0,
+      "height": 12.0,
+      "text": "easy/ med/ hard",
+      "glyphs": [
+        {
+          "glyph": 11,
+          "advance": 6.65
+        },
+        {
+          "glyph": 8,
+          "advance": 6.65
+        },
+        {
+          "glyph": 21,
+          "advance": 6.65
+        },
+        {
+          "glyph": 25,
+          "advance": 6.55
+        },
+        {
+          "glyph": 2,
+          "advance": 3.35
+        },
+        {
+          "glyph": 0,
+          "advance": 3.35
+        },
+        {
+          "glyph": 17,
+          "advance": 10.65
+        },
+        {
+          "glyph": 11,
+          "advance": 6.65
+        },
+        {
+          "glyph": 10,
+          "advance": 7.35
+        },
+        {
+          "glyph": 2,
+          "advance": 3.35
+        },
+        {
+          "glyph": 0,
+          "advance": 3.35
+        },
+        {
+          "glyph": 13,
+          "advance": 7.35
+        },
+        {
+          "glyph": 8,
+          "advance": 6.65
+        },
+        {
+          "glyph": 20,
+          "advance": 4.65
+        },
+        {
+          "glyph": 10,
+          "advance": 7.35
+        }
+      ]
+    }
+  ]
+}

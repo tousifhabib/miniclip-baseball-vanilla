@@ -1,0 +1,35 @@
+{
+  "id": 247,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 243
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 4
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 245
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 246
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    }
+  ]
+}

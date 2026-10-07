@@ -1,0 +1,25 @@
+{
+  "id": 1818,
+  "bounds": {
+    "x_min": 66.8,
+    "y_min": -2.0,
+    "x_max": 116.55,
+    "y_max": 23.55
+  },
+  "font": 166,
+  "height": 18.0,
+  "color": "#000000ff",
+  "layout": {
+    "align": "center",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent.balls_left",
+  "initial_text": "0",
+  "flags": [
+    "read_only",
+    "selectable"
+  ]
+}

@@ -1,0 +1,580 @@
+{
+  "id": 1686,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 501
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -0.45, 0.05]
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 581
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 252.5, 77.1],
+          "name": "scoreboard"
+        },
+        {
+          "op": "place",
+          "depth": 36,
+          "action": {
+            "place": 583
+          },
+          "matrix": [0.0999908447265625, 0.0, 0.0, 0.0999908447265625, 304.45, 60.45]
+        },
+        {
+          "op": "place",
+          "depth": 40,
+          "action": {
+            "place": 584
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 41,
+          "action": {
+            "place": 600
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 585.95, -400.0],
+          "name": "test"
+        },
+        {
+          "op": "place",
+          "depth": 59,
+          "action": {
+            "place": 595
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 848.15, 6.6]
+        },
+        {
+          "op": "place",
+          "depth": 61,
+          "action": {
+            "place": 602
+          },
+          "matrix": [0.0, 1.0, -1.0, 0.0, 440.15, 176.1],
+          "name": "hMarker"
+        },
+        {
+          "op": "place",
+          "depth": 63,
+          "action": {
+            "place": 597
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 294.75, 168.4],
+          "color": {
+            "mult": [0.0, 0.0, 0.0, 1.0],
+            "add": [255, 204, 0, 0]
+          },
+          "name": "shadowFlyMarker"
+        },
+        {
+          "op": "place",
+          "depth": 65,
+          "action": {
+            "place": 602
+          },
+          "matrix": [0.0, 1.0, -1.0, 0.0, 439.6, 345.0],
+          "name": "uMarker"
+        },
+        {
+          "op": "place",
+          "depth": 67,
+          "action": {
+            "place": 602
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 295.0, 159.0],
+          "name": "centreMarker"
+        },
+        {
+          "op": "place",
+          "depth": 69,
+          "action": {
+            "place": 606
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 303.45, 167.65],
+          "name": "aimArea"
+        },
+        {
+          "op": "place",
+          "depth": 74,
+          "action": {
+            "place": 611
+          },
+          "matrix": [0.1877593994140625, 0.0, 0.0, 0.1877593994140625, 205.85, 133.0],
+          "color": {
+            "mult": [0.69921875, 0.69921875, 0.69921875, 1.0],
+            "add": [17, 30, 23, 0]
+          }
+        },
+        {
+          "op": "place",
+          "depth": 85,
+          "action": {
+            "place": 616
+          },
+          "matrix": [0.2062835693359375, 0.0, 0.0, 0.2062835693359375, 254.4, 129.4],
+          "color": {
+            "mult": [0.69921875, 0.69921875, 0.69921875, 1.0],
+            "add": [17, 30, 23, 0]
+          }
+        },
+        {
+          "op": "place",
+          "depth": 103,
+          "action": {
+            "place": 616
+          },
+          "matrix": [0.095977783203125, 0.0, 0.0, 0.095977783203125, 311.0, 150.2],
+          "color": {
+            "mult": [0.6484375, 0.6484375, 0.6484375, 1.0],
+            "add": [20, 35, 27, 0]
+          }
+        },
+        {
+          "op": "place",
+          "depth": 121,
+          "action": {
+            "place": 626
+          },
+          "matrix": [0.17474365234375, 0.0, 0.0, 0.17474365234375, 274.95, 178.4],
+          "color": {
+            "mult": [0.80078125, 0.80078125, 0.80078125, 1.0],
+            "add": [12, 20, 16, 0]
+          },
+          "name": "runnerOnSecond"
+        },
+        {
+          "op": "place",
+          "depth": 131,
+          "action": {
+            "place": 616
+          },
+          "matrix": [0.1897430419921875, 0.0089569091796875, -0.0051422119140625, 0.1898956298828125, -21.4, 133.95],
+          "color": {
+            "mult": [0.69921875, 0.69921875, 0.69921875, 1.0],
+            "add": [17, 30, 23, 0]
+          }
+        },
+        {
+          "op": "place",
+          "depth": 149,
+          "action": {
+            "place": 616
+          },
+          "matrix": [0.095977783203125, 0.0, 0.0, 0.095977783203125, 492.0, 152.2],
+          "color": {
+            "mult": [0.6484375, 0.6484375, 0.6484375, 1.0],
+            "add": [20, 35, 27, 0]
+          }
+        },
+        {
+          "op": "place",
+          "depth": 167,
+          "action": {
+            "place": 688
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 561.0, 437.7],
+          "name": "pitcher"
+        },
+        {
+          "op": "place",
+          "depth": 203,
+          "action": {
+            "place": 599
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 644.35, 453.0],
+          "name": "ballPassesBat_marker"
+        },
+        {
+          "op": "place",
+          "depth": 210,
+          "action": {
+            "place": 690
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 345.95, 199.0],
+          "color": {
+            "mult": [1.0, 1.0, 1.0, 0.75],
+            "add": [0, 0, 0, 0]
+          },
+          "name": "aimCircle"
+        },
+        {
+          "op": "place",
+          "depth": 213,
+          "action": {
+            "place": 692
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 345.9, 367.0],
+          "name": "aimCircleShadow"
+        },
+        {
+          "op": "place",
+          "depth": 215,
+          "action": {
+            "place": 694
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 247.75, 192.2],
+          "name": "strikeZone"
+        },
+        {
+          "op": "place",
+          "depth": 217,
+          "action": {
+            "place": 696
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 96.0, 121.45],
+          "name": "acl"
+        },
+        {
+          "op": "place",
+          "depth": 219,
+          "action": {
+            "place": 697
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 377.65, 409.2],
+          "name": "ballFly"
+        },
+        {
+          "op": "place",
+          "depth": 223,
+          "action": {
+            "place": 592
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 286.1, 137.85],
+          "name": "ballAll"
+        },
+        {
+          "op": "place",
+          "depth": 225,
+          "action": {
+            "place": 594
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 286.1, 233.35],
+          "name": "ballShadow"
+        },
+        {
+          "op": "place",
+          "depth": 227,
+          "action": {
+            "place": 1082
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 101.5, 135.9],
+          "name": "hitter"
+        },
+        {
+          "op": "place",
+          "depth": 319,
+          "action": {
+            "place": 1084
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 205.0, 320.0],
+          "name": "hitArea_easy"
+        },
+        {
+          "op": "place",
+          "depth": 321,
+          "action": {
+            "place": 1084
+          },
+          "matrix": [0.6822967529296875, 0.0, 0.0, 0.6829681396484375, 239.0, 330.0],
+          "name": "hitArea_med"
+        },
+        {
+          "op": "place",
+          "depth": 323,
+          "action": {
+            "place": 1084
+          },
+          "matrix": [0.349456787109375, 0.0, 0.0, 0.349884033203125, 270.6, 340.0],
+          "name": "hitArea_hard"
+        },
+        {
+          "op": "place",
+          "depth": 325,
+          "action": {
+            "place": 1085
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 181.9, 409.9]
+        },
+        {
+          "op": "place",
+          "depth": 326,
+          "action": {
+            "place": 1092
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 10.75, 6.55]
+        },
+        {
+          "op": "place",
+          "depth": 351,
+          "action": {
+            "place": 1548
+          },
+          "matrix": [0.8697357177734375, 0.0, 0.0, 0.86981201171875, 876.5, 30.4],
+          "name": "field"
+        },
+        {
+          "op": "place",
+          "depth": 659,
+          "action": {
+            "place": 1549
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 430.85, -28.55],
+          "name": "ballTest_functionHolder"
+        },
+        {
+          "op": "place",
+          "depth": 661,
+          "action": {
+            "place": 1549
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 408.05, -28.55],
+          "name": "aimCircle_functionHolder"
+        },
+        {
+          "op": "place",
+          "depth": 663,
+          "action": {
+            "place": 1549
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 472.5, -28.55],
+          "name": "swing_functionHolder"
+        },
+        {
+          "op": "place",
+          "depth": 665,
+          "action": {
+            "place": 1552
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 217.1, 440.5],
+          "name": "recordDataHolder"
+        },
+        {
+          "op": "place",
+          "depth": 668,
+          "action": {
+            "place": 1549
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 453.3, -27.95],
+          "name": "ballPitch_functionHolder"
+        },
+        {
+          "op": "place",
+          "depth": 670,
+          "action": {
+            "place": 1555
+          },
+          "matrix": [1.00042724609375, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 673,
+          "action": {
+            "place": 1549
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 492.5, -28.55],
+          "name": "ballFlyAway_functionHolder"
+        },
+        {
+          "op": "place",
+          "depth": 675,
+          "action": {
+            "place": 1586
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 519.25, 491.5],
+          "name": "soundHolder"
+        },
+        {
+          "op": "place",
+          "depth": 678,
+          "action": {
+            "place": 1588
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 216.0, 481.95],
+          "name": "fieldTimer"
+        },
+        {
+          "op": "place",
+          "depth": 681,
+          "action": {
+            "place": 1549
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 882.45, 52.45],
+          "name": "ballDistanceTest",
+          "clip_events": [
+            "enter_frame"
+          ]
+        },
+        {
+          "op": "place",
+          "depth": 683,
+          "action": {
+            "place": 1549
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 511.5, -28.55],
+          "name": "ballFlyAwayField_functionHolder"
+        },
+        {
+          "op": "place",
+          "depth": 685,
+          "action": {
+            "place": 1549
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 532.45, -28.55],
+          "name": "fielder_functionHolder"
+        },
+        {
+          "op": "place",
+          "depth": 687,
+          "action": {
+            "place": 1549
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 550.35, -28.55],
+          "name": "throw_functionHolder"
+        },
+        {
+          "op": "place",
+          "depth": 689,
+          "action": {
+            "place": 1549
+          },
+          "matrix": [1.0000152587890625, 0.0, 0.0, 0.9999847412109375, 572.6, -27.5],
+          "name": "buttonController_functionHolder",
+          "clip_events": [
+            "enter_frame"
+          ]
+        },
+        {
+          "op": "place",
+          "depth": 691,
+          "action": {
+            "place": 1590
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 217.45, 538.35],
+          "name": "foulWalkTimer"
+        },
+        {
+          "op": "place",
+          "depth": 694,
+          "action": {
+            "place": 1620
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 519.35, 405.5],
+          "name": "btn_nextBall"
+        },
+        {
+          "op": "place",
+          "depth": 704,
+          "action": {
+            "place": 457
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 202.95, -270.05]
+        },
+        {
+          "op": "place",
+          "depth": 815,
+          "action": {
+            "place": 1629
+          },
+          "matrix": [0.9998931884765625, 0.0, 0.0, 0.9998626708984375, 0.0, 0.0],
+          "name": "transitions"
+        },
+        {
+          "op": "place",
+          "depth": 828,
+          "action": {
+            "place": 1643
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "name": "strikeAnim_old"
+        },
+        {
+          "op": "place",
+          "depth": 832,
+          "action": {
+            "place": 31
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 833,
+          "action": {
+            "place": 1644
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 19.85, -92.25]
+        },
+        {
+          "op": "place",
+          "depth": 834,
+          "action": {
+            "place": 1645
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 191.95, -51.45]
+        },
+        {
+          "op": "place",
+          "depth": 835,
+          "action": {
+            "place": 1646
+          },
+          "matrix": [0.999969482421875, 0.0, 0.0, 1.0, 191.2, -31.0]
+        },
+        {
+          "op": "place",
+          "depth": 836,
+          "action": {
+            "place": 1652
+          },
+          "matrix": [0.54998779296875, 0.0, 0.0, 0.54998779296875, 3.55, 378.4]
+        },
+        {
+          "op": "place",
+          "depth": 848,
+          "action": {
+            "place": 1675
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 195.3, 136.35],
+          "name": "quitConfirm"
+        },
+        {
+          "op": "place",
+          "depth": 884,
+          "action": {
+            "place": 1679
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 294.45, 201.45]
+        },
+        {
+          "op": "place",
+          "depth": 889,
+          "action": {
+            "place": 1683
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 289.9, 206.25],
+          "name": "lightFlare"
+        },
+        {
+          "op": "place",
+          "depth": 892,
+          "action": {
+            "place": 1685
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 290.15, 206.2],
+          "name": "lightFlareQuit"
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    }
+  ]
+}

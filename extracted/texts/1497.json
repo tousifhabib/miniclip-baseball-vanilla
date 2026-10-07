@@ -1,0 +1,34 @@
+{
+  "id": 1497,
+  "bounds": {
+    "x_min": 0.75,
+    "y_min": 1.1,
+    "x_max": 25.65,
+    "y_max": 10.35
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 628,
+      "color": "#006666ff",
+      "x": 0.0,
+      "y": 9.0,
+      "height": 10.0,
+      "text": "Run",
+      "glyphs": [
+        {
+          "glyph": 5,
+          "advance": 7.2
+        },
+        {
+          "glyph": 23,
+          "advance": 6.1
+        },
+        {
+          "glyph": 18,
+          "advance": 6.1
+        }
+      ]
+    }
+  ]
+}

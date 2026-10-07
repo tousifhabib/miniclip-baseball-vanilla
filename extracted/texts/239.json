@@ -1,0 +1,74 @@
+{
+  "id": 239,
+  "bounds": {
+    "x_min": 0.55,
+    "y_min": 2.8,
+    "x_max": 139.95,
+    "y_max": 15.4
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 14.0,
+      "height": 15.0,
+      "text": "Team Colours:",
+      "glyphs": [
+        {
+          "glyph": 52,
+          "advance": 11.25
+        },
+        {
+          "glyph": 69,
+          "advance": 10.45
+        },
+        {
+          "glyph": 65,
+          "advance": 11.25
+        },
+        {
+          "glyph": 77,
+          "advance": 17.95
+        },
+        {
+          "glyph": 0,
+          "advance": 3.75
+        },
+        {
+          "glyph": 35,
+          "advance": 12.05
+        },
+        {
+          "glyph": 79,
+          "advance": 11.25
+        },
+        {
+          "glyph": 76,
+          "advance": 6.1
+        },
+        {
+          "glyph": 79,
+          "advance": 11.25
+        },
+        {
+          "glyph": 85,
+          "advance": 11.9
+        },
+        {
+          "glyph": 82,
+          "advance": 8.15
+        },
+        {
+          "glyph": 83,
+          "advance": 9.25
+        },
+        {
+          "glyph": 26,
+          "advance": 5.95
+        }
+      ]
+    }
+  ]
+}

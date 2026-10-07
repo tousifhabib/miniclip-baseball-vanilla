@@ -1,0 +1,226 @@
+{
+  "id": 1673,
+  "bounds": {
+    "x_min": 1.3,
+    "y_min": 2.45,
+    "x_max": 151.05,
+    "y_max": 48.0
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 1.0, 0.0],
+  "runs": [
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 7.0,
+      "y": 12.0,
+      "height": 13.0,
+      "text": "Are you sure you ",
+      "glyphs": [
+        {
+          "glyph": 33,
+          "advance": 9.9
+        },
+        {
+          "glyph": 82,
+          "advance": 7.05
+        },
+        {
+          "glyph": 69,
+          "advance": 9.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 89,
+          "advance": 8.5
+        },
+        {
+          "glyph": 79,
+          "advance": 9.75
+        },
+        {
+          "glyph": 85,
+          "advance": 10.3
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 83,
+          "advance": 8.0
+        },
+        {
+          "glyph": 85,
+          "advance": 10.3
+        },
+        {
+          "glyph": 82,
+          "advance": 7.05
+        },
+        {
+          "glyph": 69,
+          "advance": 9.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 89,
+          "advance": 8.5
+        },
+        {
+          "glyph": 79,
+          "advance": 9.75
+        },
+        {
+          "glyph": 85,
+          "advance": 10.3
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        }
+      ]
+    },
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 30.0,
+      "height": 13.0,
+      "text": "want to Quit to the",
+      "glyphs": [
+        {
+          "glyph": 87,
+          "advance": 13.25
+        },
+        {
+          "glyph": 65,
+          "advance": 9.75
+        },
+        {
+          "glyph": 78,
+          "advance": 10.4
+        },
+        {
+          "glyph": 84,
+          "advance": 5.95
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 84,
+          "advance": 5.95
+        },
+        {
+          "glyph": 79,
+          "advance": 9.75
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 49,
+          "advance": 11.25
+        },
+        {
+          "glyph": 85,
+          "advance": 10.3
+        },
+        {
+          "glyph": 73,
+          "advance": 5.25
+        },
+        {
+          "glyph": 84,
+          "advance": 5.95
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 84,
+          "advance": 5.95
+        },
+        {
+          "glyph": 79,
+          "advance": 9.75
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 84,
+          "advance": 5.95
+        },
+        {
+          "glyph": 72,
+          "advance": 10.3
+        },
+        {
+          "glyph": 69,
+          "advance": 9.1
+        }
+      ]
+    },
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 23.0,
+      "y": 47.0,
+      "height": 13.0,
+      "text": "Main Menu?",
+      "glyphs": [
+        {
+          "glyph": 45,
+          "advance": 14.35
+        },
+        {
+          "glyph": 65,
+          "advance": 9.75
+        },
+        {
+          "glyph": 73,
+          "advance": 5.25
+        },
+        {
+          "glyph": 78,
+          "advance": 10.4
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 45,
+          "advance": 14.35
+        },
+        {
+          "glyph": 69,
+          "advance": 9.1
+        },
+        {
+          "glyph": 78,
+          "advance": 10.4
+        },
+        {
+          "glyph": 85,
+          "advance": 10.3
+        },
+        {
+          "glyph": 31,
+          "advance": 8.25
+        }
+      ]
+    }
+  ]
+}

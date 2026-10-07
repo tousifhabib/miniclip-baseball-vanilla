@@ -1,0 +1,35 @@
+{
+  "id": 1781,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 1776
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 1777
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -1.95, 0.3]
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 1780
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 41.7, 9.15],
+          "name": "timesTwo"
+        }
+      ]
+    }
+  ]
+}

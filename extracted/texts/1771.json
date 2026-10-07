@@ -1,0 +1,46 @@
+{
+  "id": 1771,
+  "bounds": {
+    "x_min": -0.05,
+    "y_min": 0.45,
+    "x_max": 51.8,
+    "y_max": 14.95
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 166,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 14.0,
+      "height": 15.0,
+      "text": "Arcade",
+      "glyphs": [
+        {
+          "glyph": 12,
+          "advance": 7.45
+        },
+        {
+          "glyph": 45,
+          "advance": 4.15
+        },
+        {
+          "glyph": 35,
+          "advance": 6.2
+        },
+        {
+          "glyph": 33,
+          "advance": 6.95
+        },
+        {
+          "glyph": 36,
+          "advance": 7.2
+        },
+        {
+          "glyph": 37,
+          "advance": 6.7
+        }
+      ]
+    }
+  ]
+}

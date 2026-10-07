@@ -1,0 +1,292 @@
+{
+  "id": 491,
+  "bounds": {
+    "x_min": 34.7,
+    "y_min": 0.75,
+    "x_max": 259.9,
+    "y_max": 36.55
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 490,
+      "color": "#ffffffff",
+      "x": 38.0,
+      "y": 15.0,
+      "height": 18.0,
+      "text": "You have one innings (3 outs) to",
+      "glyphs": [
+        {
+          "glyph": 23,
+          "advance": 8.3
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 40,
+          "advance": 8.35
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 31,
+          "advance": 8.35
+        },
+        {
+          "glyph": 24,
+          "advance": 8.8
+        },
+        {
+          "glyph": 41,
+          "advance": 7.4
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 35,
+          "advance": 8.35
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 32,
+          "advance": 3.2
+        },
+        {
+          "glyph": 35,
+          "advance": 8.35
+        },
+        {
+          "glyph": 35,
+          "advance": 8.35
+        },
+        {
+          "glyph": 32,
+          "advance": 3.2
+        },
+        {
+          "glyph": 35,
+          "advance": 8.35
+        },
+        {
+          "glyph": 30,
+          "advance": 8.8
+        },
+        {
+          "glyph": 38,
+          "advance": 6.05
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 3,
+          "advance": 4.7
+        },
+        {
+          "glyph": 6,
+          "advance": 8.5
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 40,
+          "advance": 8.35
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 38,
+          "advance": 6.05
+        },
+        {
+          "glyph": 4,
+          "advance": 4.7
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        }
+      ]
+    },
+    {
+      "font": 490,
+      "color": "#ffffffff",
+      "x": 34.0,
+      "y": 35.0,
+      "height": 18.0,
+      "text": "beat the other team's score of 5.",
+      "glyphs": [
+        {
+          "glyph": 25,
+          "advance": 8.9
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 24,
+          "advance": 8.8
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 31,
+          "advance": 8.35
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 31,
+          "advance": 8.35
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 37,
+          "advance": 6.3
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 24,
+          "advance": 8.8
+        },
+        {
+          "glyph": 34,
+          "advance": 11.85
+        },
+        {
+          "glyph": 2,
+          "advance": 2.8
+        },
+        {
+          "glyph": 38,
+          "advance": 6.05
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 38,
+          "advance": 6.05
+        },
+        {
+          "glyph": 26,
+          "advance": 8.25
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 37,
+          "advance": 6.3
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 29,
+          "advance": 5.85
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 7,
+          "advance": 8.7
+        },
+        {
+          "glyph": 5,
+          "advance": 3.65
+        }
+      ]
+    }
+  ]
+}

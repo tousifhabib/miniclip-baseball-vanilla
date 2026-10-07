@@ -1,0 +1,25 @@
+{
+  "id": 536,
+  "bounds": {
+    "x_min": 66.9,
+    "y_min": -2.0,
+    "x_max": 85.6,
+    "y_max": 23.3
+  },
+  "font": 504,
+  "height": 18.0,
+  "color": "#042452ff",
+  "layout": {
+    "align": "center",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent._parent.strikes",
+  "initial_text": "1",
+  "flags": [
+    "read_only",
+    "use_outlines"
+  ]
+}

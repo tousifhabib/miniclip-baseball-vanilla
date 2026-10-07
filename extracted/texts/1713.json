@@ -1,0 +1,25 @@
+{
+  "id": 1713,
+  "bounds": {
+    "x_min": 45.65,
+    "y_min": -2.0,
+    "x_max": 62.1,
+    "y_max": 25.65
+  },
+  "font": 1677,
+  "height": 20.0,
+  "color": "#fcf4bcff",
+  "layout": {
+    "align": "left",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent._parent.batsman4_score",
+  "initial_text": "0",
+  "flags": [
+    "read_only",
+    "use_outlines"
+  ]
+}

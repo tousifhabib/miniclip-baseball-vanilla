@@ -1,0 +1,51 @@
+{
+  "id": 461,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 252
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 56.65, 22.8],
+          "name": "skillSelect"
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 253
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 47.1, 2.0]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 458
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 7.8, 23.0]
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "place": 459
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 68.2, 23.0]
+        },
+        {
+          "op": "place",
+          "depth": 11,
+          "action": {
+            "place": 460
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 153.8, 23.0]
+        }
+      ]
+    }
+  ]
+}

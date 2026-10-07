@@ -1,0 +1,50 @@
+{
+  "id": 1729,
+  "bounds": {
+    "x_min": 4.85,
+    "y_min": 1.15,
+    "x_max": 52.5,
+    "y_max": 15.8
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 490,
+      "color": "#ffffffff",
+      "x": 4.0,
+      "y": 15.0,
+      "height": 18.0,
+      "text": "Restart",
+      "glyphs": [
+        {
+          "glyph": 19,
+          "advance": 8.5
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 38,
+          "advance": 6.05
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 24,
+          "advance": 8.8
+        },
+        {
+          "glyph": 37,
+          "advance": 6.3
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        }
+      ]
+    }
+  ]
+}

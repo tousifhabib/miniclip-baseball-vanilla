@@ -1,0 +1,66 @@
+{
+  "id": 1621,
+  "bounds": {
+    "x_min": 11.45,
+    "y_min": 3.75,
+    "x_max": 148.75,
+    "y_max": 23.95
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 10.8, 0.0],
+  "runs": [
+    {
+      "font": 23,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 23.0,
+      "height": 25.0,
+      "text": "Transitions",
+      "glyphs": [
+        {
+          "glyph": 13,
+          "advance": 15.25
+        },
+        {
+          "glyph": 27,
+          "advance": 8.35
+        },
+        {
+          "glyph": 14,
+          "advance": 13.9
+        },
+        {
+          "glyph": 24,
+          "advance": 13.9
+        },
+        {
+          "glyph": 28,
+          "advance": 12.5
+        },
+        {
+          "glyph": 21,
+          "advance": 5.55
+        },
+        {
+          "glyph": 29,
+          "advance": 6.95
+        },
+        {
+          "glyph": 21,
+          "advance": 5.55
+        },
+        {
+          "glyph": 25,
+          "advance": 13.9
+        },
+        {
+          "glyph": 24,
+          "advance": 13.9
+        },
+        {
+          "glyph": 28,
+          "advance": 12.5
+        }
+      ]
+    }
+  ]
+}

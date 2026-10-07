@@ -1,0 +1,372 @@
+{
+  "id": 1981,
+  "bounds": {
+    "x_min": 2.85,
+    "y_min": 2.45,
+    "x_max": 185.6,
+    "y_max": 64.85
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 204,
+      "color": "#ffffffff",
+      "x": 10.0,
+      "y": 12.0,
+      "height": 13.0,
+      "text": "Land the ball as close ",
+      "glyphs": [
+        {
+          "glyph": 25,
+          "advance": 9.1
+        },
+        {
+          "glyph": 36,
+          "advance": 9.75
+        },
+        {
+          "glyph": 48,
+          "advance": 10.4
+        },
+        {
+          "glyph": 39,
+          "advance": 10.4
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 54,
+          "advance": 5.95
+        },
+        {
+          "glyph": 43,
+          "advance": 10.3
+        },
+        {
+          "glyph": 40,
+          "advance": 9.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 37,
+          "advance": 10.3
+        },
+        {
+          "glyph": 36,
+          "advance": 9.75
+        },
+        {
+          "glyph": 46,
+          "advance": 5.25
+        },
+        {
+          "glyph": 46,
+          "advance": 5.25
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 36,
+          "advance": 9.75
+        },
+        {
+          "glyph": 53,
+          "advance": 8.0
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 38,
+          "advance": 8.95
+        },
+        {
+          "glyph": 46,
+          "advance": 5.25
+        },
+        {
+          "glyph": 49,
+          "advance": 9.75
+        },
+        {
+          "glyph": 53,
+          "advance": 8.0
+        },
+        {
+          "glyph": 40,
+          "advance": 9.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        }
+      ]
+    },
+    {
+      "font": 204,
+      "color": "#ffffffff",
+      "x": 2.0,
+      "y": 29.0,
+      "height": 13.0,
+      "text": "as you can to the center ",
+      "glyphs": [
+        {
+          "glyph": 36,
+          "advance": 9.75
+        },
+        {
+          "glyph": 53,
+          "advance": 8.0
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 59,
+          "advance": 8.5
+        },
+        {
+          "glyph": 49,
+          "advance": 9.75
+        },
+        {
+          "glyph": 55,
+          "advance": 10.3
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 38,
+          "advance": 8.95
+        },
+        {
+          "glyph": 36,
+          "advance": 9.75
+        },
+        {
+          "glyph": 48,
+          "advance": 10.4
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 54,
+          "advance": 5.95
+        },
+        {
+          "glyph": 49,
+          "advance": 9.75
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 54,
+          "advance": 5.95
+        },
+        {
+          "glyph": 43,
+          "advance": 10.3
+        },
+        {
+          "glyph": 40,
+          "advance": 9.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 38,
+          "advance": 8.95
+        },
+        {
+          "glyph": 40,
+          "advance": 9.1
+        },
+        {
+          "glyph": 48,
+          "advance": 10.4
+        },
+        {
+          "glyph": 54,
+          "advance": 5.95
+        },
+        {
+          "glyph": 40,
+          "advance": 9.1
+        },
+        {
+          "glyph": 52,
+          "advance": 7.05
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        }
+      ]
+    },
+    {
+      "font": 204,
+      "color": "#ffffffff",
+      "x": 33.0,
+      "y": 45.0,
+      "height": 13.0,
+      "text": "of the target for ",
+      "glyphs": [
+        {
+          "glyph": 49,
+          "advance": 9.75
+        },
+        {
+          "glyph": 41,
+          "advance": 5.95
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 54,
+          "advance": 5.95
+        },
+        {
+          "glyph": 43,
+          "advance": 10.3
+        },
+        {
+          "glyph": 40,
+          "advance": 9.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 54,
+          "advance": 5.95
+        },
+        {
+          "glyph": 36,
+          "advance": 9.75
+        },
+        {
+          "glyph": 52,
+          "advance": 7.05
+        },
+        {
+          "glyph": 42,
+          "advance": 10.3
+        },
+        {
+          "glyph": 40,
+          "advance": 9.1
+        },
+        {
+          "glyph": 54,
+          "advance": 5.95
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 41,
+          "advance": 5.95
+        },
+        {
+          "glyph": 49,
+          "advance": 9.75
+        },
+        {
+          "glyph": 52,
+          "advance": 7.05
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        }
+      ]
+    },
+    {
+      "font": 204,
+      "color": "#ffffffff",
+      "x": 27.0,
+      "y": 61.0,
+      "height": 13.0,
+      "text": "maximum points",
+      "glyphs": [
+        {
+          "glyph": 47,
+          "advance": 15.6
+        },
+        {
+          "glyph": 36,
+          "advance": 9.75
+        },
+        {
+          "glyph": 58,
+          "advance": 8.8
+        },
+        {
+          "glyph": 44,
+          "advance": 5.25
+        },
+        {
+          "glyph": 47,
+          "advance": 15.6
+        },
+        {
+          "glyph": 55,
+          "advance": 10.3
+        },
+        {
+          "glyph": 47,
+          "advance": 15.6
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 50,
+          "advance": 10.4
+        },
+        {
+          "glyph": 49,
+          "advance": 9.75
+        },
+        {
+          "glyph": 44,
+          "advance": 5.25
+        },
+        {
+          "glyph": 48,
+          "advance": 10.4
+        },
+        {
+          "glyph": 54,
+          "advance": 5.95
+        },
+        {
+          "glyph": 53,
+          "advance": 8.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "id": 50,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 27
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 31
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 48
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0021209716796875, 0.0, -3.0],
+          "name": "mcLoading"
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "ratio": 655
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "ratio": 2621
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "ratio": 5898
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "ratio": 10485
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "ratio": 16384
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "ratio": 23593
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "ratio": 32112
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "ratio": 41943
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "ratio": 53083
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "remove",
+          "depth": 2
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 49
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 31
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 48
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0021209716796875, 0.0, -3.0],
+          "ratio": 10,
+          "name": "mcLoading"
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "remove",
+          "depth": 2
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    }
+  ]
+}

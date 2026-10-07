@@ -1,0 +1,106 @@
+{
+  "id": 436,
+  "bounds": {
+    "x_min": 11.95,
+    "y_min": 1.35,
+    "x_max": 114.65,
+    "y_max": 12.55
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 166,
+      "color": "#ffffffff",
+      "x": 11.0,
+      "y": 11.0,
+      "height": 12.0,
+      "text": "Reset to Default Skin",
+      "glyphs": [
+        {
+          "glyph": 26,
+          "advance": 6.4
+        },
+        {
+          "glyph": 37,
+          "advance": 5.35
+        },
+        {
+          "glyph": 46,
+          "advance": 4.75
+        },
+        {
+          "glyph": 37,
+          "advance": 5.35
+        },
+        {
+          "glyph": 47,
+          "advance": 3.3
+        },
+        {
+          "glyph": 0,
+          "advance": 2.3
+        },
+        {
+          "glyph": 47,
+          "advance": 3.3
+        },
+        {
+          "glyph": 44,
+          "advance": 5.55
+        },
+        {
+          "glyph": 0,
+          "advance": 2.3
+        },
+        {
+          "glyph": 15,
+          "advance": 6.8
+        },
+        {
+          "glyph": 37,
+          "advance": 5.35
+        },
+        {
+          "glyph": 38,
+          "advance": 3.1
+        },
+        {
+          "glyph": 33,
+          "advance": 5.55
+        },
+        {
+          "glyph": 48,
+          "advance": 5.6
+        },
+        {
+          "glyph": 42,
+          "advance": 2.7
+        },
+        {
+          "glyph": 47,
+          "advance": 3.3
+        },
+        {
+          "glyph": 0,
+          "advance": 2.3
+        },
+        {
+          "glyph": 27,
+          "advance": 6.2
+        },
+        {
+          "glyph": 41,
+          "advance": 5.15
+        },
+        {
+          "glyph": 40,
+          "advance": 2.7
+        },
+        {
+          "glyph": 43,
+          "advance": 5.55
+        }
+      ]
+    }
+  ]
+}

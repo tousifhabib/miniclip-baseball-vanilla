@@ -1,0 +1,66 @@
+{
+  "id": 1678,
+  "bounds": {
+    "x_min": 8.45,
+    "y_min": 1.55,
+    "x_max": 92.55,
+    "y_max": 15.05
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 1677,
+      "color": "#ffffffff",
+      "x": 8.0,
+      "y": 14.0,
+      "height": 15.0,
+      "text": "Fade in Box",
+      "glyphs": [
+        {
+          "glyph": 20,
+          "advance": 7.95
+        },
+        {
+          "glyph": 35,
+          "advance": 8.9
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 37,
+          "advance": 8.9
+        },
+        {
+          "glyph": 0,
+          "advance": 4.6
+        },
+        {
+          "glyph": 40,
+          "advance": 3.55
+        },
+        {
+          "glyph": 42,
+          "advance": 8.9
+        },
+        {
+          "glyph": 0,
+          "advance": 4.6
+        },
+        {
+          "glyph": 16,
+          "advance": 9.25
+        },
+        {
+          "glyph": 43,
+          "advance": 8.9
+        },
+        {
+          "glyph": 47,
+          "advance": 10.45
+        }
+      ]
+    }
+  ]
+}

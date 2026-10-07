@@ -1,0 +1,94 @@
+{
+  "id": 1681,
+  "bounds": {
+    "x_min": 9.35,
+    "y_min": 1.55,
+    "x_max": 134.75,
+    "y_max": 18.25
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 8.8, 0.0],
+  "runs": [
+    {
+      "font": 1677,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 14.0,
+      "height": 15.0,
+      "text": "LightFlare Fade In",
+      "glyphs": [
+        {
+          "glyph": 23,
+          "advance": 7.7
+        },
+        {
+          "glyph": 40,
+          "advance": 3.55
+        },
+        {
+          "glyph": 38,
+          "advance": 8.95
+        },
+        {
+          "glyph": 39,
+          "advance": 8.95
+        },
+        {
+          "glyph": 45,
+          "advance": 5.45
+        },
+        {
+          "glyph": 20,
+          "advance": 7.95
+        },
+        {
+          "glyph": 41,
+          "advance": 3.55
+        },
+        {
+          "glyph": 35,
+          "advance": 8.9
+        },
+        {
+          "glyph": 44,
+          "advance": 5.95
+        },
+        {
+          "glyph": 37,
+          "advance": 8.9
+        },
+        {
+          "glyph": 0,
+          "advance": 4.6
+        },
+        {
+          "glyph": 20,
+          "advance": 7.95
+        },
+        {
+          "glyph": 35,
+          "advance": 8.9
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 37,
+          "advance": 8.9
+        },
+        {
+          "glyph": 0,
+          "advance": 4.6
+        },
+        {
+          "glyph": 22,
+          "advance": 3.55
+        },
+        {
+          "glyph": 42,
+          "advance": 8.9
+        }
+      ]
+    }
+  ]
+}

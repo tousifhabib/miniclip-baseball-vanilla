@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-7.3 -3.1 47 26.1" width="47" height="26.1">
+<defs>
+<radialGradient id="g1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="819.2" fx="0" fy="0" gradientTransform="matrix(0.03155517578125 0 0 0.0204315185546875 21.9 5.15)">
+<stop offset="0" stop-color="#ffffff"/>
+<stop offset="1" stop-color="#edfec5"/>
+</radialGradient>
+<radialGradient id="g2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="819.2" fx="0" fy="0" gradientTransform="matrix(0.03155517578125 0 0 0.0204315185546875 21.9 5.15)">
+<stop offset="0" stop-color="#ffffff"/>
+<stop offset="1" stop-color="#edfec5"/>
+</radialGradient>
+</defs>
+<path d="M0.65 18.1 Q-5.8 14.75 -5.8 9.95 Q-5.8 5.15 0.65 1.75 Q7.1 -1.6 16.2 -1.6 Q25.3 -1.6 31.75 1.75 Q38.2 5.15 38.2 9.95 Q38.2 14.75 31.75 18.1 Q25.3 21.5 16.2 21.5 Q7.1 21.5 0.65 18.1 Z" fill="url(#g1)" fill-rule="evenodd"/>
+<path d="M0.65 18.1 Q-5.8 14.75 -5.8 9.95 Q-5.8 5.15 0.65 1.75 Q7.1 -1.6 16.2 -1.6 Q25.3 -1.6 31.75 1.75 Q38.2 5.15 38.2 9.95 Q38.2 14.75 31.75 18.1 Q25.3 21.5 16.2 21.5 Q7.1 21.5 0.65 18.1 Z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M31.75 18.1 Q25.3 21.5 16.2 21.5 Q7.1 21.5 0.65 18.1 Q-5.8 14.75 -5.8 9.95 Q-5.8 5.15 0.65 1.75 Q7.1 -1.6 16.2 -1.6 Q25.3 -1.6 31.75 1.75 Q38.2 5.15 38.2 9.95 Q38.2 14.75 31.75 18.1 Z" fill="url(#g2)" fill-rule="evenodd"/>
+<path d="M31.75 18.1 Q25.3 21.5 16.2 21.5 Q7.1 21.5 0.65 18.1 Q-5.8 14.75 -5.8 9.95 Q-5.8 5.15 0.65 1.75 Q7.1 -1.6 16.2 -1.6 Q25.3 -1.6 31.75 1.75 Q38.2 5.15 38.2 9.95 Q38.2 14.75 31.75 18.1 Z" fill="none" stroke="#003300" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

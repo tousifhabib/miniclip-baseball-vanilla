@@ -1,0 +1,98 @@
+{
+  "id": 626,
+  "labels": {
+    "full": 6,
+    "none": 1
+  },
+  "frames": [
+    {
+      "label": "none",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 617
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 619
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 1896.45, -15.9],
+          "name": "skinColor"
+        },
+        {
+          "op": "place",
+          "depth": 6,
+          "action": {
+            "place": 620
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 7,
+          "action": {
+            "place": 622
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 1884.75, -75.75],
+          "name": "helmet"
+        }
+      ],
+      "has_script": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "full",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 623
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": "modify",
+          "matrix": [1.0, 0.0, 0.0, 1.0, 27.5, 15.45]
+        },
+        {
+          "op": "place",
+          "depth": 6,
+          "action": {
+            "replace": 624
+          }
+        },
+        {
+          "op": "place",
+          "depth": 7,
+          "action": "modify",
+          "matrix": [1.0, 0.0, 0.0, 1.0, 15.8, -44.4]
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "place": 625
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {},
+    {},
+    {},
+    {}
+  ]
+}

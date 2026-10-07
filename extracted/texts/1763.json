@@ -1,0 +1,248 @@
+{
+  "id": 1763,
+  "bounds": {
+    "x_min": 28.4,
+    "y_min": 2.15,
+    "x_max": 433.35,
+    "y_max": 41.15
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 504,
+      "color": "#fdf6c0ff",
+      "x": 28.0,
+      "y": 17.0,
+      "height": 18.0,
+      "text": "MUST GET BACK OUT THERE FOR ANOTHER INNING. ",
+      "glyphs": [
+        {
+          "glyph": 45,
+          "advance": 13.65
+        },
+        {
+          "glyph": 53,
+          "advance": 10.95
+        },
+        {
+          "glyph": 51,
+          "advance": 10.95
+        },
+        {
+          "glyph": 52,
+          "advance": 10.05
+        },
+        {
+          "glyph": 0,
+          "advance": 5.45
+        },
+        {
+          "glyph": 39,
+          "advance": 11.0
+        },
+        {
+          "glyph": 37,
+          "advance": 9.45
+        },
+        {
+          "glyph": 52,
+          "advance": 10.05
+        },
+        {
+          "glyph": 0,
+          "advance": 5.45
+        },
+        {
+          "glyph": 34,
+          "advance": 11.0
+        },
+        {
+          "glyph": 33,
+          "advance": 11.55
+        },
+        {
+          "glyph": 35,
+          "advance": 9.7
+        },
+        {
+          "glyph": 43,
+          "advance": 11.6
+        },
+        {
+          "glyph": 0,
+          "advance": 5.45
+        },
+        {
+          "glyph": 47,
+          "advance": 10.95
+        },
+        {
+          "glyph": 53,
+          "advance": 10.95
+        },
+        {
+          "glyph": 52,
+          "advance": 10.05
+        },
+        {
+          "glyph": 0,
+          "advance": 5.45
+        },
+        {
+          "glyph": 52,
+          "advance": 10.05
+        },
+        {
+          "glyph": 40,
+          "advance": 10.95
+        },
+        {
+          "glyph": 37,
+          "advance": 9.45
+        },
+        {
+          "glyph": 50,
+          "advance": 11.0
+        },
+        {
+          "glyph": 37,
+          "advance": 9.45
+        },
+        {
+          "glyph": 0,
+          "advance": 5.45
+        },
+        {
+          "glyph": 38,
+          "advance": 9.45
+        },
+        {
+          "glyph": 47,
+          "advance": 10.95
+        },
+        {
+          "glyph": 50,
+          "advance": 11.0
+        },
+        {
+          "glyph": 0,
+          "advance": 5.45
+        },
+        {
+          "glyph": 33,
+          "advance": 11.55
+        },
+        {
+          "glyph": 46,
+          "advance": 11.55
+        },
+        {
+          "glyph": 47,
+          "advance": 10.95
+        },
+        {
+          "glyph": 52,
+          "advance": 10.05
+        },
+        {
+          "glyph": 40,
+          "advance": 10.95
+        },
+        {
+          "glyph": 37,
+          "advance": 9.45
+        },
+        {
+          "glyph": 50,
+          "advance": 11.0
+        },
+        {
+          "glyph": 0,
+          "advance": 5.45
+        },
+        {
+          "glyph": 41,
+          "advance": 4.2
+        },
+        {
+          "glyph": 46,
+          "advance": 11.55
+        },
+        {
+          "glyph": 46,
+          "advance": 11.55
+        },
+        {
+          "glyph": 41,
+          "advance": 4.2
+        },
+        {
+          "glyph": 46,
+          "advance": 11.55
+        },
+        {
+          "glyph": 39,
+          "advance": 11.0
+        },
+        {
+          "glyph": 14,
+          "advance": 4.2
+        },
+        {
+          "glyph": 0,
+          "advance": 5.45
+        }
+      ]
+    },
+    {
+      "font": 504,
+      "color": "#fdf6c0ff",
+      "x": 183.0,
+      "y": 40.0,
+      "height": 18.0,
+      "text": "BATTER UP!",
+      "glyphs": [
+        {
+          "glyph": 34,
+          "advance": 11.0
+        },
+        {
+          "glyph": 33,
+          "advance": 11.55
+        },
+        {
+          "glyph": 52,
+          "advance": 10.05
+        },
+        {
+          "glyph": 52,
+          "advance": 10.05
+        },
+        {
+          "glyph": 37,
+          "advance": 9.45
+        },
+        {
+          "glyph": 50,
+          "advance": 11.0
+        },
+        {
+          "glyph": 0,
+          "advance": 5.45
+        },
+        {
+          "glyph": 53,
+          "advance": 10.95
+        },
+        {
+          "glyph": 48,
+          "advance": 10.95
+        },
+        {
+          "glyph": 1,
+          "advance": 4.55
+        }
+      ]
+    }
+  ]
+}

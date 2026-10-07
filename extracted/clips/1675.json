@@ -1,0 +1,154 @@
+{
+  "id": 1675,
+  "labels": {
+    "offScreen": 1,
+    "onScreen": 11
+  },
+  "frames": [
+    {
+      "label": "offScreen",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1653
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 1654
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 420.8, -73.0]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "onScreen",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "remove",
+          "depth": 2
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1656
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -203.2, -142.25],
+          "ratio": 10,
+          "name": "coverUp"
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 1657
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 1664
+          },
+          "matrix": [0.54998779296875, 0.0, 0.0, 0.54998779296875, 84.4, 87.65],
+          "ratio": 10
+        },
+        {
+          "op": "place",
+          "depth": 17,
+          "action": {
+            "place": 1670
+          },
+          "matrix": [0.54998779296875, 0.0, 0.0, 0.54998779296875, 11.35, 87.65],
+          "ratio": 10
+        },
+        {
+          "op": "place",
+          "depth": 30,
+          "action": {
+            "place": 1671
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 31,
+          "action": {
+            "place": 1672
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 72.0, 6.0]
+        },
+        {
+          "op": "place",
+          "depth": 32,
+          "action": {
+            "place": 1672
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 72.0, 6.0]
+        },
+        {
+          "op": "place",
+          "depth": 33,
+          "action": {
+            "place": 1674
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 17.6, 27.95],
+          "color": {
+            "mult": [0.0, 0.0, 0.0, 1.0],
+            "add": [0, 0, 0, 0]
+          },
+          "ratio": 10,
+          "filters": [
+            {
+              "type": "blur",
+              "blur_x": 5.0,
+              "blur_y": 5.0,
+              "passes": 1
+            }
+          ]
+        },
+        {
+          "op": "place",
+          "depth": 35,
+          "action": {
+            "place": 1674
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 17.6, 27.95],
+          "ratio": 10
+        }
+      ],
+      "has_script": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+}

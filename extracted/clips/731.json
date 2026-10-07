@@ -1,0 +1,360 @@
+{
+  "id": 731,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 702
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 703
+          },
+          "matrix": [0.7306060791015625, 0.322845458984375, -0.403564453125, 0.913238525390625, -155.25, -43.0]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 3
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 704
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 705
+          },
+          "matrix": [0.7306060791015625, 0.322845458984375, -0.403564453125, 0.913238525390625, -153.0, -43.0],
+          "ratio": 1
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 3
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 706
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 707
+          },
+          "matrix": [0.7306060791015625, 0.322845458984375, -0.403564453125, 0.913238525390625, -147.15, -40.3],
+          "ratio": 2
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 3
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 708
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 709
+          },
+          "matrix": [0.7306060791015625, 0.322845458984375, -0.403564453125, 0.913238525390625, -145.1, -35.9],
+          "ratio": 3
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 3
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 710
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 711
+          },
+          "matrix": [0.4905548095703125, 0.216766357421875, -0.403564453125, 0.913238525390625, -119.7, -26.0],
+          "ratio": 4
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 3
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 712
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 713
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 714
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 715
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 716
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 717
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 718
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 719
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 720
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 721
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 722
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 723
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 724
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 725
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 726
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 727
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 728
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 729
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 2
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 730
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    },
+    {},
+    {},
+    {}
+  ]
+}

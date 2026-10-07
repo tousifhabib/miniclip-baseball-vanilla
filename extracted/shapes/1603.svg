@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 59 59" width="59" height="59">
+<defs>
+<radialGradient id="g1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="819.2" fx="0" fy="0" gradientTransform="matrix(0.051300048828125 0 0 0.051300048828125 35.55 19.4)">
+<stop offset="0" stop-color="#dddddd"/>
+<stop offset="0.7098" stop-color="#999999"/>
+<stop offset="1" stop-color="#373737"/>
+</radialGradient>
+<linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="-819.2" x2="819.2" gradientTransform="matrix(-0.0244140625 0.0247039794921875 -0.0247039794921875 -0.0244140625 28.5 28.5)">
+<stop offset="0" stop-color="#ffffff"/>
+<stop offset="1" stop-color="#000000"/>
+</linearGradient>
+</defs>
+<path d="M57 28.5 Q57 40.3 48.65 48.65 Q40.35 57 28.5 57 Q16.7 57 8.35 48.65 Q0 40.3 0 28.5 Q0 16.65 8.35 8.3 Q16.7 -0.05 28.5 0 Q40.35 -0.05 48.65 8.3 Q57 16.65 57 28.5 Z" fill="none" stroke="#000000" stroke-opacity="0.4824" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M57 28.5 Q57 40.3 48.65 48.65 Q40.35 57 28.5 57 Q16.7 57 8.35 48.65 Q0 40.3 0 28.5 Q0 16.65 8.35 8.3 Q16.7 -0.05 28.5 0 Q40.35 -0.05 48.65 8.3 Q57 16.65 57 28.5 Z" fill="url(#g1)" fill-rule="evenodd"/>
+<path d="M57 28.5 Q57 40.3 48.65 48.65 Q40.35 57 28.5 57 Q16.7 57 8.35 48.65 Q0 40.3 0 28.5 Q0 16.65 8.35 8.3 Q16.7 -0.05 28.5 0 Q40.35 -0.05 48.65 8.3 Q57 16.65 57 28.5 Z" fill="none" stroke="url(#g2)" stroke-width="0.05" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

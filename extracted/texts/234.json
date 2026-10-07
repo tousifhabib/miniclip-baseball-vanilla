@@ -1,0 +1,62 @@
+{
+  "id": 234,
+  "bounds": {
+    "x_min": 0.65,
+    "y_min": 3.4,
+    "x_max": 134.6,
+    "y_max": 17.3
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 204,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 16.0,
+      "height": 17.0,
+      "text": "TEAM SETUP",
+      "glyphs": [
+        {
+          "glyph": 32,
+          "advance": 12.75
+        },
+        {
+          "glyph": 20,
+          "advance": 12.75
+        },
+        {
+          "glyph": 16,
+          "advance": 12.9
+        },
+        {
+          "glyph": 26,
+          "advance": 18.75
+        },
+        {
+          "glyph": 0,
+          "advance": 4.25
+        },
+        {
+          "glyph": 31,
+          "advance": 10.65
+        },
+        {
+          "glyph": 20,
+          "advance": 12.75
+        },
+        {
+          "glyph": 32,
+          "advance": 12.75
+        },
+        {
+          "glyph": 33,
+          "advance": 12.4
+        },
+        {
+          "glyph": 29,
+          "advance": 14.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="153.15 -1.05 74.75 25.8" width="74.75" height="25.8">
+<defs>
+<linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="-819.2" x2="819.2" gradientTransform="matrix(-0.1158905029296875 0 0 0.0207672119140625 124.25 15.9)">
+<stop offset="0.2549" stop-color="#21c4d6" stop-opacity="0.7529"/>
+<stop offset="1" stop-color="#afd6fa" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="-819.2" x2="819.2" gradientTransform="matrix(-0.1158905029296875 0 0 0.0013885498046875 124.15 0.15)">
+<stop offset="0.2549" stop-color="#ffffff" stop-opacity="0.7529"/>
+<stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="-819.2" x2="819.2" gradientTransform="matrix(-0.0037078857421875 -0.0017852783203125 0.00457763671875 -0.00946044921875 220.6 15.1)">
+<stop offset="0" stop-color="#ffffff"/>
+<stop offset="1" stop-color="#2e9ba7"/>
+</linearGradient>
+</defs>
+<path d="M153.15 -1 L153.15 -1.05 L193.5 -1.05 L193.5 -1 L153.15 -1 Z" fill="url(#g1)" fill-rule="evenodd"/>
+<path d="M193.5 -1 L193.5 -0.9 L153.15 -0.9 L153.15 -1 L193.5 -1 Z" fill="url(#g2)" fill-rule="evenodd"/>
+<path d="M215.1 23.65 Q212.9 22.2 214.2 20.2 Q215 18.85 216.6 19.7 L222.5 8.25 Q223.7 6.1 226.05 7.65 Q228.3 9.15 226.75 11.05 L218.25 20.85 Q219.45 21.85 218.85 22.95 Q217.25 25.1 215.1 23.65 Z" fill="url(#g3)" fill-rule="evenodd"/>
+<path d="M215.1 23.65 Q212.9 22.2 214.2 20.2 Q215 18.85 216.6 19.7 L222.5 8.25 Q223.7 6.1 226.05 7.65 Q228.3 9.15 226.75 11.05 L218.25 20.85 Q219.45 21.85 218.85 22.95 Q217.25 25.1 215.1 23.65 Z" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

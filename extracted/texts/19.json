@@ -1,0 +1,102 @@
+{
+  "id": 19,
+  "bounds": {
+    "x_min": -0.9,
+    "y_min": -1.7,
+    "x_max": 300.15,
+    "y_max": 10.75
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 18,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 10.0,
+      "height": 13.0,
+      "text": "Free Games AND ShowS",
+      "glyphs": [
+        {
+          "glyph": 3,
+          "advance": 14.8
+        },
+        {
+          "glyph": 12,
+          "advance": 15.05
+        },
+        {
+          "glyph": 8,
+          "advance": 14.8
+        },
+        {
+          "glyph": 8,
+          "advance": 14.8
+        },
+        {
+          "glyph": 0,
+          "advance": 11.55
+        },
+        {
+          "glyph": 4,
+          "advance": 14.8
+        },
+        {
+          "glyph": 7,
+          "advance": 16.1
+        },
+        {
+          "glyph": 10,
+          "advance": 16.1
+        },
+        {
+          "glyph": 8,
+          "advance": 14.8
+        },
+        {
+          "glyph": 13,
+          "advance": 14.8
+        },
+        {
+          "glyph": 0,
+          "advance": 11.55
+        },
+        {
+          "glyph": 1,
+          "advance": 16.1
+        },
+        {
+          "glyph": 5,
+          "advance": 14.8
+        },
+        {
+          "glyph": 2,
+          "advance": 14.8
+        },
+        {
+          "glyph": 0,
+          "advance": 11.55
+        },
+        {
+          "glyph": 6,
+          "advance": 14.8
+        },
+        {
+          "glyph": 9,
+          "advance": 14.8
+        },
+        {
+          "glyph": 11,
+          "advance": 14.7
+        },
+        {
+          "glyph": 14,
+          "advance": 18.8
+        },
+        {
+          "glyph": 6,
+          "advance": 14.8
+        }
+      ]
+    }
+  ]
+}

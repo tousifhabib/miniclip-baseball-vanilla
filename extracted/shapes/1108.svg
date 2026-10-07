@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.2 0.25 104.60000000000001 56.45" width="104.60000000000001" height="56.45">
+<defs>
+<pattern id="p1" patternUnits="userSpaceOnUse" width="68" height="37" patternTransform="matrix(1.5255126953125 0 0 1.5255126953125 0.65 0.25)"><image href="../bitmaps/1107.png" width="68" height="37" style="image-rendering:pixelated"/></pattern>
+<radialGradient id="g2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="819.2" fx="0" fy="0" gradientTransform="matrix(0.082305908203125 0 0 0.082305908203125 87.5 11.55)">
+<stop offset="0.0078" stop-color="#ffffff" stop-opacity="0.502"/>
+<stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+</radialGradient>
+</defs>
+<path d="M104.4 56.7 L0.65 56.7 L0.65 0.25 L104.4 0.25 L104.4 56.7 Z" fill="url(#p1)" fill-rule="evenodd"/>
+<path d="M103.45 55.25 L-0.2 55.25 L-0.2 0.5 L103.45 0.5 L103.45 55.25 Z" fill="url(#g2)" fill-rule="evenodd"/>
+</svg>

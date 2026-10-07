@@ -1,0 +1,157 @@
+{
+  "id": null,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 51
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 293.45, 200.4]
+        }
+      ],
+      "has_script": true
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 1
+        },
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 2027
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -1.05, 0.0],
+          "ratio": 2
+        },
+        {
+          "op": "place",
+          "depth": 231,
+          "action": {
+            "place": 2029
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -69.85, 430.15],
+          "ratio": 2,
+          "name": "sound01"
+        },
+        {
+          "op": "place",
+          "depth": 233,
+          "action": {
+            "place": 2029
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -15.65, 428.75],
+          "ratio": 2,
+          "name": "sound1"
+        },
+        {
+          "op": "place",
+          "depth": 235,
+          "action": {
+            "place": 2029
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 12.2, 428.75],
+          "ratio": 2,
+          "name": "sound2"
+        },
+        {
+          "op": "place",
+          "depth": 237,
+          "action": {
+            "place": 2029
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 39.1, 428.75],
+          "ratio": 2,
+          "name": "sound3"
+        },
+        {
+          "op": "place",
+          "depth": 239,
+          "action": {
+            "place": 2029
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 65.0, 428.75],
+          "ratio": 2,
+          "name": "sound4"
+        },
+        {
+          "op": "place",
+          "depth": 241,
+          "action": {
+            "place": 2029
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -42.55, 429.7],
+          "ratio": 2,
+          "name": "sound0"
+        },
+        {
+          "op": "place",
+          "depth": 243,
+          "action": {
+            "place": 2029
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 89.0, 428.75],
+          "ratio": 2,
+          "name": "sound5"
+        },
+        {
+          "op": "place",
+          "depth": 245,
+          "action": {
+            "place": 2029
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 113.95, 428.75],
+          "ratio": 2,
+          "name": "sound6"
+        },
+        {
+          "op": "place",
+          "depth": 247,
+          "action": {
+            "place": 2029
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 138.9, 428.75],
+          "ratio": 2,
+          "name": "sound7"
+        },
+        {
+          "op": "place",
+          "depth": 249,
+          "action": {
+            "place": 2029
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 164.8, 428.75],
+          "ratio": 2,
+          "name": "sound8"
+        },
+        {
+          "op": "place",
+          "depth": 251,
+          "action": {
+            "place": 2029
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -97.0, 430.15],
+          "ratio": 2,
+          "name": "introMusic_loop"
+        },
+        {
+          "op": "place",
+          "depth": 253,
+          "action": {
+            "place": 2030
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    }
+  ]
+}

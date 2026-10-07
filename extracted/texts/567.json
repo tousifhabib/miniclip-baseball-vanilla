@@ -1,0 +1,70 @@
+{
+  "id": 567,
+  "bounds": {
+    "x_min": 0.3,
+    "y_min": 0.75,
+    "x_max": 62.8,
+    "y_max": 10.35
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 504,
+      "color": "#fcf2a5ff",
+      "x": 0.0,
+      "y": 9.0,
+      "height": 10.0,
+      "text": "RUNS TO WIN!",
+      "glyphs": [
+        {
+          "glyph": 50,
+          "advance": 6.1
+        },
+        {
+          "glyph": 53,
+          "advance": 6.1
+        },
+        {
+          "glyph": 46,
+          "advance": 6.4
+        },
+        {
+          "glyph": 51,
+          "advance": 6.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.0
+        },
+        {
+          "glyph": 52,
+          "advance": 5.6
+        },
+        {
+          "glyph": 47,
+          "advance": 6.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.0
+        },
+        {
+          "glyph": 55,
+          "advance": 9.5
+        },
+        {
+          "glyph": 41,
+          "advance": 2.35
+        },
+        {
+          "glyph": 46,
+          "advance": 6.4
+        },
+        {
+          "glyph": 1,
+          "advance": 2.55
+        }
+      ]
+    }
+  ]
+}

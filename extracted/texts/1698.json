@@ -1,0 +1,74 @@
+{
+  "id": 1698,
+  "bounds": {
+    "x_min": 3.55,
+    "y_min": 2.4,
+    "x_max": 140.5,
+    "y_max": 19.7
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 2.9, 0.0],
+  "runs": [
+    {
+      "font": 1677,
+      "color": "#fcf4bcff",
+      "x": 0.0,
+      "y": 19.0,
+      "height": 20.0,
+      "text": "BALLS PITCHED",
+      "glyphs": [
+        {
+          "glyph": 16,
+          "advance": 12.3
+        },
+        {
+          "glyph": 15,
+          "advance": 12.85
+        },
+        {
+          "glyph": 23,
+          "advance": 10.25
+        },
+        {
+          "glyph": 23,
+          "advance": 10.25
+        },
+        {
+          "glyph": 30,
+          "advance": 12.25
+        },
+        {
+          "glyph": 0,
+          "advance": 6.1
+        },
+        {
+          "glyph": 27,
+          "advance": 12.25
+        },
+        {
+          "glyph": 22,
+          "advance": 4.7
+        },
+        {
+          "glyph": 31,
+          "advance": 11.2
+        },
+        {
+          "glyph": 17,
+          "advance": 10.85
+        },
+        {
+          "glyph": 21,
+          "advance": 12.25
+        },
+        {
+          "glyph": 19,
+          "advance": 10.55
+        },
+        {
+          "glyph": 18,
+          "advance": 12.25
+        }
+      ]
+    }
+  ]
+}

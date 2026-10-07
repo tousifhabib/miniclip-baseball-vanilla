@@ -1,0 +1,26 @@
+{
+  "id": 1856,
+  "bounds": {
+    "x_min": 62.0,
+    "y_min": -2.0,
+    "x_max": 621.9,
+    "y_max": 31.6
+  },
+  "font": 1677,
+  "height": 25.0,
+  "color": "#003366ff",
+  "layout": {
+    "align": "center",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent.points_total",
+  "initial_text": "<p align=\"center\"><font face=\"Kimberley\" size=\"25\" color=\"#003366\" letterSpacing=\"0.500000\" kerning=\"0\"><b>0</b></font></p>",
+  "flags": [
+    "read_only",
+    "html",
+    "use_outlines"
+  ]
+}

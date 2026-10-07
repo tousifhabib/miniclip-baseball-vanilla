@@ -1,0 +1,23 @@
+{
+  "id": 456,
+  "bounds": {
+    "x_min": -2.0,
+    "y_min": -2.0,
+    "x_max": 61.95,
+    "y_max": 15.35
+  },
+  "font": 23,
+  "height": 10.0,
+  "color": "#000000ff",
+  "layout": {
+    "align": "center",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "initial_text": "0x000000",
+  "flags": [
+    "read_only"
+  ]
+}

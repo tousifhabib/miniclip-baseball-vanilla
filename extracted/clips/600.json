@@ -1,0 +1,89 @@
+{
+  "id": 600,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 585
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 592
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 286.1, 137.85],
+          "name": "ballAll"
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 594
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 286.1, 233.35],
+          "name": "ballShadow"
+        },
+        {
+          "op": "place",
+          "depth": 7,
+          "action": {
+            "place": 595
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 1009.9, 13.75]
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "place": 597
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 314.95, 202.45],
+          "name": "aimMarker"
+        },
+        {
+          "op": "place",
+          "depth": 11,
+          "action": {
+            "place": 597
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 314.9, 351.0],
+          "name": "shadowMarker"
+        },
+        {
+          "op": "place",
+          "depth": 13,
+          "action": {
+            "place": 597
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 285.85, 137.8],
+          "name": "startpointMarker"
+        },
+        {
+          "op": "place",
+          "depth": 15,
+          "action": {
+            "place": 597
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 285.85, 230.35],
+          "name": "startpointShadowMarker"
+        },
+        {
+          "op": "place",
+          "depth": 17,
+          "action": {
+            "place": 599
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 586.45, 173.3],
+          "name": "ballPassesBat_marker"
+        }
+      ]
+    }
+  ]
+}

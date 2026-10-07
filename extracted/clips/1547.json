@@ -1,0 +1,28 @@
+{
+  "id": 1547,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 594
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -0.05, -1.05],
+          "name": "ballShadow"
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 1546
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -0.05, 0.05],
+          "name": "ball"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": 1855,
+  "bounds": {
+    "x_min": -1.35,
+    "y_min": 2.3,
+    "x_max": 144.0,
+    "y_max": 24.4
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, -1.2, 0.0],
+  "runs": [
+    {
+      "font": 1677,
+      "color": "#003366ff",
+      "x": 0.0,
+      "y": 23.0,
+      "height": 25.0,
+      "text": "YOU SCORED",
+      "glyphs": [
+        {
+          "glyph": 34,
+          "advance": 15.5
+        },
+        {
+          "glyph": 26,
+          "advance": 15.8
+        },
+        {
+          "glyph": 32,
+          "advance": 15.8
+        },
+        {
+          "glyph": 0,
+          "advance": 8.1
+        },
+        {
+          "glyph": 30,
+          "advance": 15.8
+        },
+        {
+          "glyph": 17,
+          "advance": 14.05
+        },
+        {
+          "glyph": 26,
+          "advance": 15.8
+        },
+        {
+          "glyph": 29,
+          "advance": 15.85
+        },
+        {
+          "glyph": 19,
+          "advance": 13.7
+        },
+        {
+          "glyph": 18,
+          "advance": 15.8
+        }
+      ]
+    }
+  ]
+}

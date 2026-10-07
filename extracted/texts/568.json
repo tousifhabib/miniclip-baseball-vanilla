@@ -1,0 +1,26 @@
+{
+  "id": 568,
+  "bounds": {
+    "x_min": -2.0,
+    "y_min": -2.0,
+    "x_max": 22.75,
+    "y_max": 18.55
+  },
+  "font": 504,
+  "height": 14.0,
+  "color": "#7b1822ff",
+  "layout": {
+    "align": "center",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent._parent.runsToGet",
+  "initial_text": "0",
+  "flags": [
+    "read_only",
+    "selectable",
+    "use_outlines"
+  ]
+}

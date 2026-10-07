@@ -1,0 +1,42 @@
+{
+  "id": 518,
+  "bounds": {
+    "x_min": 0.3,
+    "y_min": 0.75,
+    "x_max": 28.65,
+    "y_max": 10.35
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 504,
+      "color": "#fcf2a5ff",
+      "x": 0.0,
+      "y": 9.0,
+      "height": 10.0,
+      "text": "SCORE",
+      "glyphs": [
+        {
+          "glyph": 51,
+          "advance": 6.1
+        },
+        {
+          "glyph": 35,
+          "advance": 5.4
+        },
+        {
+          "glyph": 47,
+          "advance": 6.1
+        },
+        {
+          "glyph": 50,
+          "advance": 6.1
+        },
+        {
+          "glyph": 37,
+          "advance": 5.25
+        }
+      ]
+    }
+  ]
+}

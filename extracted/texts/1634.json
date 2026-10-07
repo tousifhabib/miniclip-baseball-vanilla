@@ -1,0 +1,46 @@
+{
+  "id": 1634,
+  "bounds": {
+    "x_min": 35.2,
+    "y_min": 0.4,
+    "x_max": 125.2,
+    "y_max": 32.0
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 34.9, 0.0],
+  "runs": [
+    {
+      "font": 1633,
+      "color": "#990000ff",
+      "x": 0.0,
+      "y": 31.0,
+      "height": 37.0,
+      "text": "Strike",
+      "glyphs": [
+        {
+          "glyph": 0,
+          "advance": 13.5
+        },
+        {
+          "glyph": 5,
+          "advance": 13.75
+        },
+        {
+          "glyph": 4,
+          "advance": 12.35
+        },
+        {
+          "glyph": 2,
+          "advance": 8.35
+        },
+        {
+          "glyph": 3,
+          "advance": 14.0
+        },
+        {
+          "glyph": 1,
+          "advance": 12.05
+        }
+      ]
+    }
+  ]
+}

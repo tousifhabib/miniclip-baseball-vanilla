@@ -1,0 +1,112 @@
+{
+  "id": 1587,
+  "bounds": {
+    "x_min": 3.65,
+    "y_min": 0.45,
+    "x_max": 105.45,
+    "y_max": 31.4
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 628,
+      "color": "#ffffffff",
+      "x": 3.0,
+      "y": 13.0,
+      "height": 14.0,
+      "text": "switch to field",
+      "glyphs": [
+        {
+          "glyph": 21,
+          "advance": 7.8
+        },
+        {
+          "glyph": 24,
+          "advance": 10.9
+        },
+        {
+          "glyph": 14,
+          "advance": 3.9
+        },
+        {
+          "glyph": 22,
+          "advance": 4.65
+        },
+        {
+          "glyph": 9,
+          "advance": 7.8
+        },
+        {
+          "glyph": 13,
+          "advance": 8.55
+        },
+        {
+          "glyph": 0,
+          "advance": 3.9
+        },
+        {
+          "glyph": 22,
+          "advance": 4.65
+        },
+        {
+          "glyph": 19,
+          "advance": 8.55
+        },
+        {
+          "glyph": 0,
+          "advance": 3.9
+        },
+        {
+          "glyph": 12,
+          "advance": 4.65
+        },
+        {
+          "glyph": 14,
+          "advance": 3.9
+        },
+        {
+          "glyph": 11,
+          "advance": 7.8
+        },
+        {
+          "glyph": 16,
+          "advance": 3.9
+        },
+        {
+          "glyph": 10,
+          "advance": 8.55
+        }
+      ]
+    },
+    {
+      "font": 628,
+      "color": "#ffffffff",
+      "x": 33.0,
+      "y": 30.0,
+      "height": 14.0,
+      "text": "timer",
+      "glyphs": [
+        {
+          "glyph": 22,
+          "advance": 4.65
+        },
+        {
+          "glyph": 14,
+          "advance": 3.9
+        },
+        {
+          "glyph": 17,
+          "advance": 12.45
+        },
+        {
+          "glyph": 11,
+          "advance": 7.8
+        },
+        {
+          "glyph": 20,
+          "advance": 5.45
+        }
+      ]
+    }
+  ]
+}

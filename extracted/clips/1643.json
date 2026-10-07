@@ -1,0 +1,97 @@
+{
+  "id": 1643,
+  "labels": {
+    "strike1": 2,
+    "strike2": 8,
+    "strike3": 14
+  },
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1630
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 1631
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.00091552734375, -6.0, 455.45]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {
+      "label": "strike1",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 1638
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.2, 0.1],
+          "ratio": 1
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "strike2",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 3
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 1640
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.2, 0.1],
+          "ratio": 7
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "strike3",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 3
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 1642
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.2, 0.1],
+          "ratio": 13
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": 255,
+  "bounds": {
+    "x_min": 0.55,
+    "y_min": 2.2,
+    "x_max": 40.75,
+    "y_max": 14.95
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 11.0,
+      "height": 12.0,
+      "text": "Easy",
+      "glyphs": [
+        {
+          "glyph": 37,
+          "advance": 9.0
+        },
+        {
+          "glyph": 65,
+          "advance": 9.0
+        },
+        {
+          "glyph": 83,
+          "advance": 7.4
+        },
+        {
+          "glyph": 89,
+          "advance": 7.85
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "id": 202,
+  "bounds": {
+    "x_min": 41.65,
+    "y_min": 3.55,
+    "x_max": 192.9,
+    "y_max": 18.2
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 40.85, 0.0],
+  "runs": [
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 17.0,
+      "height": 18.0,
+      "text": "HIGH SCORES",
+      "glyphs": [
+        {
+          "glyph": 40,
+          "advance": 15.75
+        },
+        {
+          "glyph": 41,
+          "advance": 8.25
+        },
+        {
+          "glyph": 39,
+          "advance": 15.2
+        },
+        {
+          "glyph": 40,
+          "advance": 15.75
+        },
+        {
+          "glyph": 0,
+          "advance": 4.5
+        },
+        {
+          "glyph": 51,
+          "advance": 11.25
+        },
+        {
+          "glyph": 35,
+          "advance": 14.45
+        },
+        {
+          "glyph": 47,
+          "advance": 15.55
+        },
+        {
+          "glyph": 50,
+          "advance": 15.35
+        },
+        {
+          "glyph": 37,
+          "advance": 13.5
+        },
+        {
+          "glyph": 51,
+          "advance": 11.25
+        }
+      ]
+    }
+  ]
+}

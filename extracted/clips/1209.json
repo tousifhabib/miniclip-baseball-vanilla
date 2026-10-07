@@ -1,0 +1,243 @@
+{
+  "id": 1209,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 1189
+          },
+          "matrix": [0.17498779296875, 0.0, 0.0, 0.17498779296875, -7.25, -14.75]
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 1191
+          },
+          "matrix": [0.17498779296875, 0.0, 0.0, 0.17498779296875, -4.0, -13.55]
+        },
+        {
+          "op": "place",
+          "depth": 6,
+          "action": {
+            "place": 1202
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "replace": 1192
+          }
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": "modify",
+          "matrix": [0.17498779296875, 0.0, 0.0, 0.17498779296875, -4.0, -14.35]
+        },
+        {
+          "op": "place",
+          "depth": 6,
+          "action": {
+            "replace": 1203
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "replace": 1193
+          }
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": "modify",
+          "matrix": [0.17498779296875, 0.0, 0.0, 0.17498779296875, -3.9, -14.15]
+        },
+        {
+          "op": "place",
+          "depth": 6,
+          "action": {
+            "replace": 1204
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 6
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "replace": 1194
+          }
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": "modify",
+          "matrix": [0.17498779296875, 0.0, 0.0, 0.17498779296875, -4.15, -13.35]
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "replace": 1195
+          }
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": "modify",
+          "matrix": [0.17498779296875, 0.0, 0.0, 0.17498779296875, -4.25, -13.6]
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "replace": 1196
+          }
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": "modify",
+          "matrix": [0.17498779296875, 0.0, 0.0, 0.17498779296875, -4.4, -14.15]
+        },
+        {
+          "op": "place",
+          "depth": 6,
+          "action": {
+            "place": 1205
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 6
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "replace": 1197
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "replace": 1198
+          }
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": "modify",
+          "matrix": [0.17498779296875, 0.0, 0.0, 0.17498779296875, -3.95, -14.15]
+        },
+        {
+          "op": "place",
+          "depth": 6,
+          "action": {
+            "place": 1206
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "replace": 1199
+          }
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": "modify",
+          "matrix": [0.17498779296875, 0.0, 0.0, 0.17498779296875, -3.8, -13.7]
+        },
+        {
+          "op": "place",
+          "depth": 6,
+          "action": {
+            "replace": 1207
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "replace": 1200
+          }
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": "modify",
+          "matrix": [0.17498779296875, 0.0, 0.0, 0.17498779296875, -4.5, -13.35]
+        },
+        {
+          "op": "place",
+          "depth": 6,
+          "action": {
+            "replace": 1208
+          }
+        }
+      ]
+    },
+    {}
+  ]
+}

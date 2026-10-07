@@ -1,0 +1,76 @@
+{
+  "id": 1765,
+  "bounds": {
+    "x_min": 10.1,
+    "y_min": 1.1,
+    "x_max": 63.1,
+    "y_max": 23.75
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 166,
+      "color": "#ffffffff",
+      "x": 18.0,
+      "y": 12.0,
+      "height": 13.0,
+      "text": "NEXT",
+      "glyphs": [
+        {
+          "glyph": 23,
+          "advance": 7.35
+        },
+        {
+          "glyph": 16,
+          "advance": 6.05
+        },
+        {
+          "glyph": 31,
+          "advance": 5.8
+        },
+        {
+          "glyph": 28,
+          "advance": 4.95
+        }
+      ]
+    },
+    {
+      "font": 166,
+      "color": "#ffffffff",
+      "x": 9.0,
+      "y": 23.0,
+      "height": 13.0,
+      "text": "INNINGS",
+      "glyphs": [
+        {
+          "glyph": 19,
+          "advance": 3.15
+        },
+        {
+          "glyph": 23,
+          "advance": 7.35
+        },
+        {
+          "glyph": 23,
+          "advance": 7.35
+        },
+        {
+          "glyph": 19,
+          "advance": 3.15
+        },
+        {
+          "glyph": 23,
+          "advance": 7.35
+        },
+        {
+          "glyph": 17,
+          "advance": 7.35
+        },
+        {
+          "glyph": 27,
+          "advance": 6.7
+        }
+      ]
+    }
+  ]
+}

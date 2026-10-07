@@ -1,0 +1,25 @@
+{
+  "id": 1803,
+  "bounds": {
+    "x_min": 66.0,
+    "y_min": -2.0,
+    "x_max": 106.1,
+    "y_max": 17.6
+  },
+  "font": 628,
+  "height": 14.0,
+  "color": "#ffffffff",
+  "layout": {
+    "align": "center",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent.field_x_distance",
+  "initial_text": "0",
+  "flags": [
+    "read_only",
+    "selectable"
+  ]
+}

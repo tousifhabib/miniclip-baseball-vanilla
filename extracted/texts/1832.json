@@ -1,0 +1,25 @@
+{
+  "id": 1832,
+  "bounds": {
+    "x_min": 47.2,
+    "y_min": -2.0,
+    "x_max": 161.95,
+    "y_max": 27.85
+  },
+  "font": 204,
+  "height": 22.0,
+  "color": "#ffffffff",
+  "layout": {
+    "align": "center",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent._parent.points_total",
+  "initial_text": "340",
+  "flags": [
+    "read_only",
+    "use_outlines"
+  ]
+}

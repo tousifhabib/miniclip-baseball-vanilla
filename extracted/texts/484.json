@@ -1,0 +1,25 @@
+{
+  "id": 484,
+  "bounds": {
+    "x_min": 63.7,
+    "y_min": -2.0,
+    "x_max": 92.7,
+    "y_max": 23.1
+  },
+  "font": 67,
+  "height": 18.0,
+  "color": "#ffffffff",
+  "layout": {
+    "align": "center",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent._parent.scoreTarget",
+  "initial_text": "0",
+  "flags": [
+    "read_only",
+    "use_outlines"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "id": 51,
+  "labels": {
+    "preload": 3
+  },
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 33,
+          "action": {
+            "place": 5
+          },
+          "matrix": [0.1658172607421875, 0.0, 0.0, 0.16583251953125, 0.1, 0.35],
+          "name": "mcBackground"
+        },
+        {
+          "op": "place",
+          "depth": 37,
+          "action": {
+            "place": 21
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "name": "mcAnimation"
+        },
+        {
+          "op": "place",
+          "depth": 51,
+          "action": {
+            "place": 26
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "name": "mcIntro",
+          "clip_events": [
+            "load"
+          ]
+        }
+      ],
+      "has_script": true
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 50
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "ratio": 1,
+          "name": "mcLoadingAnimated",
+          "clip_events": [
+            "load"
+          ]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {
+      "label": "preload",
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 33
+        },
+        {
+          "op": "remove",
+          "depth": 37
+        },
+        {
+          "op": "remove",
+          "depth": 51
+        }
+      ],
+      "has_script": true
+    },
+    {},
+    {
+      "has_script": true
+    },
+    {},
+    {},
+    {}
+  ]
+}

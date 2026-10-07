@@ -1,12 +1,14 @@
 # miniclip-baseball-mod
 
-An unofficial, fan-made project to rebuild the Flash game *Miniclip Baseball*
-as a native Rust application that is easy to mod.
+A project to rebuild the Flash game *Miniclip Baseball* as a native Rust
+application that is easy to mod.
 
-**This repository contains no game files.** The game and its art, sound and
-code belong to Miniclip. You need your own copy of the game's SWF. The tools
-here convert it on your machine, and nothing taken from it is committed. This
-project is not affiliated with or endorsed by Miniclip.
+The game's art and sound are published here by the project's owner, who
+holds the rights to them for this game under an agreement with Miniclip.
+The original SWF is in `original/`, and `extracted/` is that file converted
+to open formats, which is what the game loads. Those rights are for this
+game: they do not make the art free to use anywhere else. Miniclip does not
+run or support this project.
 
 ## Status
 
@@ -35,10 +37,11 @@ project is not affiliated with or endorsed by Miniclip.
 
 ## Extracting the game
 
-Needs a current stable Rust toolchain.
+`extracted/` is already here, so this only needs doing again after a change
+to the extractor. Needs a current stable Rust toolchain.
 
 ```bash
-cargo run --release -p bb-extractor -- path/to/the-game.swf --out extracted
+cargo run --release -p bb-extractor -- original/miniclip-baseball.swf --out extracted
 ```
 
 This writes:
@@ -151,8 +154,7 @@ is, `events` prints the buttons touched and sounds asked for, `tree` prints
 every object on the stage, and `shot FILE` saves a picture.
 
 The same steps drive the tests in `crates/game/tests`, which play the real
-game with no window. They need the extracted art in `extracted/`, and pass
-without checking anything where it is missing.
+game with no window.
 
 ## Making the Mac app
 
@@ -296,4 +298,5 @@ What the engine does:
 
 ## Licence
 
-No licence has been chosen yet.
+No licence has been chosen yet for the code. The art and sound are not
+covered by whatever licence the code is given: see the top of this page.

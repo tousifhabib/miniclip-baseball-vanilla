@@ -1,0 +1,48 @@
+{
+  "id": 1864,
+  "labels": {
+    "easy": 1,
+    "hard": 3,
+    "med": 2
+  },
+  "frames": [
+    {
+      "label": "easy",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1861
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -14.8, -14.8]
+        }
+      ],
+      "has_script": true
+    },
+    {
+      "label": "med",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 1862
+          }
+        }
+      ]
+    },
+    {
+      "label": "hard",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 1863
+          }
+        }
+      ]
+    }
+  ]
+}

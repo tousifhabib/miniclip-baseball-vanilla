@@ -1,0 +1,36 @@
+{
+  "id": 450,
+  "track_as_menu": false,
+  "records": [
+    {
+      "states": [
+        "hit"
+      ],
+      "symbol": 243,
+      "depth": 1,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    }
+  ],
+  "actions": [
+    {
+      "conditions": [
+        "roll_over"
+      ]
+    },
+    {
+      "conditions": [
+        "roll_out"
+      ]
+    },
+    {
+      "conditions": [
+        "release_outside"
+      ]
+    },
+    {
+      "conditions": [
+        "release"
+      ]
+    }
+  ]
+}

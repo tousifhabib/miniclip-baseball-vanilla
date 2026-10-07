@@ -1,0 +1,53 @@
+{
+  "id": 1117,
+  "labels": {
+    "australia": 1,
+    "england": 11
+  },
+  "frames": [
+    {
+      "label": "australia",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1115
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ],
+      "has_script": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "england",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 1116
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+}

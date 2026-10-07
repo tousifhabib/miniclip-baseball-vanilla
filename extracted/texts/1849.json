@@ -1,0 +1,24 @@
+{
+  "id": 1849,
+  "bounds": {
+    "x_min": -2.0,
+    "y_min": -2.0,
+    "x_max": 132.05,
+    "y_max": 20.75
+  },
+  "font": 490,
+  "height": 18.0,
+  "color": "#ffffffff",
+  "layout": {
+    "align": "left",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "points_total",
+  "initial_text": "0",
+  "flags": [
+    "read_only"
+  ]
+}

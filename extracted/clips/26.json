@@ -1,0 +1,35 @@
+{
+  "id": 26,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 22
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 24
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -70.55, -45.6]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 25
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -89.95, -26.0]
+        }
+      ],
+      "has_script": true
+    }
+  ]
+}

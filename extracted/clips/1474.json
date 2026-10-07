@@ -1,0 +1,237 @@
+{
+  "id": 1474,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 1456
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 622
+          },
+          "matrix": [0.70880126953125, 0.0, 0.0, 0.70880126953125, 38.95, 13.75],
+          "name": "helmet"
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 1457
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ],
+      "has_script": true
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 1458
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": "modify",
+          "matrix": [0.70880126953125, 0.0, 0.0, 0.70880126953125, 40.1, 10.3]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "replace": 1459
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 1460
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": "modify",
+          "matrix": [0.70880126953125, 0.0, 0.0, 0.70880126953125, 39.5, 8.0]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "replace": 1461
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 1462
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": "modify",
+          "matrix": [0.70880126953125, 0.0, 0.0, 0.70880126953125, 40.1, 14.25]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "replace": 1463
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 1464
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": "modify",
+          "matrix": [0.70880126953125, 0.0, 0.0, 0.70880126953125, 41.25, 13.65]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "replace": 1465
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 1466
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": "modify",
+          "matrix": [0.70880126953125, 0.0, 0.0, 0.70880126953125, 40.7, 13.05]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "replace": 1467
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 1468
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": "modify",
+          "matrix": [0.70880126953125, 0.0, 0.0, 0.70880126953125, 39.55, 9.05]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "replace": 1469
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 1470
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": "modify",
+          "matrix": [0.70880126953125, 0.0, 0.0, 0.70880126953125, 39.0, 12.45]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "replace": 1471
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "replace": 1472
+          }
+        },
+        {
+          "op": "place",
+          "depth": 3,
+          "action": "modify",
+          "matrix": [0.70880126953125, 0.0, 0.0, 0.70880126953125, 40.1, 15.25]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "replace": 1473
+          }
+        }
+      ]
+    },
+    {}
+  ]
+}

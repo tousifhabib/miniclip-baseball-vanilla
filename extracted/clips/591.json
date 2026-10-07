@@ -1,0 +1,60 @@
+{
+  "id": 591,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 3,
+          "action": {
+            "place": 586
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 587
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ],
+      "has_script": true
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 588
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 589
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 590
+          }
+        }
+      ]
+    }
+  ]
+}

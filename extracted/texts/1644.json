@@ -1,0 +1,26 @@
+{
+  "id": 1644,
+  "bounds": {
+    "x_min": 66.8,
+    "y_min": -2.0,
+    "x_max": 186.75,
+    "y_max": 34.2
+  },
+  "font": 166,
+  "height": 18.0,
+  "color": "#990000ff",
+  "layout": {
+    "align": "left",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent.runnersMoving",
+  "initial_text": "runnersMoving",
+  "flags": [
+    "read_only",
+    "selectable",
+    "use_outlines"
+  ]
+}

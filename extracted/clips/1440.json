@@ -1,0 +1,728 @@
+{
+  "id": 1440,
+  "labels": {
+    "out": 50,
+    "safe": 2
+  },
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1408
+          },
+          "matrix": [0.0317535400390625, 0.0, 0.0, -0.0128631591796875, -3.2, 16.6],
+          "color": {
+            "mult": [0.0, 0.0, 0.0, 0.30078125],
+            "add": [0, 0, 0, 0]
+          }
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 1409
+          },
+          "matrix": [0.0317535400390625, 0.0, 0.0, -0.0128631591796875, -3.2, 16.6],
+          "color": {
+            "mult": [0.0, 0.0, 0.0, 0.30078125],
+            "add": [0, 0, 0, 0]
+          }
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 1408
+          },
+          "matrix": [0.0317535400390625, 0.0, 0.0, 0.0317535400390625, -3.05, 2.2]
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "place": 1409
+          },
+          "matrix": [0.0317535400390625, 0.0, 0.0, 0.0317535400390625, -3.05, 2.2]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {
+      "label": "safe",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1410
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1410
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1411
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1411
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1412
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1412
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1413
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1413
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1414
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1414
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1415
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1415
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1416
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1416
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1417
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1417
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1418
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1418
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1419
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1419
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1420
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1420
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1421
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1421
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1422
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1422
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1423
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1423
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1424
+          }
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1424
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "has_script": true
+    },
+    {
+      "label": "out",
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": "modify",
+          "matrix": [0.0319976806640625, 0.0, 0.0, -0.0129547119140625, -3.25, 16.6]
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1425
+          },
+          "matrix": [0.0319976806640625, 0.0, 0.0, -0.0129547119140625, -3.25, 16.6]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": "modify",
+          "matrix": [0.0319976806640625, 0.0, 0.0, 0.0319976806640625, -3.1, 2.15]
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1425
+          },
+          "matrix": [0.0319976806640625, 0.0, 0.0, 0.0319976806640625, -3.1, 2.15]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1426
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1426
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1427
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1427
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1428
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1428
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1429
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1429
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1430
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1430
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1431
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1431
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1432
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1432
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1433
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1433
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1434
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1434
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1435
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1435
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1436
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1436
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1437
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1437
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1438
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1438
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 1439
+          }
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "replace": 1439
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "has_script": true
+    }
+  ]
+}

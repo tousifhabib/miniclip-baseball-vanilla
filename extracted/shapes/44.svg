@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-99 -24 197.5 16" width="197.5" height="16">
+<defs>
+<linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="-819.2" x2="819.2" gradientTransform="matrix(0 -0.009765625 0.009765625 0 -0.25 -16)">
+<stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+<stop offset="0.6627" stop-color="#ffffff" stop-opacity="0.2"/>
+<stop offset="1" stop-color="#ffffff" stop-opacity="0.4"/>
+</linearGradient>
+</defs>
+<path d="M-95 -24 L94.5 -24 Q96.15 -24 97.3 -22.85 Q98.5 -21.65 98.5 -20 L98.5 -12 Q98.5 -10.35 97.3 -9.2 Q96.15 -8 94.5 -8 L-95 -8 Q-96.65 -8 -97.85 -9.2 Q-99 -10.35 -99 -12 L-99 -20 Q-99 -21.65 -97.85 -22.85 Q-96.65 -24 -95 -24 Z" fill="url(#g1)" fill-rule="evenodd"/>
+</svg>

@@ -1,0 +1,894 @@
+{
+  "id": 465,
+  "bounds": {
+    "x_min": 0.85,
+    "y_min": 2.55,
+    "x_max": 295.35,
+    "y_max": 162.05
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 20.0,
+      "y": 13.0,
+      "height": 14.0,
+      "text": "You have 10 pitches to score as ",
+      "glyphs": [
+        {
+          "glyph": 57,
+          "advance": 10.2
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 85,
+          "advance": 11.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 72,
+          "advance": 11.1
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 86,
+          "advance": 9.45
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 17,
+          "advance": 9.65
+        },
+        {
+          "glyph": 16,
+          "advance": 9.65
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 80,
+          "advance": 11.2
+        },
+        {
+          "glyph": 73,
+          "advance": 5.7
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 67,
+          "advance": 9.65
+        },
+        {
+          "glyph": 72,
+          "advance": 11.1
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 67,
+          "advance": 9.65
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 82,
+          "advance": 7.6
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        }
+      ]
+    },
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 32.0,
+      "height": 14.0,
+      "text": "many points as you can.  To do this, ",
+      "glyphs": [
+        {
+          "glyph": 77,
+          "advance": 16.8
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 78,
+          "advance": 11.2
+        },
+        {
+          "glyph": 89,
+          "advance": 9.2
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 80,
+          "advance": 11.2
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 73,
+          "advance": 5.7
+        },
+        {
+          "glyph": 78,
+          "advance": 11.2
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 89,
+          "advance": 9.2
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 85,
+          "advance": 11.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 67,
+          "advance": 9.65
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 78,
+          "advance": 11.2
+        },
+        {
+          "glyph": 14,
+          "advance": 5.55
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 52,
+          "advance": 10.5
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 68,
+          "advance": 11.2
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 72,
+          "advance": 11.1
+        },
+        {
+          "glyph": 73,
+          "advance": 5.7
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 12,
+          "advance": 5.55
+        },
+        {
+          "glyph": 0,
+          "advance": 2.25
+        }
+      ]
+    },
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 6.0,
+      "y": 50.0,
+      "height": 14.0,
+      "text": "land the ball as close to the centre ",
+      "glyphs": [
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 78,
+          "advance": 11.2
+        },
+        {
+          "glyph": 68,
+          "advance": 11.2
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 72,
+          "advance": 11.1
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 66,
+          "advance": 11.1
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 67,
+          "advance": 9.65
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 72,
+          "advance": 11.1
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 67,
+          "advance": 9.65
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 78,
+          "advance": 11.2
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 82,
+          "advance": 7.6
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        }
+      ]
+    },
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 45.0,
+      "y": 69.0,
+      "height": 14.0,
+      "text": "of the target as possible.",
+      "glyphs": [
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 70,
+          "advance": 6.4
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 72,
+          "advance": 11.1
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 82,
+          "advance": 7.6
+        },
+        {
+          "glyph": 71,
+          "advance": 11.1
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 80,
+          "advance": 11.2
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 73,
+          "advance": 5.7
+        },
+        {
+          "glyph": 66,
+          "advance": 11.1
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 14,
+          "advance": 5.55
+        }
+      ]
+    },
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 35.0,
+      "y": 106.0,
+      "height": 14.0,
+      "text": "Harder difficulty levels will ",
+      "glyphs": [
+        {
+          "glyph": 40,
+          "advance": 12.25
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 82,
+          "advance": 7.6
+        },
+        {
+          "glyph": 68,
+          "advance": 11.2
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 82,
+          "advance": 7.6
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 68,
+          "advance": 11.2
+        },
+        {
+          "glyph": 73,
+          "advance": 5.7
+        },
+        {
+          "glyph": 70,
+          "advance": 6.4
+        },
+        {
+          "glyph": 70,
+          "advance": 6.4
+        },
+        {
+          "glyph": 73,
+          "advance": 5.7
+        },
+        {
+          "glyph": 67,
+          "advance": 9.65
+        },
+        {
+          "glyph": 85,
+          "advance": 11.1
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 89,
+          "advance": 9.2
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 86,
+          "advance": 9.45
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 87,
+          "advance": 14.3
+        },
+        {
+          "glyph": 73,
+          "advance": 5.7
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        }
+      ]
+    },
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 20.0,
+      "y": 124.0,
+      "height": 14.0,
+      "text": "multiply your score at the end.",
+      "glyphs": [
+        {
+          "glyph": 77,
+          "advance": 16.8
+        },
+        {
+          "glyph": 85,
+          "advance": 11.1
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 73,
+          "advance": 5.7
+        },
+        {
+          "glyph": 80,
+          "advance": 11.2
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 89,
+          "advance": 9.2
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 89,
+          "advance": 9.2
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 85,
+          "advance": 11.1
+        },
+        {
+          "glyph": 82,
+          "advance": 7.6
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 83,
+          "advance": 8.6
+        },
+        {
+          "glyph": 67,
+          "advance": 9.65
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 82,
+          "advance": 7.6
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 65,
+          "advance": 10.5
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 84,
+          "advance": 6.4
+        },
+        {
+          "glyph": 72,
+          "advance": 11.1
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 69,
+          "advance": 9.8
+        },
+        {
+          "glyph": 78,
+          "advance": 11.2
+        },
+        {
+          "glyph": 68,
+          "advance": 11.2
+        },
+        {
+          "glyph": 14,
+          "advance": 5.55
+        }
+      ]
+    },
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 103.0,
+      "y": 161.0,
+      "height": 14.0,
+      "text": "Good luck!",
+      "glyphs": [
+        {
+          "glyph": 39,
+          "advance": 11.8
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 79,
+          "advance": 10.5
+        },
+        {
+          "glyph": 68,
+          "advance": 11.2
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 76,
+          "advance": 5.7
+        },
+        {
+          "glyph": 85,
+          "advance": 11.1
+        },
+        {
+          "glyph": 67,
+          "advance": 9.65
+        },
+        {
+          "glyph": 75,
+          "advance": 10.35
+        },
+        {
+          "glyph": 1,
+          "advance": 5.55
+        }
+      ]
+    }
+  ]
+}

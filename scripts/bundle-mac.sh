@@ -7,8 +7,7 @@
 #   scripts/bundle-mac.sh --universal  for both Apple and Intel Macs; needs
 #                                      `rustup target add x86_64-apple-darwin aarch64-apple-darwin`
 #
-# The art is whatever is in extracted/. It is not part of this repository:
-# make it from your own copy of the game with bb-extract.
+# The art is whatever is in extracted/.
 
 set -euo pipefail
 cd "$(dirname "$0")/.."

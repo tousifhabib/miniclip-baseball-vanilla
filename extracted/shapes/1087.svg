@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-3.2 -3.2 6.4 6.4" width="6.4" height="6.4">
+<defs>
+<radialGradient id="g1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="819.2" fx="0" fy="0" gradientTransform="matrix(0.0050048828125 0 0 0.0050048828125 0.55 -1.15)">
+<stop offset="0.1765" stop-color="#fef292"/>
+<stop offset="1" stop-color="#e68900"/>
+</radialGradient>
+<radialGradient id="g2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="819.2" fx="0" fy="0" gradientTransform="matrix(0.007049560546875 0 0 0.007049560546875 2.2 -2)">
+<stop offset="0.1765" stop-color="#be8605"/>
+<stop offset="1" stop-color="#3f300e"/>
+</radialGradient>
+</defs>
+<path d="M0 -2.7 Q1.1 -2.7 1.9 -1.95 Q2.7 -1.15 2.7 0 Q2.7 1.1 1.9 1.9 Q1.1 2.7 0 2.7 Q-1.15 2.7 -1.95 1.9 Q-2.7 1.1 -2.7 0 Q-2.7 -1.15 -1.95 -1.95 Q-1.15 -2.7 0 -2.7 Z" fill="url(#g1)" fill-rule="evenodd"/>
+<path d="M0 -2.7 Q1.1 -2.7 1.9 -1.95 Q2.7 -1.15 2.7 0 Q2.7 1.1 1.9 1.9 Q1.1 2.7 0 2.7 Q-1.15 2.7 -1.95 1.9 Q-2.7 1.1 -2.7 0 Q-2.7 -1.15 -1.95 -1.95 Q-1.15 -2.7 0 -2.7 Z" fill="none" stroke="url(#g2)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

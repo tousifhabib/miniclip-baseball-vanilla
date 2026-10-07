@@ -1,0 +1,90 @@
+{
+  "id": 1826,
+  "bounds": {
+    "x_min": 5.45,
+    "y_min": 2.55,
+    "x_max": 185.3,
+    "y_max": 14.4
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 204,
+      "color": "#1c6267ff",
+      "x": 5.0,
+      "y": 13.0,
+      "height": 14.0,
+      "text": "PITCHES REMAINING",
+      "glyphs": [
+        {
+          "glyph": 29,
+          "advance": 11.55
+        },
+        {
+          "glyph": 23,
+          "advance": 6.4
+        },
+        {
+          "glyph": 32,
+          "advance": 10.5
+        },
+        {
+          "glyph": 18,
+          "advance": 11.2
+        },
+        {
+          "glyph": 22,
+          "advance": 12.25
+        },
+        {
+          "glyph": 20,
+          "advance": 10.5
+        },
+        {
+          "glyph": 31,
+          "advance": 8.75
+        },
+        {
+          "glyph": 0,
+          "advance": 3.5
+        },
+        {
+          "glyph": 30,
+          "advance": 11.95
+        },
+        {
+          "glyph": 20,
+          "advance": 10.5
+        },
+        {
+          "glyph": 26,
+          "advance": 15.45
+        },
+        {
+          "glyph": 16,
+          "advance": 10.65
+        },
+        {
+          "glyph": 23,
+          "advance": 6.4
+        },
+        {
+          "glyph": 27,
+          "advance": 11.95
+        },
+        {
+          "glyph": 23,
+          "advance": 6.4
+        },
+        {
+          "glyph": 27,
+          "advance": 11.95
+        },
+        {
+          "glyph": 21,
+          "advance": 11.8
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": 1672,
+  "bounds": {
+    "x_min": 0.8,
+    "y_min": 2.55,
+    "x_max": 56.95,
+    "y_max": 17.2
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 13.0,
+      "height": 14.0,
+      "text": "QUIT?",
+      "glyphs": [
+        {
+          "glyph": 49,
+          "advance": 12.1
+        },
+        {
+          "glyph": 53,
+          "advance": 10.2
+        },
+        {
+          "glyph": 41,
+          "advance": 6.4
+        },
+        {
+          "glyph": 52,
+          "advance": 10.5
+        },
+        {
+          "glyph": 31,
+          "advance": 8.9
+        }
+      ]
+    }
+  ]
+}

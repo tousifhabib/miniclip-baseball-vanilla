@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 827 426" width="827" height="426">
+<defs>
+<pattern id="p1" patternUnits="userSpaceOnUse" width="827" height="426" patternTransform="matrix(1 0 0 1 0 0)"><image href="../bitmaps/189.png" width="827" height="426" style="image-rendering:pixelated"/></pattern>
+</defs>
+<path d="M827 426 L0 426 L0 0 L827 0 L827 426 Z" fill="url(#p1)" fill-rule="evenodd"/>
+</svg>

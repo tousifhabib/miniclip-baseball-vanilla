@@ -1,0 +1,42 @@
+{
+  "id": 433,
+  "bounds": {
+    "x_min": 0.6,
+    "y_min": 2.8,
+    "x_max": 54.0,
+    "y_max": 15.35
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 14.0,
+      "height": 15.0,
+      "text": "Skin:",
+      "glyphs": [
+        {
+          "glyph": 51,
+          "advance": 9.4
+        },
+        {
+          "glyph": 75,
+          "advance": 11.1
+        },
+        {
+          "glyph": 73,
+          "advance": 6.1
+        },
+        {
+          "glyph": 78,
+          "advance": 12.05
+        },
+        {
+          "glyph": 26,
+          "advance": 5.95
+        }
+      ]
+    }
+  ]
+}

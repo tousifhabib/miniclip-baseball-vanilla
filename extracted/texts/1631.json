@@ -1,0 +1,62 @@
+{
+  "id": 1631,
+  "bounds": {
+    "x_min": 20.8,
+    "y_min": 2.8,
+    "x_max": 136.15,
+    "y_max": 19.35
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 20.25, 0.0],
+  "runs": [
+    {
+      "font": 628,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 18.0,
+      "height": 20.0,
+      "text": "strikeAnim",
+      "glyphs": [
+        {
+          "glyph": 21,
+          "advance": 11.1
+        },
+        {
+          "glyph": 22,
+          "advance": 6.65
+        },
+        {
+          "glyph": 20,
+          "advance": 7.8
+        },
+        {
+          "glyph": 14,
+          "advance": 5.55
+        },
+        {
+          "glyph": 15,
+          "advance": 11.1
+        },
+        {
+          "glyph": 11,
+          "advance": 11.1
+        },
+        {
+          "glyph": 3,
+          "advance": 14.45
+        },
+        {
+          "glyph": 18,
+          "advance": 12.2
+        },
+        {
+          "glyph": 14,
+          "advance": 5.55
+        },
+        {
+          "glyph": 17,
+          "advance": 17.8
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": 1950,
+  "bounds": {
+    "x_min": 40.55,
+    "y_min": 2.3,
+    "x_max": 112.3,
+    "y_max": 13.45
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 39.75, 0.0],
+  "runs": [
+    {
+      "font": 204,
+      "color": "#000033ff",
+      "x": 0.0,
+      "y": 12.0,
+      "height": 13.0,
+      "text": "<CLICK>",
+      "glyphs": [
+        {
+          "glyph": 14,
+          "advance": 8.7
+        },
+        {
+          "glyph": 18,
+          "advance": 10.4
+        },
+        {
+          "glyph": 25,
+          "advance": 9.1
+        },
+        {
+          "glyph": 23,
+          "advance": 5.95
+        },
+        {
+          "glyph": 18,
+          "advance": 10.4
+        },
+        {
+          "glyph": 24,
+          "advance": 11.1
+        },
+        {
+          "glyph": 15,
+          "advance": 8.7
+        }
+      ]
+    }
+  ]
+}

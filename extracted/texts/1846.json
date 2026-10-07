@@ -1,0 +1,66 @@
+{
+  "id": 1846,
+  "bounds": {
+    "x_min": 24.6,
+    "y_min": 0.95,
+    "x_max": 104.95,
+    "y_max": 15.85
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 490,
+      "color": "#ffffffff",
+      "x": 25.0,
+      "y": 15.0,
+      "height": 18.0,
+      "text": "You scored:",
+      "glyphs": [
+        {
+          "glyph": 23,
+          "advance": 8.3
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 40,
+          "advance": 8.35
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 38,
+          "advance": 6.05
+        },
+        {
+          "glyph": 26,
+          "advance": 8.25
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 37,
+          "advance": 6.3
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 27,
+          "advance": 8.8
+        },
+        {
+          "glyph": 8,
+          "advance": 3.8
+        }
+      ]
+    }
+  ]
+}

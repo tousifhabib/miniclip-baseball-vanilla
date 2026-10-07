@@ -1,0 +1,25 @@
+{
+  "id": 1806,
+  "bounds": {
+    "x_min": 66.8,
+    "y_min": -2.0,
+    "x_max": 163.05,
+    "y_max": 25.15
+  },
+  "font": 166,
+  "height": 12.0,
+  "color": "#000000ff",
+  "layout": {
+    "align": "left",
+    "left_margin": 0.0,
+    "right_margin": 0.0,
+    "indent": 0.0,
+    "leading": 2.0
+  },
+  "variable": "_parent.hit_distance",
+  "initial_text": "hit_distance",
+  "flags": [
+    "read_only",
+    "selectable"
+  ]
+}

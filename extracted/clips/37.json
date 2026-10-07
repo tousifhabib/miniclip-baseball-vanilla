@@ -1,0 +1,68 @@
+{
+  "id": 37,
+  "labels": {
+    "loadAd": 2,
+    "showAd": 12
+  },
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 33
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 4
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 35
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -107.0, -26.5],
+          "name": "mcAd"
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 36
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    },
+    {
+      "label": "loadAd",
+      "has_script": true
+    },
+    {},
+    {
+      "has_script": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "label": "showAd",
+      "has_script": true,
+      "stops": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+}

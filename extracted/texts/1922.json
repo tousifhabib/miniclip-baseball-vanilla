@@ -1,0 +1,26 @@
+{
+  "id": 1922,
+  "bounds": {
+    "x_min": 0.8,
+    "y_min": 2.3,
+    "x_max": 17.1,
+    "y_max": 13.3
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 204,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 12.0,
+      "height": 13.0,
+      "text": "2",
+      "glyphs": [
+        {
+          "glyph": 6,
+          "advance": 8.95
+        }
+      ]
+    }
+  ]
+}

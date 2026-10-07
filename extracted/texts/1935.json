@@ -1,0 +1,280 @@
+{
+  "id": 1935,
+  "bounds": {
+    "x_min": 3.35,
+    "y_min": 2.3,
+    "x_max": 123.95,
+    "y_max": 62.25
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 204,
+      "color": "#ffffffff",
+      "x": 3.0,
+      "y": 12.0,
+      "height": 13.0,
+      "text": "This red shape ",
+      "glyphs": [
+        {
+          "glyph": 32,
+          "advance": 9.75
+        },
+        {
+          "glyph": 43,
+          "advance": 10.3
+        },
+        {
+          "glyph": 44,
+          "advance": 5.25
+        },
+        {
+          "glyph": 53,
+          "advance": 8.0
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 52,
+          "advance": 7.05
+        },
+        {
+          "glyph": 40,
+          "advance": 9.1
+        },
+        {
+          "glyph": 39,
+          "advance": 10.4
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 53,
+          "advance": 8.0
+        },
+        {
+          "glyph": 43,
+          "advance": 10.3
+        },
+        {
+          "glyph": 36,
+          "advance": 9.75
+        },
+        {
+          "glyph": 50,
+          "advance": 10.4
+        },
+        {
+          "glyph": 40,
+          "advance": 9.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        }
+      ]
+    },
+    {
+      "font": 204,
+      "color": "#ffffffff",
+      "x": 10.0,
+      "y": 29.0,
+      "height": 13.0,
+      "text": "shows which ",
+      "glyphs": [
+        {
+          "glyph": 53,
+          "advance": 8.0
+        },
+        {
+          "glyph": 43,
+          "advance": 10.3
+        },
+        {
+          "glyph": 49,
+          "advance": 9.75
+        },
+        {
+          "glyph": 57,
+          "advance": 13.25
+        },
+        {
+          "glyph": 53,
+          "advance": 8.0
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 57,
+          "advance": 13.25
+        },
+        {
+          "glyph": 43,
+          "advance": 10.3
+        },
+        {
+          "glyph": 44,
+          "advance": 5.25
+        },
+        {
+          "glyph": 38,
+          "advance": 8.95
+        },
+        {
+          "glyph": 43,
+          "advance": 10.3
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        }
+      ]
+    },
+    {
+      "font": 204,
+      "color": "#ffffffff",
+      "x": 9.0,
+      "y": 45.0,
+      "height": 13.0,
+      "text": "direction the ",
+      "glyphs": [
+        {
+          "glyph": 39,
+          "advance": 10.4
+        },
+        {
+          "glyph": 44,
+          "advance": 5.25
+        },
+        {
+          "glyph": 52,
+          "advance": 7.05
+        },
+        {
+          "glyph": 40,
+          "advance": 9.1
+        },
+        {
+          "glyph": 38,
+          "advance": 8.95
+        },
+        {
+          "glyph": 54,
+          "advance": 5.95
+        },
+        {
+          "glyph": 44,
+          "advance": 5.25
+        },
+        {
+          "glyph": 49,
+          "advance": 9.75
+        },
+        {
+          "glyph": 48,
+          "advance": 10.4
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 54,
+          "advance": 5.95
+        },
+        {
+          "glyph": 43,
+          "advance": 10.3
+        },
+        {
+          "glyph": 40,
+          "advance": 9.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        }
+      ]
+    },
+    {
+      "font": 204,
+      "color": "#ffffffff",
+      "x": 4.0,
+      "y": 61.0,
+      "height": 13.0,
+      "text": "ball will travel",
+      "glyphs": [
+        {
+          "glyph": 37,
+          "advance": 10.3
+        },
+        {
+          "glyph": 36,
+          "advance": 9.75
+        },
+        {
+          "glyph": 46,
+          "advance": 5.25
+        },
+        {
+          "glyph": 46,
+          "advance": 5.25
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 57,
+          "advance": 13.25
+        },
+        {
+          "glyph": 44,
+          "advance": 5.25
+        },
+        {
+          "glyph": 46,
+          "advance": 5.25
+        },
+        {
+          "glyph": 46,
+          "advance": 5.25
+        },
+        {
+          "glyph": 0,
+          "advance": 3.25
+        },
+        {
+          "glyph": 54,
+          "advance": 5.95
+        },
+        {
+          "glyph": 52,
+          "advance": 7.05
+        },
+        {
+          "glyph": 36,
+          "advance": 9.75
+        },
+        {
+          "glyph": 56,
+          "advance": 8.8
+        },
+        {
+          "glyph": 40,
+          "advance": 9.1
+        },
+        {
+          "glyph": 46,
+          "advance": 5.25
+        }
+      ]
+    }
+  ]
+}

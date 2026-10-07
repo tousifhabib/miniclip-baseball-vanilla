@@ -1,0 +1,46 @@
+{
+  "id": 505,
+  "bounds": {
+    "x_min": 0.2,
+    "y_min": 0.75,
+    "x_max": 34.85,
+    "y_max": 10.35
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 504,
+      "color": "#00003380",
+      "x": 0.0,
+      "y": 9.0,
+      "height": 10.0,
+      "text": "TARGET",
+      "glyphs": [
+        {
+          "glyph": 52,
+          "advance": 5.6
+        },
+        {
+          "glyph": 33,
+          "advance": 6.4
+        },
+        {
+          "glyph": 50,
+          "advance": 6.1
+        },
+        {
+          "glyph": 39,
+          "advance": 6.1
+        },
+        {
+          "glyph": 37,
+          "advance": 5.25
+        },
+        {
+          "glyph": 52,
+          "advance": 5.6
+        }
+      ]
+    }
+  ]
+}

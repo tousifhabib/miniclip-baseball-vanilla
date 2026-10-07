@@ -1,0 +1,224 @@
+{
+  "id": 1758,
+  "bounds": {
+    "x_min": 13.2,
+    "y_min": 0.95,
+    "x_max": 280.75,
+    "y_max": 36.55
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 490,
+      "color": "#ffffffff",
+      "x": 13.0,
+      "y": 15.0,
+      "height": 18.0,
+      "text": "You reached your target without losing",
+      "glyphs": [
+        {
+          "glyph": 23,
+          "advance": 8.3
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 40,
+          "advance": 8.35
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 37,
+          "advance": 6.3
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 24,
+          "advance": 8.8
+        },
+        {
+          "glyph": 26,
+          "advance": 8.25
+        },
+        {
+          "glyph": 31,
+          "advance": 8.35
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 27,
+          "advance": 8.8
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 43,
+          "advance": 7.4
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 40,
+          "advance": 8.35
+        },
+        {
+          "glyph": 37,
+          "advance": 6.3
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 24,
+          "advance": 8.8
+        },
+        {
+          "glyph": 37,
+          "advance": 6.3
+        },
+        {
+          "glyph": 30,
+          "advance": 8.8
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 42,
+          "advance": 11.25
+        },
+        {
+          "glyph": 32,
+          "advance": 3.2
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 31,
+          "advance": 8.35
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 40,
+          "advance": 8.35
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 33,
+          "advance": 3.3
+        },
+        {
+          "glyph": 36,
+          "advance": 8.95
+        },
+        {
+          "glyph": 38,
+          "advance": 6.05
+        },
+        {
+          "glyph": 32,
+          "advance": 3.2
+        },
+        {
+          "glyph": 35,
+          "advance": 8.35
+        },
+        {
+          "glyph": 30,
+          "advance": 8.8
+        }
+      ]
+    },
+    {
+      "font": 490,
+      "color": "#ffffffff",
+      "x": 118.0,
+      "y": 35.0,
+      "height": 18.0,
+      "text": "3 hitters!",
+      "glyphs": [
+        {
+          "glyph": 6,
+          "advance": 8.5
+        },
+        {
+          "glyph": 0,
+          "advance": 4.45
+        },
+        {
+          "glyph": 31,
+          "advance": 8.35
+        },
+        {
+          "glyph": 32,
+          "advance": 3.2
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 39,
+          "advance": 4.95
+        },
+        {
+          "glyph": 28,
+          "advance": 8.8
+        },
+        {
+          "glyph": 37,
+          "advance": 6.3
+        },
+        {
+          "glyph": 38,
+          "advance": 6.05
+        },
+        {
+          "glyph": 1,
+          "advance": 3.25
+        }
+      ]
+    }
+  ]
+}

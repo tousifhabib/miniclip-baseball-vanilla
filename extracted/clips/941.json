@@ -1,0 +1,1986 @@
+{
+  "id": 941,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "place": 701
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 731
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, -0.15],
+          "name": "tShirtMovie"
+        },
+        {
+          "op": "place",
+          "depth": 10,
+          "action": {
+            "place": 732
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 11,
+          "action": {
+            "place": 757
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "name": "skinMovie"
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "place": 758
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 15,
+          "action": {
+            "place": 783
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "name": "helmetMovie"
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "place": 784
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 785
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": {
+            "place": 309
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, -82.45, -148.7]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": {
+            "place": 310
+          },
+          "matrix": [0.0709991455078125, 0.0093536376953125, -0.0093536376953125, 0.0709991455078125, -76.9, -126.1]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "place": 786
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": {
+            "place": 310
+          },
+          "matrix": [0.0453338623046875, 0.034576416015625, -0.0348968505859375, 0.0457305908203125, -45.7, -122.55]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "place": 787
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": {
+            "place": 341
+          },
+          "matrix": [0.07501220703125, 0.1040496826171875, -0.1040496826171875, 0.07501220703125, -106.2, -215.45],
+          "name": "batLogo"
+        }
+      ],
+      "has_script": true
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 788
+          }
+        },
+        {
+          "op": "place",
+          "depth": 10,
+          "action": {
+            "replace": 789
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 790
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 791
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 792
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [1.0, 0.0, 0.0, 1.0, -75.45, -145.7]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0709991455078125, 0.0093536376953125, -0.0093536376953125, 0.0709991455078125, -71.9, -121.6]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 793
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.052032470703125, 0.023223876953125, -0.0234375, 0.052490234375, -54.15, -129.1]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 794
+          }
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.0542755126953125, 0.06060791015625, -0.090087890625, 0.0806732177734375, -110.85, -196.25]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 795
+          }
+        },
+        {
+          "op": "place",
+          "depth": 10,
+          "action": {
+            "replace": 796
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 797
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 798
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 799
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [1.0, 0.0, 0.0, 1.0, -72.45, -141.7]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0709991455078125, 0.0093536376953125, -0.0093536376953125, 0.0709991455078125, -67.9, -118.1]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 800
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.03961181640625, 0.0176849365234375, -0.0234375, 0.052490234375, -61.85, -130.7]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 801
+          }
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.0666961669921875, 0.046478271484375, -0.069091796875, 0.099151611328125, -112.95, -169.25]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 802
+          }
+        },
+        {
+          "op": "place",
+          "depth": 10,
+          "action": {
+            "replace": 803
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 804
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 805
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 806
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [1.0, 0.0, 0.0, 1.0, -72.45, -139.7]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 807
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.0219268798828125, 0.0097808837890625, -0.0234375, 0.052490234375, -67.5, -125.4]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 808
+          }
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.04638671875, 0.0202484130859375, -0.0483245849609375, 0.110687255859375, -111.7, -139.5]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 809
+          }
+        },
+        {
+          "op": "place",
+          "depth": 10,
+          "action": {
+            "replace": 810
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 811
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 812
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 813
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9978790283203125, 0.06170654296875, -0.06170654296875, 0.9978790283203125, -71.2, -138.4]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 814
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.02392578125, -0.001678466796875, 0.0039825439453125, 0.0572662353515625, -72.1, -112.45]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 815
+          }
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.0503997802734375, 0.0041961669921875, -0.0100250244140625, 0.1202392578125, -117.55, -118.8]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 816
+          }
+        },
+        {
+          "op": "place",
+          "depth": 10,
+          "action": {
+            "replace": 817
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 818
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 819
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 820
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.99725341796875, 0.07080078125, -0.07080078125, 0.99725341796875, -71.95, -138.7]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0709991455078125, 0.0093536376953125, -0.0093536376953125, 0.0709991455078125, -64.9, -115.1]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 821
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.02392578125, -0.001678466796875, 0.0039825439453125, 0.0572662353515625, -71.15, -95.6]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 822
+          }
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.05499267578125, 0.0133056640625, -0.02838134765625, 0.1172027587890625, -125.85, -111.75]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 823
+          }
+        },
+        {
+          "op": "place",
+          "depth": 10,
+          "action": {
+            "replace": 824
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 825
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 826
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 827
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.999847412109375, 0.013763427734375, -0.013763427734375, 0.999847412109375, -76.15, -136.1]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.057464599609375, 0.011474609375, -0.0140228271484375, 0.070220947265625, -70.45, -113.8]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 828
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.0370025634765625, 0.013458251953125, -0.0196075439453125, 0.0538482666015625, -58.55, -71.35]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 829
+          }
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.0668182373046875, 0.0282440185546875, -0.038360595703125, 0.0906982421875, -148.1, -116.55]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 830
+          }
+        },
+        {
+          "op": "place",
+          "depth": 10,
+          "action": {
+            "replace": 831
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 832
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 833
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 834
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.996917724609375, 0.075103759765625, -0.075103759765625, 0.996917724609375, -76.85, -137.8]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0577850341796875, 0.01806640625, -0.0213623046875, 0.068328857421875, -71.9, -116.35]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 835
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.04034423828125, 0.0201416015625, -0.0239105224609375, 0.047882080078125, -31.5, -40.35]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 836
+          }
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.0745391845703125, 0.038299560546875, -0.0413970947265625, 0.08050537109375, -152.05, -112.55]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 10
+        },
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 837
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "place": 838
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 839
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 840
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 841
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.996917724609375, 0.075103759765625, -0.075103759765625, 0.996917724609375, -78.85, -135.8]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0577850341796875, 0.01806640625, -0.0213623046875, 0.068328857421875, -74.3, -114.25]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 842
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.04034423828125, 0.0201416015625, -0.0125579833984375, 0.025146484375, -11.75, -18.15]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 843
+          }
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.0742340087890625, 0.0313873291015625, -0.0450439453125, 0.1064910888671875, -69.2, -59.25]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "remove",
+          "depth": 25
+        },
+        {
+          "op": "remove",
+          "depth": 26
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 844
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 845
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 846
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 847
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 848
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.996917724609375, 0.075103759765625, -0.075103759765625, 0.996917724609375, -76.85, -134.8]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0630950927734375, 0.0237579345703125, -0.02520751953125, 0.066986083984375, -74.45, -114.3]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 849
+          }
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.0742340087890625, 0.0313873291015625, -0.0450439453125, 0.1064910888671875, -60.95, -350.6]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 850
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 851
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 852
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 853
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 854
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9901580810546875, 0.1365203857421875, -0.1365203857421875, 0.9901580810546875, -76.4, -135.45]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.059844970703125, 0.031005859375, -0.03289794921875, 0.06353759765625, -73.65, -115.05]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 855
+          }
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.0742034912109375, 0.031219482421875, -0.0447845458984375, 0.1064453125, -61.0, -350.6]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "remove",
+          "depth": 27
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 856
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 857
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 858
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 859
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 860
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9901580810546875, 0.1365203857421875, -0.1365203857421875, 0.9901580810546875, -76.4, -131.45]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0598602294921875, 0.030975341796875, -0.032867431640625, 0.0635528564453125, -70.65, -111.1]
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": {
+            "place": 861
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 19
+        },
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "remove",
+          "depth": 21
+        },
+        {
+          "op": "remove",
+          "depth": 26
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 862
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 863
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 864
+          }
+        },
+        {
+          "op": "place",
+          "depth": 18,
+          "action": {
+            "place": 865
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "place": 866
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 21
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 309
+          },
+          "matrix": [0.9901580810546875, 0.1365203857421875, -0.1365203857421875, 0.9901580810546875, -68.4, -129.45]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.05609130859375, 0.037322998046875, -0.0395965576171875, 0.0595550537109375, -59.35, -109.95]
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.0742340087890625, 0.0313873291015625, -0.0450439453125, 0.1064910888671875, -60.95, -350.6]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 18
+        },
+        {
+          "op": "remove",
+          "depth": 19
+        },
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 867
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 868
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 869
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "place": 870
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 871
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": {
+            "place": 309
+          },
+          "matrix": [0.9901580810546875, 0.1365203857421875, -0.1365203857421875, 0.9901580810546875, -55.4, -127.45]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.05938720703125, 0.0317230224609375, -0.033660888671875, 0.0630340576171875, -48.95, -104.4]
+        },
+        {
+          "op": "place",
+          "depth": 24,
+          "action": {
+            "place": 872
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.0655364990234375, 0.0359039306640625, -0.049591064453125, 0.0905303955078125, -144.15, -96.5]
+        }
+      ]
+    },
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "remove",
+          "depth": 24
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 873
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 874
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 875
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 876
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 877
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9901580810546875, 0.1365203857421875, -0.1365203857421875, 0.9901580810546875, -53.4, -126.45]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0582733154296875, 0.0337677001953125, -0.0358123779296875, 0.061859130859375, -46.0, -103.65]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "place": 878
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.071990966796875, 0.0361480712890625, -0.0517425537109375, 0.1030426025390625, -213.5, -138.7]
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 879
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 880
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 881
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 882
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 883
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9901580810546875, 0.1365203857421875, -0.1365203857421875, 0.9901580810546875, -55.4, -131.45]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0584259033203125, 0.0334625244140625, -0.0355072021484375, 0.0620269775390625, -43.9, -106.6]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 884
+          }
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.071990966796875, 0.0361480712890625, -0.0517425537109375, 0.1030426025390625, -234.8, -162.85]
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 885
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 886
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 887
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 888
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 889
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9982147216796875, 0.044677734375, -0.044677734375, 0.9982147216796875, -62.5, -133.0]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0582733154296875, 0.033721923828125, -0.0357818603515625, 0.0618743896484375, -47.5, -107.25]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 890
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": {
+            "place": 310
+          },
+          "matrix": [0.0110931396484375, -0.0118408203125, 0.0419921875, 0.039337158203125, -145.45, -126.35]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "place": 310
+          },
+          "matrix": [0.009857177734375, -0.007598876953125, 0.0351104736328125, 0.0455474853515625, -147.6, -106.4]
+        },
+        {
+          "op": "place",
+          "depth": 28,
+          "action": {
+            "place": 891
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.07745361328125, 0.050628662109375, -0.062835693359375, 0.09613037109375, -231.95, -184.25]
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 892
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 893
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 894
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 895
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 896
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9982147216796875, 0.044677734375, -0.044677734375, 0.9982147216796875, -70.5, -137.0]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0570220947265625, 0.0357666015625, -0.037933349609375, 0.0605316162109375, -52.05, -113.2]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 897
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.0110931396484375, -0.0118408203125, 0.0419921875, 0.039337158203125, -137.0, -126.7]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": "modify",
+          "matrix": [0.016387939453125, -0.01263427734375, 0.0351104736328125, 0.0455474853515625, -147.0, -108.1]
+        },
+        {
+          "op": "place",
+          "depth": 28,
+          "action": {
+            "replace": 898
+          }
+        },
+        {
+          "op": "place",
+          "depth": 29,
+          "action": "modify",
+          "matrix": [0.0400848388671875, 0.0605010986328125, -0.11279296875, 0.0747528076171875, -177.55, -175.65]
+        }
+      ]
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "remove",
+          "depth": 28
+        },
+        {
+          "op": "remove",
+          "depth": 29
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 899
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 900
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 901
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 902
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 903
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9982147216796875, 0.044677734375, -0.044677734375, 0.9982147216796875, -78.5, -143.0]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.058502197265625, 0.0332489013671875, -0.0352630615234375, 0.062103271484375, -58.1, -116.55]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 904
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.0181121826171875, -0.0059814453125, 0.018035888671875, 0.054534912109375, -144.4, -113.5]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 905
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 906
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 907
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 908
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 909
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 910
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9982147216796875, 0.044677734375, -0.044677734375, 0.9982147216796875, -81.5, -146.0]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0646514892578125, 0.018280029296875, -0.0194244384765625, 0.068634033203125, -64.35, -117.3]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 911
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.036865234375, 0.003570556640625, -0.0054931640625, 0.057098388671875, -139.95, -116.1]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 912
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 913
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 914
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 915
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 916
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 917
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9982147216796875, 0.044677734375, -0.044677734375, 0.9982147216796875, -85.5, -148.0]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0635986328125, 0.0216522216796875, -0.0229949951171875, 0.0674896240234375, -68.15, -118.1]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 918
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.0427398681640625, 0.017608642578125, -0.0218048095703125, 0.0529937744140625, -129.45, -115.7]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 919
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 920
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 921
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 922
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 923
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 924
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9982147216796875, 0.044677734375, -0.044677734375, 0.9982147216796875, -87.5, -149.0]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0621185302734375, 0.0255584716796875, -0.027130126953125, 0.06591796875, -69.85, -120.35]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 925
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.0427398681640625, 0.017608642578125, -0.0195465087890625, 0.0475006103515625, -121.45, -112.7]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 926
+          }
+        }
+      ]
+    },
+    {},
+    {
+      "has_script": true
+    },
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 927
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 928
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 929
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 930
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 931
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9982147216796875, 0.044677734375, -0.044677734375, 0.9982147216796875, -88.5, -150.0]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0621185302734375, 0.0255584716796875, -0.027130126953125, 0.06591796875, -71.05, -120.0]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 932
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.040252685546875, 0.028900146484375, -0.0299224853515625, 0.0417022705078125, -115.7, -111.3]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 933
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {},
+    {
+      "ops": [
+        {
+          "op": "remove",
+          "depth": 20
+        },
+        {
+          "op": "place",
+          "depth": 4,
+          "action": {
+            "replace": 934
+          }
+        },
+        {
+          "op": "place",
+          "depth": 9,
+          "action": {
+            "replace": 935
+          }
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "replace": 936
+          }
+        },
+        {
+          "op": "place",
+          "depth": 19,
+          "action": {
+            "replace": 937
+          }
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 938
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "clip_depth": 22
+        },
+        {
+          "op": "place",
+          "depth": 21,
+          "action": "modify",
+          "matrix": [0.9982147216796875, 0.044677734375, -0.044677734375, 0.9982147216796875, -87.5, -151.0]
+        },
+        {
+          "op": "place",
+          "depth": 23,
+          "action": "modify",
+          "matrix": [0.0621185302734375, 0.0255584716796875, -0.027130126953125, 0.06591796875, -71.05, -120.3]
+        },
+        {
+          "op": "place",
+          "depth": 25,
+          "action": {
+            "replace": 939
+          }
+        },
+        {
+          "op": "place",
+          "depth": 26,
+          "action": "modify",
+          "matrix": [0.040252685546875, 0.028900146484375, -0.0299224853515625, 0.0417022705078125, -116.9, -110.7]
+        },
+        {
+          "op": "place",
+          "depth": 27,
+          "action": {
+            "replace": 940
+          }
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "has_script": true,
+      "stops": true
+    }
+  ]
+}

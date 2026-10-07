@@ -1,0 +1,95 @@
+{
+  "id": 260,
+  "track_as_menu": false,
+  "records": [
+    {
+      "states": [
+        "up"
+      ],
+      "symbol": 254,
+      "depth": 1,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "up"
+      ],
+      "symbol": 255,
+      "depth": 2,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 2.0, 2.0]
+    },
+    {
+      "states": [
+        "over"
+      ],
+      "symbol": 256,
+      "depth": 1,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "over"
+      ],
+      "symbol": 255,
+      "depth": 2,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 2.0, 2.0]
+    },
+    {
+      "states": [
+        "down"
+      ],
+      "symbol": 257,
+      "depth": 1,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "down"
+      ],
+      "symbol": 255,
+      "depth": 2,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 2.0, 2.0]
+    },
+    {
+      "states": [
+        "hit"
+      ],
+      "symbol": 258,
+      "depth": 1,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    }
+  ],
+  "actions": [
+    {
+      "conditions": [
+        "release"
+      ]
+    }
+  ],
+  "sounds": {
+    "up_to_over": {
+      "sound": 80,
+      "event": "event",
+      "loops": 1,
+      "envelope": [
+        {
+          "sample": 0,
+          "left": 0.8558655,
+          "right": 0.8468323
+        }
+      ]
+    },
+    "over_to_down": {
+      "sound": 259,
+      "event": "event",
+      "loops": 1,
+      "envelope": [
+        {
+          "sample": 0,
+          "left": 0.738739,
+          "right": 0.71170044
+        }
+      ]
+    }
+  }
+}

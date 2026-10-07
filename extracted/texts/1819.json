@@ -1,0 +1,62 @@
+{
+  "id": 1819,
+  "bounds": {
+    "x_min": 73.7,
+    "y_min": 1.9,
+    "x_max": 150.15,
+    "y_max": 17.7
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 68.8, 0.0],
+  "runs": [
+    {
+      "font": 166,
+      "color": "#000000ff",
+      "x": 4.0,
+      "y": 17.0,
+      "height": 18.0,
+      "text": "Balls Left",
+      "glyphs": [
+        {
+          "glyph": 13,
+          "advance": 9.85
+        },
+        {
+          "glyph": 33,
+          "advance": 8.35
+        },
+        {
+          "glyph": 42,
+          "advance": 4.05
+        },
+        {
+          "glyph": 42,
+          "advance": 4.05
+        },
+        {
+          "glyph": 46,
+          "advance": 7.1
+        },
+        {
+          "glyph": 0,
+          "advance": 3.4
+        },
+        {
+          "glyph": 21,
+          "advance": 7.4
+        },
+        {
+          "glyph": 37,
+          "advance": 8.0
+        },
+        {
+          "glyph": 38,
+          "advance": 4.65
+        },
+        {
+          "glyph": 47,
+          "advance": 4.95
+        }
+      ]
+    }
+  ]
+}

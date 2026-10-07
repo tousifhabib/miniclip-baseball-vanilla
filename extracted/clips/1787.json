@@ -1,0 +1,54 @@
+{
+  "id": 1787,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "place": 1785
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ],
+      "has_script": true,
+      "stops": true
+    },
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 1,
+          "action": {
+            "replace": 1786
+          }
+        },
+        {
+          "op": "place",
+          "depth": 2,
+          "action": {
+            "place": 1782
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 48.05, -11.1],
+          "ratio": 1,
+          "name": "scoreAnim"
+        }
+      ],
+      "sounds": [
+        {
+          "sound": 1573,
+          "event": "event",
+          "loops": 1
+        },
+        {
+          "sound": 1783,
+          "event": "event",
+          "loops": 1
+        }
+      ],
+      "has_script": true
+    }
+  ]
+}

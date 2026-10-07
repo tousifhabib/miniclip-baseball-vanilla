@@ -1,0 +1,98 @@
+{
+  "id": 1092,
+  "labels": {},
+  "frames": [
+    {
+      "ops": [
+        {
+          "op": "place",
+          "depth": 5,
+          "action": {
+            "place": 1086
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        },
+        {
+          "op": "place",
+          "depth": 6,
+          "action": {
+            "place": 1088
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 18.1, 26.0]
+        },
+        {
+          "op": "place",
+          "depth": 8,
+          "action": {
+            "place": 1088
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 35.25, 42.45]
+        },
+        {
+          "op": "place",
+          "depth": 10,
+          "action": {
+            "place": 1088
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 51.3, 14.45]
+        },
+        {
+          "op": "place",
+          "depth": 12,
+          "action": {
+            "place": 1088
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 74.4, 24.5]
+        },
+        {
+          "op": "place",
+          "depth": 14,
+          "action": {
+            "place": 1088
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 50.75, 39.75]
+        },
+        {
+          "op": "place",
+          "depth": 16,
+          "action": {
+            "place": 1088
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 32.85, 56.95]
+        },
+        {
+          "op": "place",
+          "depth": 18,
+          "action": {
+            "place": 1088
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 67.25, 56.95]
+        },
+        {
+          "op": "place",
+          "depth": 20,
+          "action": {
+            "place": 1088
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 50.75, 57.35]
+        },
+        {
+          "op": "place",
+          "depth": 22,
+          "action": {
+            "place": 1090
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 50.35, 73.7]
+        },
+        {
+          "op": "place",
+          "depth": 24,
+          "action": {
+            "place": 1091
+          },
+          "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+        }
+      ]
+    }
+  ]
+}

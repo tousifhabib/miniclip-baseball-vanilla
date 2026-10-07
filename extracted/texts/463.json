@@ -1,0 +1,46 @@
+{
+  "id": 463,
+  "bounds": {
+    "x_min": 0.2,
+    "y_min": 3.3,
+    "x_max": 92.25,
+    "y_max": 17.3
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 67,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 16.0,
+      "height": 17.0,
+      "text": "ARCADE",
+      "glyphs": [
+        {
+          "glyph": 33,
+          "advance": 12.9
+        },
+        {
+          "glyph": 50,
+          "advance": 14.5
+        },
+        {
+          "glyph": 35,
+          "advance": 13.65
+        },
+        {
+          "glyph": 33,
+          "advance": 12.9
+        },
+        {
+          "glyph": 36,
+          "advance": 14.9
+        },
+        {
+          "glyph": 37,
+          "advance": 12.75
+        }
+      ]
+    }
+  ]
+}

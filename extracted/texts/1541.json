@@ -1,0 +1,98 @@
+{
+  "id": 1541,
+  "bounds": {
+    "x_min": 0.95,
+    "y_min": 1.45,
+    "x_max": 123.0,
+    "y_max": 14.95
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 166,
+      "color": "#ffffffff",
+      "x": 0.0,
+      "y": 14.0,
+      "height": 15.0,
+      "text": "Runner starts above",
+      "glyphs": [
+        {
+          "glyph": 26,
+          "advance": 7.95
+        },
+        {
+          "glyph": 48,
+          "advance": 6.95
+        },
+        {
+          "glyph": 43,
+          "advance": 6.95
+        },
+        {
+          "glyph": 43,
+          "advance": 6.95
+        },
+        {
+          "glyph": 37,
+          "advance": 6.7
+        },
+        {
+          "glyph": 45,
+          "advance": 4.15
+        },
+        {
+          "glyph": 0,
+          "advance": 2.85
+        },
+        {
+          "glyph": 46,
+          "advance": 5.95
+        },
+        {
+          "glyph": 47,
+          "advance": 4.15
+        },
+        {
+          "glyph": 33,
+          "advance": 6.95
+        },
+        {
+          "glyph": 45,
+          "advance": 4.15
+        },
+        {
+          "glyph": 47,
+          "advance": 4.15
+        },
+        {
+          "glyph": 46,
+          "advance": 5.95
+        },
+        {
+          "glyph": 0,
+          "advance": 2.85
+        },
+        {
+          "glyph": 33,
+          "advance": 6.95
+        },
+        {
+          "glyph": 34,
+          "advance": 7.2
+        },
+        {
+          "glyph": 44,
+          "advance": 6.95
+        },
+        {
+          "glyph": 49,
+          "advance": 5.4
+        },
+        {
+          "glyph": 37,
+          "advance": 6.7
+        }
+      ]
+    }
+  ]
+}

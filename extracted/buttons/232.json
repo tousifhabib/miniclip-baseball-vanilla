@@ -1,0 +1,159 @@
+{
+  "id": 232,
+  "track_as_menu": false,
+  "records": [
+    {
+      "states": [
+        "up"
+      ],
+      "symbol": 65,
+      "depth": 1,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 17.75, -1.05]
+    },
+    {
+      "states": [
+        "up",
+        "over",
+        "down",
+        "hit"
+      ],
+      "symbol": 194,
+      "depth": 5,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "up",
+        "over",
+        "down",
+        "hit"
+      ],
+      "symbol": 209,
+      "depth": 6,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "up",
+        "over",
+        "down",
+        "hit"
+      ],
+      "symbol": 210,
+      "depth": 7,
+      "matrix": [0.8804473876953125, 0.0, 0.0, 0.8804473876953125, 12.35, 5.9]
+    },
+    {
+      "states": [
+        "up"
+      ],
+      "symbol": 69,
+      "depth": 8,
+      "matrix": [0.998779296875, 0.0, 0.0, 0.998779296875, 16.7, 4.4]
+    },
+    {
+      "states": [
+        "up",
+        "over",
+        "down",
+        "hit"
+      ],
+      "symbol": 70,
+      "depth": 10,
+      "matrix": [0.998779296875, 0.0, 0.0, 0.998779296875, 16.7, 4.4]
+    },
+    {
+      "states": [
+        "up"
+      ],
+      "symbol": 211,
+      "depth": 11,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "over"
+      ],
+      "symbol": 73,
+      "depth": 1,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 17.5, -1.0]
+    },
+    {
+      "states": [
+        "over"
+      ],
+      "symbol": 74,
+      "depth": 8,
+      "matrix": [0.998779296875, 0.0, 0.0, 0.998779296875, 16.7, 4.4]
+    },
+    {
+      "states": [
+        "over"
+      ],
+      "symbol": 231,
+      "depth": 11,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "down",
+        "hit"
+      ],
+      "symbol": 207,
+      "depth": 1,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "down"
+      ],
+      "symbol": 77,
+      "depth": 8,
+      "matrix": [0.998779296875, 0.0, 0.0, 0.998779296875, 16.7, 4.4]
+    },
+    {
+      "states": [
+        "down",
+        "hit"
+      ],
+      "symbol": 211,
+      "depth": 12,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "hit"
+      ],
+      "symbol": 69,
+      "depth": 8,
+      "matrix": [0.998779296875, 0.0, 0.0, 0.998779296875, 16.7, 4.4]
+    },
+    {
+      "states": [
+        "hit"
+      ],
+      "symbol": 79,
+      "depth": 11,
+      "matrix": [6.4288330078125, 0.0, 0.0, 0.8897857666015625, -194.2, -1.0]
+    }
+  ],
+  "actions": [
+    {
+      "conditions": [
+        "release"
+      ]
+    }
+  ],
+  "sounds": {
+    "up_to_over": {
+      "sound": 80,
+      "event": "event",
+      "loops": 1
+    },
+    "over_to_down": {
+      "sound": 81,
+      "event": "event",
+      "loops": 1
+    }
+  }
+}

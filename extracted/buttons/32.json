@@ -1,0 +1,41 @@
+{
+  "id": 32,
+  "track_as_menu": false,
+  "records": [
+    {
+      "states": [
+        "up",
+        "over",
+        "down"
+      ],
+      "symbol": 29,
+      "depth": 4,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "over",
+        "down",
+        "hit"
+      ],
+      "symbol": 30,
+      "depth": 5,
+      "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "states": [
+        "hit"
+      ],
+      "symbol": 31,
+      "depth": 1,
+      "matrix": [4.284271240234375, 0.0, 0.0, 0.66436767578125, -433.05, 51.8]
+    }
+  ],
+  "actions": [
+    {
+      "conditions": [
+        "release"
+      ]
+    }
+  ]
+}

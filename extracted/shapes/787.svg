@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-120.85 -226.25 80 98.95" width="80" height="98.95">
+<defs>
+<linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="-819.2" x2="819.2" gradientTransform="matrix(0.04779052734375 0 0 0.058929443359375 -81.2 -176.1)">
+<stop offset="0.0078" stop-color="#aa9155"/>
+<stop offset="1" stop-color="#d6c587"/>
+</linearGradient>
+</defs>
+<path d="M-108.75 -224.35 L-108.7 -224.35 L-77.3 -180.55 L-42.05 -131.7 L-48.8 -127.8 L-50.5 -127.8 L-103.2 -190.8 L-120.35 -216.6 L-120.35 -217.15 Q-118.75 -229.2 -108.75 -224.35 Z" fill="#bba674" fill-rule="evenodd"/>
+<path d="M-108.7 -224.35 L-108.75 -224.35 L-108.7 -224.35 Z" fill="url(#g1)" fill-rule="evenodd"/>
+<path d="M-77.3 -180.55 L-108.7 -224.35 L-108.75 -224.35" fill="none" stroke="#806f51" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M-108.75 -224.35 Q-118.75 -229.2 -120.35 -217.15 M-120.35 -216.6 L-103.2 -190.8 L-50.5 -127.8 M-48.8 -127.8 L-42.05 -131.7 L-77.3 -180.55 M-42.05 -131.7 L-41.35 -130.7" fill="none" stroke="#806f51" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,38 @@
+{
+  "id": 1709,
+  "bounds": {
+    "x_min": 48.6,
+    "y_min": 2.4,
+    "x_max": 95.45,
+    "y_max": 19.7
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 47.95, 0.0],
+  "runs": [
+    {
+      "font": 1677,
+      "color": "#fcf4bcff",
+      "x": 0.0,
+      "y": 19.0,
+      "height": 20.0,
+      "text": "OUTS",
+      "glyphs": [
+        {
+          "glyph": 26,
+          "advance": 12.25
+        },
+        {
+          "glyph": 32,
+          "advance": 12.25
+        },
+        {
+          "glyph": 31,
+          "advance": 11.2
+        },
+        {
+          "glyph": 30,
+          "advance": 12.25
+        }
+      ]
+    }
+  ]
+}

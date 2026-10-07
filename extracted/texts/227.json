@@ -1,0 +1,58 @@
+{
+  "id": 227,
+  "bounds": {
+    "x_min": 27.4,
+    "y_min": 1.15,
+    "x_max": 82.15,
+    "y_max": 11.6
+  },
+  "matrix": [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+  "runs": [
+    {
+      "font": 166,
+      "color": "#85d5dcff",
+      "x": 27.0,
+      "y": 10.0,
+      "height": 11.0,
+      "text": "A GAME BY",
+      "glyphs": [
+        {
+          "glyph": 12,
+          "advance": 5.5
+        },
+        {
+          "glyph": 0,
+          "advance": 2.1
+        },
+        {
+          "glyph": 17,
+          "advance": 6.25
+        },
+        {
+          "glyph": 12,
+          "advance": 5.5
+        },
+        {
+          "glyph": 22,
+          "advance": 7.9
+        },
+        {
+          "glyph": 16,
+          "advance": 5.1
+        },
+        {
+          "glyph": 0,
+          "advance": 2.1
+        },
+        {
+          "glyph": 13,
+          "advance": 6.05
+        },
+        {
+          "glyph": 32,
+          "advance": 4.55
+        }
+      ]
+    }
+  ]
+}
