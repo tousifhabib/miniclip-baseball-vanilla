@@ -1,0 +1,21 @@
+[package]
+name = "bb-extractor"
+description = "Converts your own copy of the game's SWF into open, editable files"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "bb-extract"
+path = "src/main.rs"
+
+[dependencies]
+anyhow.workspace = true
+bb-format = { path = "../format" }
+clap = { version = "4", features = ["derive"] }
+flate2 = "1"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "gif"] }
+serde.workspace = true
+serde_json.workspace = true
+swf = "0.3"

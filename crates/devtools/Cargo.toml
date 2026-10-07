@@ -1,0 +1,28 @@
+[package]
+name = "bb-devtools"
+description = "Checks used while developing the extractor and engine"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "shape-diff"
+path = "src/shape_diff.rs"
+
+[[bin]]
+name = "bitmap-diff"
+path = "src/bitmap_diff.rs"
+
+[[bin]]
+name = "extracted-check"
+path = "src/extracted_check.rs"
+
+[dependencies]
+anyhow.workspace = true
+bb-format = { path = "../format" }
+clap = { version = "4", features = ["derive"] }
+image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
+resvg = "0.48"
+serde.workspace = true
+serde_json.workspace = true

@@ -1,0 +1,14 @@
+# Build output
+/target
+
+# The game and everything taken from it. These belong to Miniclip and must
+# never be committed. Everyone supplies their own copy.
+/original
+/decompiled
+/extracted
+*.swf
+
+# Third-party tools downloaded for local use
+/tools
+
+.DS_Store

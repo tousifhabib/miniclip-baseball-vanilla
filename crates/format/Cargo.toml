@@ -1,0 +1,10 @@
+[package]
+name = "bb-format"
+description = "Data types for the extracted game files, shared by the extractor and the engine"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+serde.workspace = true
