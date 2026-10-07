@@ -6,5 +6,6 @@ pub mod baseball;
 pub mod locate;
 pub mod menu;
 pub mod rng;
+pub mod rules;
 pub mod script;
 pub mod settings;

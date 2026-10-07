@@ -5,7 +5,8 @@ use bb_engine::library::Library;
 use bb_engine::stage::Stage;
 
 use crate::art;
-use crate::settings::{Difficulty, OUTS, Settings};
+use crate::rules::Rules;
+use crate::settings::{Difficulty, Settings};
 
 /// Where the player is in the menu. Each is a section of the menu clip that
 /// plays in and then waits.
@@ -49,6 +50,14 @@ pub enum Leave {
     Arcade,
 }
 
+/// What every screen works from: the numbers the game is played by, and
+/// what the player has chosen.
+#[derive(Clone, Debug, Default)]
+pub struct Game {
+    pub rules: Rules,
+    pub settings: Settings,
+}
+
 pub struct Menu {
     page: MenuPage,
     /// A page is on its way in, and has things to be set once it is there.
@@ -76,38 +85,27 @@ impl Menu {
     /// The menu has just been put on screen. Coming from the intro it plays
     /// its whole arrival. Coming back from anywhere else it goes straight to
     /// fading in.
-    pub fn shown(
-        &mut self,
-        from_intro: bool,
-        settings: &Settings,
-        stage: &mut Stage,
-        library: &Library,
-    ) {
+    pub fn shown(&mut self, from_intro: bool, game: &Game, stage: &mut Stage, library: &Library) {
         self.page = MenuPage::Opening;
         if !from_intro {
-            self.open(MenuPage::Main, settings, stage, library);
+            self.open(MenuPage::Main, game, stage, library);
         }
     }
 
     /// Plays in another page.
-    pub fn open(
-        &mut self,
-        page: MenuPage,
-        settings: &Settings,
-        stage: &mut Stage,
-        library: &Library,
-    ) {
+    pub fn open(&mut self, page: MenuPage, game: &Game, stage: &mut Stage, library: &Library) {
         let Some(menu) = art::in_shell(stage, art::MENU) else {
             return;
         };
         if stage.goto_label(&menu, page.label(), true, library) {
             self.page = page;
             // What the summary pages say about the game to come.
-            let behind = settings.difficulty.runs_down();
+            let rules = &game.rules.game;
+            let behind = rules.runs_down.at(game.settings.difficulty);
             stage.set_text("oppositionScore", behind.to_string());
             // Drawing level is not enough: the target is one run more.
             stage.set_text("scoreTarget", (behind + 1).to_string());
-            stage.set_text("maximumOuts", OUTS.to_string());
+            stage.set_text("maximumOuts", rules.outs.to_string());
             // The page's own clips only exist once it has played in.
             self.arriving = true;
         }
@@ -126,7 +124,7 @@ impl Menu {
     pub fn clicked(
         &mut self,
         label: &str,
-        settings: &mut Settings,
+        game: &mut Game,
         stage: &mut Stage,
         library: &Library,
     ) -> Option<Leave> {
@@ -148,27 +146,22 @@ impl Menu {
             (MatchSummary, "PLAY BALL") => ToMatch,
             (ArcadeSummary, "PLAY BALL") => ToArcade,
             (MatchSetup | ArcadeSetup, "EASY" | "MEDIUM" | "HARD") => {
-                settings.difficulty = match label {
+                game.settings.difficulty = match label {
                     "EASY" => Difficulty::Easy,
                     "MEDIUM" => Difficulty::Medium,
                     _ => Difficulty::Hard,
                 };
-                Menu::show_difficulty(settings, stage, library);
+                Menu::show_difficulty(&game.settings, stage, library);
                 return None;
             }
             _ => return None,
         };
-        self.open(page, settings, stage, library);
+        self.open(page, game, stage, library);
         None
     }
 
     /// Called once a frame while the menu is showing.
-    pub fn tick(
-        &mut self,
-        settings: &Settings,
-        stage: &mut Stage,
-        library: &Library,
-    ) -> Option<Leave> {
+    pub fn tick(&mut self, game: &Game, stage: &mut Stage, library: &Library) -> Option<Leave> {
         let menu = Menu::clip(stage)?;
         let (frame, playing, last) = (menu.frame, menu.playing, menu.frame_count(library));
         let labels = library
@@ -176,7 +169,7 @@ impl Menu {
             .map(|timeline| &timeline.labels);
         if self.arriving && !playing {
             self.arriving = false;
-            Menu::show_difficulty(settings, stage, library);
+            Menu::show_difficulty(&game.settings, stage, library);
         }
         match self.page {
             MenuPage::Opening if !playing => self.page = MenuPage::Main,

@@ -17,7 +17,7 @@ project is not affiliated with or endorsed by Miniclip.
 | 3 | Engine: a Flash-style tree of clips with timelines, drawn with `wgpu` | Done |
 | 4 | Check the engine's output against an independent renderer | Done |
 | 5 | Game logic: the rules, written fresh on top of the original art | In progress |
-| 6 | Restructure for modding: data files, mod folders, hot reload | |
+| 6 | Restructure for modding: data files, mod folders, hot reload | Started: the game's numbers live in a data file |
 | 7 | Package as a Mac app | In progress: the app builds and runs |
 
 ## Layout
@@ -29,6 +29,7 @@ project is not affiliated with or endorsed by Miniclip.
 | `crates/engine` | Plays the extracted timelines and draws them; `bb-player` and `bb-shot` |
 | `crates/game` | The baseball game itself: `bb-game` |
 | `crates/devtools` | Checks used while developing |
+| `data/rules.toml` | The numbers the game is played by |
 | `scripts/bundle-mac.sh` | Builds the Mac app |
 | `assets/icon.svg` | The app's icon, drawn for this project |
 
@@ -95,6 +96,15 @@ BACK, the quit prompt, and the result screens. What is not written yet is
 the play itself: pitching, batting, fielding and scoring. The match and
 arcade screens show the field, and nothing happens on it.
 
+### The numbers the game is played by
+
+Numbers such as how many outs an innings has are not in the code. They are
+in `data/rules.toml`, which is built into the program. A change is made by
+laying another file of the same shape over it, holding only the numbers to
+change; a number the game does not have, or one of the wrong kind, is
+refused with the name of the file that had it. Loading such files from mod
+folders, and picking up changes while the game runs, is step 6.
+
 ### How the rules meet the engine
 
 The engine's timelines only know how to play. A game supplies a `Logic`
@@ -102,8 +112,9 @@ The engine's timelines only know how to play. A game supplies a `Logic`
 touches and every scripted frame a clip lands on, and is called once a
 frame. In return it steers the stage: jump a clip to a labelled frame, play
 or stop it, find a clip by its instance name, set what a text field says,
-or ask for a sound. `crates/game/src/baseball.rs` is the whole of the
-baseball rules, and `crates/game/src/art.rs` is its description of the art.
+or ask for a sound. In `crates/game/src`, `baseball.rs` decides which screen
+is showing, `menu.rs` is the menu, `rules.rs` reads the numbers, and
+`art.rs` describes the art.
 
 ### Driving it from a script
 

@@ -19,3 +19,5 @@ anyhow.workspace = true
 bb-engine = { path = "../engine" }
 bb-format = { path = "../format" }
 clap = { version = "4", features = ["derive"] }
+serde.workspace = true
+toml = "1"

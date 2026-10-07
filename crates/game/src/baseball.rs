@@ -10,8 +10,8 @@ use bb_engine::stage::Stage;
 use bb_format::SymbolId;
 
 use crate::art::{self, ButtonLabels};
-use crate::menu::{Leave, Menu, MenuPage};
-use crate::settings::Settings;
+use crate::menu::{Game, Leave, Menu, MenuPage};
+use crate::rules::Rules;
 
 /// What the player is looking at. Each is a labelled frame of the shell.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -69,7 +69,7 @@ impl Screen {
 pub struct Baseball {
     screen: Screen,
     menu: Menu,
-    settings: Settings,
+    game: Game,
     labels: ButtonLabels,
     /// The screen to open on, if not the intro.
     first: Option<Screen>,
@@ -83,11 +83,16 @@ impl Baseball {
         Baseball {
             screen: Screen::Loading,
             menu: Menu::default(),
-            settings: Settings::default(),
+            game: Game::default(),
             labels: ButtonLabels::read(library),
             first: None,
             holds: Vec::new(),
         }
+    }
+
+    /// Plays by `rules` instead of the ones built in.
+    pub fn play_by(&mut self, rules: Rules) {
+        self.game.rules = rules;
     }
 
     /// Opens on `screen` instead of the intro.
@@ -105,7 +110,7 @@ impl Baseball {
         stage.goto_label(&shell, label, false, library);
         self.screen = screen;
         if screen == Screen::Menu {
-            self.menu.shown(from_intro, &self.settings, stage, library);
+            self.menu.shown(from_intro, &self.game, stage, library);
         }
     }
 
@@ -126,7 +131,7 @@ impl Baseball {
         match self.screen {
             Screen::Intro if label == "SKIP" => self.show(Screen::Menu, stage, library),
             Screen::Menu => {
-                let leave = self.menu.clicked(label, &mut self.settings, stage, library);
+                let leave = self.menu.clicked(label, &mut self.game, stage, library);
                 if let Some(leave) = leave {
                     self.leave_menu(leave, stage, library);
                 }
@@ -141,7 +146,7 @@ impl Baseball {
                 if label.contains("HIGH SCORES") {
                     self.show(Screen::Menu, stage, library);
                     self.menu
-                        .open(MenuPage::HighScores, &self.settings, stage, library);
+                        .open(MenuPage::HighScores, &self.game, stage, library);
                 } else if label == "MAIN MENU" || art::CONTINUE_BUTTONS.contains(&button) {
                     self.show(Screen::Menu, stage, library);
                 }
@@ -255,7 +260,7 @@ impl Logic for Baseball {
                 }
             }
             Screen::Menu => {
-                if let Some(leave) = self.menu.tick(&self.settings, stage, library) {
+                if let Some(leave) = self.menu.tick(&self.game, stage, library) {
                     self.leave_menu(leave, stage, library);
                 }
             }
@@ -268,9 +273,9 @@ impl Logic for Baseball {
             Screen::Menu => format!(
                 "Menu, {:?}, {:?}",
                 self.menu.page(),
-                self.settings.difficulty
+                self.game.settings.difficulty
             ),
-            screen => format!("{screen:?}, {:?}", self.settings.difficulty),
+            screen => format!("{screen:?}, {:?}", self.game.settings.difficulty),
         }
     }
 }
