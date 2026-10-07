@@ -47,8 +47,13 @@ else
 fi
 "$cargo" build --release -p bb-devtools --bin svg-png
 
-app="target/app/$APP_NAME.app"
-rm -rf "$app"
+# The app is put together out of sight and moved into place when it is
+# whole. Built where it will live, it is for a few seconds an app with no
+# icon, and the Finder and the Dock remember it that way.
+final="target/app/$APP_NAME.app"
+staging="target/app/staging"
+app="$staging/$APP_NAME.app"
+rm -rf "$staging"
 mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
 
 if $universal; then
@@ -114,4 +119,14 @@ fi
 codesign --force --deep --sign - "$app"
 codesign --verify --deep --strict "$app"
 
-echo "Made $app ($(du -sh "$app" | cut -f1))"
+rm -rf "$final"
+mv "$app" "$final"
+rm -rf "$staging"
+# Tell the system the app has changed, so that it looks at the icon again.
+touch "$final"
+lsregister="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
+if [ -x "$lsregister" ]; then
+    "$lsregister" -f "$final" || true
+fi
+
+echo "Made $final ($(du -sh "$final" | cut -f1))"
