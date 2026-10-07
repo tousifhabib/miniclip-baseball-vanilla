@@ -463,11 +463,24 @@ impl Tessellator {
         // A field that holds markup is drawn as its plain words, in the
         // field's own font, size and colour.
         let plain;
-        let content = if text.flags.iter().any(|flag| flag == "html") {
+        let marked_up = text.flags.iter().any(|flag| flag == "html");
+        let content = if marked_up {
             plain = plain_text(content);
             plain.as_str()
         } else {
             content
+        };
+        // The field's own markup says how far apart its letters are set,
+        // and that holds for whatever it is made to say.
+        let spacing = if marked_up {
+            text.initial_text
+                .as_deref()
+                .and_then(|markup| markup.split("letterSpacing=\"").nth(1))
+                .and_then(|rest| rest.split('"').next())
+                .and_then(|number| number.parse::<f32>().ok())
+                .unwrap_or(0.0)
+        } else {
+            0.0
         };
         if content.is_empty() {
             return Ok(builder.build());
@@ -504,7 +517,7 @@ impl Tessellator {
             let width: f32 = line
                 .chars()
                 .filter_map(glyph_for)
-                .map(|glyph| glyph.advance as f32 * scale)
+                .map(|glyph| glyph.advance as f32 * scale + spacing)
                 .sum();
             let mut pen = match align {
                 "right" => inner_right - width,
@@ -534,7 +547,7 @@ impl Tessellator {
                     Matrix::translate(pen, baseline).then_inner(Matrix::scale(scale, scale));
                 let outline = lyon_path(parse_path(&glyph.path)?.into_iter(), place);
                 builder.fill(&outline, color, Paint::Solid)?;
-                pen += glyph.advance as f32 * scale;
+                pen += glyph.advance as f32 * scale + spacing;
             }
             baseline += ascent + descent + leading;
         }

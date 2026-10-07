@@ -174,3 +174,48 @@ fn the_pointer_is_hidden_only_while_the_ring_is_being_aimed() {
     assert!(state_after(&mut script, "state").contains("Ready"));
     assert!(!script.runner.stage.hide_pointer);
 }
+
+#[test]
+fn quitting_a_game_goes_to_the_menu_behind_a_flare() {
+    let Some(mut script) = game("match") else {
+        return;
+    };
+    // QUIT, and then YES on the prompt it brings up.
+    script
+        .run("wait 60; click 30 385; wait 40; click 355 232")
+        .unwrap();
+    // The flare plays first: the game is still there for a moment.
+    assert!(state_after(&mut script, "wait 4; state").starts_with("Match"));
+    assert_eq!(
+        state_after(&mut script, "wait 60; state"),
+        "Menu, Main, Medium"
+    );
+}
+
+#[test]
+fn over_a_colour_strip_the_arts_own_pointer_takes_the_place_of_the_systems() {
+    let Some(mut script) = game("menu") else {
+        return;
+    };
+    let steps = format!("wait 60; {BOTTOM_OF_THE_NINTH}; wait 60; move 470 194; wait 3");
+    script.run(&steps).unwrap();
+    let ring = |script: &bb_game::script::Script| {
+        let stage = &script.runner.stage;
+        let path = stage
+            .find_named(&[], "picker_mc")
+            .expect("the picker's pointer");
+        let on_stage = stage.to_stage(&path).unwrap().apply(0.0, 0.0);
+        (on_stage, stage.hide_pointer)
+    };
+    let ((x, y), hidden) = ring(&script);
+    assert!(
+        (x - 470.0).abs() < 1.0 && (y - 194.0).abs() < 1.0,
+        "{x},{y}"
+    );
+    assert!(hidden);
+    // Off the strip it is put well out of sight and the pointer is back.
+    script.run("move 300 300; wait 3").unwrap();
+    let ((x, _), hidden) = ring(&script);
+    assert!(x > 800.0, "{x}");
+    assert!(!hidden);
+}

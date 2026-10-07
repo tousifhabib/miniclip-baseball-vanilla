@@ -177,7 +177,13 @@ impl Stage {
     /// Asks for a sound by its export name, as `attachSound` used: played
     /// `loops` times. Returns whether there is a sound with that name.
     pub fn play_sound(&mut self, name: &str, loops: u16, library: &Library) -> bool {
-        self.sound(name, SoundEvent::Event, loops, library)
+        self.sound(name, SoundEvent::Event, loops, None, library)
+    }
+
+    /// The same, at a level given for this once, from 0 to 1, whatever level
+    /// the sound has been set to.
+    pub fn play_sound_at(&mut self, name: &str, loops: u16, level: f32, library: &Library) -> bool {
+        self.sound(name, SoundEvent::Event, loops, Some(level), library)
     }
 
     /// Sets how loud the sound with this export name is whenever the game
@@ -193,18 +199,24 @@ impl Stage {
 
     /// Stops every copy of the sound with this export name.
     pub fn stop_sound(&mut self, name: &str, library: &Library) -> bool {
-        self.sound(name, SoundEvent::Stop, 0, library)
+        self.sound(name, SoundEvent::Stop, 0, None, library)
     }
 
-    fn sound(&mut self, name: &str, event: SoundEvent, loops: u16, library: &Library) -> bool {
+    fn sound(
+        &mut self,
+        name: &str,
+        event: SoundEvent,
+        loops: u16,
+        level: Option<f32>,
+        library: &Library,
+    ) -> bool {
         let Some(&sound) = library.manifest.exports.get(name) else {
             return false;
         };
         // A sound the game has turned down starts at that level.
-        let envelope = self
-            .levels
-            .get(&sound)
-            .map(|&level| EnvelopePoint {
+        let envelope = level
+            .or_else(|| self.levels.get(&sound).copied())
+            .map(|level| EnvelopePoint {
                 sample: 0,
                 left: level,
                 right: level,

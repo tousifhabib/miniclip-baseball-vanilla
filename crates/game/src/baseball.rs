@@ -5,6 +5,7 @@
 
 use bb_engine::app::Logic;
 use bb_engine::display::{ButtonEvent, Event, Path};
+use bb_engine::input::Key;
 use bb_engine::library::Library;
 use bb_engine::math::Matrix;
 use bb_engine::stage::Stage;
@@ -83,6 +84,10 @@ pub struct Baseball {
     play: Option<Match>,
     /// What the game's chances are worked out from, if not the clock.
     seed: Option<u64>,
+    /// Frames until a game that has been quit gives way to the menu.
+    leaving: Option<u32>,
+    /// The pointer is over one of the setup pages' colour strips.
+    over_strip: bool,
     scores: Scores,
     /// Where the scores are kept. `None` keeps them only for this run.
     scores_file: Option<std::path::PathBuf>,
@@ -109,6 +114,8 @@ impl Baseball {
             first: None,
             play: None,
             seed: None,
+            leaving: None,
+            over_strip: false,
             scores: Scores::default(),
             scores_file: None,
             table: Vec::new(),
@@ -305,6 +312,8 @@ impl Baseball {
         self.holds.clear();
         stage.goto_label(&shell, label, false, library);
         self.screen = screen;
+        self.leaving = None;
+        self.over_strip = false;
         self.sound_for(screen, stage, library);
         let seed = self.seed.unwrap_or_else(Rng::seed_from_clock);
         self.play = match screen {
@@ -342,7 +351,17 @@ impl Baseball {
             Screen::Match | Screen::Arcade => match label {
                 "QUIT" => self.quit_prompt(true, stage, library),
                 "NO" => self.quit_prompt(false, stage, library),
-                "YES" => self.show(Screen::Menu, stage, library),
+                "YES" => {
+                    // A flare covers the way out, as it covers the way to
+                    // the next pitch.
+                    if let Some(flare) = stage.find_named(&[], "lightFlareQuit") {
+                        stage.goto_clip(&flare, 2, library);
+                        if let Some(clip) = stage.clip_mut(&flare) {
+                            clip.playing = true;
+                        }
+                    }
+                    self.leaving = Some(11);
+                }
                 _ => {}
             },
             Screen::MatchLost | Screen::MatchWon | Screen::InningsTied | Screen::ArcadeFinish => {
@@ -426,6 +445,18 @@ impl Logic for Baseball {
         if let Some(play) = &mut self.play {
             play.event(event, &self.game, stage, library);
         }
+        if let Event::Button { symbol, event, .. } = event
+            && (art::CLOTHES_STRIP_BUTTONS.contains(symbol)
+                || art::SKIN_STRIP_BUTTONS.contains(symbol))
+        {
+            match event {
+                ButtonEvent::RollOver | ButtonEvent::DragOver => self.over_strip = true,
+                ButtonEvent::RollOut | ButtonEvent::DragOut | ButtonEvent::ReleaseOutside => {
+                    self.over_strip = false;
+                }
+                _ => {}
+            }
+        }
         if let Event::Button {
             symbol,
             event: ButtonEvent::Release,
@@ -437,7 +468,22 @@ impl Logic for Baseball {
         }
     }
 
+    fn key(&mut self, key: &Key, stage: &mut Stage, library: &Library) -> bool {
+        // The space bar takes the next pitch, as its button does.
+        match (key, &mut self.play) {
+            (Key::Char(' '), Some(play)) => play.take_next_pitch(stage, library),
+            _ => false,
+        }
+    }
+
     fn tick(&mut self, stage: &mut Stage, library: &Library) {
+        if let Some(left) = self.leaving {
+            if left == 0 {
+                self.show(Screen::Menu, stage, library);
+            } else {
+                self.leaving = Some(left - 1);
+            }
+        }
         self.holds
             .retain(|(path, frame)| match stage.clip_mut(path) {
                 Some(clip) if clip.frame >= *frame => {
@@ -506,6 +552,25 @@ impl Logic for Baseball {
             .is_some_and(|prompt| prompt.frame > 1);
         if self.play.is_none() || prompt_up {
             stage.hide_pointer = false;
+        }
+        // Over a colour strip the art has a pointer of its own, a little
+        // ring, which takes the system pointer's place. Away from the strips
+        // it is kept well off the stage.
+        if self.screen == Screen::Menu
+            && let Some(shell) = art::shell(stage)
+        {
+            let pointer = (stage.pointer.x, stage.pointer.y);
+            for path in art::all_named(stage, &shell, "picker_mc") {
+                let place = self
+                    .over_strip
+                    .then(|| stage.from_stage(&path[..path.len() - 1], pointer.0, pointer.1))
+                    .flatten()
+                    .unwrap_or((1000.0, 1000.0));
+                if let Some(ring) = stage.child_mut(&path) {
+                    ring.move_to(place.0, place.1);
+                }
+            }
+            stage.hide_pointer = self.over_strip;
         }
         match self.screen {
             Screen::Loading => {

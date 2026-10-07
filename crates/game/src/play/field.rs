@@ -92,9 +92,10 @@ impl Ball {
         self.at.0 += self.speed.0;
         self.at.1 += self.speed.1;
         let far = distance(home, self.at);
-        // Never more than all of it, or a mishit far from home would turn
-        // round in the air.
-        let lost = (rules.drag * (miss / rules.drag_aim) * (far * far / rules.drag_reach)).min(1.0);
+        // The original puts no cap on this. Far enough out it would come
+        // to more than all of the ball's speed, but a ball hit that far
+        // off-centre has slowed to nothing long before it gets there.
+        let lost = rules.drag * (miss / rules.drag_aim) * (far * far / rules.drag_reach);
         self.speed.0 -= self.speed.0 * lost;
         self.speed.1 -= self.speed.1 * lost;
         self.height += self.lift;
@@ -282,8 +283,9 @@ mod tests {
     }
 
     #[test]
-    fn a_ball_never_turns_round_in_the_air() {
-        // Far off-centre, the air takes all the ball's speed but no more.
+    fn a_ball_hit_far_off_centre_dies_in_the_field() {
+        // The air takes more of its speed the further out it gets, and it
+        // stops well short of the wall without ever turning back.
         let mishit = Contact {
             power: 14.0,
             under: 200.0,
@@ -291,12 +293,12 @@ mod tests {
         };
         let rules = Rules::default();
         let mut ball = Ball::hit(HOME, STRAIGHT, &mishit, &rules.hit, &rules.field);
-        for _ in 0..300 {
+        for _ in 0..600 {
             ball.step(HOME, mishit.miss(), &rules.field);
-            if !ball.walled {
-                assert!(ball.speed.1 <= 0.0, "{ball:?}");
-            }
+            assert!(ball.speed.1 <= 0.0, "{ball:?}");
         }
+        assert!(!ball.walled);
+        assert!(reach(HOME, ball.at) < rules.field.wall);
     }
 
     #[test]

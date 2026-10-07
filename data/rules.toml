@@ -177,8 +177,10 @@ throw_near = 10.0
 # Frames a fielder takes to pick the ball up, and then to let go of it.
 pick_time = 20
 throw_time = 15
-# A play that has not ended by itself after this many frames is called dead.
-longest = 2400
+# A play that has not ended by itself after this many frames is called dead,
+# and anyone between bases is given the base he was making for. 0 is never,
+# which is how the original was: a play that will not end is left by QUIT.
+longest = 0
 
 # Fielders' running speed in pixels a frame.
 [field.fielder_speed]
@@ -231,7 +233,11 @@ logos = ["fire", "eagle", "miniclip", "sweetspot", "warclub", "bigbat"]
 [sound]
 # How loud each sound is, by its name in the art, from 0 to 1. A sound not
 # listed plays at 1.
-levels = { introMusic_loop = 0.75, crowd_loop_1 = 0.35, batSwing_fast = 0.2, baseball_organ_FX = 0.3, umpire_out_1 = 0.3, umpire_yourOuttaHere_1 = 0.6 }
+# The original set levels on eight channels, each shared by a few sounds, so
+# the sounds that shared a channel are all as loud as each other.
+levels = { introMusic_loop = 0.75, crowd_loop_1 = 0.35, batSwing_fast = 0.2, baseball_organ_FX = 0.3, baseball_organ_tense_FX = 0.3, umpire_out_1 = 0.3, umpire_out_2 = 0.3, umpire_Strike_grunt = 0.3, umpire_yourOuttaHere_1 = 0.6, umpire_yourOuttaHere_2 = 0.6, umpire_yourOuttaHere_3 = 0.6 }
+# A catch out in the field, heard from the batter's end of the ground.
+field_catch = 0.18
 # The music that plays on the menu, and the crowd that is heard under a
 # game.
 music = "introMusic_loop"

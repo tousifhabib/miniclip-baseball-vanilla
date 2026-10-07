@@ -373,10 +373,11 @@ impl Match {
                     if ball.bounced {
                         // It got down before he could take it.
                         state.job = Job::Chase;
-                    } else if ball.lift < 0.0 && ball.height <= rules.catch_height {
+                    } else if ball.height <= rules.catch_height {
                         state.caught = true;
                         show(stage, &parts.field_ball, false);
-                        Match::sound(stage, library, "ballCatch_3");
+                        let level = game.rules.sound.field_catch;
+                        stage.play_sound_at("ballCatch_3", 1, level, library);
                         Match::sound(stage, library, "umpire_out_1");
                         Match::sound(stage, library, "crowd_unhappy");
                         // Caught: the batter is out wherever he has got to.
@@ -452,7 +453,7 @@ impl Match {
         } else if state.walk {
             !self.anyone_running()
         } else {
-            !state.live || state.frames > rules.longest
+            !state.live || (rules.longest > 0 && state.frames > rules.longest)
         };
         if over {
             // Anyone still between bases when a play is called dead is given
@@ -497,7 +498,7 @@ impl Match {
         library: &Library,
     ) {
         let base = state.throw_to;
-        Match::sound(stage, library, "ballCatch_1");
+        stage.play_sound_at("ballCatch_1", 1, game.rules.sound.field_catch, library);
         show(stage, &parts.field_ball, false);
         // The fielder minding that base has the ball now.
         state.fielder = 4 + usize::from(base);

@@ -131,10 +131,19 @@ The original also has an instruction page for each kind of game, apart
 from the one the menu opens. Nothing in the original ever shows them, so
 nothing here does either.
 
-Known differences from the original: a ball caught in the field is as loud
-as one caught by the catcher; a strike-out is counted when it is called,
-not at the start of the next pitch; and a badly mishit ball is stopped by
-the air where the original could turn it round in flight.
+- The small things: the space bar takes the next pitch as its button
+  does, a flare covers quitting a game, and over a colour strip the art's
+  own eyedropper stands in for the pointer.
+
+Where the original does something odd, so does this. A third strike is
+counted as the next pitch is got ready, after the look at whether the match
+is over, so a side that strikes out for its last out sees one more pitch.
+A fielder waiting under the ball has it as soon as it is low enough,
+whichever way it is going. The arcade target's rings do not quite meet.
+And nothing calls a play dead if it will not end: QUIT is the way out.
+
+One thing is kept that the original did not have, switched off: a limit on
+how long a play may last, `longest` under `[field]` in the rules.
 
 ### The numbers the game is played by
 

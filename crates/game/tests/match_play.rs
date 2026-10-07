@@ -420,3 +420,86 @@ fn a_fielder_throws_once_and_then_stands() {
     }
     assert!(threw > 0, "nobody was left in a throwing pose to check");
 }
+
+#[test]
+fn the_space_bar_takes_the_next_pitch_once_it_is_on_offer() {
+    use bb_engine::input::Key;
+
+    let Some(mut script) = game("match") else {
+        return;
+    };
+    let state = |script: &mut bb_game::script::Script| {
+        script.run("state").unwrap().pop().unwrap_or_default()
+    };
+    // Mid-pitch there is no next pitch to take, and the key is left alone.
+    script.run("wait 60").unwrap();
+    assert!(!script.runner.key(Key::Char(' ')));
+    for _ in 0..3000 {
+        if seen(&state(&mut script)).phase == "Ready" {
+            break;
+        }
+        script.run("wait 1").unwrap();
+    }
+    // The badge takes about half a second to arrive, and then it is.
+    script.run("wait 60").unwrap();
+    assert!(script.runner.key(Key::Char(' ')));
+    script.run("wait 40").unwrap();
+    let after = state(&mut script);
+    assert!(
+        after.contains("pitched 1") && after.contains("Settling"),
+        "{after}"
+    );
+}
+
+#[test]
+fn a_strike_out_is_counted_as_the_next_pitch_is_got_ready() {
+    let Some(mut script) = game("match") else {
+        return;
+    };
+    let state = |script: &mut bb_game::script::Script| {
+        script.run("state").unwrap().pop().unwrap_or_default()
+    };
+    // Swing far too early at every pitch: three strikes.
+    let mut strikes = 0;
+    for _ in 0..20_000 {
+        let now = state(&mut script);
+        let look = seen(&now);
+        match look.phase.as_str() {
+            "Flight" => {
+                script.run("click 300 250").unwrap();
+                while seen(&state(&mut script)).phase == "Flight" {
+                    script.run("wait 1").unwrap();
+                }
+                strikes += 1;
+                if strikes == 3 {
+                    break;
+                }
+            }
+            "Ready" => {
+                script.run("wait 60; click 545 355; wait 2").unwrap();
+            }
+            _ => {
+                script.run("wait 1").unwrap();
+            }
+        }
+    }
+    // Called, but not yet an out.
+    let called = state(&mut script);
+    assert!(
+        called.contains("outs 0") && called.contains("count 0-3"),
+        "{called}"
+    );
+    // The next pitch being got ready is when it counts.
+    for _ in 0..3000 {
+        if seen(&state(&mut script)).phase == "Ready" {
+            break;
+        }
+        script.run("wait 1").unwrap();
+    }
+    script.run("wait 60; click 545 355; wait 60").unwrap();
+    let next = state(&mut script);
+    assert!(
+        next.contains("outs 1") && next.contains("count 0-0"),
+        "{next}"
+    );
+}

@@ -503,6 +503,17 @@ impl Match {
             self.phase = Phase::Over;
             return Some(outcome);
         }
+        // A third strike is counted here, after the look at whether the
+        // match is over, as the original had it. So a side that strikes out
+        // for its last out sees one more pitch before the match is lost.
+        if self.strikes >= game.rules.count.strikes {
+            if let Some(batter) = self.batter() {
+                self.runners[batter].place = Place::Out;
+            }
+            self.outs += 1;
+            self.clear_count();
+            self.announce = true;
+        }
         if self.batter().is_none() {
             // Each batter in a match has his own skin, and they carry the
             // bat logos in turn. The arcade game's one batter is as chosen.
@@ -981,12 +992,8 @@ impl Match {
             let call = ["1", "2", "3"][self.rng.below(3) as usize];
             Match::sound(stage, library, &format!("umpire_yourOuttaHere_{call}"));
             Match::sound(stage, library, "crowd_unhappy");
-            if let Some(batter) = self.batter() {
-                self.runners[batter].place = Place::Out;
-            }
-            self.outs += 1;
-            self.clear_count();
-            self.announce = true;
+            // He is not out yet: that is counted as the next pitch is got
+            // ready.
         } else {
             Match::sound(stage, library, "umpire_Strike_grunt");
             if self.strikes + 1 == rules.count.strikes {
@@ -1053,6 +1060,48 @@ impl Match {
         self.show_numbers(stage);
     }
 
+    /// Goes on to the next pitch, as its button does and the space bar
+    /// does. Returns whether there was a next pitch on offer to take.
+    pub fn take_next_pitch(&mut self, stage: &mut Stage, library: &Library) -> bool {
+        if self.phase != Phase::Ready {
+            return false;
+        }
+        let Some(at_bat) = &self.at else {
+            return false;
+        };
+        // The badge is a clip inside the panel, and is not to be had until
+        // it has finished arriving.
+        let badge = stage.clip(&at_bat.parts.next).and_then(|clip| {
+            clip.children
+                .iter()
+                .find_map(|(&depth, child)| match &child.content {
+                    Content::Clip(inner)
+                        if library
+                            .timeline(inner.symbol)
+                            .is_some_and(|timeline| timeline.labels.contains_key("nextBall")) =>
+                    {
+                        Some((depth, inner.playing))
+                    }
+                    _ => None,
+                })
+        });
+        let Some((depth, false)) = badge else {
+            return false;
+        };
+        // It plays itself out, and a flare covers the change.
+        let mut panel = at_bat.parts.next.clone();
+        panel.push(depth);
+        stage.goto_label(&panel, "nextBall", true, library);
+        if let Some(flare) = &at_bat.parts.flare {
+            stage.goto_clip(flare, 2, library);
+            if let Some(clip) = stage.clip_mut(flare) {
+                clip.playing = true;
+            }
+        }
+        self.phase = Phase::Leaving { left: 12 };
+        true
+    }
+
     /// Takes in something the stage has reported.
     pub fn event(&mut self, event: &Event, game: &Game, stage: &mut Stage, library: &Library) {
         let Event::Button {
@@ -1064,21 +1113,8 @@ impl Match {
             return;
         };
         match (*symbol, *event) {
-            (NEXT_BALL_BUTTON, ButtonEvent::Release) if self.phase == Phase::Ready => {
-                let Some(at_bat) = &self.at else {
-                    return;
-                };
-                // The panel plays itself out, and a flare covers the change.
-                let mut panel = path.clone();
-                panel.pop();
-                stage.goto_label(&panel, "nextBall", true, library);
-                if let Some(flare) = &at_bat.parts.flare {
-                    stage.goto_clip(flare, 2, library);
-                    if let Some(clip) = stage.clip_mut(flare) {
-                        clip.playing = true;
-                    }
-                }
-                self.phase = Phase::Leaving { left: 12 };
+            (NEXT_BALL_BUTTON, ButtonEvent::Release) => {
+                self.take_next_pitch(stage, library);
             }
             (_, ButtonEvent::Press) => self.runner_button(*symbol, path, game, stage, library),
             _ => {}
