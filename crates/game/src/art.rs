@@ -5,7 +5,7 @@
 
 use std::collections::HashMap;
 
-use bb_engine::display::Path;
+use bb_engine::display::{Content, Path};
 use bb_engine::library::Library;
 use bb_engine::stage::Stage;
 use bb_format::{Op, PlaceAction, SymbolId, SymbolInfo};
@@ -36,6 +36,28 @@ pub fn shell(stage: &Stage) -> Option<Path> {
 /// A clip that sits directly inside the shell: the screen that is showing.
 pub fn in_shell(stage: &Stage, symbol: SymbolId) -> Option<Path> {
     stage.find_symbol(&shell(stage)?, symbol)
+}
+
+/// Every object with this instance name at or below the clip at `from`.
+pub fn all_named(stage: &Stage, from: &[u16], name: &str) -> Vec<Path> {
+    let mut found = Vec::new();
+    let mut to_search = vec![from.to_vec()];
+    while let Some(path) = to_search.pop() {
+        let Some(clip) = stage.clip(&path) else {
+            continue;
+        };
+        for (&depth, child) in &clip.children {
+            let mut here = path.clone();
+            here.push(depth);
+            if child.name.as_deref() == Some(name) {
+                found.push(here.clone());
+            }
+            if matches!(child.content, Content::Clip(_)) {
+                to_search.push(here);
+            }
+        }
+    }
+    found
 }
 
 /// The words on each button, in capitals, for telling buttons apart.

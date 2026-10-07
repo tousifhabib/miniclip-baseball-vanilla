@@ -14,6 +14,7 @@ use crate::menu::{Game, Leave, Menu, MenuPage};
 use crate::play::{Match, Outcome};
 use crate::rng::Rng;
 use crate::rules::Rules;
+use crate::settings::Difficulty;
 
 /// What the player is looking at. Each is a labelled frame of the shell.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -275,6 +276,24 @@ impl Logic for Baseball {
                 Outcome::ArcadeOver => Screen::ArcadeFinish,
             };
             self.show(screen, stage, library);
+        }
+        // The arcade game's finish screen names the skill level played, on
+        // a clip with a frame for each. It appears part of the way through
+        // the screen's arrival, so it is set whenever it is there.
+        if self.screen == Screen::ArcadeFinish
+            && let Some(shell) = art::shell(stage)
+        {
+            let frame = match self.game.settings.difficulty {
+                Difficulty::Easy => 1,
+                Difficulty::Medium => 2,
+                Difficulty::Hard => 3,
+            };
+            for path in art::all_named(stage, &shell, "skillLevelText") {
+                stage.goto_clip(&path, frame, library);
+                if let Some(clip) = stage.clip_mut(&path) {
+                    clip.playing = false;
+                }
+            }
         }
         match self.screen {
             Screen::Loading => {
