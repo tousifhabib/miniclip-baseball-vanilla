@@ -9,6 +9,7 @@ use anyhow::{Context, Result};
 use serde::Deserialize;
 use toml::{Table, Value};
 
+use crate::play::pitch::Quality;
 use crate::settings::Difficulty;
 
 /// The file that holds every number, as built into the program.
@@ -20,6 +21,144 @@ pub struct Rules {
     /// The match: batting in the last innings to overtake the other side.
     #[serde(rename = "match")]
     pub game: MatchRules,
+    pub count: CountRules,
+    /// The pitch, for each skill level.
+    pub pitch: BySkillRef<PitchRules>,
+    /// What every pitch shares.
+    pub throw: ThrowRules,
+    /// The ball off the bat.
+    pub hit: HitRules,
+    /// The ball over the field.
+    pub field: FieldRules,
+}
+
+#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CountRules {
+    pub strikes: u32,
+    pub balls: u32,
+}
+
+/// A whole number picked from `low` to `high`, both included.
+#[derive(Clone, Copy, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Span {
+    pub low: u32,
+    pub high: u32,
+}
+
+/// A number worked out as `base + over / n`, with n picked from 1 to
+/// `parts`.
+#[derive(Clone, Copy, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Curve {
+    pub base: f32,
+    pub over: f32,
+    pub parts: u32,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Area {
+    pub x: f32,
+    pub y: f32,
+    pub width: f32,
+    pub height: f32,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Band {
+    pub top: f32,
+    pub bottom: f32,
+}
+
+#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PitchRules {
+    pub speed: Span,
+    pub swing: Curve,
+    pub dip: Curve,
+    pub target: Area,
+    pub marker_frame: u16,
+    pub aim_ease: f32,
+    pub show_zone: bool,
+    pub band: Band,
+    /// Frames after the swing, how well the ball is met, and the power.
+    pub window: Vec<(u32, Quality, f32)>,
+}
+
+#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ThrowRules {
+    pub settle: u32,
+    pub release_frame: u16,
+    pub swing_lead: f32,
+    pub dip_lead: f32,
+    pub approach: f32,
+    pub size: f32,
+    pub growth: f32,
+    pub fade: f32,
+}
+
+#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct HitRules {
+    pub pull: f32,
+    pub watch: u32,
+    pub walk_wait: u32,
+    pub lift: f32,
+    pub lift_aim: f32,
+    pub power_drag: f32,
+    pub gravity: f32,
+    pub bounce: f32,
+}
+
+#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FieldRules {
+    pub x: f32,
+    pub pace: f32,
+    pub aim_share: f32,
+    pub lift_share: f32,
+    pub gravity: f32,
+    pub drag: f32,
+    pub drag_aim: f32,
+    pub drag_reach: f32,
+    pub bounce_run: f32,
+    pub bounce_lift: f32,
+    pub bounce_cap: f32,
+    pub bounce_loss: f32,
+    pub wall: f32,
+    pub clear: f32,
+    pub wall_bounce: f32,
+    pub fielder_reach: f32,
+    pub catch_height: f32,
+    pub throw_speed: f32,
+    pub throw_near: f32,
+    pub pick_time: u32,
+    pub throw_time: u32,
+    pub longest: u32,
+    pub fielder_speed: BySkill<f32>,
+}
+
+/// A table that differs with the skill level chosen.
+#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct BySkillRef<T> {
+    pub easy: T,
+    pub medium: T,
+    pub hard: T,
+}
+
+impl<T> BySkillRef<T> {
+    pub fn at(&self, difficulty: Difficulty) -> &T {
+        match difficulty {
+            Difficulty::Easy => &self.easy,
+            Difficulty::Medium => &self.medium,
+            Difficulty::Hard => &self.hard,
+        }
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, Deserialize)]

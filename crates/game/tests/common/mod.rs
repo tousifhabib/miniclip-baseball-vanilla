@@ -4,6 +4,8 @@
 //! These tests need the extracted art, which is not part of the repository.
 //! Where it is missing they pass without checking anything, and say so.
 
+#![allow(dead_code)]
+
 use std::path::PathBuf;
 
 use bb_engine::app::Runner;
@@ -21,6 +23,11 @@ fn extracted() -> Option<PathBuf> {
 /// The game, opened on the screen with this label. `None` when there is no
 /// extracted art to play.
 pub fn game(screen: &str) -> Option<Script> {
+    game_with(screen, Some(1))
+}
+
+/// The game opened on a screen, with its chances worked out from `seed`.
+pub fn game_with(screen: &str, seed: Option<u64>) -> Option<Script> {
     let Some(dir) = extracted() else {
         eprintln!("skipped: there is no extracted art to play");
         return None;
@@ -29,6 +36,9 @@ pub fn game(screen: &str) -> Option<Script> {
     let stage = Stage::new(None, &library);
     let mut logic = Box::new(Baseball::new(&library));
     logic.start_on(Screen::from_label(screen).expect("a screen with that label"));
+    if let Some(seed) = seed {
+        logic.seed(seed);
+    }
     let runner = Runner::new(library, stage, logic, None);
     Some(Script::new(runner).expect("a renderer with no window"))
 }

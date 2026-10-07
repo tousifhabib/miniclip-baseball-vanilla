@@ -14,3 +14,169 @@ outs = 3
 easy = 1
 medium = 2
 hard = 3
+
+# Strikes that put a batter out, and balls that walk him to first.
+[count]
+strikes = 3
+balls = 4
+
+# ---------------------------------------------------------------------------
+# The pitch. One table for each skill level.
+#
+# speed    How long the pitch takes: the larger, the slower. A whole number
+#          is picked from low to high, both included.
+# swing    How far the ball curves sideways each frame, in pixels:
+#          base + over / n, with n picked from 1 to parts.
+# dip      How far it drops each frame, worked out the same way.
+# target   Where the pitcher aims: a corner and a size, in pixels of the
+#          batting view. The curve then carries the ball off it.
+# marker_frame  The frame of the pitcher's wind-up on which the player is
+#          shown where the ball will cross. The ball leaves his hand on
+#          frame 78, so later is harder.
+# aim_ease The aiming ring closes this share of the gap to the pointer each
+#          frame: 1 / aim_ease. Larger is more sluggish.
+# band     The ball can be hit while its shadow is between these heights.
+# window   What a swing does to a ball that is in the band this many frames
+#          after the click: [frames, quality, power]. Quality is one of
+#          "poor", "medium_poor", "medium" and "good". A lower power sends
+#          the ball further. Frames not listed are a miss.
+
+[pitch.easy]
+speed = { low = 70, high = 70 }
+swing = { base = 0.0, over = 0.0, parts = 1 }
+dip = { base = 0.0, over = 0.0, parts = 1 }
+target = { x = 235.0, y = 175.0, width = 110.0, height = 140.0 }
+marker_frame = 15
+aim_ease = 5.0
+show_zone = true
+band = { top = 320.0, bottom = 395.4 }
+window = [
+    [7, "medium_poor", 18.0],
+    [8, "medium_poor", 17.0],
+    [9, "medium", 15.0],
+    [10, "good", 15.0],
+    [11, "good", 14.0],
+    [12, "good", 15.0],
+    [13, "medium", 18.0],
+]
+
+[pitch.medium]
+speed = { low = 60, high = 60 }
+swing = { base = -0.5, over = 2.0, parts = 5 }
+dip = { base = 0.0, over = 1.0, parts = 10 }
+target = { x = 230.0, y = 190.0, width = 110.0, height = 110.0 }
+marker_frame = 30
+aim_ease = 10.0
+show_zone = false
+band = { top = 330.0, bottom = 381.5 }
+window = [
+    [8, "poor", 25.0],
+    [9, "medium_poor", 18.0],
+    [10, "good", 14.0],
+    [11, "good", 14.0],
+    [12, "medium", 17.0],
+]
+
+[pitch.hard]
+speed = { low = 35, high = 49 }
+swing = { base = -1.5, over = 3.0, parts = 5 }
+dip = { base = 0.0, over = 1.0, parts = 5 }
+target = { x = 230.0, y = 170.0, width = 110.0, height = 130.0 }
+marker_frame = 46
+aim_ease = 20.0
+show_zone = false
+band = { top = 340.0, bottom = 366.4 }
+window = [
+    [8, "poor", 30.0],
+    [9, "medium", 17.0],
+    [10, "good", 14.0],
+    [11, "medium", 18.0],
+]
+
+# Numbers every pitch shares.
+[throw]
+# Frames the pitcher waits before starting his wind-up, on top of the time
+# the pitch itself will take.
+settle = 28
+# The frame of the wind-up on which the ball leaves his hand.
+release_frame = 78
+# The curve moves the pitcher's aim by this many pixels for each pixel of
+# swing and of dip.
+swing_lead = 40.0
+dip_lead = 30.0
+# How the ball speeds up as it nears: each frame it covers this share of the
+# way for every pixel its shadow has already come.
+approach = 30.0
+# The ball's size: this much at the pitcher's hand, growing by `growth` for
+# each pixel its shadow has come.
+size = 1.05
+growth = 0.02
+# Once past the batter the ball fades by this much a frame.
+fade = 0.1
+
+# ---------------------------------------------------------------------------
+# The ball off the bat.
+[hit]
+# Aiming to one side of the ball sends it the other way. This is how many
+# pixels the hit moves for each pixel the ring is off.
+pull = 3.0
+# Frames the ball is watched leaving the bat before the view changes to the
+# field.
+watch = 61
+# Frames after the fourth ball before the view changes for the walk.
+walk_wait = 41
+# How hard the ball goes up: lift - power / power_drag, plus the height the
+# ring was off divided by lift_aim.
+lift = 25.0
+lift_aim = 8.0
+power_drag = 3.0
+gravity = 0.4
+# What is left of the ball's speed up when it bounces in the batting view.
+bounce = 0.8
+
+# The ball over the field.
+[field]
+# Where the field sits on screen once the view has changed.
+x = 40.0
+# The ball's speed is the way to its mark divided by power * pace.
+pace = 8.0
+# Sideways aim carries over to the field at 1 / aim_share.
+aim_share = 1.3
+# The ball's lift over the field, as a share of its lift off the bat.
+lift_share = 0.1286
+gravity = 0.03
+# Drag: each frame the ball loses this share of its speed for every 40
+# pixels the ring was off in height, times distance squared over 1500.
+drag = 0.002
+drag_aim = 40.0
+drag_reach = 1500.0
+# What a bounce leaves: of its speed along the ground, and of its speed up
+# (which is also capped).
+bounce_run = 0.5
+bounce_lift = 0.4
+bounce_cap = 1.0
+bounce_loss = 0.05
+# How far the wall is, and how high the ball must be to clear it.
+wall = 820.0
+clear = 25.0
+# What bouncing off the wall leaves of the ball's speed.
+wall_bounce = 0.3
+# A fielder stops this far out.
+fielder_reach = 845.0
+# A fielder catches a ball that comes down to this height where he waits.
+catch_height = 20.0
+# How fast a thrown ball goes, in pixels a frame, and how close to the base
+# counts as there.
+throw_speed = 2.0
+throw_near = 10.0
+# Frames a fielder takes to pick the ball up, and then to let go of it.
+pick_time = 20
+throw_time = 15
+# A play that has not ended by itself after this many frames is called dead.
+longest = 2400
+
+# Fielders' running speed in pixels a frame.
+[field.fielder_speed]
+easy = 0.4
+medium = 0.45
+hard = 0.49

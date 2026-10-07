@@ -40,6 +40,10 @@ struct Args {
     /// `key NAME`, `state`, `events`, `tree` and `shot FILE`.
     #[arg(long)]
     run: Option<String>,
+    /// Make every game go the same way: the number its chances are worked
+    /// out from.
+    #[arg(long)]
+    seed: Option<u64>,
     /// With `--run`: picture pixels per stage pixel.
     #[arg(long, default_value_t = 1.0)]
     scale: f32,
@@ -78,6 +82,9 @@ fn run() -> Result<()> {
     let library = Library::load(&locate::find(args.dir.as_deref())?)?;
     let stage = Stage::new(None, &library);
     let mut logic = Box::new(Baseball::new(&library));
+    if let Some(seed) = args.seed {
+        logic.seed(seed);
+    }
     if let Some(label) = &args.screen {
         let screen = Screen::from_label(label)
             .with_context(|| format!("there is no screen called `{label}`"))?;

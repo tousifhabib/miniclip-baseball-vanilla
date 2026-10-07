@@ -16,7 +16,7 @@ project is not affiliated with or endorsed by Miniclip.
 | 2 | Extractor: turn the SWF into open, editable files | Done |
 | 3 | Engine: a Flash-style tree of clips with timelines, drawn with `wgpu` | Done |
 | 4 | Check the engine's output against an independent renderer | Done |
-| 5 | Game logic: the rules, written fresh on top of the original art | In progress |
+| 5 | Game logic: the rules, written fresh on top of the original art | In progress: a match can be played from the first pitch to the result |
 | 6 | Restructure for modding: data files, mod folders, hot reload | Started: the game's numbers live in a data file |
 | 7 | Package as a Mac app | In progress: the app builds and runs |
 
@@ -89,12 +89,23 @@ its clips, the labels on their frames, and the variable each text field
 shows. So the screens and the look are the original's, and the rules are
 free to change.
 
-What works so far is getting around: the intro and its SKIP, the main
-menu, team setup with the skill level, the summary pages, PLAY BALL into a
-match or the arcade game, high scores, the instructions with NEXT and
-BACK, the quit prompt, and the result screens. What is not written yet is
-the play itself: pitching, batting, fielding and scoring. The match and
-arcade screens show the field, and nothing happens on it.
+What works so far:
+
+- Getting around: the intro and its SKIP, the main menu, team setup with
+  the skill level and a team name that can be typed, the summary pages,
+  PLAY BALL, high scores, the instructions, the quit prompt, and the result
+  screens.
+- A match, from the first pitch to winning, losing or tying. The pitcher
+  winds up and throws; the game shows where the ball will cross; the ring
+  follows the pointer and a click swings. Timing and aim decide whether the
+  bat meets the ball and how well. Strikes, balls, walks and strike-outs
+  are counted and called. A ball that is hit is followed over the field:
+  the nearest fielder runs it down or catches it and throws to the bases,
+  runners are forced on, can be sent on or made to slide with their own
+  buttons, and are safe or out. A ball over the wall is a home run.
+
+Not written yet: the arcade game, the team's colours and bat logo, and a
+high-score table.
 
 ### The numbers the game is played by
 
@@ -113,8 +124,10 @@ touches and every scripted frame a clip lands on, and is called once a
 frame. In return it steers the stage: jump a clip to a labelled frame, play
 or stop it, find a clip by its instance name, set what a text field says,
 or ask for a sound. In `crates/game/src`, `baseball.rs` decides which screen
-is showing, `menu.rs` is the menu, `rules.rs` reads the numbers, and
-`art.rs` describes the art.
+is showing, `menu.rs` is the menu, `play/` is a match (`pitch.rs` and
+`field.rs` are the ball's flight to the bat and over the field, with no art
+in them), `rules.rs` reads the numbers, and `art.rs` describes the art.
+`--seed N` makes every game go the same way.
 
 ### Driving it from a script
 

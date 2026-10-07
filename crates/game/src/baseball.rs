@@ -11,6 +11,8 @@ use bb_format::SymbolId;
 
 use crate::art::{self, ButtonLabels};
 use crate::menu::{Game, Leave, Menu, MenuPage};
+use crate::play::{Match, Outcome};
+use crate::rng::Rng;
 use crate::rules::Rules;
 
 /// What the player is looking at. Each is a labelled frame of the shell.
@@ -73,6 +75,10 @@ pub struct Baseball {
     labels: ButtonLabels,
     /// The screen to open on, if not the intro.
     first: Option<Screen>,
+    /// The match being played, while the match screen is showing.
+    play: Option<Match>,
+    /// What the game's chances are worked out from, if not the clock.
+    seed: Option<u64>,
     /// Clips that are playing an animation and must stop when they reach
     /// this frame, where the art has no stop of its own.
     holds: Vec<(Path, u16)>,
@@ -86,8 +92,15 @@ impl Baseball {
             game: Game::default(),
             labels: ButtonLabels::read(library),
             first: None,
+            play: None,
+            seed: None,
             holds: Vec::new(),
         }
+    }
+
+    /// Makes every game go the same way, for a test or for chasing a fault.
+    pub fn seed(&mut self, seed: u64) {
+        self.seed = Some(seed);
     }
 
     /// Plays by `rules` instead of the ones built in.
@@ -109,6 +122,10 @@ impl Baseball {
         self.holds.clear();
         stage.goto_label(&shell, label, false, library);
         self.screen = screen;
+        self.play = (screen == Screen::Match).then(|| {
+            let seed = self.seed.unwrap_or_else(Rng::seed_from_clock);
+            Match::new(&self.game, seed, library)
+        });
         if screen == Screen::Menu {
             self.menu.shown(from_intro, &self.game, stage, library);
         }
@@ -220,6 +237,9 @@ impl Baseball {
 
 impl Logic for Baseball {
     fn event(&mut self, event: &Event, stage: &mut Stage, library: &Library) {
+        if let Some(play) = &mut self.play {
+            play.event(event, &self.game, stage, library);
+        }
         if let Event::Button {
             symbol,
             event: ButtonEvent::Release,
@@ -241,6 +261,17 @@ impl Logic for Baseball {
                 // The clip has gone, and its hold with it.
                 None => false,
             });
+        if let Some(play) = &mut self.play
+            && let Some(outcome) = play.tick(&self.game, stage, library)
+        {
+            play.show_result(stage);
+            let screen = match outcome {
+                Outcome::Won => Screen::MatchWon,
+                Outcome::Lost => Screen::MatchLost,
+                Outcome::Tied => Screen::InningsTied,
+            };
+            self.show(screen, stage, library);
+        }
         match self.screen {
             Screen::Loading => {
                 if art::shell(stage).is_some() {
@@ -275,7 +306,14 @@ impl Logic for Baseball {
                 self.menu.page(),
                 self.game.settings.difficulty
             ),
-            screen => format!("{screen:?}, {:?}", self.game.settings.difficulty),
+            screen => {
+                let play = self
+                    .play
+                    .as_ref()
+                    .map(|play| format!(": {}", play.describe()))
+                    .unwrap_or_default();
+                format!("{screen:?}, {:?}{play}", self.game.settings.difficulty)
+            }
         }
     }
 }
