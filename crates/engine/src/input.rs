@@ -278,7 +278,7 @@ mod tests {
             .manifest
             .symbols
             .insert(BUTTON, symbol("buttons/20.json", SymbolInfo::Button));
-        let root = ClipState::new(None, &library, &mut Vec::new());
+        let root = ClipState::new(None, &library, &mut Vec::new(), &mut Path::new());
         (library, root)
     }
 
@@ -297,7 +297,7 @@ mod tests {
             .into_iter()
             .filter_map(|event| match event {
                 Event::Button { event, .. } => Some(event),
-                Event::Sound(_) => None,
+                Event::Sound(_) | Event::Frame { .. } => None,
             })
             .collect()
     }

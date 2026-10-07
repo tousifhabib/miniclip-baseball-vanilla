@@ -11,7 +11,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use anyhow::{Context, Result};
-use bb_engine::display::{Bounds, ClipState, commands};
+use bb_engine::display::{Bounds, ClipState, Texts, commands};
 use bb_engine::gpu::Renderer;
 use bb_engine::library::Library;
 use bb_engine::math::Matrix;
@@ -415,7 +415,7 @@ fn draw(
     let scaled = Matrix::scale(n as f32, n as f32).then_inner(base);
     // A stroke is at least one pixel of the final picture wide.
     renderer.min_stroke = n as f32;
-    let list = commands(clip, scaled, library);
+    let list = commands(clip, scaled, library, &Texts::new());
     let large = renderer.capture(library, &list, (size.0 * n, size.1 * n), background)?;
     if n == 1 {
         return Ok(large);
@@ -480,7 +480,12 @@ fn align(
         for y in steps(extra.1) {
             let mut score = 0.0;
             for (state, reference) in &tried {
-                let list = commands(state, Matrix::translate(x - left, y - top), library);
+                let list = commands(
+                    state,
+                    Matrix::translate(x - left, y - top),
+                    library,
+                    &Texts::new(),
+                );
                 let ours = renderer.capture(library, &list, (width, height), [0.0; 4])?;
                 let diff = compare(clip, state.frame, &ours, reference);
                 score += diff.wrong + diff.mean;
@@ -641,7 +646,7 @@ fn save_pair(
     let [left, top, ..] = clip_area(diff.clip, library, areas).unwrap_or([0.0; 4]);
     let root = played_to(diff.clip, diff.frame, library, renderer);
     let base = Matrix::translate(shift.0 - left, shift.1 - top);
-    let list = commands(&root, base, library);
+    let list = commands(&root, base, library, &Texts::new());
     let grey = [0.5, 0.5, 0.5, 1.0];
     let ours = renderer.capture(library, &list, (width, height), grey)?;
 

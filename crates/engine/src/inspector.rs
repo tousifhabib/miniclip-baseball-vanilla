@@ -3,13 +3,13 @@
 
 use std::collections::VecDeque;
 
-use bb_engine::display::{
+use crate::display::{
     ButtonMode, Child, Children, ClipState, Content, Path, bounds_of, child_bounds,
 };
-use bb_engine::gpu::Stats;
-use bb_engine::library::Library;
-use bb_engine::math::Matrix;
-use bb_engine::stage::Stage;
+use crate::gpu::Stats;
+use crate::library::Library;
+use crate::math::Matrix;
+use crate::stage::Stage;
 use bb_format::SymbolInfo;
 
 /// How many recent events the panel keeps.
@@ -40,6 +40,12 @@ pub struct Info<'a> {
     pub frames_per_second: f32,
     /// From stage coordinates to window pixels.
     pub base: Matrix,
+}
+
+impl Default for Inspector {
+    fn default() -> Inspector {
+        Inspector::new()
+    }
 }
 
 impl Inspector {

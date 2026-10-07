@@ -12,7 +12,7 @@ path = "src/bin/bb_shot.rs"
 
 [[bin]]
 name = "bb-player"
-path = "src/bin/bb_player/main.rs"
+path = "src/bin/bb_player.rs"
 
 [dependencies]
 anyhow.workspace = true

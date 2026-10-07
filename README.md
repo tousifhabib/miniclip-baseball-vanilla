@@ -16,7 +16,7 @@ project is not affiliated with or endorsed by Miniclip.
 | 2 | Extractor: turn the SWF into open, editable files | Done |
 | 3 | Engine: a Flash-style tree of clips with timelines, drawn with `wgpu` | Done |
 | 4 | Check the engine's output against an independent renderer | Done |
-| 5 | Port the game logic to Rust, kept parallel to the original | Next |
+| 5 | Game logic: the rules, written fresh on top of the original art | In progress |
 | 6 | Restructure for modding: data files, mod folders, hot reload | |
 | 7 | Package as a Mac app | |
 
@@ -27,6 +27,7 @@ project is not affiliated with or endorsed by Miniclip.
 | `crates/format` | Data types for the extracted files, shared by the extractor and the engine |
 | `crates/extractor` | `bb-extract`, which converts the SWF |
 | `crates/engine` | Plays the extracted timelines and draws them; `bb-player` and `bb-shot` |
+| `crates/game` | The baseball game itself: `bb-game` |
 | `crates/devtools` | Checks used while developing |
 
 ## Extracting the game
@@ -68,6 +69,54 @@ cargo run --release -p bb-devtools --bin extracted-check -- extracted
 cargo run --release -p bb-devtools --bin shape-diff -- extracted/shapes path/to/reference/shapes
 cargo run --release -p bb-devtools --bin bitmap-diff -- extracted/bitmaps path/to/reference/images
 ```
+
+## Playing the game
+
+```bash
+cargo run --release -p bb-game -- extracted
+```
+
+Space pauses, F1 opens the inspector, Escape quits, `--mute` turns the sound
+off, and `--screen menu` (or `match`, `arcade`, `matchWon` and so on) starts
+on a screen of your choice.
+
+The game's rules are new code, not a translation of the original's
+scripts. They use the original only for how its art is wired: the names of
+its clips, the labels on their frames, and the variable each text field
+shows. So the screens and the look are the original's, and the rules are
+free to change.
+
+What works so far is getting around: the intro and its SKIP, the main
+menu, team setup with the skill level, the summary pages, PLAY BALL into a
+match or the arcade game, high scores, the instructions with NEXT and
+BACK, the quit prompt, and the result screens. What is not written yet is
+the play itself: pitching, batting, fielding and scoring. The match and
+arcade screens show the field, and nothing happens on it.
+
+### How the rules meet the engine
+
+The engine's timelines only know how to play. A game supplies a `Logic`
+(`crates/engine/src/app.rs`), which is told about every button the pointer
+touches and every scripted frame a clip lands on, and is called once a
+frame. In return it steers the stage: jump a clip to a labelled frame, play
+or stop it, find a clip by its instance name, set what a text field says,
+or ask for a sound. `crates/game/src/baseball.rs` is the whole of the
+baseball rules, and `crates/game/src/art.rs` is its description of the art.
+
+### Driving it from a script
+
+For checking the rules without a mouse, `--run` plays with no window and
+follows a list of steps:
+
+```bash
+cargo run --release -p bb-game -- extracted --screen menu \
+  --run "wait 60; click 200 192; wait 60; state; shot setup.png"
+```
+
+`wait N` plays N frames, `click X Y` clicks at a stage position, `move`,
+`press` and `release` work the pointer by hand, `state` prints where the
+game is, `events` prints the buttons touched and sounds asked for, `tree`
+prints every object on the stage, and `shot FILE` saves a picture.
 
 ## Checking the engine
 
@@ -152,6 +201,9 @@ What the engine does:
   points, and starting volume, with Flash's limit of 32 sounds at once.
 - Buttons with their up, over and down looks, hit areas, and all seven
   pointer events, reported for the game logic to act on.
+- Text fields that say whatever the game sets for the variable they show.
+  A field holding markup is drawn as its plain words in the field's own
+  font, size and colour; the markup's own styling is not applied yet.
 
 ## What the extractor leaves out
 

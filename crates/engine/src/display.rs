@@ -107,6 +107,13 @@ pub enum Event {
         path: Path,
         event: ButtonEvent,
     },
+    /// A clip landed on a frame where the original had a script. `symbol` is
+    /// `None` for the main timeline, whose path is empty.
+    Frame {
+        symbol: Option<SymbolId>,
+        path: Path,
+        frame: u16,
+    },
 }
 
 /// A playing instance of a timeline.
@@ -121,15 +128,21 @@ pub struct ClipState {
 }
 
 impl ClipState {
-    /// Creates an instance showing its first frame.
-    pub fn new(symbol: Option<SymbolId>, library: &Library, events: &mut Vec<Event>) -> ClipState {
+    /// Creates an instance showing its first frame. `path` is where the
+    /// instance sits in the tree, which the events it reports carry.
+    pub fn new(
+        symbol: Option<SymbolId>,
+        library: &Library,
+        events: &mut Vec<Event>,
+        path: &mut Path,
+    ) -> ClipState {
         let mut clip = ClipState {
             symbol,
             frame: 0,
             playing: true,
             children: Children::new(),
         };
-        clip.goto(1, library, events);
+        clip.goto(1, library, events, path);
         clip
     }
 
@@ -140,11 +153,11 @@ impl ClipState {
     }
 
     /// Moves everything on by one frame.
-    pub fn advance(&mut self, library: &Library, events: &mut Vec<Event>) {
+    pub fn advance(&mut self, library: &Library, events: &mut Vec<Event>, path: &mut Path) {
         // Objects already here move on before this timeline does, and objects
         // this timeline adds now stay on their first frame until the next
         // tick. That is the order Flash uses.
-        advance_children(&mut self.children, library, events);
+        advance_children(&mut self.children, library, events, path);
         if !self.playing {
             return;
         }
@@ -157,11 +170,35 @@ impl ClipState {
         } else {
             self.frame + 1
         };
-        self.goto(next, library, events);
+        self.goto(next, library, events, path);
+    }
+
+    /// Moves the playhead to the frame with this label. Returns whether the
+    /// timeline has such a label.
+    pub fn goto_label(
+        &mut self,
+        label: &str,
+        library: &Library,
+        events: &mut Vec<Event>,
+        path: &mut Path,
+    ) -> bool {
+        let frame = library
+            .timeline(self.symbol)
+            .and_then(|timeline| timeline.labels.get(label).copied());
+        if let Some(frame) = frame {
+            self.goto(frame, library, events, path);
+        }
+        frame.is_some()
     }
 
     /// Moves the playhead to `frame`, clamped to the timeline's length.
-    pub fn goto(&mut self, frame: u16, library: &Library, events: &mut Vec<Event>) {
+    pub fn goto(
+        &mut self,
+        frame: u16,
+        library: &Library,
+        events: &mut Vec<Event>,
+        path: &mut Path,
+    ) {
         let Some(timeline) = library.timeline(self.symbol) else {
             return;
         };
@@ -173,27 +210,44 @@ impl ClipState {
         if target == self.frame {
             return;
         }
+        // This clip's own frame is reported ahead of anything the objects it
+        // places report, as a script on the frame would run before theirs.
+        let mark = events.len();
         if target > self.frame {
             for frame in self.frame + 1..=target {
                 for op in &timeline.frames[usize::from(frame) - 1].ops {
-                    apply(&mut self.children, op, frame, library, events);
+                    apply(&mut self.children, op, frame, library, events, path);
                 }
             }
         } else {
-            self.rewind_to(target, library, events);
+            self.rewind_to(target, library, events, path);
         }
         self.frame = target;
         // Only the frame the playhead lands on is heard, not the ones it
         // passed over on the way.
         let landed = &timeline.frames[usize::from(target) - 1];
         events.extend(landed.sounds.iter().cloned().map(Event::Sound));
+        if landed.has_script {
+            let event = Event::Frame {
+                symbol: self.symbol,
+                path: path.clone(),
+                frame: target,
+            };
+            events.insert(mark, event);
+        }
         if landed.stops && library.obey_stops {
             self.playing = false;
         }
     }
 
     /// Rebuilds the display list as it stands on `target`, an earlier frame.
-    fn rewind_to(&mut self, target: u16, library: &Library, events: &mut Vec<Event>) {
+    fn rewind_to(
+        &mut self,
+        target: u16,
+        library: &Library,
+        events: &mut Vec<Event>,
+        path: &mut Path,
+    ) {
         let Some(timeline) = library.timeline(self.symbol) else {
             return;
         };
@@ -204,7 +258,7 @@ impl ClipState {
         for frame in 1..=target {
             for op in &timeline.frames[usize::from(frame) - 1].ops {
                 let mut made = Vec::new();
-                apply(&mut self.children, op, frame, library, &mut made);
+                apply(&mut self.children, op, frame, library, &mut made, path);
                 match op {
                     Op::Remove { depth } => {
                         pending.remove(depth);
@@ -244,17 +298,41 @@ impl ClipState {
     }
 }
 
-fn advance_children(children: &mut Children, library: &Library, events: &mut Vec<Event>) {
-    for child in children.values_mut() {
+fn advance_children(
+    children: &mut Children,
+    library: &Library,
+    events: &mut Vec<Event>,
+    path: &mut Path,
+) {
+    for (&depth, child) in children.iter_mut() {
+        path.push(depth);
         match &mut child.content {
-            Content::Clip(clip) => clip.advance(library, events),
-            Content::Button(button) => advance_children(button.shown_mut(), library, events),
+            Content::Clip(clip) => clip.advance(library, events, path),
+            Content::Button(button) => {
+                advance_children(button.shown_mut(), library, events, path);
+            }
             Content::Graphic => {}
         }
+        path.pop();
     }
 }
 
-fn apply(children: &mut Children, op: &Op, frame: u16, library: &Library, events: &mut Vec<Event>) {
+/// Applies one change to `children`, the display list of the clip at `path`.
+fn apply(
+    children: &mut Children,
+    op: &Op,
+    frame: u16,
+    library: &Library,
+    events: &mut Vec<Event>,
+    path: &mut Path,
+) {
+    // The path of whatever this change puts at its depth.
+    let mut placed = |symbol: SymbolId, depth: u16, events: &mut Vec<Event>| {
+        path.push(depth);
+        let child = new_child(symbol, frame, library, events, path);
+        path.pop();
+        child
+    };
     match op {
         Op::Remove { depth } => {
             children.remove(depth);
@@ -263,7 +341,7 @@ fn apply(children: &mut Children, op: &Op, frame: u16, library: &Library, events
             PlaceAction::Place(symbol) => {
                 // Flash ignores a placement at a depth that is already taken.
                 if !children.contains_key(&place.depth)
-                    && let Some(mut child) = new_child(symbol, frame, library, events)
+                    && let Some(mut child) = placed(symbol, place.depth, events)
                 {
                     update(&mut child, place);
                     children.insert(place.depth, child);
@@ -275,7 +353,7 @@ fn apply(children: &mut Children, op: &Op, frame: u16, library: &Library, events
                 }
             }
             PlaceAction::Replace(symbol) => {
-                let Some(mut child) = new_child(symbol, frame, library, events) else {
+                let Some(mut child) = placed(symbol, place.depth, events) else {
                     return;
                 };
                 // The new object takes over the old one's settings, apart
@@ -321,15 +399,19 @@ fn update(child: &mut Child, place: &Place) {
     }
 }
 
-/// A fresh instance of `symbol`, or `None` if there is nothing to show for it.
+/// A fresh instance of `symbol` to sit at `path`, or `None` if there is
+/// nothing to show for it.
 fn new_child(
     symbol: SymbolId,
     placed_on: u16,
     library: &Library,
     events: &mut Vec<Event>,
+    path: &mut Path,
 ) -> Option<Child> {
     let content = match &library.manifest.symbols.get(&symbol)?.info {
-        SymbolInfo::Clip { .. } => Content::Clip(ClipState::new(Some(symbol), library, events)),
+        SymbolInfo::Clip { .. } => {
+            Content::Clip(ClipState::new(Some(symbol), library, events, path))
+        }
         SymbolInfo::Button => {
             let button = library.buttons.get(&symbol)?;
             let mut state = ButtonState {
@@ -348,7 +430,10 @@ fn new_child(
                         "hit" => &mut state.hit,
                         _ => continue,
                     };
-                    if let Some(mut child) = new_child(record.symbol, 0, library, events) {
+                    path.push(record.depth);
+                    let made = new_child(record.symbol, 0, library, events, path);
+                    path.pop();
+                    if let Some(mut child) = made {
                         child.matrix = record.matrix.into();
                         if let Some(color) = record.color {
                             child.color = color.into();
@@ -440,6 +525,62 @@ pub fn child_bounds(child: &Child, matrix: Matrix, library: &Library) -> Option<
     }
 }
 
+/// Lists every object in `children`, one to a line and indented by how deep
+/// it is nested, with the frame each clip is on. For looking at a scene
+/// without a window.
+pub fn describe_tree(children: &Children, library: &Library) -> String {
+    fn walk(children: &Children, library: &Library, indent: usize, out: &mut String) {
+        use std::fmt::Write;
+        for (depth, child) in children {
+            let pad = "  ".repeat(indent);
+            let name = child
+                .name
+                .as_deref()
+                .map(|name| format!(" \"{name}\""))
+                .unwrap_or_default();
+            let mask = if child.clip_depth.is_some() {
+                " (mask)"
+            } else {
+                ""
+            };
+            let hidden = if child.visible { "" } else { " (hidden)" };
+            match &child.content {
+                Content::Graphic => {
+                    writeln!(
+                        out,
+                        "{pad}{depth}: symbol {}{name}{mask}{hidden}",
+                        child.symbol
+                    )
+                }
+                Content::Clip(clip) => {
+                    let state = if clip.playing { "playing" } else { "stopped" };
+                    writeln!(
+                        out,
+                        "{pad}{depth}: clip {}{name}{mask}{hidden}, {state} on frame {} of {}",
+                        child.symbol,
+                        clip.frame,
+                        clip.frame_count(library)
+                    )
+                }
+                Content::Button(button) => writeln!(
+                    out,
+                    "{pad}{depth}: button {}{name}{mask}{hidden}, {:?}",
+                    child.symbol, button.mode
+                ),
+            }
+            .expect("writing to a string");
+            match &child.content {
+                Content::Clip(clip) => walk(&clip.children, library, indent + 1, out),
+                Content::Button(button) => walk(button.shown(), library, indent + 1, out),
+                Content::Graphic => {}
+            }
+        }
+    }
+    let mut out = String::new();
+    walk(children, library, 1, &mut out);
+    out
+}
+
 /// One step of drawing a frame.
 #[derive(Clone, Debug, PartialEq)]
 pub enum Command {
@@ -448,6 +589,8 @@ pub enum Command {
         ratio: u16,
         matrix: Matrix,
         color: ColorTransform,
+        /// For a text field: what it says now, if the game has set it.
+        text: Option<String>,
     },
     /// The draws up to `ActivateMask` are the outline of a mask.
     PushMask,
@@ -468,11 +611,22 @@ pub enum Command {
     EndBlur,
 }
 
+/// What the game's text fields say, by the name of the variable each field
+/// shows. A field that the original bound to `_root.game.score` shows the
+/// entry for `score`: only the last part of the name counts.
+pub type Texts = std::collections::HashMap<String, String>;
+
+/// The part of a text field's variable name that [`Texts`] is keyed by.
+pub fn text_key(variable: &str) -> &str {
+    variable.rsplit(['.', ':', '/']).next().unwrap_or(variable)
+}
+
 /// Lists what to draw for a clip, back to front.
-pub fn commands(clip: &ClipState, base: Matrix, library: &Library) -> Vec<Command> {
+pub fn commands(clip: &ClipState, base: Matrix, library: &Library, texts: &Texts) -> Vec<Command> {
     let mut out = Vec::new();
     let context = Context {
         library,
+        texts,
         // Filter sizes are in stage pixels, so they grow with the view.
         view_scale: (base.a * base.d - base.b * base.c).abs().sqrt(),
     };
@@ -489,6 +643,7 @@ pub fn commands(clip: &ClipState, base: Matrix, library: &Library) -> Vec<Comman
 
 struct Context<'a> {
     library: &'a Library,
+    texts: &'a Texts,
     view_scale: f32,
 }
 
@@ -572,6 +727,12 @@ fn draw_child(
             ratio: child.ratio,
             matrix,
             color,
+            text: context
+                .library
+                .edit_texts
+                .get(&child.symbol)
+                .and_then(|field| context.texts.get(text_key(&field.variable)))
+                .cloned(),
         }),
         Content::Clip(clip) => {
             draw_children(&clip.children, matrix, color, in_mask, context, out);
@@ -702,13 +863,17 @@ pub(crate) mod tests {
     }
 
     fn start(library: &Library) -> ClipState {
-        ClipState::new(None, library, &mut Vec::new())
+        ClipState::new(None, library, &mut Vec::new(), &mut Path::new())
     }
 
     fn tick(clip: &mut ClipState, library: &Library) -> Vec<Event> {
         let mut events = Vec::new();
-        clip.advance(library, &mut events);
+        clip.advance(library, &mut events, &mut Path::new());
         events
+    }
+
+    fn draw(clip: &ClipState, base: Matrix, library: &Library) -> Vec<Command> {
+        commands(clip, base, library, &Texts::new())
     }
 
     fn inner_frame(clip: &ClipState, depth: u16) -> u16 {
@@ -823,10 +988,81 @@ pub(crate) mod tests {
             1,
         );
         let mut root = start(&library);
-        root.goto(2, &library, &mut Vec::new());
+        root.goto(2, &library, &mut Vec::new(), &mut Path::new());
         assert_eq!(root.children.keys().copied().collect::<Vec<_>>(), [2]);
-        root.goto(1, &library, &mut Vec::new());
+        root.goto(1, &library, &mut Vec::new(), &mut Path::new());
         assert_eq!(root.children.keys().copied().collect::<Vec<_>>(), [1]);
+    }
+
+    #[test]
+    fn landing_on_a_scripted_frame_is_reported_with_where_it_happened() {
+        let scripted = Frame {
+            has_script: true,
+            ..Frame::default()
+        };
+        // The inner clip has a script on its first frame; so does the second
+        // frame of the main timeline, which is the one that places it.
+        let second = Frame {
+            has_script: true,
+            ..frame(vec![put(7, INNER)])
+        };
+        let library = library_with(vec![frame(vec![]), second], vec![scripted]);
+        let mut root = start(&library);
+        assert_eq!(
+            tick(&mut root, &library),
+            [
+                // The outer frame first, as its script would run first.
+                Event::Frame {
+                    symbol: None,
+                    path: vec![],
+                    frame: 2,
+                },
+                Event::Frame {
+                    symbol: Some(INNER),
+                    path: vec![7],
+                    frame: 1,
+                },
+            ]
+        );
+    }
+
+    #[test]
+    fn a_text_field_shows_what_the_game_has_set() {
+        const FIELD: SymbolId = 30;
+        let mut library = library(vec![frame(vec![put(1, FIELD)])], 1);
+        library
+            .manifest
+            .symbols
+            .insert(FIELD, symbol("texts/30.json", SymbolInfo::EditText));
+        library.edit_texts.insert(
+            FIELD,
+            bb_format::EditText {
+                id: FIELD,
+                bounds: Rect {
+                    x_min: 0.0,
+                    y_min: 0.0,
+                    x_max: 50.0,
+                    y_max: 20.0,
+                },
+                font: None,
+                height: None,
+                color: None,
+                max_length: None,
+                layout: None,
+                variable: "_root.game.score".to_owned(),
+                initial_text: Some("0".to_owned()),
+                flags: Vec::new(),
+            },
+        );
+        let root = start(&library);
+        let said = |texts: &Texts| match &commands(&root, Matrix::IDENTITY, &library, texts)[0] {
+            Command::Draw { text, .. } => text.clone(),
+            other => panic!("expected a draw, found {other:?}"),
+        };
+        assert_eq!(said(&Texts::new()), None);
+        // Only the last part of the field's variable name counts.
+        let texts = Texts::from([("score".to_owned(), "12".to_owned())]);
+        assert_eq!(said(&texts), Some("12".to_owned()));
     }
 
     #[test]
@@ -868,7 +1104,7 @@ pub(crate) mod tests {
         let library = library(vec![with_sound(7), with_sound(8), with_sound(9)], 1);
 
         let mut events = Vec::new();
-        let mut root = ClipState::new(None, &library, &mut events);
+        let mut root = ClipState::new(None, &library, &mut events, &mut Path::new());
         assert_eq!(events, [Event::Sound(sound(7))]);
 
         assert_eq!(tick(&mut root, &library), [Event::Sound(sound(8))]);
@@ -876,8 +1112,8 @@ pub(crate) mod tests {
         // Jumping from frame 2 back to 1 and on to 3 passes over nothing
         // that should be heard except where it lands.
         let mut events = Vec::new();
-        root.goto(1, &library, &mut events);
-        root.goto(3, &library, &mut events);
+        root.goto(1, &library, &mut events, &mut Path::new());
+        root.goto(3, &library, &mut events, &mut Path::new());
         assert_eq!(events, [Event::Sound(sound(7)), Event::Sound(sound(9))]);
     }
 
@@ -893,7 +1129,7 @@ pub(crate) mod tests {
         ];
         let library = library_with(vec![frame(vec![put(1, INNER)]), frame(vec![])], inner);
         let mut events = Vec::new();
-        let mut root = ClipState::new(None, &library, &mut events);
+        let mut root = ClipState::new(None, &library, &mut events, &mut Path::new());
         assert_eq!(events, [Event::Sound(sound(7))]);
         assert!(tick(&mut root, &library).is_empty());
         // Back to frame 1: the inner clip is the same one, part way through.
@@ -948,7 +1184,7 @@ pub(crate) mod tests {
         // Symbol 1 is the mask. Symbol 2 sits at depth 2, inside the mask, and
         // again at depth 3, past its end.
         assert_eq!(
-            kinds(&commands(&root, Matrix::IDENTITY, &library)),
+            kinds(&draw(&root, Matrix::IDENTITY, &library)),
             [
                 "PushMask",
                 "draw 1",
@@ -970,7 +1206,7 @@ pub(crate) mod tests {
         };
         let library = library(vec![frame(vec![Op::Place(Box::new(moved))])], 1);
         let root = start(&library);
-        let commands = commands(&root, Matrix::scale(2.0, 2.0), &library);
+        let commands = draw(&root, Matrix::scale(2.0, 2.0), &library);
         let Command::Draw { matrix, .. } = &commands[0] else {
             panic!("expected a draw");
         };
@@ -990,7 +1226,7 @@ pub(crate) mod tests {
         };
         let library = library(vec![frame(vec![Op::Place(Box::new(blurred))])], 1);
         let root = start(&library);
-        let commands = commands(&root, Matrix::scale(2.0, 2.0), &library);
+        let commands = draw(&root, Matrix::scale(2.0, 2.0), &library);
         assert_eq!(kinds(&commands), ["BeginBlur", "draw 1", "EndBlur"]);
         // The 10 by 10 shape at (20, 30), drawn at twice the size.
         assert_eq!(

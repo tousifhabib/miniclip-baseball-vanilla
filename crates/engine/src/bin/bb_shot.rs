@@ -3,7 +3,7 @@
 use std::path::PathBuf;
 
 use anyhow::{Context, Result};
-use bb_engine::display::{Children, Content, Event};
+use bb_engine::display::{Event, describe_tree};
 use bb_engine::gpu::Renderer;
 use bb_engine::library::Library;
 use bb_engine::math::Matrix;
@@ -51,45 +51,6 @@ struct Args {
     scale: f32,
 }
 
-/// Prints one line per object, indented by how deep it is nested.
-fn print_tree(children: &Children, library: &Library, indent: usize) {
-    for (depth, child) in children {
-        let pad = "  ".repeat(indent);
-        let name = child
-            .name
-            .as_deref()
-            .map(|name| format!(" \"{name}\""))
-            .unwrap_or_default();
-        let mask = if child.clip_depth.is_some() {
-            " (mask)"
-        } else {
-            ""
-        };
-        let placed = child.placed_on;
-        match &child.content {
-            Content::Graphic => {
-                println!("{pad}{depth}: symbol {}{name}{mask}", child.symbol);
-            }
-            Content::Clip(clip) => {
-                println!(
-                    "{pad}{depth}: clip {}{name}{mask}, placed on frame {placed}, now on frame {} of {}",
-                    child.symbol,
-                    clip.frame,
-                    clip.frame_count(library)
-                );
-                print_tree(&clip.children, library, indent + 1);
-            }
-            Content::Button(button) => {
-                println!(
-                    "{pad}{depth}: button {}{name}{mask}, {:?}",
-                    child.symbol, button.mode
-                );
-                print_tree(button.shown(), library, indent + 1);
-            }
-        }
-    }
-}
-
 fn parse_point(text: &str) -> Result<(f32, f32), String> {
     let (x, y) = text
         .split_once(',')
@@ -134,11 +95,13 @@ fn main() -> Result<()> {
         match event {
             Event::Button { symbol, event, .. } => println!("button {symbol}: {event:?}"),
             Event::Sound(start) => println!("sound {}", start.sound),
+            // Too many to be worth listing: one for every scripted frame.
+            Event::Frame { .. } => {}
         }
     }
 
     if args.tree {
-        print_tree(&stage.root.children, &library, 1);
+        print!("{}", describe_tree(&stage.root.children, &library));
     }
 
     let scale = Matrix::scale(args.scale, args.scale);

@@ -32,6 +32,8 @@ const LAYER_STEP: u32 = 64;
 const MAX_LAYER: u32 = 4096;
 /// A layer's textures are dropped after going unused for this many frames.
 const LAYER_LIFETIME: u64 = 300;
+/// How many meshes of changing text to keep before clearing them out.
+const MAX_FIELD_MESHES: usize = 512;
 /// The widest blur the shader will sample, in pixels.
 const MAX_BLUR: f32 = 127.0;
 
@@ -202,6 +204,9 @@ enum MeshKey {
     Shape(SymbolId),
     Morph(SymbolId, u16),
     Text(SymbolId),
+    /// A text field saying something the game has set. The number stands
+    /// for what it says.
+    Field(SymbolId, u64),
     /// The square from (0, 0) to (1, 1), for drawing a layer.
     Quad,
 }
@@ -587,6 +592,18 @@ impl Renderer {
         scissor: Option<[u32; 4]>,
     ) {
         self.frame += 1;
+        // Text that changes often, such as a score, leaves a mesh behind for
+        // every value it has shown. Clear them out now and then; the ones
+        // still wanted are rebuilt as they are drawn.
+        let fields = self
+            .meshes
+            .keys()
+            .filter(|key| matches!(key, MeshKey::Field(..)))
+            .count();
+        if fields > MAX_FIELD_MESHES {
+            self.meshes
+                .retain(|key, _| !matches!(key, MeshKey::Field(..)));
+        }
         let (mut layers, items) = self.prepare(library, commands, size);
         self.upload(&mut layers, &items, size);
         self.stats = Stats {
@@ -896,7 +913,7 @@ impl Renderer {
                     if layer.size == (0, 0) {
                         continue;
                     }
-                    self.ensure_mesh(library, MeshKey::Quad);
+                    self.ensure_mesh(library, MeshKey::Quad, None);
                     // The unit square, stretched over the layer's place.
                     let item = push_item(Item {
                         world_abcd: [layer.size.0 as f32, 0.0, 0.0, layer.size.1 as f32],
@@ -919,14 +936,15 @@ impl Renderer {
                     ratio,
                     matrix,
                     color,
+                    text,
                 } => {
                     if layers[current].size == (0, 0) {
                         continue;
                     }
-                    let Some(key) = mesh_key(library, *symbol, *ratio) else {
+                    let Some(key) = mesh_key(library, *symbol, *ratio, text.as_deref()) else {
                         continue;
                     };
-                    self.ensure_mesh(library, key);
+                    self.ensure_mesh(library, key, text.as_deref());
                     let Some(Some(mesh)) = self.meshes.get(&key) else {
                         continue;
                     };
@@ -948,7 +966,9 @@ impl Renderer {
         (layers, items)
     }
 
-    fn ensure_mesh(&mut self, library: &Library, key: MeshKey) {
+    /// Builds the mesh for `key` if it is not there yet. `text` is what a
+    /// [`MeshKey::Field`] says.
+    fn ensure_mesh(&mut self, library: &Library, key: MeshKey, text: Option<&str>) {
         if self.meshes.contains_key(&key) {
             return;
         }
@@ -965,8 +985,12 @@ impl Renderer {
             MeshKey::Morph(id, ratio) => self.tessellator.morph(&library.morphs[&id], ratio),
             MeshKey::Text(id) => match (library.texts.get(&id), library.edit_texts.get(&id)) {
                 (Some(text), _) => self.tessellator.text(text, library),
-                (None, Some(text)) => self.tessellator.edit_text(text, library),
+                (None, Some(field)) => self.tessellator.edit_text(field, None, library),
                 (None, None) => Ok(Mesh::default()),
+            },
+            MeshKey::Field(id, _) => match library.edit_texts.get(&id) {
+                Some(field) => self.tessellator.edit_text(field, text, library),
+                None => Ok(Mesh::default()),
             },
             MeshKey::Quad => {
                 let corner = |x: f32, y: f32| Vertex {
@@ -1217,10 +1241,10 @@ impl Geometry for Renderer {
         x: f32,
         y: f32,
     ) -> bool {
-        let Some(key) = mesh_key(library, symbol, ratio) else {
+        let Some(key) = mesh_key(library, symbol, ratio, None) else {
             return false;
         };
-        self.ensure_mesh(library, key);
+        self.ensure_mesh(library, key, None);
         match self.meshes.get(&key) {
             Some(Some(mesh)) => mesh.mesh.contains(x, y),
             _ => false,
@@ -1229,11 +1253,21 @@ impl Geometry for Renderer {
 }
 
 /// Which mesh draws `symbol`, if it is something with a mesh.
-fn mesh_key(library: &Library, symbol: SymbolId, ratio: u16) -> Option<MeshKey> {
-    match library.manifest.symbols.get(&symbol)?.info {
-        SymbolInfo::Shape { .. } => Some(MeshKey::Shape(symbol)),
-        SymbolInfo::MorphShape => Some(MeshKey::Morph(symbol, ratio)),
-        SymbolInfo::Text | SymbolInfo::EditText => Some(MeshKey::Text(symbol)),
+fn mesh_key(
+    library: &Library,
+    symbol: SymbolId,
+    ratio: u16,
+    text: Option<&str>,
+) -> Option<MeshKey> {
+    match (&library.manifest.symbols.get(&symbol)?.info, text) {
+        (SymbolInfo::Shape { .. }, _) => Some(MeshKey::Shape(symbol)),
+        (SymbolInfo::MorphShape, _) => Some(MeshKey::Morph(symbol, ratio)),
+        (SymbolInfo::EditText, Some(text)) => {
+            let mut hasher = std::hash::DefaultHasher::new();
+            std::hash::Hash::hash(text, &mut hasher);
+            Some(MeshKey::Field(symbol, std::hash::Hasher::finish(&hasher)))
+        }
+        (SymbolInfo::Text | SymbolInfo::EditText, None) => Some(MeshKey::Text(symbol)),
         _ => None,
     }
 }

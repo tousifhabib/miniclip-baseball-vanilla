@@ -443,18 +443,32 @@ impl Tessellator {
         Ok(builder.build())
     }
 
-    /// Tessellates a text field showing the text it starts with.
-    pub fn edit_text(&mut self, text: &f::EditText, library: &Library) -> Result<Mesh> {
+    /// Tessellates a text field showing `content`, or the text it starts
+    /// with if that is `None`.
+    pub fn edit_text(
+        &mut self,
+        text: &f::EditText,
+        content: Option<&str>,
+        library: &Library,
+    ) -> Result<Mesh> {
         let mut builder = Builder::new();
         let (Some(font), Some(height), Some(content)) = (
             text.font.and_then(|font| library.fonts.get(&font)),
             text.height,
-            text.initial_text.as_deref(),
+            content.or(text.initial_text.as_deref()),
         ) else {
             return Ok(builder.build());
         };
-        // Fields that hold markup need a parser the engine does not have yet.
-        if content.is_empty() || text.flags.iter().any(|flag| flag == "html") {
+        // A field that holds markup is drawn as its plain words, in the
+        // field's own font, size and colour.
+        let plain;
+        let content = if text.flags.iter().any(|flag| flag == "html") {
+            plain = plain_text(content);
+            plain.as_str()
+        } else {
+            content
+        };
+        if content.is_empty() {
             return Ok(builder.build());
         }
 
@@ -694,6 +708,44 @@ impl Tessellator {
         self.image_slots.insert(key, self.images.len() - 1);
         Ok(self.images.len() - 1)
     }
+}
+
+/// The words of some HTML-like markup, as Flash text fields hold it: tags
+/// dropped, paragraphs and line breaks turned into new lines, and the common
+/// entities turned back into their characters.
+fn plain_text(markup: &str) -> String {
+    let mut out = String::new();
+    let mut rest = markup;
+    while let Some(open) = rest.find('<') {
+        out.push_str(&rest[..open]);
+        let Some(close) = rest[open..].find('>') else {
+            // An unfinished tag: keep it as written.
+            out.push_str(&rest[open..]);
+            rest = "";
+            break;
+        };
+        let tag = rest[open + 1..open + close].trim().to_ascii_lowercase();
+        let name = tag.trim_start_matches('/').split_whitespace().next();
+        // A line ends at a break, and at the end of a paragraph.
+        if matches!(name, Some("br" | "br/")) || tag.starts_with("/p") {
+            out.push('\n');
+        }
+        rest = &rest[open + close + 1..];
+    }
+    out.push_str(rest);
+    let out = [
+        ("&nbsp;", " "),
+        ("&lt;", "<"),
+        ("&gt;", ">"),
+        ("&quot;", "\""),
+        ("&apos;", "'"),
+        ("&amp;", "&"),
+    ]
+    .iter()
+    .fold(out, |text, (entity, character)| {
+        text.replace(entity, character)
+    });
+    out.trim_end_matches('\n').to_owned()
 }
 
 fn first_image(group: &usvg::Group) -> Option<&usvg::Image> {
@@ -938,6 +990,14 @@ mod tests {
         assert_eq!(tessellator.ramps[row][255], [255, 255, 255, 255]);
         assert_eq!(tessellator.ramp(&[stop(0.0, 0), stop(1.0, 255)]), row);
         assert_eq!(tessellator.ramps.len(), 1);
+    }
+
+    #[test]
+    fn markup_becomes_plain_words_and_lines() {
+        let markup = r#"<p align="left"><font face="Arial" size="12">Top &amp; <b>bold</b></font></p><p>Next<br>line</p>"#;
+        assert_eq!(plain_text(markup), "Top & bold\nNext\nline");
+        assert_eq!(plain_text("no tags at all"), "no tags at all");
+        assert_eq!(plain_text("a < b"), "a < b");
     }
 
     #[test]

@@ -307,6 +307,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "bb-game"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bb-engine",
+ "bb-format",
+ "clap",
+]
+
+[[package]]
 name = "bit-set"
 version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

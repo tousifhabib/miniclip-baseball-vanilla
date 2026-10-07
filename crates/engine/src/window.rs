@@ -1,22 +1,13 @@
-//! Plays the extracted game in a window, with sound and a working pointer.
+//! Runs a [`Runner`] in a window, with sound, a working pointer, and the
+//! inspector.
 //!
 //! Space pauses, the right arrow steps one frame while paused, F1 opens the
 //! inspector, Escape quits.
 
-mod inspector;
-
-use std::path::PathBuf;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 
 use anyhow::{Context, Result};
-use bb_engine::audio::Audio;
-use bb_engine::display::Event;
-use bb_engine::gpu::Renderer;
-use bb_engine::library::Library;
-use bb_engine::math::Matrix;
-use bb_engine::stage::Stage;
-use clap::Parser;
 use winit::application::ApplicationHandler;
 use winit::dpi::LogicalSize;
 use winit::event::{ElementState, KeyEvent, MouseButton, WindowEvent};
@@ -24,36 +15,61 @@ use winit::event_loop::{ActiveEventLoop, EventLoop};
 use winit::keyboard::{Key, NamedKey};
 use winit::window::{CursorIcon, Window, WindowId};
 
+use crate::app::Runner;
+use crate::gpu::Renderer;
 use crate::inspector::{Action, Info, Inspector};
+use crate::math::Matrix;
 
-#[derive(Parser)]
-#[command(about = "Plays the extracted game in a window")]
-struct Args {
-    /// The folder `bb-extract` wrote.
-    dir: PathBuf,
-    /// Show this clip on its own, with its origin at the centre of the
-    /// window, instead of the main timeline.
-    #[arg(long)]
-    clip: Option<u16>,
-    /// Start on this frame.
-    #[arg(long, default_value_t = 1)]
-    frame: u16,
-    /// Keep the top timeline on its frame while the clips inside it play, even
-    /// where the original has no `stop()`.
-    #[arg(long)]
-    hold: bool,
-    /// Play no sound.
-    #[arg(long)]
-    mute: bool,
+pub struct Options {
+    pub title: String,
     /// Open with the inspector showing.
-    #[arg(long)]
-    inspect: bool,
-    /// Load every sound, report any that fail, and quit without a window.
-    #[arg(long)]
-    check_sounds: bool,
+    pub inspect: bool,
+    /// Put the top clip's origin at the centre of the window, for looking at
+    /// one clip on its own.
+    pub centre_origin: bool,
     /// Quit after drawing this many frames. For testing.
-    #[arg(long)]
-    exit_after: Option<u32>,
+    pub exit_after: Option<u32>,
+}
+
+/// What a run of the window amounted to.
+pub struct Summary {
+    pub frames_drawn: u32,
+    pub sounds_asked: u32,
+    /// Things that could not be drawn or played.
+    pub problems: Vec<String>,
+}
+
+/// Opens a window and plays until it is closed.
+pub fn run(runner: Runner, options: Options) -> Result<Summary> {
+    let mut inspector = Inspector::new();
+    inspector.open = options.inspect;
+    let mut app = App {
+        runner,
+        options,
+        inspector,
+        paused: false,
+        last_redraw: Instant::now(),
+        owed: Duration::ZERO,
+        frame_time: 1.0 / 60.0,
+        drawn: 0,
+        cursor: (0.0, 0.0),
+        pressed: false,
+        view: None,
+        error: None,
+    };
+    let event_loop = EventLoop::new().context("starting the window system")?;
+    event_loop.run_app(&mut app).context("running the window")?;
+    if let Some(error) = app.error {
+        return Err(error);
+    }
+
+    let audio_problems = app.runner.audio.iter().flat_map(|audio| &audio.problems);
+    let draw_problems = app.view.iter().flat_map(|view| &view.renderer.problems);
+    Ok(Summary {
+        frames_drawn: app.drawn,
+        sounds_asked: app.runner.sounds_asked,
+        problems: draw_problems.chain(audio_problems).cloned().collect(),
+    })
 }
 
 struct View {
@@ -65,11 +81,9 @@ struct View {
     egui_renderer: egui_wgpu::Renderer,
 }
 
-struct Player {
-    args: Args,
-    library: Library,
-    stage: Stage,
-    audio: Option<Audio>,
+struct App {
+    runner: Runner,
+    options: Options,
     inspector: Inspector,
     paused: bool,
     last_redraw: Instant,
@@ -78,7 +92,6 @@ struct Player {
     /// A running average of the time between redraws.
     frame_time: f32,
     drawn: u32,
-    sounds_asked: u32,
     /// Where the pointer is, in window pixels, and whether its button is held.
     cursor: (f32, f32),
     pressed: bool,
@@ -86,78 +99,11 @@ struct Player {
     error: Option<anyhow::Error>,
 }
 
-fn main() -> Result<()> {
-    let args = Args::parse();
-    let library = Library::load(&args.dir)?;
-
-    if args.check_sounds {
-        let mut audio = Audio::new()?;
-        let loaded = audio.load_all(&library);
-        println!("Loaded {loaded} sounds.");
-        for problem in &audio.problems {
-            println!("  problem: {problem}");
-        }
-        return Ok(());
-    }
-
-    let mut stage = Stage::new(args.clip, &library);
-    stage.goto(args.frame, &library);
-    if args.hold {
-        stage.root.playing = false;
-    }
-    let audio = if args.mute {
-        None
-    } else {
-        // A machine with no sound device can still play, silently.
-        Audio::new()
-            .inspect_err(|error| eprintln!("Playing without sound: {error:#}"))
-            .ok()
-    };
-
-    let mut inspector = Inspector::new();
-    inspector.open = args.inspect;
-    let mut player = Player {
-        args,
-        library,
-        stage,
-        audio,
-        inspector,
-        paused: false,
-        last_redraw: Instant::now(),
-        owed: Duration::ZERO,
-        frame_time: 1.0 / 60.0,
-        drawn: 0,
-        sounds_asked: 0,
-        cursor: (0.0, 0.0),
-        pressed: false,
-        view: None,
-        error: None,
-    };
-    let event_loop = EventLoop::new().context("starting the window system")?;
-    event_loop
-        .run_app(&mut player)
-        .context("running the window")?;
-
-    println!(
-        "Drew {} frames; the game asked for {} sounds.",
-        player.drawn, player.sounds_asked
-    );
-    let audio_problems = player.audio.iter().flat_map(|audio| &audio.problems);
-    let draw_problems = player.view.iter().flat_map(|view| &view.renderer.problems);
-    for problem in draw_problems.chain(audio_problems) {
-        println!("  problem: {problem}");
-    }
-    match player.error {
-        Some(error) => Err(error),
-        None => Ok(()),
-    }
-}
-
-impl Player {
+impl App {
     fn open(&self, event_loop: &ActiveEventLoop) -> Result<View> {
-        let stage = &self.library.manifest.stage;
+        let stage = &self.runner.library.manifest.stage;
         let attributes = Window::default_attributes()
-            .with_title("Miniclip Baseball (engine preview)")
+            .with_title(&self.options.title)
             .with_inner_size(LogicalSize::new(stage.width, stage.height));
         let window = Arc::new(
             event_loop
@@ -219,7 +165,7 @@ impl Player {
     /// How the stage sits in a window of this size: the transform from stage
     /// coordinates to window pixels, and the rectangle the stage covers.
     fn layout(&self, width: u32, height: u32) -> (Matrix, [u32; 4]) {
-        let stage = &self.library.manifest.stage;
+        let stage = &self.runner.library.manifest.stage;
         let (stage_width, stage_height) = (stage.width as f32, stage.height as f32);
         // Fit the stage inside the window, centred, keeping its shape.
         let scale = (width as f32 / stage_width).min(height as f32 / stage_height);
@@ -228,9 +174,10 @@ impl Player {
             ((height as f32 - stage_height * scale) / 2.0).round(),
         );
         let fit = Matrix::translate(left, top).then_inner(Matrix::scale(scale, scale));
-        let base = match self.args.clip {
-            Some(_) => fit.then_inner(Matrix::translate(stage_width / 2.0, stage_height / 2.0)),
-            None => fit,
+        let base = if self.options.centre_origin {
+            fit.then_inner(Matrix::translate(stage_width / 2.0, stage_height / 2.0))
+        } else {
+            fit
         };
         let rectangle = [
             left as u32,
@@ -243,65 +190,47 @@ impl Player {
 
     /// Tells the stage where the pointer now is.
     fn pointer_changed(&mut self) {
-        let Some(view) = &mut self.view else {
+        let Some((width, height)) = self.size() else {
             return;
         };
-        let (width, height) = (view.config.width, view.config.height);
         let (base, _) = self.layout(width, height);
         let Some(inverse) = base.inverse() else {
             return;
         };
         let (x, y) = inverse.apply(self.cursor.0, self.cursor.1);
-        let Some(view) = &mut self.view else {
-            return;
-        };
-        self.stage
-            .pointer_changed(x, y, self.pressed, &self.library, &mut view.renderer);
-    }
-
-    /// Acts on what the stage says has happened.
-    fn handle_events(&mut self) {
-        for event in self.stage.take_events() {
-            match event {
-                Event::Sound(start) => {
-                    if let Some(audio) = &mut self.audio {
-                        audio.play(&self.library, &start);
-                    }
-                    self.sounds_asked += 1;
-                    self.inspector.note(format!("sound {}", start.sound));
-                }
-                Event::Button {
-                    symbol,
-                    path,
-                    event,
-                } => {
-                    self.inspector
-                        .note(format!("button {symbol} at {path:?}: {event:?}"));
-                }
-            }
+        if let Some(view) = &mut self.view {
+            self.runner.pointer(x, y, self.pressed, &mut view.renderer);
         }
     }
 
+    fn size(&self) -> Option<(u32, u32)> {
+        self.view
+            .as_ref()
+            .map(|view| (view.config.width, view.config.height))
+    }
+
     fn apply(&mut self, action: Action) {
+        let stage = &mut self.runner.stage;
         match action {
             Action::TogglePause => self.paused = !self.paused,
             Action::Step => self.step(),
             Action::SetPlaying(path, playing) => {
-                if let Some(clip) = self.stage.clip_mut(&path) {
+                if let Some(clip) = stage.clip_mut(&path) {
                     clip.playing = playing;
                 }
             }
             Action::SetVisible(path, visible) => {
-                if let Some(child) = self.stage.root.child_mut(&path) {
+                if let Some(child) = stage.root.child_mut(&path) {
                     child.visible = visible;
                 }
             }
             Action::Goto(path, frame) => {
-                self.stage.goto_clip(&path, frame, &self.library);
+                stage.goto_clip(&path, frame, &self.runner.library);
                 // Hold it there, or it would play straight on.
-                if let Some(clip) = self.stage.clip_mut(&path) {
+                if let Some(clip) = stage.clip_mut(&path) {
                     clip.playing = false;
                 }
+                self.runner.settle();
             }
         }
     }
@@ -309,7 +238,7 @@ impl Player {
     /// Plays one frame.
     fn step(&mut self) {
         if let Some(view) = &mut self.view {
-            self.stage.advance(&self.library, &mut view.renderer);
+            self.runner.tick(&mut view.renderer);
         }
     }
 
@@ -318,7 +247,7 @@ impl Player {
         let elapsed = now - self.last_redraw;
         self.last_redraw = now;
         self.frame_time += (elapsed.as_secs_f32() - self.frame_time) * 0.1;
-        let frame = Duration::from_secs_f64(1.0 / self.library.manifest.stage.frame_rate);
+        let frame = Duration::from_secs_f64(1.0 / self.runner.library.manifest.stage.frame_rate);
         if !self.paused {
             // After a long stall, skip ahead instead of replaying it all.
             self.owed = (self.owed + elapsed).min(frame * 5);
@@ -327,19 +256,17 @@ impl Player {
                 self.owed -= frame;
             }
         }
-        self.handle_events();
+        for note in self.runner.take_notes() {
+            self.inspector.note(note);
+        }
 
-        let Some((width, height)) = self
-            .view
-            .as_ref()
-            .map(|view| (view.config.width, view.config.height))
-        else {
+        let Some((width, height)) = self.size() else {
             return;
         };
         let (base, scissor) = self.layout(width, height);
-        let commands = self.stage.commands(base, &self.library);
-        let background = self
-            .library
+        let library = &self.runner.library;
+        let commands = self.runner.stage.commands(base, library);
+        let background = library
             .manifest
             .stage
             .background
@@ -367,7 +294,7 @@ impl Player {
         // One point on screen, which is more than one pixel on a dense display.
         view.renderer.min_stroke = view.window.scale_factor() as f32;
         view.renderer.render(
-            &self.library,
+            library,
             &commands,
             &target,
             (width, height),
@@ -377,8 +304,8 @@ impl Player {
 
         // The inspector goes on top, in a pass of its own.
         let info = Info {
-            stage: &self.stage,
-            library: &self.library,
+            stage: &self.runner.stage,
+            library,
             stats: view.renderer.stats,
             paused: self.paused,
             frames_per_second: 1.0 / self.frame_time.max(1e-6),
@@ -435,7 +362,7 @@ impl Player {
         }
 
         view.renderer.queue.present(texture);
-        let cursor = if self.stage.pointer.on_button() {
+        let cursor = if self.runner.stage.pointer.on_button() {
             CursorIcon::Pointer
         } else {
             CursorIcon::Default
@@ -449,7 +376,7 @@ impl Player {
     }
 }
 
-impl ApplicationHandler for Player {
+impl ApplicationHandler for App {
     fn resumed(&mut self, event_loop: &ActiveEventLoop) {
         if self.view.is_some() {
             return;
@@ -489,7 +416,7 @@ impl ApplicationHandler for Player {
             }
             WindowEvent::RedrawRequested => {
                 if self
-                    .args
+                    .options
                     .exit_after
                     .is_some_and(|limit| self.drawn >= limit)
                 {
