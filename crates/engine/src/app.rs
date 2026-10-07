@@ -9,7 +9,7 @@ use bb_format::{SoundEvent, SoundStart};
 
 use crate::audio::Audio;
 use crate::display::Event;
-use crate::input::Geometry;
+use crate::input::{Geometry, Key};
 use crate::library::Library;
 use crate::stage::Stage;
 
@@ -28,6 +28,12 @@ pub trait Logic {
 
     /// Called once a frame, after the timelines have moved on.
     fn tick(&mut self, _stage: &mut Stage, _library: &Library) {}
+
+    /// Called for each key the player presses that no text field has taken.
+    /// Returns whether the rules had a use for it.
+    fn key(&mut self, _key: &Key, _stage: &mut Stage, _library: &Library) -> bool {
+        false
+    }
 
     /// A short account of where the game is, for an inspector or a test.
     fn describe(&self) -> String {
@@ -88,6 +94,18 @@ impl Runner {
         self.stage
             .pointer_changed(x, y, down, &self.library, geometry);
         self.react();
+    }
+
+    /// Takes in a key the player has pressed. A text field being typed in
+    /// gets it first, and the logic gets it otherwise. Returns whether either
+    /// had a use for it.
+    pub fn key(&mut self, key: Key) -> bool {
+        self.ensure_started();
+        let used = self.stage.key(&key, &self.library)
+            || self.logic.key(&key, &mut self.stage, &self.library);
+        self.notes.push(format!("key {key:?}"));
+        self.react();
+        used
     }
 
     /// Lets the logic act on anything that has happened without playing a

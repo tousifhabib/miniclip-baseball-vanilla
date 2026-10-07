@@ -1,8 +1,9 @@
 //! Runs a [`Runner`] in a window, with sound, a working pointer, and the
 //! inspector.
 //!
-//! Space pauses, the right arrow steps one frame while paused, F1 opens the
-//! inspector, Escape quits.
+//! F1 opens the inspector, F2 pauses, and F3 steps one frame while paused.
+//! Every other key goes to the game. If the game has no use for it, Space
+//! pauses, the right arrow steps one frame while paused, and Escape quits.
 
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -10,13 +11,14 @@ use std::time::{Duration, Instant};
 use anyhow::{Context, Result};
 use winit::application::ApplicationHandler;
 use winit::dpi::LogicalSize;
-use winit::event::{ElementState, KeyEvent, MouseButton, WindowEvent};
+use winit::event::{ElementState, MouseButton, WindowEvent};
 use winit::event_loop::{ActiveEventLoop, EventLoop};
 use winit::keyboard::{Key, NamedKey};
 use winit::window::{CursorIcon, Window, WindowId};
 
 use crate::app::Runner;
 use crate::gpu::Renderer;
+use crate::input;
 use crate::inspector::{Action, Info, Inspector};
 use crate::math::Matrix;
 
@@ -220,8 +222,9 @@ impl App {
                 }
             }
             Action::SetVisible(path, visible) => {
-                if let Some(child) = stage.root.child_mut(&path) {
-                    child.visible = visible;
+                // Held, so that it stays hidden when its timeline loops.
+                if let Some(child) = stage.child_mut(&path) {
+                    child.set_visible(visible);
                 }
             }
             Action::Goto(path, frame) => {
@@ -445,21 +448,57 @@ impl ApplicationHandler for App {
                     self.pointer_changed();
                 }
             }
-            WindowEvent::KeyboardInput {
-                event:
-                    KeyEvent {
-                        logical_key: Key::Named(key),
-                        state: ElementState::Pressed,
-                        ..
-                    },
-                ..
-            } if !taken => match key {
-                NamedKey::Space => self.paused = !self.paused,
-                NamedKey::ArrowRight if self.paused => self.step(),
-                NamedKey::F1 => self.inspector.open = !self.inspector.open,
-                NamedKey::Escape => event_loop.exit(),
-                _ => {}
-            },
+            WindowEvent::KeyboardInput { event, .. }
+                if !taken && event.state == ElementState::Pressed =>
+            {
+                match &event.logical_key {
+                    // The window's own keys, which no game is offered.
+                    Key::Named(NamedKey::F1) => self.inspector.open = !self.inspector.open,
+                    Key::Named(NamedKey::F2) => self.paused = !self.paused,
+                    Key::Named(NamedKey::F3) => {
+                        if self.paused {
+                            self.step();
+                        }
+                    }
+                    logical => {
+                        let named = match logical {
+                            Key::Named(NamedKey::Backspace) => Some(input::Key::Backspace),
+                            Key::Named(NamedKey::Enter) => Some(input::Key::Enter),
+                            Key::Named(NamedKey::Tab) => Some(input::Key::Tab),
+                            Key::Named(NamedKey::Escape) => Some(input::Key::Escape),
+                            Key::Named(NamedKey::ArrowLeft) => Some(input::Key::Left),
+                            Key::Named(NamedKey::ArrowRight) => Some(input::Key::Right),
+                            Key::Named(NamedKey::ArrowUp) => Some(input::Key::Up),
+                            Key::Named(NamedKey::ArrowDown) => Some(input::Key::Down),
+                            _ => None,
+                        };
+                        // What the press types, if anything: a held Shift or
+                        // Option has already been taken into account.
+                        let typed: Vec<input::Key> = match named {
+                            Some(key) => vec![key],
+                            None => event
+                                .text
+                                .iter()
+                                .flat_map(|text| text.chars())
+                                .filter(|c| !c.is_control())
+                                .map(input::Key::Char)
+                                .collect(),
+                        };
+                        let mut used = false;
+                        for key in typed {
+                            used |= self.runner.key(key);
+                        }
+                        if !used {
+                            match logical {
+                                Key::Named(NamedKey::Space) => self.paused = !self.paused,
+                                Key::Named(NamedKey::ArrowRight) if self.paused => self.step(),
+                                Key::Named(NamedKey::Escape) => event_loop.exit(),
+                                _ => {}
+                            }
+                        }
+                    }
+                }
+            }
             _ => {}
         }
     }

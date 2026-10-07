@@ -76,9 +76,9 @@ cargo run --release -p bb-devtools --bin bitmap-diff -- extracted/bitmaps path/t
 cargo run --release -p bb-game -- extracted
 ```
 
-Space pauses, F1 opens the inspector, Escape quits, `--mute` turns the sound
-off, and `--screen menu` (or `match`, `arcade`, `matchWon` and so on) starts
-on a screen of your choice.
+F1 opens the inspector, F2 pauses, F3 steps one frame while paused, and
+Escape quits. `--mute` turns the sound off, and `--screen menu` (or `match`,
+`arcade`, `matchWon` and so on) starts on a screen of your choice.
 
 The game's rules are new code, not a translation of the original's
 scripts. They use the original only for how its art is wired: the names of
@@ -114,9 +114,14 @@ cargo run --release -p bb-game -- extracted --screen menu \
 ```
 
 `wait N` plays N frames, `click X Y` clicks at a stage position, `move`,
-`press` and `release` work the pointer by hand, `state` prints where the
-game is, `events` prints the buttons touched and sounds asked for, `tree`
-prints every object on the stage, and `shot FILE` saves a picture.
+`press` and `release` work the pointer by hand, `type TEXT` types, `key NAME`
+presses a key such as `backspace` or `enter`, `state` prints where the game
+is, `events` prints the buttons touched and sounds asked for, `tree` prints
+every object on the stage, and `shot FILE` saves a picture.
+
+The same steps drive the tests in `crates/game/tests`, which play the real
+game with no window. They need the extracted art in `extracted/`, and pass
+without checking anything where it is missing.
 
 ## Checking the engine
 
@@ -140,6 +145,13 @@ smoothed edge next to a hard one and shifts of under a pixel, and still
 catches anything missing, misplaced or the wrong colour. `--save` writes
 three panels for each of the worst clips: the engine's picture, the
 reference, and a map of where they disagree.
+
+To look at an animation without stepping through it, `clip-sheet` draws
+many frames of one clip side by side, each marked with its number:
+
+```bash
+cargo run --release -p bb-devtools --bin clip-sheet -- extracted --clip 688 --every 6 --play --out pitcher.png
+```
 
 On 1,056 frames sampled across all 268 clips, 1,031 are within 1% and
 1,054 within 5%. Looking into the rest found two faults in
@@ -178,10 +190,11 @@ cargo run --release -p bb-engine --bin bb-player -- extracted
 cargo run --release -p bb-engine --bin bb-shot -- extracted --ticks 240 --pointer 545,380 --press --out frame.png
 ```
 
-In the window: Space pauses, the right arrow steps one frame while paused,
-F1 opens the inspector, Escape quits. Both tools take `--clip ID` to show one
-clip on its own, `--frame N` to start on a frame, and `--hold` to keep the
-top timeline from playing.
+In the window: F1 opens the inspector, F2 pauses, and F3 steps one frame
+while paused. Every other key is offered to the game first; where the game
+has no use for it, Space also pauses, the right arrow also steps, and Escape
+quits. Both tools take `--clip ID` to show one clip on its own, `--frame N`
+to start on a frame, and `--hold` to keep the top timeline from playing.
 
 The inspector lists every object on the stage as a tree. For each clip it
 shows the frame it is on, with a switch to play or stop it and a slider to
@@ -204,6 +217,14 @@ What the engine does:
 - Text fields that say whatever the game sets for the variable they show.
   A field holding markup is drawn as its plain words in the field's own
   font, size and colour; the markup's own styling is not applied yet.
+- Text fields the player can type in: a click gives one the typing and shows
+  a caret, and it keeps to the field's length and to the letters its font
+  has.
+- Objects the rules take charge of. Once the rules have moved, tinted or
+  hidden an object, its timeline leaves that setting alone, as Flash did
+  for an object a script had touched. The rules can also add objects of
+  their own, which stay until the rules remove them.
+- Keys, handed to the game's rules when no text field wants them.
 
 ## What the extractor leaves out
 

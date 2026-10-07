@@ -17,6 +17,7 @@ use lyon::tessellation::{
 
 use crate::library::Library;
 use crate::math::Matrix;
+use crate::stage::CARET;
 
 /// How far, in pixels at normal size, a flattened curve may stray from the
 /// true curve.
@@ -510,7 +511,25 @@ impl Tessellator {
                 "center" => (inner_left + inner_right - width) / 2.0,
                 _ => inner_left + indent,
             };
-            for glyph in line.chars().filter_map(glyph_for) {
+            for c in line.chars() {
+                if c == CARET {
+                    // A thin bar the height of a line, taking up no room.
+                    let width = (height as f32 / 16.0).max(1.0);
+                    let (top, bottom) = (baseline - ascent, baseline + descent);
+                    let bar = [
+                        Segment::Move(pen, top),
+                        Segment::Line(pen + width, top),
+                        Segment::Line(pen + width, bottom),
+                        Segment::Line(pen, bottom),
+                        Segment::Close,
+                    ];
+                    let outline = lyon_path(bar.into_iter(), Matrix::IDENTITY);
+                    builder.fill(&outline, color, Paint::Solid)?;
+                    continue;
+                }
+                let Some(glyph) = glyph_for(c) else {
+                    continue;
+                };
                 let place =
                     Matrix::translate(pen, baseline).then_inner(Matrix::scale(scale, scale));
                 let outline = lyon_path(parse_path(&glyph.path)?.into_iter(), place);

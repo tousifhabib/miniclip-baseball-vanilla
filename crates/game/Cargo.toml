@@ -6,6 +6,10 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[lib]
+name = "bb_game"
+path = "src/lib.rs"
+
 [[bin]]
 name = "bb-game"
 path = "src/main.rs"

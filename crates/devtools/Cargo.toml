@@ -22,6 +22,10 @@ path = "src/extracted_check.rs"
 name = "frame-diff"
 path = "src/frame_diff.rs"
 
+[[bin]]
+name = "clip-sheet"
+path = "src/clip_sheet.rs"
+
 [dependencies]
 anyhow.workspace = true
 bb-engine = { path = "../engine" }

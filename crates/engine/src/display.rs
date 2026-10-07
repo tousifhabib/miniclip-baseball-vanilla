@@ -36,7 +36,61 @@ pub struct Child {
     pub filters: Vec<Filter>,
     /// The frame of the parent timeline that put this object here.
     pub placed_on: u16,
+    /// What the game's rules have taken charge of.
+    pub held: Held,
+    /// The rules put this object here themselves, as `attachMovie` did. No
+    /// timeline placed it, so none removes it: it stays until the rules take
+    /// it away or its parent goes.
+    pub attached: bool,
     pub content: Content,
+}
+
+/// The settings of an object that the game's rules have set themselves. The
+/// timeline leaves these alone from then on, as in Flash, where an object a
+/// script has moved stops following its tween.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct Held {
+    pub matrix: bool,
+    pub color: bool,
+    pub visible: bool,
+}
+
+impl Child {
+    /// Puts the object's origin at this point of its parent, keeping its
+    /// size and turn, and takes its placing out of the timeline's hands.
+    pub fn move_to(&mut self, x: f32, y: f32) {
+        self.matrix.tx = x;
+        self.matrix.ty = y;
+        self.held.matrix = true;
+    }
+
+    /// Sets the object's whole transform, and takes it out of the timeline's
+    /// hands.
+    pub fn set_matrix(&mut self, matrix: Matrix) {
+        self.matrix = matrix;
+        self.held.matrix = true;
+    }
+
+    /// Sets the object's colour transform, and takes it out of the
+    /// timeline's hands.
+    pub fn set_color(&mut self, color: ColorTransform) {
+        self.color = color;
+        self.held.color = true;
+    }
+
+    /// Sets how solid the object is, from 0 (not there) to 1, leaving its
+    /// colours alone.
+    pub fn set_alpha(&mut self, alpha: f32) {
+        self.color.mult[3] = alpha;
+        self.held.color = true;
+    }
+
+    /// Shows or hides the object, and takes that out of the timeline's
+    /// hands.
+    pub fn set_visible(&mut self, visible: bool) {
+        self.visible = visible;
+        self.held.visible = true;
+    }
 }
 
 #[derive(Clone, Debug)]
@@ -251,7 +305,7 @@ impl ClipState {
         let Some(timeline) = library.timeline(self.symbol) else {
             return;
         };
-        let old = std::mem::take(&mut self.children);
+        let mut old = std::mem::take(&mut self.children);
         // What the objects built by the replay asked for, by depth. Held back
         // until it is known which of them are really new.
         let mut pending: BTreeMap<u16, Vec<Event>> = BTreeMap::new();
@@ -273,12 +327,35 @@ impl ClipState {
         // Keep the old object wherever the replay made the same one, so that
         // it carries on from where it was instead of starting over.
         for (depth, child) in &mut self.children {
-            if let Some(previous) = old.get(depth)
-                && previous.symbol == child.symbol
-                && previous.placed_on == child.placed_on
-            {
-                child.content = previous.content.clone();
-                pending.remove(depth);
+            if let Some(previous) = old.remove(depth) {
+                if previous.symbol == child.symbol
+                    && previous.placed_on == child.placed_on
+                    && !previous.attached
+                {
+                    // What the rules had set stays set.
+                    if previous.held.matrix {
+                        child.matrix = previous.matrix;
+                    }
+                    if previous.held.color {
+                        child.color = previous.color;
+                    }
+                    if previous.held.visible {
+                        child.visible = previous.visible;
+                    }
+                    child.held = previous.held;
+                    child.content = previous.content;
+                    pending.remove(depth);
+                } else {
+                    old.insert(*depth, previous);
+                }
+            }
+        }
+        // Objects the rules added are no part of any frame, so going back
+        // does not remove them. One that the replay has covered is lost, as
+        // a placement on a taken depth would have been ignored going forward.
+        for (depth, child) in old {
+            if child.attached {
+                self.children.entry(depth).or_insert(child);
             }
         }
         events.extend(pending.into_values().flatten());
@@ -295,6 +372,29 @@ impl ClipState {
             Content::Clip(clip) => clip.child_mut(rest),
             _ => None,
         }
+    }
+
+    /// Puts a new instance of `symbol` on this clip's display list at
+    /// `depth`, in place of anything already there, as `attachMovie` did.
+    /// `path` is where this clip sits in the tree. Returns the new object,
+    /// or `None` if `symbol` is nothing that can be shown.
+    pub fn attach(
+        &mut self,
+        symbol: SymbolId,
+        depth: u16,
+        name: Option<&str>,
+        library: &Library,
+        events: &mut Vec<Event>,
+        path: &mut Path,
+    ) -> Option<&mut Child> {
+        path.push(depth);
+        let made = new_child(symbol, self.frame, library, events, path);
+        path.pop();
+        let mut child = made?;
+        child.name = name.map(str::to_owned);
+        child.attached = true;
+        self.children.insert(depth, child);
+        self.children.get_mut(&depth)
     }
 }
 
@@ -366,6 +466,7 @@ fn apply(
                     child.name = old.name;
                     child.visible = old.visible;
                     child.filters = old.filters;
+                    child.held = old.held;
                 }
                 update(&mut child, place);
                 children.insert(place.depth, child);
@@ -376,10 +477,14 @@ fn apply(
 
 /// Applies the settings a placement names, leaving the rest alone.
 fn update(child: &mut Child, place: &Place) {
-    if let Some(matrix) = place.matrix {
+    if let Some(matrix) = place.matrix
+        && !child.held.matrix
+    {
         child.matrix = matrix.into();
     }
-    if let Some(color) = place.color {
+    if let Some(color) = place.color
+        && !child.held.color
+    {
         child.color = color.into();
     }
     if let Some(ratio) = place.ratio {
@@ -391,7 +496,9 @@ fn update(child: &mut Child, place: &Place) {
     if let Some(clip_depth) = place.clip_depth {
         child.clip_depth = Some(clip_depth);
     }
-    if let Some(visible) = place.visible {
+    if let Some(visible) = place.visible
+        && !child.held.visible
+    {
         child.visible = visible;
     }
     if let Some(filters) = &place.filters {
@@ -463,6 +570,8 @@ fn new_child(
         visible: true,
         filters: Vec::new(),
         placed_on,
+        held: Held::default(),
+        attached: false,
         content,
     })
 }
@@ -913,6 +1022,82 @@ pub(crate) mod tests {
     }
 
     #[test]
+    fn the_timeline_leaves_alone_what_the_rules_have_moved() {
+        let moved = Place {
+            matrix: Some([1.0, 0.0, 0.0, 1.0, 5.0, 7.0]),
+            ..place(1, PlaceAction::Modify)
+        };
+        let library = library(
+            vec![
+                frame(vec![put(1, SHAPE), put(2, SHAPE)]),
+                frame(vec![
+                    Op::Place(Box::new(moved.clone())),
+                    Op::Place(Box::new(Place { depth: 2, ..moved })),
+                ]),
+            ],
+            1,
+        );
+        let mut root = start(&library);
+        root.children.get_mut(&1).unwrap().move_to(40.0, 50.0);
+        tick(&mut root, &library);
+        assert_eq!(root.children[&1].matrix, Matrix::translate(40.0, 50.0));
+        // The one the rules never touched still follows the timeline.
+        assert_eq!(root.children[&2].matrix, Matrix::translate(5.0, 7.0));
+    }
+
+    #[test]
+    fn what_the_rules_have_set_survives_a_loop() {
+        let library = library(vec![frame(vec![put(1, SHAPE)]), frame(vec![])], 1);
+        let mut root = start(&library);
+        let child = root.children.get_mut(&1).unwrap();
+        child.move_to(40.0, 50.0);
+        child.set_visible(false);
+        child.set_alpha(0.5);
+        tick(&mut root, &library);
+        tick(&mut root, &library);
+        assert_eq!(root.frame, 1);
+        let child = &root.children[&1];
+        assert_eq!(child.matrix, Matrix::translate(40.0, 50.0));
+        assert!(!child.visible);
+        assert_eq!(child.color.mult[3], 0.5);
+    }
+
+    #[test]
+    fn an_object_the_rules_added_stays_through_a_loop() {
+        let library = library(
+            vec![frame(vec![put(1, SHAPE)]), frame(vec![put(2, OTHER_SHAPE)])],
+            10,
+        );
+        let mut root = start(&library);
+        let added = root.attach(
+            INNER,
+            100,
+            Some("extra"),
+            &library,
+            &mut Vec::new(),
+            &mut Path::new(),
+        );
+        assert!(added.is_some());
+        tick(&mut root, &library);
+        assert!(root.children.contains_key(&2));
+        tick(&mut root, &library);
+        assert_eq!(root.frame, 1);
+        assert!(!root.children.contains_key(&2));
+        assert_eq!(root.children[&100].name.as_deref(), Some("extra"));
+        // It was not rebuilt either: it has kept counting.
+        assert_eq!(inner_frame(&root, 100), 3);
+    }
+
+    #[test]
+    fn attaching_something_that_cannot_be_shown_adds_nothing() {
+        let library = library(vec![frame(vec![])], 1);
+        let mut root = start(&library);
+        let added = root.attach(999, 100, None, &library, &mut Vec::new(), &mut Path::new());
+        assert!(added.is_none());
+        assert!(root.children.is_empty());
+    }
+
+    #[test]
     fn replacing_keeps_the_old_position() {
         let moved = Place {
             matrix: Some([1.0, 0.0, 0.0, 1.0, 5.0, 7.0]),
@@ -1026,10 +1211,11 @@ pub(crate) mod tests {
         );
     }
 
-    #[test]
-    fn a_text_field_shows_what_the_game_has_set() {
-        const FIELD: SymbolId = 30;
-        let mut library = library(vec![frame(vec![put(1, FIELD)])], 1);
+    pub(crate) const FIELD: SymbolId = 30;
+
+    /// Adds a text field 50 wide and 20 high, showing `variable`, as symbol
+    /// [`FIELD`].
+    pub(crate) fn add_field(library: &mut Library, variable: &str, flags: &[&str]) {
         library
             .manifest
             .symbols
@@ -1049,11 +1235,17 @@ pub(crate) mod tests {
                 color: None,
                 max_length: None,
                 layout: None,
-                variable: "_root.game.score".to_owned(),
+                variable: variable.to_owned(),
                 initial_text: Some("0".to_owned()),
-                flags: Vec::new(),
+                flags: flags.iter().map(|flag| (*flag).to_owned()).collect(),
             },
         );
+    }
+
+    #[test]
+    fn a_text_field_shows_what_the_game_has_set() {
+        let mut library = library(vec![frame(vec![put(1, FIELD)])], 1);
+        add_field(&mut library, "_root.game.score", &["read_only"]);
         let root = start(&library);
         let said = |texts: &Texts| match &commands(&root, Matrix::IDENTITY, &library, texts)[0] {
             Command::Draw { text, .. } => text.clone(),
