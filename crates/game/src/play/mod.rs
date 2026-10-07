@@ -19,7 +19,7 @@ use bb_format::SymbolId;
 use crate::art;
 use crate::menu::Game;
 use crate::rng::Rng;
-use crate::rules::PitchRules;
+use crate::rules::{HitRules, PitchRules};
 use field::{Ball, Contact};
 use pitch::{Choice, Mound, Pitch, Point, Quality};
 
@@ -638,11 +638,19 @@ impl Match {
     }
 
     /// Works out where a hit made now would go sideways, and shows it.
-    fn point_hit(at_bat: &mut AtBat, pull: f32, stage: &mut Stage, library: &Library) {
+    fn point_hit(at_bat: &mut AtBat, rules: &HitRules, stage: &mut Stage, library: &Library) {
         if at_bat.contact.is_some() {
             return;
         }
         let parts = &at_bat.parts;
+        let pull = rules.pull;
+        // Unless the rules say otherwise, the pointer is kept out of sight
+        // until there is a crossing point for it to answer to.
+        show(
+            stage,
+            &parts.aim_area,
+            at_bat.marker_shown || rules.pointer_before_pitch,
+        );
         // Until the player has been shown where this pitch will cross, the
         // pointer answers the ring as if it were coming down the middle.
         let crosses = if at_bat.marker_shown {
@@ -685,7 +693,7 @@ impl Match {
         Match::settle_fielders(&at_bat.parts, stage, library);
         if at_bat.contact.is_none() {
             Match::aim(&mut at_bat, stage);
-            Match::point_hit(&mut at_bat, rules.hit.pull, stage, library);
+            Match::point_hit(&mut at_bat, &rules.hit, stage, library);
         }
 
         // In the arcade game the ball goes on over the field while the next

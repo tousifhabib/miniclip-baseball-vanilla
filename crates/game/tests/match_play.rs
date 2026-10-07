@@ -311,26 +311,47 @@ fn a_ball_that_is_hit_leaves_the_bat_at_the_size_it_had_grown_to() {
     );
 }
 
+/// Where the landing pointer is across the screen, and whether it shows.
+fn landing_pointer(script: &bb_game::script::Script) -> (f32, bool) {
+    let stage = &script.runner.stage;
+    let main = stage.find_named(&[], "gameMain").unwrap();
+    let area = stage.find(&main, &["aimArea"]).unwrap();
+    let child = stage.child(&area).unwrap();
+    (child.matrix.tx, child.visible)
+}
+
 #[test]
-fn the_landing_pointer_follows_the_ring_before_the_pitch_is_shown() {
+fn the_landing_pointer_is_hidden_until_the_pitch_is_shown() {
     let Some(mut script) = game("match") else {
+        return;
+    };
+    script.run("wait 20; move 150 250; wait 30").unwrap();
+    assert!(script.run("state").unwrap()[0].contains("Settling"));
+    assert!(!landing_pointer(&script).1, "it should be out of sight");
+    // Once the pitch has been thrown the crossing point has been shown.
+    for _ in 0..2000 {
+        if script.run("state").unwrap()[0].contains("Flight") {
+            break;
+        }
+        script.run("wait 1").unwrap();
+    }
+    assert!(landing_pointer(&script).1, "it should be showing by now");
+}
+
+#[test]
+fn the_rules_can_have_the_landing_pointer_out_from_the_start() {
+    let layer = "[hit]\npointer_before_pitch = true\n";
+    let rules = bb_game::rules::Rules::layered(&[("a test", layer)]).unwrap();
+    let Some(mut script) = common::game_ruled("match", Some(1), Some(rules)) else {
         return;
     };
     // The pitcher has not begun his wind-up, so nothing has been shown yet.
     script.run("wait 20; move 150 250; wait 30").unwrap();
-    let pointer_x = |script: &bb_game::script::Script| {
-        let stage = &script.runner.stage;
-        let main = stage.find_named(&[], "gameMain").unwrap();
-        let area = stage.find(&main, &["aimArea"]).unwrap();
-        stage.child(&area).unwrap().matrix.tx
-    };
-    let ring_left = pointer_x(&script);
+    let (ring_left, showing) = landing_pointer(&script);
+    assert!(showing);
     script.run("move 420 250; wait 30").unwrap();
-    let ring_right = pointer_x(&script);
-    assert!(
-        script.run("state").unwrap()[0].contains("Settling"),
-        "the pitch should not have been shown yet"
-    );
+    let (ring_right, _) = landing_pointer(&script);
+    assert!(script.run("state").unwrap()[0].contains("Settling"));
     // Aiming to one side sends the ball the other way.
     assert!(
         ring_left > ring_right + 100.0,

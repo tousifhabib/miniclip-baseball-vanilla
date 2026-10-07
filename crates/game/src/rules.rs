@@ -126,6 +126,7 @@ pub struct ThrowRules {
 #[serde(deny_unknown_fields)]
 pub struct HitRules {
     pub pull: f32,
+    pub pointer_before_pitch: bool,
     pub watch: u32,
     pub walk_wait: u32,
     pub lift: f32,

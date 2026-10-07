@@ -120,6 +120,11 @@ fade = 0.1
 # Aiming to one side of the ball sends it the other way. This is how many
 # pixels the hit moves for each pixel the ring is off.
 pull = 3.0
+# The red pointer on the outfield shows where a hit would go. In the
+# original it is not seen until the game shows where the pitch will cross.
+# Set this to true to have it out from the start, following the ring as if
+# the pitch were coming down the middle.
+pointer_before_pitch = false
 # Frames the ball is watched leaving the bat before the view changes to the
 # field.
 watch = 61

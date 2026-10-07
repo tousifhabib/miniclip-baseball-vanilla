@@ -12,6 +12,7 @@ use bb_engine::app::Runner;
 use bb_engine::library::Library;
 use bb_engine::stage::Stage;
 use bb_game::baseball::{Baseball, Screen};
+use bb_game::rules::Rules;
 use bb_game::script::Script;
 
 /// The folder `bb-extract` wrote, if it is there.
@@ -28,6 +29,11 @@ pub fn game(screen: &str) -> Option<Script> {
 
 /// The game opened on a screen, with its chances worked out from `seed`.
 pub fn game_with(screen: &str, seed: Option<u64>) -> Option<Script> {
+    game_ruled(screen, seed, None)
+}
+
+/// The same, played by `rules` instead of the ones built in.
+pub fn game_ruled(screen: &str, seed: Option<u64>, rules: Option<Rules>) -> Option<Script> {
     let Some(dir) = extracted() else {
         eprintln!("skipped: there is no extracted art to play");
         return None;
@@ -38,6 +44,9 @@ pub fn game_with(screen: &str, seed: Option<u64>) -> Option<Script> {
     logic.start_on(Screen::from_label(screen).expect("a screen with that label"));
     if let Some(seed) = seed {
         logic.seed(seed);
+    }
+    if let Some(rules) = rules {
+        logic.play_by(rules);
     }
     let runner = Runner::new(library, stage, logic, None);
     Some(Script::new(runner).expect("a renderer with no window"))
