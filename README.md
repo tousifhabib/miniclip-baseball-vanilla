@@ -1,7 +1,9 @@
-# miniclip-baseball-mod
+# miniclip-baseball-vanilla
 
 A project to rebuild the Flash game *Miniclip Baseball* as a native Rust
-application that is easy to mod.
+application, playing as closely to the original as it can be made to.
+Changing the game is for a separate project built on this one. Here, where
+the rebuild and the original differ, the original is right.
 
 The game's art and sound are published here by the project's owner, who
 holds the rights to them for this game under an agreement with Miniclip.
@@ -120,8 +122,19 @@ What works so far:
 - Sound: music on the menu, a crowd under each game, and the levels the
   original set for its quieter sounds.
 
-Not written yet: a high-score table, and the instruction pages shown
-before each kind of game. The pointer is not hidden while aiming.
+- A high-score table for the arcade game, kept in a file on the player's
+  own machine. The original's was kept on its publisher's servers and only
+  shown on their site.
+- The pointer is hidden while the ring is being aimed, as it was.
+
+The original also has an instruction page for each kind of game, apart
+from the one the menu opens. Nothing in the original ever shows them, so
+nothing here does either.
+
+Known differences from the original: a ball caught in the field is as loud
+as one caught by the catcher; a strike-out is counted when it is called,
+not at the start of the next pitch; and a badly mishit ball is stopped by
+the air where the original could turn it round in flight.
 
 ### The numbers the game is played by
 

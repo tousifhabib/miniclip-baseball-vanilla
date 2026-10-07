@@ -300,6 +300,12 @@ impl Match {
             .any(|runner| runner.running_to.is_some())
     }
 
+    /// The arcade game's points with the skill level counted in.
+    pub fn arcade_score(&self, game: &Game) -> Option<u32> {
+        let arcade = self.arcade.as_ref()?;
+        Some(arcade.points * game.rules.arcade.multiplier.at(game.settings.difficulty))
+    }
+
     /// How the side should look just now, given the team's own colour.
     pub fn look(&self, clothes: Option<Rgb>) -> Look {
         let batter = self.batter().map(|index| &self.runners[index]);
@@ -719,6 +725,20 @@ impl Match {
         // The view has gone: the screen was left.
         stage.clip(&at_bat.parts.main)?;
         let rules = &game.rules;
+        // While the ring is being aimed it stands for the pointer, which
+        // would only get in its way.
+        let aiming = at_bat.contact.is_none()
+            && matches!(
+                self.phase,
+                Phase::Settling { .. } | Phase::WindUp | Phase::Flight { .. }
+            );
+        stage.hide_pointer = aiming
+            && stage
+                .from_stage(&at_bat.parts.main, stage.pointer.x, stage.pointer.y)
+                .is_some_and(|(x, y)| {
+                    let [left, top, right, bottom] = at_bat.parts.aim_box;
+                    (left..=right).contains(&x) && (top..=bottom).contains(&y)
+                });
         Match::still_batter(stage, &at_bat.parts.hitter, library);
         Match::settle_fielders(&at_bat.parts, stage, library);
         if at_bat.contact.is_none() {

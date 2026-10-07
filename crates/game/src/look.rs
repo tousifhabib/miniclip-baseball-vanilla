@@ -40,7 +40,7 @@ pub struct Look {
 }
 
 /// The transform that paints a clip one flat colour.
-fn tint(colour: Rgb) -> ColorTransform {
+pub fn tint(colour: Rgb) -> ColorTransform {
     let [r, g, b] = colour.map(|channel| f32::from(channel) / 255.0);
     ColorTransform {
         mult: [0.0, 0.0, 0.0, 1.0],

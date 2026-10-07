@@ -132,3 +132,45 @@ fn the_menu_has_music_and_a_game_has_a_crowd() {
     let heard = script.run(&steps).unwrap();
     assert!(heard.iter().any(|line| line.trim() == crowd), "{heard:?}");
 }
+
+#[test]
+fn an_arcade_score_is_shown_on_the_high_score_page() {
+    let Some(mut script) = game("arcade") else {
+        return;
+    };
+    // Ten pitches let go by: a score of nothing, but a score.
+    for _ in 0..10 {
+        script.run("wait 320; click 545 355").unwrap();
+    }
+    assert!(state_after(&mut script, "wait 420; state").starts_with("ArcadeFinish"));
+    // The finish screen's HIGH SCORES button.
+    assert_eq!(
+        state_after(&mut script, "click 300 373; wait 120; state"),
+        "Menu, HighScores, Medium"
+    );
+    let stage = &script.runner.stage;
+    let mut written = Vec::new();
+    for line in bb_game::art::all_named(stage, &[], "scoreLine") {
+        written.extend(stage.child(&line).unwrap().said.clone());
+    }
+    for wanted in ["HIGHSCORES", "1", "PLAYER", "0"] {
+        assert!(written.iter().any(|text| text == wanted), "{written:?}");
+    }
+}
+
+#[test]
+fn the_pointer_is_hidden_only_while_the_ring_is_being_aimed() {
+    let Some(mut script) = game("match") else {
+        return;
+    };
+    // Over the batting area before the pitch: the ring stands for it.
+    script.run("wait 30; move 300 250; wait 5").unwrap();
+    assert!(script.runner.stage.hide_pointer);
+    // Off to the side, over the quit button's corner: an ordinary pointer.
+    script.run("move 20 390; wait 5").unwrap();
+    assert!(!script.runner.stage.hide_pointer);
+    // And once the pitch has gone by, wherever it is.
+    script.run("move 300 250; wait 400").unwrap();
+    assert!(state_after(&mut script, "state").contains("Ready"));
+    assert!(!script.runner.stage.hide_pointer);
+}

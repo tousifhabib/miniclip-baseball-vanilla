@@ -15,6 +15,9 @@ pub struct Stage {
     pub texts: Texts,
     /// The text field that typing goes to, if the player has clicked on one.
     pub focus: Option<Focus>,
+    /// The game wants the system's pointer out of sight, because it is
+    /// drawing something of its own where the pointer is.
+    pub hide_pointer: bool,
     /// Frames played, for blinking the caret.
     ticks: u32,
     /// How loud each sound is to be played, where the game has said.
@@ -45,6 +48,7 @@ impl Stage {
             pointer: Pointer::default(),
             texts: Texts::new(),
             focus: None,
+            hide_pointer: false,
             ticks: 0,
             levels: std::collections::HashMap::new(),
             events,

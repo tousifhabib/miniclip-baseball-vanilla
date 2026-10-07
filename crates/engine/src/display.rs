@@ -42,6 +42,9 @@ pub struct Child {
     /// timeline placed it, so none removes it: it stays until the rules take
     /// it away or its parent goes.
     pub attached: bool,
+    /// For a text field: what this one instance says, whatever the variable
+    /// it shows holds. For a field the rules have added themselves.
+    pub said: Option<String>,
     pub content: Content,
 }
 
@@ -572,6 +575,7 @@ fn new_child(
         placed_on,
         held: Held::default(),
         attached: false,
+        said: None,
         content,
     })
 }
@@ -836,12 +840,14 @@ fn draw_child(
             ratio: child.ratio,
             matrix,
             color,
-            text: context
-                .library
-                .edit_texts
-                .get(&child.symbol)
-                .and_then(|field| context.texts.get(text_key(&field.variable)))
-                .cloned(),
+            text: child.said.clone().or_else(|| {
+                context
+                    .library
+                    .edit_texts
+                    .get(&child.symbol)
+                    .and_then(|field| context.texts.get(text_key(&field.variable)))
+                    .cloned()
+            }),
         }),
         Content::Clip(clip) => {
             draw_children(&clip.children, matrix, color, in_mask, context, out);

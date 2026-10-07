@@ -55,7 +55,10 @@ impl Arcade {
     /// Scores a ball that has just touched the ground `off` from the target.
     /// Returns the ring it lit, counting from the centre, and the points.
     fn touch(&mut self, off: f32, rules: &ArcadeRules) -> Option<(usize, u32)> {
-        let ring = rules.rings.iter().position(|ring| off <= ring.within)?;
+        let ring = rules
+            .rings
+            .iter()
+            .position(|ring| off > ring.over && off <= ring.within)?;
         if self.lit.get(ring).copied().unwrap_or(true) {
             return None;
         }
@@ -241,6 +244,14 @@ mod tests {
         let (mut arcade, rules) = arcade();
         assert!(arcade.touch(50.0, &rules.arcade).is_some());
         assert_eq!(arcade.touch(50.0, &rules.arcade), None);
+    }
+
+    #[test]
+    fn a_ball_in_the_gap_between_two_rings_scores_nothing() {
+        let (mut arcade, rules) = arcade();
+        assert_eq!(arcade.touch(62.5, &rules.arcade), None);
+        assert_eq!(arcade.touch(10.5, &rules.arcade), None);
+        assert_eq!(arcade.points, 0);
     }
 
     #[test]

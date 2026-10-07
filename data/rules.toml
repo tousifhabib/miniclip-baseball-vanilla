@@ -196,14 +196,17 @@ watch = 39
 target = { x = 90.0, y = 140.0, width = 350.0, height = 80.0 }
 # A miss up or down the field counts this much more than one to the side.
 depth_weight = 1.1
-# The rings, from the centre out: a ball that comes down within `within` of
-# the centre lights the ring and scores its points. Each ring scores once a
-# pitch, and the first one scored on a pitch counts `first_bonus` times.
+# The rings, from the centre out: a ball that comes down more than `over`
+# and no more than `within` from the centre lights the ring and scores its
+# points. Each ring scores once a pitch, and the first one scored on a pitch
+# counts `first_bonus` times. The rings do not quite meet: a ball that comes
+# down in one of the narrow gaps between them scores nothing. That is how
+# the original was.
 rings = [
-    { within = 10.0, points = 100 },
-    { within = 42.0, points = 75 },
-    { within = 62.0, points = 50 },
-    { within = 85.0, points = 25 },
+    { over = -1.0, within = 10.0, points = 100 },
+    { over = 11.0, within = 42.0, points = 75 },
+    { over = 43.0, within = 62.0, points = 50 },
+    { over = 63.0, within = 85.0, points = 25 },
 ]
 first_bonus = 2
 

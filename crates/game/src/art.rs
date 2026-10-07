@@ -43,6 +43,15 @@ pub const LOGO_BUTTONS: [(SymbolId, &str); 6] = [
     (454, "warclub"),
 ];
 
+/// The panel on the high-score page, and the parts of it that tell the
+/// player the scores are kept elsewhere: one drawing that holds both the
+/// panel's heading and that notice, and a link to the web site.
+pub const SCORE_PANEL: SymbolId = 422;
+pub const SCORE_PANEL_NOTICE: [SymbolId; 2] = [421, 420];
+/// A text field in the game's display lettering, with letters and figures,
+/// which the table is written in.
+pub const TABLE_FIELD: SymbolId = 1762;
+
 /// Buttons whose words are drawn as artwork, not text, so they have to be
 /// known by number: the ones on the result screens that lead back to the
 /// menu, such as the "restart game" badge.

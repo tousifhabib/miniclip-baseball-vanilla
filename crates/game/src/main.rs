@@ -11,6 +11,7 @@ use bb_engine::stage::Stage;
 use bb_engine::window::{self, Options};
 use bb_game::baseball::{Baseball, Screen};
 use bb_game::locate;
+use bb_game::scores::Scores;
 use bb_game::script::Script;
 use clap::Parser;
 
@@ -84,6 +85,12 @@ fn run() -> Result<()> {
     let mut logic = Box::new(Baseball::new(&library));
     if let Some(seed) = args.seed {
         logic.seed(seed);
+    }
+    // A scripted run is a test, and leaves the player's own table alone.
+    if args.run.is_none()
+        && let Some(file) = Scores::usual_file()
+    {
+        logic.keep_scores_in(file);
     }
     if let Some(label) = &args.screen {
         let screen = Screen::from_label(label)

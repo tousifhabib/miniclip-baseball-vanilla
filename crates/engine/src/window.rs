@@ -371,6 +371,9 @@ impl App {
             CursorIcon::Default
         };
         view.window.set_cursor(cursor);
+        // Never while the inspector is up: it needs a pointer to be used.
+        view.window
+            .set_cursor_visible(!self.runner.stage.hide_pointer || self.inspector.open);
         self.drawn += 1;
 
         for action in actions {

@@ -69,6 +69,7 @@ pub struct ArcadeRules {
 #[derive(Clone, Copy, Debug, PartialEq, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Ring {
+    pub over: f32,
     pub within: f32,
     pub points: u32,
 }

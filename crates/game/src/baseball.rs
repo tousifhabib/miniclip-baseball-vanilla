@@ -6,6 +6,7 @@
 use bb_engine::app::Logic;
 use bb_engine::display::{ButtonEvent, Event, Path};
 use bb_engine::library::Library;
+use bb_engine::math::Matrix;
 use bb_engine::stage::Stage;
 use bb_format::SymbolId;
 
@@ -15,6 +16,7 @@ use crate::menu::{Game, Leave, Menu, MenuPage};
 use crate::play::{Match, Outcome};
 use crate::rng::Rng;
 use crate::rules::Rules;
+use crate::scores::Scores;
 use crate::settings::Difficulty;
 
 /// What the player is looking at. Each is a labelled frame of the shell.
@@ -81,6 +83,11 @@ pub struct Baseball {
     play: Option<Match>,
     /// What the game's chances are worked out from, if not the clock.
     seed: Option<u64>,
+    scores: Scores,
+    /// Where the scores are kept. `None` keeps them only for this run.
+    scores_file: Option<std::path::PathBuf>,
+    /// The lines of the score table on the stage, while its page is up.
+    table: Vec<Path>,
     /// Whether the menu's music and the game's crowd are being heard.
     music_on: bool,
     crowd_on: bool,
@@ -102,6 +109,9 @@ impl Baseball {
             first: None,
             play: None,
             seed: None,
+            scores: Scores::default(),
+            scores_file: None,
+            table: Vec::new(),
             music_on: false,
             crowd_on: false,
             // A game whose art has no such strip is played in the art's own
@@ -109,6 +119,97 @@ impl Baseball {
             clothes_strip: Swatch::of_clip(library, art::CLOTHES_STRIP).ok(),
             skin_strip: Swatch::of_clip(library, art::SKIN_STRIP).ok(),
             holds: Vec::new(),
+        }
+    }
+
+    /// Keeps the high scores in this file, starting from what it holds.
+    pub fn keep_scores_in(&mut self, file: std::path::PathBuf) {
+        self.scores = Scores::load(&file);
+        self.scores_file = Some(file);
+    }
+
+    /// Writes the score table over the panel on the high-score page, for as
+    /// long as that page is up.
+    fn show_scores(&mut self, stage: &mut Stage, library: &Library) {
+        // The lines go when the panel does, as the page is left.
+        if self
+            .table
+            .first()
+            .is_some_and(|line| stage.child(line).is_none())
+        {
+            self.table.clear();
+        }
+        let on_page = self.screen == Screen::Menu && self.menu.page() == MenuPage::HighScores;
+        if !on_page || !self.table.is_empty() {
+            return;
+        }
+        let Some(panel) =
+            art::shell(stage).and_then(|shell| stage.find_symbol(&shell, art::SCORE_PANEL))
+        else {
+            return;
+        };
+        // The panel says the scores are kept on a web site. Here they are
+        // not, so that goes and the table takes its place.
+        let notice: Vec<Path> = stage.clip(&panel).map_or(Vec::new(), |clip| {
+            clip.children
+                .iter()
+                .filter(|(_, child)| art::SCORE_PANEL_NOTICE.contains(&child.symbol))
+                .map(|(&depth, _)| {
+                    let mut path = panel.clone();
+                    path.push(depth);
+                    path
+                })
+                .collect()
+        });
+        if notice.is_empty() {
+            // The panel has not finished arriving.
+            return;
+        }
+        for path in notice {
+            if let Some(child) = stage.child_mut(&path) {
+                child.set_visible(false);
+            }
+        }
+        let Some(field) = library.edit_texts.get(&art::TABLE_FIELD) else {
+            return;
+        };
+        // The field centres what it says, so a line is placed by its middle.
+        let middle = ((field.bounds.x_min + field.bounds.x_max) / 2.0) as f32;
+        // What to write, where its middle goes, and in what colour: dark
+        // on the panel's white, and white for the heading on its bar. The
+        // heading was drawn in one piece with the notice, so it is written
+        // back in.
+        const DARK: [u8; 3] = [0x0b, 0x3a, 0x5e];
+        const WHITE: [u8; 3] = [0xff, 0xff, 0xff];
+        let mut lines = vec![("HIGHSCORES".to_owned(), -104.0, -123.0, WHITE)];
+        if self.scores.entries.is_empty() {
+            lines.push(("NO SCORES YET".to_owned(), 0.0, -10.0, DARK));
+        }
+        for (place, entry) in self.scores.entries.iter().enumerate() {
+            let down = -88.0 + place as f32 * 19.0;
+            lines.push((format!("{}", place + 1), -150.0, down, DARK));
+            lines.push((entry.name.to_uppercase(), -35.0, down, DARK));
+            lines.push((entry.points.to_string(), 125.0, down, DARK));
+        }
+        const SIZE: f32 = 0.8;
+        for (index, (text, across, down, colour)) in lines.into_iter().enumerate() {
+            let depth = Stage::RULES_DEPTH + 200 + index as u16;
+            let Some(path) = stage.attach(&panel, art::TABLE_FIELD, depth, "scoreLine", library)
+            else {
+                continue;
+            };
+            if let Some(child) = stage.child_mut(&path) {
+                child.said = Some(text);
+                child.set_matrix(Matrix {
+                    a: SIZE,
+                    d: SIZE,
+                    tx: across - middle * SIZE,
+                    ty: down,
+                    ..Matrix::IDENTITY
+                });
+                child.set_color(look::tint(colour));
+            }
+            self.table.push(path);
         }
     }
 
@@ -352,6 +453,21 @@ impl Logic for Baseball {
         {
             play.show_result(stage);
             play.show_arcade_result(&self.game, stage);
+            if let Some(points) = play.arcade_score(&self.game) {
+                // Under the name typed on the setup page, if one was.
+                let name = stage
+                    .text("playerName")
+                    .map(str::trim)
+                    .filter(|name| !name.is_empty())
+                    .unwrap_or("PLAYER")
+                    .to_owned();
+                if self.scores.add(&name, points)
+                    && let Some(file) = &self.scores_file
+                    && let Err(error) = self.scores.save(file)
+                {
+                    eprintln!("The score could not be saved: {error:#}");
+                }
+            }
             let screen = match outcome {
                 Outcome::Won => Screen::MatchWon,
                 Outcome::Lost => Screen::MatchLost,
@@ -380,6 +496,16 @@ impl Logic for Baseball {
         }
         if let Some(shell) = art::shell(stage) {
             look::dress(stage, &shell, &self.look(), library);
+        }
+        self.show_scores(stage, library);
+        // A pointer hidden for aiming comes back for the quit prompt, and
+        // whenever no game is being played.
+        let prompt_up = stage
+            .find_symbol(&[], art::QUIT_PROMPT)
+            .and_then(|path| stage.clip(&path))
+            .is_some_and(|prompt| prompt.frame > 1);
+        if self.play.is_none() || prompt_up {
+            stage.hide_pointer = false;
         }
         match self.screen {
             Screen::Loading => {
