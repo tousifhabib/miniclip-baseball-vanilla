@@ -18,8 +18,13 @@ path = "src/bitmap_diff.rs"
 name = "extracted-check"
 path = "src/extracted_check.rs"
 
+[[bin]]
+name = "frame-diff"
+path = "src/frame_diff.rs"
+
 [dependencies]
 anyhow.workspace = true
+bb-engine = { path = "../engine" }
 bb-format = { path = "../format" }
 clap = { version = "4", features = ["derive"] }
 image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }

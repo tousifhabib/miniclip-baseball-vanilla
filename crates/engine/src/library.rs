@@ -15,6 +15,10 @@ use serde::de::DeserializeOwned;
 pub struct Library {
     /// The extracted folder this was loaded from.
     pub dir: PathBuf,
+    /// Whether a timeline halts on a frame marked as stopping. Turn this off
+    /// to play every timeline straight through, which is what a comparison
+    /// with a render that runs no scripts needs.
+    pub obey_stops: bool,
     pub manifest: Manifest,
     /// The main timeline.
     pub root: Clip,
@@ -39,6 +43,7 @@ impl Library {
 
         let mut library = Library {
             dir: dir.to_owned(),
+            obey_stops: true,
             root: read_json(&dir.join("clips/root.json"))?,
             clips: HashMap::new(),
             buttons: HashMap::new(),

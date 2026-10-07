@@ -77,16 +77,30 @@ fn vs(
     @location(3) color: vec4<f32>,
 ) -> VertexOut {
     let m = item.world_abcd;
-    // A stroke is never thinner than one pixel on screen, however far its
-    // shape is scaled down. Fills have no normal, so this leaves them alone.
-    let scale = sqrt(abs(m.x * m.w - m.y * m.z));
-    let half = max(half_width, globals.limits.x / max(scale, 1e-6));
-    let local = position + normal * half;
-
-    let pixel = vec2<f32>(
-        m.x * local.x + m.z * local.y + item.world_t.x,
-        m.y * local.x + m.w * local.y + item.world_t.y,
+    let centre = vec2<f32>(
+        m.x * position.x + m.z * position.y + item.world_t.x,
+        m.y * position.x + m.w * position.y + item.world_t.y,
     );
+
+    // A stroke is drawn as if by a round pen on the screen: its width is the
+    // same in every direction, however its shape is stretched or skewed, and
+    // never less than one pixel. So the vertex moves out from the centre
+    // line on the screen, not in the shape's own coordinates. A direction
+    // that is square to a line stays square to it when turned by the
+    // inverse transpose of the transform, which is what this is.
+    var pixel = centre;
+    let turned = vec2<f32>(
+        m.w * normal.x - m.y * normal.y,
+        m.x * normal.y - m.z * normal.x,
+    );
+    if dot(turned, turned) > 0.0 {
+        let scale = sqrt(abs(m.x * m.w - m.y * m.z));
+        let half = max(half_width * scale, globals.limits.x);
+        pixel = centre + normalize(turned) * length(normal) * half;
+    }
+    // Where the vertex is in the shape, for working out its paint.
+    let local = position + normal * half_width;
+
     let p = item.paint_abcd;
     var out: VertexOut;
     out.clip = vec4<f32>(pixel * globals.view.xy + globals.view.zw, 0.0, 1.0);

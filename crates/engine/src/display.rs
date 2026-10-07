@@ -187,7 +187,7 @@ impl ClipState {
         // passed over on the way.
         let landed = &timeline.frames[usize::from(target) - 1];
         events.extend(landed.sounds.iter().cloned().map(Event::Sound));
-        if landed.stops {
+        if landed.stops && library.obey_stops {
             self.playing = false;
         }
     }
@@ -673,6 +673,7 @@ pub(crate) mod tests {
         symbols.insert(INNER, symbol("clips/10.json", inner_info));
         Library {
             dir: PathBuf::new(),
+            obey_stops: true,
             manifest: Manifest {
                 format_version: bb_format::FORMAT_VERSION,
                 swf_version: 8,
@@ -842,6 +843,20 @@ pub(crate) mod tests {
         assert!(!root.playing);
         tick(&mut root, &library);
         assert_eq!(root.frame, 2);
+    }
+
+    #[test]
+    fn stops_can_be_switched_off() {
+        let stopping = Frame {
+            stops: true,
+            ..Frame::default()
+        };
+        let mut library = library(vec![frame(vec![]), stopping, frame(vec![])], 1);
+        library.obey_stops = false;
+        let mut root = start(&library);
+        tick(&mut root, &library);
+        tick(&mut root, &library);
+        assert_eq!(root.frame, 3);
     }
 
     #[test]

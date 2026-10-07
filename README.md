@@ -15,8 +15,8 @@ project is not affiliated with or endorsed by Miniclip.
 | 1 | Project setup | Done |
 | 2 | Extractor: turn the SWF into open, editable files | Done |
 | 3 | Engine: a Flash-style tree of clips with timelines, drawn with `wgpu` | Done |
-| 4 | Check the engine's output against the original | Next |
-| 5 | Port the game logic to Rust, kept parallel to the original | |
+| 4 | Check the engine's output against an independent renderer | Done |
+| 5 | Port the game logic to Rust, kept parallel to the original | Next |
 | 6 | Restructure for modding: data files, mod folders, hot reload | |
 | 7 | Package as a Mac app | |
 
@@ -68,6 +68,50 @@ cargo run --release -p bb-devtools --bin extracted-check -- extracted
 cargo run --release -p bb-devtools --bin shape-diff -- extracted/shapes path/to/reference/shapes
 cargo run --release -p bb-devtools --bin bitmap-diff -- extracted/bitmaps path/to/reference/images
 ```
+
+## Checking the engine
+
+`frame-diff` draws clips with the engine and compares them, frame by frame,
+with pictures of the same frames from another renderer. The reference is
+JPEXS Free Flash Decompiler's sprite export, which draws any clip at any
+frame on its own:
+
+```bash
+# With JPEXS: export frames of every clip as PNG (see its -select option to
+# pick frames), into a folder laid out as DefineSprite_<id>/<frame>.png.
+java -jar ffdec.jar -format sprite:png -export sprite reference path/to/the-game.swf
+
+cargo run --release -p bb-devtools --bin frame-diff -- extracted reference --save worst
+```
+
+JPEXS runs no scripts, so the engine plays every timeline straight through
+for this. A pixel counts as wrong only if its value is outside what the
+other picture has at that spot or right beside it. That forgives a
+smoothed edge next to a hard one and shifts of under a pixel, and still
+catches anything missing, misplaced or the wrong colour. `--save` writes
+three panels for each of the worst clips: the engine's picture, the
+reference, and a map of where they disagree.
+
+On 1,040 frames sampled across all 267 clips that have pictures, 1,015 are
+within 1% and 1,038 within 5%. Looking into the rest found two faults in
+the engine, both fixed:
+
+- A stroke was stretched and skewed along with its shape. Flash draws
+  strokes with a round pen on the screen, so the width stays even.
+- The pointer started at the corner of the stage, where it could rest on a
+  button before the mouse had moved.
+
+The differences that remain were each traced to the reference, or could
+not be settled with it:
+
+- JPEXS draws shapes with hard edges and leaves hairline gaps between
+  fills that share an edge. The engine smooths edges and leaves no gap.
+- JPEXS times a clip nested two levels deep by adding its parent's elapsed
+  time. The engine advances every clip one frame per tick from when it
+  appears, as Flash does.
+- Text fields: JPEXS sets digits about two pixels from where the engine
+  does, and closer together. The engine uses the font's own advance
+  widths. Which is right needs a comparison with the real player.
 
 ## Running the engine
 

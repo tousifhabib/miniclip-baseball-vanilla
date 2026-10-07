@@ -21,7 +21,7 @@ struct Target {
 }
 
 /// Where the pointer is and which button it is dealing with.
-#[derive(Debug, Default)]
+#[derive(Debug)]
 pub struct Pointer {
     pub x: f32,
     pub y: f32,
@@ -35,7 +35,25 @@ pub struct Pointer {
     inside: bool,
 }
 
+impl Default for Pointer {
+    /// A pointer that has not been seen yet. It starts far from everything,
+    /// so that nothing counts as hovered until the host says where it is.
+    fn default() -> Pointer {
+        Pointer {
+            x: Pointer::NOWHERE,
+            y: Pointer::NOWHERE,
+            down: false,
+            over: None,
+            pressed: None,
+            inside: false,
+        }
+    }
+}
+
 impl Pointer {
+    /// A coordinate well outside any stage.
+    pub const NOWHERE: f32 = -1.0e6;
+
     /// Whether the pointer is on a button, for showing a hand cursor.
     pub fn on_button(&self) -> bool {
         self.over.is_some() || (self.pressed.is_some() && self.inside)
@@ -289,6 +307,20 @@ mod tests {
             Content::Button(button) => button.mode,
             other => panic!("expected a button, found {other:?}"),
         }
+    }
+
+    #[test]
+    fn a_pointer_nobody_has_moved_hovers_over_nothing() {
+        // The button below is moved to the corner of the stage, where a
+        // pointer resting at (0, 0) would be on top of it.
+        let (library, mut root) = scene();
+        root.children.get_mut(&1).unwrap().matrix = crate::math::Matrix::IDENTITY;
+        let mut pointer = Pointer::default();
+        let mut events = Vec::new();
+        let (x, y, down) = (pointer.x, pointer.y, pointer.down);
+        pointer.update(&mut root, x, y, down, &library, &mut Squares, &mut events);
+        assert!(events.is_empty());
+        assert_eq!(mode(&root), ButtonMode::Up);
     }
 
     #[test]

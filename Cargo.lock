@@ -254,6 +254,7 @@ name = "bb-devtools"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "bb-engine",
  "bb-format",
  "clap",
  "image",
