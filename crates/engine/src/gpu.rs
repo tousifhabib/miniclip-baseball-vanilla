@@ -3,6 +3,10 @@
 //! Meshes are built the first time a symbol is drawn and kept. Masks use the
 //! stencil buffer: a mask's outline raises the stencil value of the pixels it
 //! covers, and masked content only draws where the value matches.
+//!
+//! A blurred object is drawn to a layer of its own, a texture just big enough
+//! to hold it. The layer is blurred and then drawn into its parent like any
+//! other picture.
 
 use std::collections::HashMap;
 
@@ -11,16 +15,25 @@ use bb_format::{SymbolId, SymbolInfo};
 use bytemuck::{Pod, Zeroable};
 use wgpu::util::DeviceExt;
 
-use crate::display::Command;
+use crate::display::{Bounds, Command};
+use crate::input::Geometry;
 use crate::library::Library;
 use crate::math::{ColorTransform, Matrix};
-use crate::tess::{Mesh, Paint, Spread, Tessellator, Vertex};
+use crate::tess::{Draw, Mesh, Paint, Spread, Tessellator, Vertex};
 
 const SAMPLES: u32 = 4;
 const STENCIL_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Depth24PlusStencil8;
-/// Uniform data for one draw is placed at multiples of this, the largest
-/// alignment any device asks for.
-const ITEM_STRIDE: usize = 256;
+/// Uniform data for one draw or one layer is placed at multiples of this, the
+/// largest alignment any device asks for.
+const SLOT: usize = 256;
+/// Layer sizes are rounded up to a multiple of this, so that an object which
+/// changes size a little from frame to frame can reuse its textures.
+const LAYER_STEP: u32 = 64;
+const MAX_LAYER: u32 = 4096;
+/// A layer's textures are dropped after going unused for this many frames.
+const LAYER_LIFETIME: u64 = 300;
+/// The widest blur the shader will sample, in pixels.
+const MAX_BLUR: f32 = 127.0;
 
 const SHADER: &str = r"
 struct Globals {
@@ -35,10 +48,13 @@ struct Item {
     world_t: vec4<f32>,
     color_mult: vec4<f32>,
     color_add: vec4<f32>,
+    // For a blur: xy is one pixel along the blur, in texture coordinates.
     paint_abcd: vec4<f32>,
     // xy: translation. z: the paint's row in the ramp texture.
+    // For a blur: x is the width of the box, in pixels.
     paint_t: vec4<f32>,
-    // x: 0 solid, 1 linear, 2 radial, 3 image. y: 0 pad, 1 reflect, 2 repeat.
+    // x: 0 solid, 1 linear, 2 radial, 3 image, 4 layer.
+    // y: 0 pad, 1 reflect, 2 repeat.
     kind: vec4<u32>,
 };
 
@@ -86,6 +102,10 @@ fn vs(
 fn fs(in: VertexOut) -> @location(0) vec4<f32> {
     var c = in.color;
     let kind = item.kind.x;
+    if kind == 4u {
+        // A finished layer: already transformed and multiplied by alpha.
+        return textureSampleLevel(paint_texture, paint_sampler, in.paint, 0.0);
+    }
     if kind == 3u {
         // Images are stored multiplied by alpha, so that smoothing does not
         // drag colour in from clear pixels.
@@ -109,6 +129,38 @@ fn fs(in: VertexOut) -> @location(0) vec4<f32> {
     }
     c = clamp(c * item.color_mult + item.color_add, vec4<f32>(0.0), vec4<f32>(1.0));
     return vec4<f32>(c.rgb * c.a, c.a);
+}
+
+struct BlurOut {
+    @builtin(position) clip: vec4<f32>,
+    @location(0) uv: vec2<f32>,
+};
+
+// One triangle that covers the whole target.
+@vertex
+fn vs_blur(@builtin(vertex_index) index: u32) -> BlurOut {
+    let corner = vec2<f32>(f32((index << 1u) & 2u), f32(index & 2u));
+    var out: BlurOut;
+    out.clip = vec4<f32>(corner * 2.0 - 1.0, 0.0, 1.0);
+    out.uv = vec2<f32>(corner.x, 1.0 - corner.y);
+    return out;
+}
+
+// Flash's blur: the average of a row of pixels `width` wide. A width that is
+// not a whole odd number gives the two end pixels part weight.
+@fragment
+fn fs_blur(in: BlurOut) -> @location(0) vec4<f32> {
+    let radius = (item.paint_t.x - 1.0) / 2.0;
+    let reach = i32(ceil(radius));
+    var sum = vec4<f32>(0.0);
+    var total = 0.0;
+    for (var i = -reach; i <= reach; i++) {
+        let weight = clamp(radius + 0.5 - abs(f32(i)), 0.0, 1.0);
+        let uv = in.uv + item.paint_abcd.xy * f32(i);
+        sum += textureSampleLevel(paint_texture, paint_sampler, uv, 0.0) * weight;
+        total += weight;
+    }
+    return sum / max(total, 1e-6);
 }
 ";
 
@@ -136,6 +188,8 @@ enum MeshKey {
     Shape(SymbolId),
     Morph(SymbolId, u16),
     Text(SymbolId),
+    /// The square from (0, 0) to (1, 1), for drawing a layer.
+    Quad,
 }
 
 struct GpuMesh {
@@ -158,7 +212,12 @@ enum Mode {
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
 enum Texture {
     Ramps,
-    Image { slot: usize, smooth: bool },
+    Image {
+        slot: usize,
+        smooth: bool,
+    },
+    /// The finished picture of a layer.
+    Layer(usize),
 }
 
 struct Step {
@@ -170,10 +229,61 @@ struct Step {
     texture: Texture,
 }
 
+/// One picture being built: the frame itself, or a blurred object.
+struct Layer {
+    steps: Vec<Step>,
+    /// Where the layer sits in the frame, in pixels.
+    origin: (i32, i32),
+    size: (u32, u32),
+    /// One entry per blur to run, in order: the item holding its settings.
+    blurs: Vec<usize>,
+    /// The textures it draws to. `None` for the frame, and for a layer that
+    /// is entirely out of view.
+    target: Option<usize>,
+}
+
+/// Mask state, which starts afresh inside each layer.
+#[derive(Clone, Copy)]
+struct Masking {
+    /// How many masks are in force.
+    depth: u32,
+    mode: Mode,
+    stencil: u32,
+}
+
+impl Masking {
+    const NONE: Masking = Masking {
+        depth: 0,
+        mode: Mode::Content,
+        stencil: 0,
+    };
+}
+
+/// The textures a layer draws to and is blurred between.
+struct LayerTarget {
+    size: (u32, u32),
+    /// Multisampled, resolved into `a`.
+    color: wgpu::TextureView,
+    stencil: wgpu::TextureView,
+    a: wgpu::TextureView,
+    a_bind: wgpu::BindGroup,
+    b: wgpu::TextureView,
+    b_bind: wgpu::BindGroup,
+    last_used: u64,
+}
+
 struct Targets {
     size: (u32, u32),
     color: wgpu::TextureView,
     stencil: wgpu::TextureView,
+}
+
+/// What the last frame took to draw.
+#[derive(Clone, Copy, Debug, Default)]
+pub struct Stats {
+    pub draws: usize,
+    pub layers: usize,
+    pub meshes: usize,
 }
 
 pub struct Renderer {
@@ -181,8 +291,11 @@ pub struct Renderer {
     pub queue: wgpu::Queue,
     format: wgpu::TextureFormat,
     pipelines: [wgpu::RenderPipeline; 3],
+    blur_pipeline: wgpu::RenderPipeline,
+    globals_layout: wgpu::BindGroupLayout,
     globals: wgpu::Buffer,
     globals_bind: wgpu::BindGroup,
+    globals_capacity: usize,
     item_layout: wgpu::BindGroupLayout,
     items: wgpu::Buffer,
     items_bind: wgpu::BindGroup,
@@ -200,8 +313,11 @@ pub struct Renderer {
     image_views: Vec<wgpu::TextureView>,
     image_binds: HashMap<Texture, wgpu::BindGroup>,
     targets: Option<Targets>,
+    layer_targets: Vec<LayerTarget>,
+    frame: u64,
     /// The least width a stroke is drawn at, in pixels of the target.
     pub min_stroke: f32,
+    pub stats: Stats,
     /// Symbols that could not be drawn, each reported once.
     pub problems: Vec<String>,
 }
@@ -231,23 +347,23 @@ impl Renderer {
             source: wgpu::ShaderSource::Wgsl(SHADER.into()),
         });
 
-        let uniform_entry = |dynamic: bool, size: usize| wgpu::BindGroupLayoutEntry {
+        let uniform_entry = |size: usize| wgpu::BindGroupLayoutEntry {
             binding: 0,
             visibility: wgpu::ShaderStages::VERTEX_FRAGMENT,
             ty: wgpu::BindingType::Buffer {
                 ty: wgpu::BufferBindingType::Uniform,
-                has_dynamic_offset: dynamic,
+                has_dynamic_offset: true,
                 min_binding_size: wgpu::BufferSize::new(size as u64),
             },
             count: None,
         };
         let globals_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("globals"),
-            entries: &[uniform_entry(false, size_of::<Globals>())],
+            entries: &[uniform_entry(size_of::<Globals>())],
         });
         let item_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("item"),
-            entries: &[uniform_entry(true, size_of::<Item>())],
+            entries: &[uniform_entry(size_of::<Item>())],
         });
         let texture_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("paint texture"),
@@ -361,20 +477,30 @@ impl Renderer {
             pipeline(Mode::MaskWrite),
             pipeline(Mode::MaskClear),
         ];
-
-        let globals = device.create_buffer(&wgpu::BufferDescriptor {
-            label: Some("globals"),
-            size: size_of::<Globals>() as u64,
-            usage: wgpu::BufferUsages::UNIFORM | wgpu::BufferUsages::COPY_DST,
-            mapped_at_creation: false,
-        });
-        let globals_bind = device.create_bind_group(&wgpu::BindGroupDescriptor {
-            label: Some("globals"),
-            layout: &globals_layout,
-            entries: &[wgpu::BindGroupEntry {
-                binding: 0,
-                resource: globals.as_entire_binding(),
-            }],
+        let blur_pipeline = device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+            label: Some("blur"),
+            layout: Some(&layout),
+            vertex: wgpu::VertexState {
+                module: &shader,
+                entry_point: Some("vs_blur"),
+                compilation_options: wgpu::PipelineCompilationOptions::default(),
+                buffers: &[],
+            },
+            primitive: wgpu::PrimitiveState::default(),
+            depth_stencil: None,
+            multisample: wgpu::MultisampleState::default(),
+            fragment: Some(wgpu::FragmentState {
+                module: &shader,
+                entry_point: Some("fs_blur"),
+                compilation_options: wgpu::PipelineCompilationOptions::default(),
+                targets: &[Some(wgpu::ColorTargetState {
+                    format,
+                    blend: None,
+                    write_mask: wgpu::ColorWrites::ALL,
+                })],
+            }),
+            multiview_mask: None,
+            cache: None,
         });
 
         let sampler = |filter: wgpu::FilterMode, address: wgpu::AddressMode| {
@@ -390,8 +516,11 @@ impl Renderer {
         let smooth_sampler = sampler(wgpu::FilterMode::Linear, wgpu::AddressMode::Repeat);
         let crisp_sampler = sampler(wgpu::FilterMode::Nearest, wgpu::AddressMode::Repeat);
 
+        let globals_capacity = 16;
+        let (globals, globals_bind) =
+            slot_buffer::<Globals>(&device, &globals_layout, globals_capacity);
         let items_capacity = 1024;
-        let (items, items_bind) = item_buffer(&device, &item_layout, items_capacity);
+        let (items, items_bind) = slot_buffer::<Item>(&device, &item_layout, items_capacity);
         let ramps_capacity = 64;
         let (ramps_texture, ramps_bind) =
             ramp_texture(&device, &texture_layout, &ramp_sampler, ramps_capacity);
@@ -401,8 +530,11 @@ impl Renderer {
             queue,
             format,
             pipelines,
+            blur_pipeline,
+            globals_layout,
             globals,
             globals_bind,
+            globals_capacity,
             item_layout,
             items,
             items_bind,
@@ -420,7 +552,10 @@ impl Renderer {
             image_views: Vec::new(),
             image_binds: HashMap::new(),
             targets: None,
+            layer_targets: Vec::new(),
+            frame: 0,
             min_stroke: 1.0,
+            stats: Stats::default(),
             problems: Vec::new(),
         }
     }
@@ -437,73 +572,149 @@ impl Renderer {
         background: [f64; 4],
         scissor: Option<[u32; 4]>,
     ) {
-        let (steps, items) = self.prepare(library, commands);
-        self.upload(&items, size);
+        self.frame += 1;
+        let (mut layers, items) = self.prepare(library, commands, size);
+        self.upload(&mut layers, &items, size);
+        self.stats = Stats {
+            draws: layers.iter().map(|layer| layer.steps.len()).sum(),
+            layers: layers.len() - 1,
+            meshes: self.meshes.len(),
+        };
 
-        let targets = self.targets.as_ref().expect("made by upload");
         let mut encoder = self
             .device
             .create_command_encoder(&wgpu::CommandEncoderDescriptor::default());
-        {
-            let [r, g, b, a] = background;
-            let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
-                label: Some("frame"),
-                color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                    view: &targets.color,
-                    depth_slice: None,
-                    resolve_target: Some(target),
-                    ops: wgpu::Operations {
-                        load: wgpu::LoadOp::Clear(wgpu::Color { r, g, b, a }),
-                        store: wgpu::StoreOp::Discard,
-                    },
-                })],
-                depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
-                    view: &targets.stencil,
-                    depth_ops: None,
-                    stencil_ops: Some(wgpu::Operations {
-                        load: wgpu::LoadOp::Clear(0),
-                        store: wgpu::StoreOp::Discard,
+        // A layer is made after the layer it belongs to, so going backwards
+        // finishes every layer before the one that draws it.
+        for (index, layer) in layers.iter().enumerate().rev() {
+            let frame = self.targets.as_ref().expect("made by upload");
+            let (color, resolve, stencil, clear) = match (index, layer.target) {
+                (0, _) => {
+                    let [r, g, b, a] = background;
+                    let clear = wgpu::Color { r, g, b, a };
+                    (&frame.color, target, &frame.stencil, clear)
+                }
+                (_, Some(slot)) => {
+                    let layer = &self.layer_targets[slot];
+                    let clear = wgpu::Color::TRANSPARENT;
+                    (&layer.color, &layer.a, &layer.stencil, clear)
+                }
+                (_, None) => continue,
+            };
+            {
+                let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+                    label: Some("layer"),
+                    color_attachments: &[Some(wgpu::RenderPassColorAttachment {
+                        view: color,
+                        depth_slice: None,
+                        resolve_target: Some(resolve),
+                        ops: wgpu::Operations {
+                            load: wgpu::LoadOp::Clear(clear),
+                            store: wgpu::StoreOp::Discard,
+                        },
+                    })],
+                    depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
+                        view: stencil,
+                        depth_ops: None,
+                        stencil_ops: Some(wgpu::Operations {
+                            load: wgpu::LoadOp::Clear(0),
+                            store: wgpu::StoreOp::Discard,
+                        }),
                     }),
-                }),
-                timestamp_writes: None,
-                occlusion_query_set: None,
-                multiview_mask: None,
-            });
-            pass.set_bind_group(0, &self.globals_bind, &[]);
-            if let Some([x, y, width, height]) = scissor {
-                pass.set_scissor_rect(x, y, width, height);
+                    timestamp_writes: None,
+                    occlusion_query_set: None,
+                    multiview_mask: None,
+                });
+                pass.set_bind_group(0, &self.globals_bind, &[(index * SLOT) as u32]);
+                if index == 0
+                    && let Some([x, y, width, height]) = scissor
+                {
+                    pass.set_scissor_rect(x, y, width, height);
+                }
+                self.draw_steps(&mut pass, &layers, &layer.steps);
             }
 
-            let mut mode = None;
-            let mut key = None;
-            let mut texture = None;
-            for step in &steps {
-                let Some(Some(mesh)) = self.meshes.get(&step.key) else {
-                    continue;
+            // Each blur reads one of the layer's two textures and writes the
+            // other.
+            let Some(slot) = layer.target else { continue };
+            let textures = &self.layer_targets[slot];
+            for (round, &item) in layer.blurs.iter().enumerate() {
+                let (source, destination) = if round.is_multiple_of(2) {
+                    (&textures.a_bind, &textures.b)
+                } else {
+                    (&textures.b_bind, &textures.a)
                 };
-                if mode != Some(step.mode) {
-                    pass.set_pipeline(&self.pipelines[step.mode as usize]);
-                    mode = Some(step.mode);
-                }
-                if key != Some(step.key) {
-                    pass.set_vertex_buffer(0, mesh.vertices.slice(..));
-                    pass.set_index_buffer(mesh.indices.slice(..), wgpu::IndexFormat::Uint32);
-                    key = Some(step.key);
-                }
-                if texture != Some(step.texture) {
-                    let bind = match step.texture {
-                        Texture::Ramps => &self.ramps_bind,
-                        image => &self.image_binds[&image],
-                    };
-                    pass.set_bind_group(2, bind, &[]);
-                    texture = Some(step.texture);
-                }
-                pass.set_stencil_reference(step.stencil);
-                pass.set_bind_group(1, &self.items_bind, &[(step.item * ITEM_STRIDE) as u32]);
-                pass.draw_indexed(mesh.mesh.draws[step.draw].indices.clone(), 0, 0..1);
+                let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+                    label: Some("blur"),
+                    color_attachments: &[Some(wgpu::RenderPassColorAttachment {
+                        view: destination,
+                        depth_slice: None,
+                        resolve_target: None,
+                        ops: wgpu::Operations {
+                            load: wgpu::LoadOp::Clear(wgpu::Color::TRANSPARENT),
+                            store: wgpu::StoreOp::Store,
+                        },
+                    })],
+                    depth_stencil_attachment: None,
+                    timestamp_writes: None,
+                    occlusion_query_set: None,
+                    multiview_mask: None,
+                });
+                pass.set_pipeline(&self.blur_pipeline);
+                pass.set_bind_group(0, &self.globals_bind, &[(index * SLOT) as u32]);
+                pass.set_bind_group(1, &self.items_bind, &[(item * SLOT) as u32]);
+                pass.set_bind_group(2, source, &[]);
+                pass.draw(0..3, 0..1);
             }
         }
         self.queue.submit([encoder.finish()]);
+
+        let frame = self.frame;
+        self.layer_targets
+            .retain(|target| frame - target.last_used < LAYER_LIFETIME);
+    }
+
+    fn draw_steps(&self, pass: &mut wgpu::RenderPass, layers: &[Layer], steps: &[Step]) {
+        let mut mode = None;
+        let mut key = None;
+        let mut texture = None;
+        for step in steps {
+            let Some(Some(mesh)) = self.meshes.get(&step.key) else {
+                continue;
+            };
+            let bind = match step.texture {
+                Texture::Ramps => &self.ramps_bind,
+                Texture::Layer(index) => {
+                    let layer = &layers[index];
+                    let Some(slot) = layer.target else { continue };
+                    let textures = &self.layer_targets[slot];
+                    // An odd number of blurs leaves the picture in the
+                    // second texture.
+                    if layer.blurs.len().is_multiple_of(2) {
+                        &textures.a_bind
+                    } else {
+                        &textures.b_bind
+                    }
+                }
+                image => &self.image_binds[&image],
+            };
+            if mode != Some(step.mode) {
+                pass.set_pipeline(&self.pipelines[step.mode as usize]);
+                mode = Some(step.mode);
+            }
+            if key != Some(step.key) {
+                pass.set_vertex_buffer(0, mesh.vertices.slice(..));
+                pass.set_index_buffer(mesh.indices.slice(..), wgpu::IndexFormat::Uint32);
+                key = Some(step.key);
+            }
+            if texture != Some(step.texture) {
+                pass.set_bind_group(2, bind, &[]);
+                texture = Some(step.texture);
+            }
+            pass.set_stencil_reference(step.stencil);
+            pass.set_bind_group(1, &self.items_bind, &[(step.item * SLOT) as u32]);
+            pass.draw_indexed(mesh.mesh.draws[step.draw].indices.clone(), 0, 0..1);
+        }
     }
 
     /// Draws `commands` to a new image.
@@ -573,34 +784,121 @@ impl Renderer {
         image::RgbaImage::from_raw(width, height, pixels).context("building the image")
     }
 
-    /// Works out the draws for `commands`, building any meshes they need.
-    fn prepare(&mut self, library: &Library, commands: &[Command]) -> (Vec<Step>, Vec<u8>) {
-        let mut steps = Vec::new();
+    /// Sorts `commands` into layers of draws, building any meshes they need.
+    /// The first layer is the frame itself.
+    fn prepare(
+        &mut self,
+        library: &Library,
+        commands: &[Command],
+        size: (u32, u32),
+    ) -> (Vec<Layer>, Vec<u8>) {
         let mut items: Vec<u8> = Vec::new();
-        // How many masks are in force, and how the next draws use them.
-        let mut masks = 0u32;
-        let mut mode = Mode::Content;
-        let mut stencil = 0u32;
+        let mut push_item = |item: Item| {
+            let slot = items.len() / SLOT;
+            items.extend_from_slice(bytemuck::bytes_of(&item));
+            items.resize((slot + 1) * SLOT, 0);
+            slot
+        };
+        let mut layers = vec![Layer {
+            steps: Vec::new(),
+            origin: (0, 0),
+            size,
+            blurs: Vec::new(),
+            target: None,
+        }];
+        // The layers being drawn into, outermost first, each with the mask
+        // state to go back to when it ends.
+        let mut open: Vec<(usize, Masking)> = Vec::new();
+        let mut current = 0;
+        let mut masking = Masking::NONE;
 
         for command in commands {
             match command {
                 Command::PushMask => {
-                    mode = Mode::MaskWrite;
-                    stencil = masks;
-                    masks += 1;
+                    masking.mode = Mode::MaskWrite;
+                    masking.stencil = masking.depth;
+                    masking.depth += 1;
                 }
                 Command::ActivateMask => {
-                    mode = Mode::Content;
-                    stencil = masks;
+                    masking.mode = Mode::Content;
+                    masking.stencil = masking.depth;
                 }
                 Command::DeactivateMask => {
-                    mode = Mode::MaskClear;
-                    stencil = masks;
+                    masking.mode = Mode::MaskClear;
+                    masking.stencil = masking.depth;
                 }
                 Command::PopMask => {
-                    masks = masks.saturating_sub(1);
-                    mode = Mode::Content;
-                    stencil = masks;
+                    masking.depth = masking.depth.saturating_sub(1);
+                    masking.mode = Mode::Content;
+                    masking.stencil = masking.depth;
+                }
+                Command::BeginBlur {
+                    blur_x,
+                    blur_y,
+                    passes,
+                    bounds,
+                } => {
+                    let (blur_x, blur_y) = (blur_x.min(MAX_BLUR), blur_y.min(MAX_BLUR));
+                    // Each pass spreads the picture by half the box's width.
+                    let reach = (blur_x.max(blur_y) / 2.0 * f32::from(*passes)).ceil() + 1.0;
+                    let parent = &layers[current];
+                    let area = layer_area(*bounds, reach, parent.origin, parent.size);
+                    let (origin, size) = area.unwrap_or(((0, 0), (0, 0)));
+                    let mut blurs = Vec::new();
+                    if area.is_some() {
+                        for _ in 0..*passes {
+                            for (width, step) in [
+                                (blur_x, [1.0 / size.0 as f32, 0.0]),
+                                (blur_y, [0.0, 1.0 / size.1 as f32]),
+                            ] {
+                                if width > 1.0 {
+                                    blurs.push(push_item(Item {
+                                        paint_abcd: [step[0], step[1], 0.0, 0.0],
+                                        paint_t: [width, 0.0, 0.0, 0.0],
+                                        ..Item::zeroed()
+                                    }));
+                                }
+                            }
+                        }
+                    }
+                    open.push((current, masking));
+                    current = layers.len();
+                    masking = Masking::NONE;
+                    layers.push(Layer {
+                        steps: Vec::new(),
+                        origin,
+                        size,
+                        blurs,
+                        target: None,
+                    });
+                }
+                Command::EndBlur => {
+                    let Some((parent, parent_masking)) = open.pop() else {
+                        continue;
+                    };
+                    let finished = current;
+                    (current, masking) = (parent, parent_masking);
+                    let layer = &layers[finished];
+                    if layer.size == (0, 0) {
+                        continue;
+                    }
+                    self.ensure_mesh(library, MeshKey::Quad);
+                    // The unit square, stretched over the layer's place.
+                    let item = push_item(Item {
+                        world_abcd: [layer.size.0 as f32, 0.0, 0.0, layer.size.1 as f32],
+                        world_t: [layer.origin.0 as f32, layer.origin.1 as f32, 0.0, 0.0],
+                        paint_abcd: [1.0, 0.0, 0.0, 1.0],
+                        kind: [4, 0, 0, 0],
+                        ..Item::zeroed()
+                    });
+                    layers[current].steps.push(Step {
+                        mode: masking.mode,
+                        stencil: masking.stencil,
+                        key: MeshKey::Quad,
+                        draw: 0,
+                        item,
+                        texture: Texture::Layer(finished),
+                    });
                 }
                 Command::Draw {
                     symbol,
@@ -608,6 +906,9 @@ impl Renderer {
                     matrix,
                     color,
                 } => {
+                    if layers[current].size == (0, 0) {
+                        continue;
+                    }
                     let Some(key) = mesh_key(library, *symbol, *ratio) else {
                         continue;
                     };
@@ -616,13 +917,11 @@ impl Renderer {
                         continue;
                     };
                     for (index, draw) in mesh.mesh.draws.iter().enumerate() {
-                        let item = items.len() / ITEM_STRIDE;
                         let (data, texture) = item_for(&draw.paint, *matrix, *color);
-                        items.extend_from_slice(bytemuck::bytes_of(&data));
-                        items.resize((item + 1) * ITEM_STRIDE, 0);
-                        steps.push(Step {
-                            mode,
-                            stencil,
+                        let item = push_item(data);
+                        layers[current].steps.push(Step {
+                            mode: masking.mode,
+                            stencil: masking.stencil,
                             key,
                             draw: index,
                             item,
@@ -632,7 +931,7 @@ impl Renderer {
                 }
             }
         }
-        (steps, items)
+        (layers, items)
     }
 
     fn ensure_mesh(&mut self, library: &Library, key: MeshKey) {
@@ -655,6 +954,27 @@ impl Renderer {
                 (None, Some(text)) => self.tessellator.edit_text(text, library),
                 (None, None) => Ok(Mesh::default()),
             },
+            MeshKey::Quad => {
+                let corner = |x: f32, y: f32| Vertex {
+                    position: [x, y],
+                    normal: [0.0, 0.0],
+                    half_width: 0.0,
+                    color: [255; 4],
+                };
+                Ok(Mesh {
+                    vertices: vec![
+                        corner(0.0, 0.0),
+                        corner(1.0, 0.0),
+                        corner(1.0, 1.0),
+                        corner(0.0, 1.0),
+                    ],
+                    indices: vec![0, 1, 2, 0, 2, 3],
+                    draws: vec![Draw {
+                        indices: 0..6,
+                        paint: Paint::Solid,
+                    }],
+                })
+            }
         };
         let mesh = match built {
             Ok(mesh) if !mesh.indices.is_empty() => Some(GpuMesh {
@@ -683,21 +1003,37 @@ impl Renderer {
         self.meshes.insert(key, mesh);
     }
 
-    /// Sends this frame's uniforms, and any new ramps and images, to the GPU.
-    fn upload(&mut self, items: &[u8], size: (u32, u32)) {
-        let (width, height) = size;
-        let globals = Globals {
-            view: [2.0 / width as f32, -2.0 / height as f32, -1.0, 1.0],
-            limits: [self.min_stroke / 2.0, 0.0, 0.0, 0.0],
-        };
-        self.queue
-            .write_buffer(&self.globals, 0, bytemuck::bytes_of(&globals));
+    /// Sends this frame's uniforms, and any new ramps and images, to the GPU,
+    /// and gives every layer textures to draw to.
+    fn upload(&mut self, layers: &mut [Layer], items: &[u8], size: (u32, u32)) {
+        if layers.len() > self.globals_capacity {
+            self.globals_capacity = layers.len().next_power_of_two();
+            (self.globals, self.globals_bind) =
+                slot_buffer::<Globals>(&self.device, &self.globals_layout, self.globals_capacity);
+        }
+        let mut globals = vec![0u8; layers.len() * SLOT];
+        for (index, layer) in layers.iter().enumerate() {
+            let (width, height) = (layer.size.0.max(1) as f32, layer.size.1.max(1) as f32);
+            let (x, y) = (layer.origin.0 as f32, layer.origin.1 as f32);
+            let data = Globals {
+                view: [
+                    2.0 / width,
+                    -2.0 / height,
+                    -1.0 - 2.0 * x / width,
+                    1.0 + 2.0 * y / height,
+                ],
+                limits: [self.min_stroke / 2.0, 0.0, 0.0, 0.0],
+            };
+            let at = index * SLOT;
+            globals[at..at + size_of::<Globals>()].copy_from_slice(bytemuck::bytes_of(&data));
+        }
+        self.queue.write_buffer(&self.globals, 0, &globals);
 
-        let needed = items.len() / ITEM_STRIDE;
+        let needed = items.len() / SLOT;
         if needed > self.items_capacity {
             self.items_capacity = needed.next_power_of_two();
             (self.items, self.items_bind) =
-                item_buffer(&self.device, &self.item_layout, self.items_capacity);
+                slot_buffer::<Item>(&self.device, &self.item_layout, self.items_capacity);
         }
         if !items.is_empty() {
             self.queue.write_buffer(&self.items, 0, items);
@@ -792,29 +1128,88 @@ impl Renderer {
             .as_ref()
             .is_none_or(|targets| targets.size != size)
         {
-            let attachment = |format: wgpu::TextureFormat| {
-                self.device
-                    .create_texture(&wgpu::TextureDescriptor {
-                        label: Some("frame"),
-                        size: wgpu::Extent3d {
-                            width,
-                            height,
-                            depth_or_array_layers: 1,
-                        },
-                        mip_level_count: 1,
-                        sample_count: SAMPLES,
-                        dimension: wgpu::TextureDimension::D2,
-                        format,
-                        usage: wgpu::TextureUsages::RENDER_ATTACHMENT,
-                        view_formats: &[],
-                    })
-                    .create_view(&wgpu::TextureViewDescriptor::default())
-            };
             self.targets = Some(Targets {
                 size,
-                color: attachment(self.format),
-                stencil: attachment(STENCIL_FORMAT),
+                color: attachment(&self.device, size, self.format, SAMPLES),
+                stencil: attachment(&self.device, size, STENCIL_FORMAT, SAMPLES),
             });
+        }
+
+        // Give each layer a set of textures of its size that no other layer
+        // has taken this frame.
+        for layer in layers.iter_mut().skip(1) {
+            if layer.size == (0, 0) {
+                continue;
+            }
+            let free = self
+                .layer_targets
+                .iter()
+                .position(|target| target.size == layer.size && target.last_used != self.frame);
+            let slot = match free {
+                Some(slot) => slot,
+                None => {
+                    self.layer_targets.push(self.new_layer_target(layer.size));
+                    self.layer_targets.len() - 1
+                }
+            };
+            self.layer_targets[slot].last_used = self.frame;
+            layer.target = Some(slot);
+        }
+    }
+
+    fn new_layer_target(&self, size: (u32, u32)) -> LayerTarget {
+        let sampled = || {
+            self.device
+                .create_texture(&wgpu::TextureDescriptor {
+                    label: Some("layer"),
+                    size: wgpu::Extent3d {
+                        width: size.0,
+                        height: size.1,
+                        depth_or_array_layers: 1,
+                    },
+                    mip_level_count: 1,
+                    sample_count: 1,
+                    dimension: wgpu::TextureDimension::D2,
+                    format: self.format,
+                    usage: wgpu::TextureUsages::RENDER_ATTACHMENT
+                        | wgpu::TextureUsages::TEXTURE_BINDING,
+                    view_formats: &[],
+                })
+                .create_view(&wgpu::TextureViewDescriptor::default())
+        };
+        let (a, b) = (sampled(), sampled());
+        let bind = |view: &wgpu::TextureView| {
+            texture_bind(&self.device, &self.texture_layout, view, &self.ramp_sampler)
+        };
+        LayerTarget {
+            size,
+            color: attachment(&self.device, size, self.format, SAMPLES),
+            stencil: attachment(&self.device, size, STENCIL_FORMAT, SAMPLES),
+            a_bind: bind(&a),
+            b_bind: bind(&b),
+            a,
+            b,
+            last_used: 0,
+        }
+    }
+}
+
+impl Geometry for Renderer {
+    fn contains(
+        &mut self,
+        library: &Library,
+        symbol: SymbolId,
+        ratio: u16,
+        x: f32,
+        y: f32,
+    ) -> bool {
+        let Some(key) = mesh_key(library, symbol, ratio) else {
+            return false;
+        };
+        self.ensure_mesh(library, key);
+        match self.meshes.get(&key) {
+            Some(Some(mesh)) => mesh.mesh.contains(x, y),
+            _ => false,
         }
     }
 }
@@ -827,6 +1222,29 @@ fn mesh_key(library: &Library, symbol: SymbolId, ratio: u16) -> Option<MeshKey> 
         SymbolInfo::Text | SymbolInfo::EditText => Some(MeshKey::Text(symbol)),
         _ => None,
     }
+}
+
+/// Where a blurred object's layer goes: `bounds` grown by `reach`, cut down
+/// to the part that can affect the parent layer, on whole pixels. Returns the
+/// top-left corner and the size, or `None` if nothing of it can be seen.
+fn layer_area(
+    bounds: Bounds,
+    reach: f32,
+    parent_origin: (i32, i32),
+    parent_size: (u32, u32),
+) -> Option<((i32, i32), (u32, u32))> {
+    let reach_px = reach as i32;
+    let left = ((bounds[0] - reach).floor() as i32).max(parent_origin.0 - reach_px);
+    let top = ((bounds[1] - reach).floor() as i32).max(parent_origin.1 - reach_px);
+    let right =
+        ((bounds[2] + reach).ceil() as i32).min(parent_origin.0 + parent_size.0 as i32 + reach_px);
+    let bottom =
+        ((bounds[3] + reach).ceil() as i32).min(parent_origin.1 + parent_size.1 as i32 + reach_px);
+    if right <= left || bottom <= top {
+        return None;
+    }
+    let round = |length: i32| (length as u32).next_multiple_of(LAYER_STEP).min(MAX_LAYER);
+    Some(((left, top), (round(right - left), round(bottom - top))))
 }
 
 fn item_for(paint: &Paint, world: Matrix, color: ColorTransform) -> (Item, Texture) {
@@ -874,30 +1292,57 @@ fn item_for(paint: &Paint, world: Matrix, color: ColorTransform) -> (Item, Textu
     (item, texture)
 }
 
-fn item_buffer(
+/// A uniform buffer holding `capacity` values of `T`, one per slot, bound so
+/// that a draw picks its slot by offset.
+fn slot_buffer<T>(
     device: &wgpu::Device,
     layout: &wgpu::BindGroupLayout,
     capacity: usize,
 ) -> (wgpu::Buffer, wgpu::BindGroup) {
     let buffer = device.create_buffer(&wgpu::BufferDescriptor {
-        label: Some("items"),
-        size: (capacity * ITEM_STRIDE) as u64,
+        label: Some("uniforms"),
+        size: (capacity * SLOT) as u64,
         usage: wgpu::BufferUsages::UNIFORM | wgpu::BufferUsages::COPY_DST,
         mapped_at_creation: false,
     });
     let bind = device.create_bind_group(&wgpu::BindGroupDescriptor {
-        label: Some("items"),
+        label: Some("uniforms"),
         layout,
         entries: &[wgpu::BindGroupEntry {
             binding: 0,
             resource: wgpu::BindingResource::Buffer(wgpu::BufferBinding {
                 buffer: &buffer,
                 offset: 0,
-                size: wgpu::BufferSize::new(size_of::<Item>() as u64),
+                size: wgpu::BufferSize::new(size_of::<T>() as u64),
             }),
         }],
     });
     (buffer, bind)
+}
+
+/// A texture to draw into and nothing else.
+fn attachment(
+    device: &wgpu::Device,
+    size: (u32, u32),
+    format: wgpu::TextureFormat,
+    samples: u32,
+) -> wgpu::TextureView {
+    device
+        .create_texture(&wgpu::TextureDescriptor {
+            label: Some("attachment"),
+            size: wgpu::Extent3d {
+                width: size.0,
+                height: size.1,
+                depth_or_array_layers: 1,
+            },
+            mip_level_count: 1,
+            sample_count: samples,
+            dimension: wgpu::TextureDimension::D2,
+            format,
+            usage: wgpu::TextureUsages::RENDER_ATTACHMENT,
+            view_formats: &[],
+        })
+        .create_view(&wgpu::TextureViewDescriptor::default())
 }
 
 /// A texture holding one gradient ramp per row.
@@ -946,4 +1391,30 @@ fn texture_bind(
             },
         ],
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn a_layer_covers_its_object_and_the_reach_of_the_blur() {
+        let area = layer_area([100.0, 100.0, 150.0, 140.0], 4.0, (0, 0), (590, 400));
+        // 96 to 154 across and 96 to 144 down, each rounded up to 64.
+        assert_eq!(area, Some(((96, 96), (64, 64))));
+    }
+
+    #[test]
+    fn a_layer_is_cut_down_to_what_can_reach_the_view() {
+        let area = layer_area([-500.0, 10.0, 30.0, 40.0], 4.0, (0, 0), (590, 400));
+        assert_eq!(area, Some(((-4, 6), (64, 64))));
+    }
+
+    #[test]
+    fn an_object_wholly_out_of_view_gets_no_layer() {
+        assert_eq!(
+            layer_area([700.0, 10.0, 800.0, 40.0], 4.0, (0, 0), (590, 400)),
+            None
+        );
+    }
 }

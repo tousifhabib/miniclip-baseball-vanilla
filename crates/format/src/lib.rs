@@ -8,7 +8,7 @@ use std::collections::BTreeMap;
 use serde::{Deserialize, Serialize};
 
 /// Bumped whenever a change would make older extracted files unreadable.
-pub const FORMAT_VERSION: u32 = 1;
+pub const FORMAT_VERSION: u32 = 2;
 
 pub type SymbolId = u16;
 
@@ -156,6 +156,10 @@ pub struct Frame {
     /// The original had ActionScript on this frame.
     #[serde(default, skip_serializing_if = "is_false")]
     pub has_script: bool,
+    /// That script calls `stop()` before anything that depends on the game's
+    /// state, so the timeline always halts here.
+    #[serde(default, skip_serializing_if = "is_false")]
+    pub stops: bool,
 }
 
 fn is_false(b: &bool) -> bool {
@@ -219,7 +223,7 @@ pub enum Filter {
     Unsupported { name: String },
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SoundStart {
     pub sound: SymbolId,
     pub event: SoundEvent,
@@ -247,7 +251,7 @@ pub enum SoundEvent {
     Stop,
 }
 
-#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct EnvelopePoint {
     pub sample: u32,
     pub left: f32,

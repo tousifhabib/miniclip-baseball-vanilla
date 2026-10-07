@@ -14,8 +14,8 @@ project is not affiliated with or endorsed by Miniclip.
 |---|---|---|
 | 1 | Project setup | Done |
 | 2 | Extractor: turn the SWF into open, editable files | Done |
-| 3 | Engine: a Flash-style tree of clips with timelines, drawn with `wgpu` | In progress |
-| 4 | Check the engine's output against the original | |
+| 3 | Engine: a Flash-style tree of clips with timelines, drawn with `wgpu` | Done |
+| 4 | Check the engine's output against the original | Next |
 | 5 | Port the game logic to Rust, kept parallel to the original | |
 | 6 | Restructure for modding: data files, mod folders, hot reload | |
 | 7 | Package as a Mac app | |
@@ -71,36 +71,49 @@ cargo run --release -p bb-devtools --bin bitmap-diff -- extracted/bitmaps path/t
 
 ## Running the engine
 
-The engine plays the extracted timelines. The game logic is not ported yet,
-so nothing reacts to input and no script stops a timeline: clips simply play
-through their frames.
+The engine plays the extracted timelines, with sound and a working pointer.
+The game logic is not ported yet, so buttons light up and click but nothing
+happens when they are pressed. Each timeline halts where the original's
+script always calls `stop()`, which is why the game sits on its intro screen.
 
 ```bash
-# Play in a window. Space pauses, the right arrow steps a frame while paused,
-# Escape quits. --hold keeps the main timeline on its frame, as the game's own
-# stop() would, while the clips inside it play.
-cargo run --release -p bb-engine --bin bb-player -- extracted --frame 3 --hold
+# Play in a window. --mute turns the sound off.
+cargo run --release -p bb-engine --bin bb-player -- extracted
 
-# Draw one frame to a PNG, with no window.
-cargo run --release -p bb-engine --bin bb-shot -- extracted --frame 3 --hold --ticks 88 --out frame.png
+# Draw one frame to a PNG, with no window: here after 240 frames of play,
+# with the pointer pressing at stage position (545, 380).
+cargo run --release -p bb-engine --bin bb-shot -- extracted --ticks 240 --pointer 545,380 --press --out frame.png
 ```
 
-What the engine does so far:
+In the window: Space pauses, the right arrow steps one frame while paused,
+F1 opens the inspector, Escape quits. Both tools take `--clip ID` to show one
+clip on its own, `--frame N` to start on a frame, and `--hold` to keep the
+top timeline from playing.
+
+The inspector lists every object on the stage as a tree. For each clip it
+shows the frame it is on, with a switch to play or stop it and a slider to
+move it. Any object can be hidden, or selected to outline it on the stage.
+It also shows the pointer's position, how much each frame takes to draw, and
+the latest sounds and button events.
+
+What the engine does:
 
 - Timelines with Flash's rules: per-frame changes, looping, rewinding, and
   nested clips that keep their own place.
 - Vector shapes tessellated with `lyon` and drawn with `wgpu`: solid,
   gradient and bitmap fills, strokes, and colour transforms.
-- Masks, fixed text, text fields showing their starting text, morph shapes,
-  and buttons in their resting state.
-
-Not there yet: sound, blur filters, button and mouse handling, and an
-inspector for looking inside a running scene.
+- Masks, blur filters, fixed text, text fields showing their starting text,
+  and morph shapes.
+- Sound through `kira`: timeline and button sounds, repeats, start and end
+  points, and starting volume, with Flash's limit of 32 sounds at once.
+- Buttons with their up, over and down looks, hit areas, and all seven
+  pointer events, reported for the game logic to act on.
 
 ## What the extractor leaves out
 
 - **Scripts.** Frames, buttons and clip events only record that a script was
-  there. The game logic is ported by hand in step 5.
+  there, and frames record whether it always stops the timeline. The game
+  logic is ported by hand in step 5.
 - **Filters other than blur.** They are recorded by name. This game only uses
   blur.
 - **Formats this game does not use:** 15-bit bitmaps, sound that is not MP3,

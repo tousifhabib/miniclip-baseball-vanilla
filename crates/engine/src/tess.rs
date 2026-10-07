@@ -83,6 +83,29 @@ pub struct Mesh {
     pub draws: Vec<Draw>,
 }
 
+impl Mesh {
+    /// Whether any triangle covers the point, which is in the mesh's own
+    /// coordinates. Strokes count at the width they were made with.
+    pub fn contains(&self, x: f32, y: f32) -> bool {
+        let corner = |index: u32| {
+            let vertex = &self.vertices[index as usize];
+            (
+                vertex.position[0] + vertex.normal[0] * vertex.half_width,
+                vertex.position[1] + vertex.normal[1] * vertex.half_width,
+            )
+        };
+        self.indices.as_chunks::<3>().0.iter().any(|triangle| {
+            let [a, b, c] = triangle.map(corner);
+            // The point is inside when it is on the same side of all three
+            // edges.
+            let side =
+                |p: (f32, f32), q: (f32, f32)| (q.0 - p.0) * (y - p.1) - (q.1 - p.1) * (x - p.0);
+            let (ab, bc, ca) = (side(a, b), side(b, c), side(c, a));
+            (ab >= 0.0 && bc >= 0.0 && ca >= 0.0) || (ab <= 0.0 && bc <= 0.0 && ca <= 0.0)
+        })
+    }
+}
+
 /// 256 colours along a gradient, not multiplied by alpha.
 pub type Ramp = [[u8; 4]; 256];
 
@@ -853,6 +876,15 @@ mod tests {
     fn an_inner_outline_cuts_a_hole() {
         let mesh = filled("M0 0 L10 0 L10 10 L0 10 Z M2 2 L8 2 L8 8 L2 8 Z");
         assert!((area(&mesh) - 64.0).abs() < 0.01);
+    }
+
+    #[test]
+    fn a_mesh_knows_which_points_it_covers() {
+        let mesh = filled("M0 0 L10 0 L10 10 L0 10 Z M2 2 L8 2 L8 8 L2 8 Z");
+        assert!(mesh.contains(1.0, 1.0));
+        // Inside the hole.
+        assert!(!mesh.contains(5.0, 5.0));
+        assert!(!mesh.contains(11.0, 5.0));
     }
 
     #[test]

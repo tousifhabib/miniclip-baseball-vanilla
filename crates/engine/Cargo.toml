@@ -12,14 +12,18 @@ path = "src/bin/bb_shot.rs"
 
 [[bin]]
 name = "bb-player"
-path = "src/bin/bb_player.rs"
+path = "src/bin/bb_player/main.rs"
 
 [dependencies]
 anyhow.workspace = true
 bb-format = { path = "../format" }
 clap = { version = "4", features = ["derive"] }
 bytemuck = { version = "1", features = ["derive"] }
+egui = "0.36"
+egui-wgpu = "0.36"
+egui-winit = "0.36"
 image = { version = "0.25", default-features = false, features = ["png"] }
+kira = "0.12"
 lyon = "1"
 pollster = "0.4"
 serde.workspace = true
