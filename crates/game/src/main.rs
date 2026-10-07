@@ -45,6 +45,9 @@ struct Args {
     /// out from.
     #[arg(long)]
     seed: Option<u64>,
+    /// Keep the high scores in this file instead of the usual one.
+    #[arg(long)]
+    scores: Option<PathBuf>,
     /// With `--run`: picture pixels per stage pixel.
     #[arg(long, default_value_t = 1.0)]
     scale: f32,
@@ -86,10 +89,14 @@ fn run() -> Result<()> {
     if let Some(seed) = args.seed {
         logic.seed(seed);
     }
-    // A scripted run is a test, and leaves the player's own table alone.
-    if args.run.is_none()
-        && let Some(file) = Scores::usual_file()
-    {
+    // A scripted run is a test, and leaves the player's own table alone
+    // unless it is told which file to use.
+    let usual = if args.run.is_none() {
+        Scores::usual_file()
+    } else {
+        None
+    };
+    if let Some(file) = args.scores.clone().or(usual) {
         logic.keep_scores_in(file);
     }
     if let Some(label) = &args.screen {

@@ -85,8 +85,9 @@ cargo run --release -p bb-game -- extracted
 ```
 
 F1 opens the inspector, F2 pauses, F3 steps one frame while paused, and
-Escape quits. `--mute` turns the sound off, and `--screen menu` (or `match`,
-`arcade`, `matchWon` and so on) starts on a screen of your choice.
+Escape quits. `--mute` turns the sound off, `--screen menu` (or `match`,
+`arcade`, `matchWon` and so on) starts on a screen of your choice, and
+`--scores FILE` keeps the high scores in a file of your choosing.
 
 The game's rules are new code, not a translation of the original's
 scripts. They use the original only for how its art is wired: the names of

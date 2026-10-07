@@ -34,6 +34,20 @@ pub fn game_with(screen: &str, seed: Option<u64>) -> Option<Script> {
 
 /// The same, played by `rules` instead of the ones built in.
 pub fn game_ruled(screen: &str, seed: Option<u64>, rules: Option<Rules>) -> Option<Script> {
+    game_set_up(screen, seed, rules, None)
+}
+
+/// The same, keeping its high scores in `scores`.
+pub fn game_scored(screen: &str, scores: &std::path::Path) -> Option<Script> {
+    game_set_up(screen, Some(1), None, Some(scores))
+}
+
+fn game_set_up(
+    screen: &str,
+    seed: Option<u64>,
+    rules: Option<Rules>,
+    scores: Option<&std::path::Path>,
+) -> Option<Script> {
     let Some(dir) = extracted() else {
         eprintln!("skipped: there is no extracted art to play");
         return None;
@@ -48,8 +62,58 @@ pub fn game_ruled(screen: &str, seed: Option<u64>, rules: Option<Rules>) -> Opti
     if let Some(rules) = rules {
         logic.play_by(rules);
     }
+    if let Some(scores) = scores {
+        logic.keep_scores_in(scores.to_owned());
+    }
     let runner = Runner::new(library, stage, logic, None);
     Some(Script::new(runner).expect("a renderer with no window"))
+}
+
+/// Where the middle of an object is on the stage, if it is there and showing.
+pub fn middle_of(script: &Script, path: &[u16]) -> Option<(f32, f32)> {
+    let (stage, library) = (&script.runner.stage, &script.runner.library);
+    let child = stage.child(path)?;
+    if !child.visible {
+        return None;
+    }
+    let parent = stage.to_stage(&path[..path.len() - 1])?;
+    // A button that draws nothing is still somewhere: where it can be hit.
+    let hit_area = match &child.content {
+        bb_engine::display::Content::Button(button) => {
+            bb_engine::display::bounds_of(&button.hit, parent.then_inner(child.matrix), library)
+        }
+        _ => None,
+    };
+    let [left, top, right, bottom] =
+        bb_engine::display::child_bounds(child, parent, library).or(hit_area)?;
+    Some(((left + right) / 2.0, (top + bottom) / 2.0))
+}
+
+/// Clicks the middle of the first showing object with this instance name.
+/// Returns whether there was one.
+pub fn click_named(script: &mut Script, name: &str) -> bool {
+    let found = bb_game::art::all_named(&script.runner.stage, &[], name)
+        .into_iter()
+        .find_map(|path| middle_of(script, &path));
+    let Some((x, y)) = found else {
+        return false;
+    };
+    script.run(&format!("click {x} {y}")).expect("the click");
+    true
+}
+
+/// Clicks the middle of the first instance of this symbol.
+pub fn click_symbol(script: &mut Script, symbol: u16) -> bool {
+    let found = script
+        .runner
+        .stage
+        .find_symbol(&[], symbol)
+        .and_then(|path| middle_of(script, &path));
+    let Some((x, y)) = found else {
+        return false;
+    };
+    script.run(&format!("click {x} {y}")).expect("the click");
+    true
 }
 
 /// Follows `steps` and returns what the last `state` in them gave.
