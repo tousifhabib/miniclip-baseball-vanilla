@@ -117,9 +117,11 @@ What works so far:
   the bat logos in turn; the arcade game's batter is as chosen on its
   setup page.
 
+- Sound: music on the menu, a crowd under each game, and the levels the
+  original set for its quieter sounds.
+
 Not written yet: a high-score table, and the instruction pages shown
-before each kind of game. Sounds all play at full volume, where the
-original turned some down, and the pointer is not hidden while aiming.
+before each kind of game. The pointer is not hidden while aiming.
 
 ### The numbers the game is played by
 

@@ -81,6 +81,9 @@ pub struct Baseball {
     play: Option<Match>,
     /// What the game's chances are worked out from, if not the clock.
     seed: Option<u64>,
+    /// Whether the menu's music and the game's crowd are being heard.
+    music_on: bool,
+    crowd_on: bool,
     /// The strips on the setup pages that colours are picked from.
     clothes_strip: Option<Swatch>,
     skin_strip: Option<Swatch>,
@@ -99,11 +102,38 @@ impl Baseball {
             first: None,
             play: None,
             seed: None,
+            music_on: false,
+            crowd_on: false,
             // A game whose art has no such strip is played in the art's own
             // colours.
             clothes_strip: Swatch::of_clip(library, art::CLOTHES_STRIP).ok(),
             skin_strip: Swatch::of_clip(library, art::SKIN_STRIP).ok(),
             holds: Vec::new(),
+        }
+    }
+
+    /// Starts and stops the music and the crowd for the screen being shown.
+    /// The music belongs to the menu and the screens a game ends on. The
+    /// crowd is heard under a game.
+    fn sound_for(&mut self, screen: Screen, stage: &mut Stage, library: &Library) {
+        let sound = &self.game.rules.sound;
+        for (name, level) in &sound.levels {
+            stage.set_sound_level(name, *level, library);
+        }
+        let in_game = matches!(screen, Screen::Match | Screen::Arcade);
+        let wants_music = screen == Screen::Menu;
+        let stops_music = in_game || screen == Screen::Instructions;
+        if wants_music && !self.music_on {
+            self.music_on = stage.play_sound(&sound.music, 999, library);
+        } else if stops_music && self.music_on {
+            stage.stop_sound(&sound.music, library);
+            self.music_on = false;
+        }
+        if in_game && !self.crowd_on {
+            self.crowd_on = stage.play_sound(&sound.crowd, 999, library);
+        } else if screen == Screen::Menu && self.crowd_on {
+            stage.stop_sound(&sound.crowd, library);
+            self.crowd_on = false;
         }
     }
 
@@ -174,6 +204,7 @@ impl Baseball {
         self.holds.clear();
         stage.goto_label(&shell, label, false, library);
         self.screen = screen;
+        self.sound_for(screen, stage, library);
         let seed = self.seed.unwrap_or_else(Rng::seed_from_clock);
         self.play = match screen {
             Screen::Match => Some(Match::new(&self.game, seed, library)),

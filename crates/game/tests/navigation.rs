@@ -110,3 +110,25 @@ fn a_colour_picked_from_the_strip_dresses_the_batter_and_goes_into_the_match() {
     assert_eq!(colour_of(&script, "helmetMovie"), helmet);
     assert_eq!(colour_of(&script, "skinMovie").mult, [0.0, 0.0, 0.0, 1.0]);
 }
+
+#[test]
+fn the_menu_has_music_and_a_game_has_a_crowd() {
+    let Some(mut script) = game("menu") else {
+        return;
+    };
+    let note = |script: &bb_game::script::Script, name: &str| {
+        format!("sound {}", script.runner.library.manifest.exports[name])
+    };
+    let (music, crowd) = (
+        note(&script, "introMusic_loop"),
+        note(&script, "crowd_loop_1"),
+    );
+    let heard = script.run("wait 60; events").unwrap();
+    assert!(heard.iter().any(|line| line.trim() == music), "{heard:?}");
+    assert!(!heard.iter().any(|line| line.trim() == crowd), "{heard:?}");
+
+    let steps =
+        format!("{BOTTOM_OF_THE_NINTH}; wait 60; {NEXT}; wait 60; {PLAY_BALL}; wait 200; events");
+    let heard = script.run(&steps).unwrap();
+    assert!(heard.iter().any(|line| line.trim() == crowd), "{heard:?}");
+}

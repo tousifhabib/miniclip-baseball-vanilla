@@ -5,7 +5,7 @@
 //! click, is the job of a [`Logic`]. A [`Runner`] plays the stage frame by
 //! frame and hands the logic everything that happens.
 
-use bb_format::{SoundEvent, SoundStart};
+use bb_format::{EnvelopePoint, SoundEvent, SoundStart};
 
 use crate::audio::Audio;
 use crate::display::Event;
@@ -180,6 +180,17 @@ impl Stage {
         self.sound(name, SoundEvent::Event, loops, library)
     }
 
+    /// Sets how loud the sound with this export name is whenever the game
+    /// asks for it, from 0 to 1, as `setVolume` did. Returns whether there is
+    /// a sound with that name.
+    pub fn set_sound_level(&mut self, name: &str, level: f32, library: &Library) -> bool {
+        let Some(&sound) = library.manifest.exports.get(name) else {
+            return false;
+        };
+        self.levels.insert(sound, level.clamp(0.0, 1.0));
+        true
+    }
+
     /// Stops every copy of the sound with this export name.
     pub fn stop_sound(&mut self, name: &str, library: &Library) -> bool {
         self.sound(name, SoundEvent::Stop, 0, library)
@@ -189,13 +200,24 @@ impl Stage {
         let Some(&sound) = library.manifest.exports.get(name) else {
             return false;
         };
+        // A sound the game has turned down starts at that level.
+        let envelope = self
+            .levels
+            .get(&sound)
+            .map(|&level| EnvelopePoint {
+                sample: 0,
+                left: level,
+                right: level,
+            })
+            .into_iter()
+            .collect();
         self.push_event(Event::Sound(SoundStart {
             sound,
             event,
             loops,
             in_sample: None,
             out_sample: None,
-            envelope: Vec::new(),
+            envelope,
         }));
         true
     }

@@ -17,6 +17,8 @@ pub struct Stage {
     pub focus: Option<Focus>,
     /// Frames played, for blinking the caret.
     ticks: u32,
+    /// How loud each sound is to be played, where the game has said.
+    pub(crate) levels: std::collections::HashMap<SymbolId, f32>,
     events: Vec<Event>,
 }
 
@@ -44,6 +46,7 @@ impl Stage {
             texts: Texts::new(),
             focus: None,
             ticks: 0,
+            levels: std::collections::HashMap::new(),
             events,
         }
     }

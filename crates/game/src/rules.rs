@@ -32,6 +32,16 @@ pub struct Rules {
     pub field: FieldRules,
     pub arcade: ArcadeRules,
     pub team: TeamRules,
+    pub sound: SoundRules,
+}
+
+#[derive(Clone, Debug, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct SoundRules {
+    /// How loud each sound is, by its name in the art, from 0 to 1.
+    pub levels: std::collections::BTreeMap<String, f32>,
+    pub music: String,
+    pub crowd: String,
 }
 
 #[derive(Clone, Debug, PartialEq, Deserialize)]

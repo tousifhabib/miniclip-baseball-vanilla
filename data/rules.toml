@@ -222,3 +222,14 @@ skins = ["#3c311a", "#594926", "#73652f", "#ab8b43", "#9e8650", "#bba674", "#cbb
 # The logos on their bats, in the order the batters come up. Each is the
 # name of a frame of the logo in the art.
 logos = ["fire", "eagle", "miniclip", "sweetspot", "warclub", "bigbat"]
+
+# ---------------------------------------------------------------------------
+# Sound.
+[sound]
+# How loud each sound is, by its name in the art, from 0 to 1. A sound not
+# listed plays at 1.
+levels = { introMusic_loop = 0.75, crowd_loop_1 = 0.35, batSwing_fast = 0.2, baseball_organ_FX = 0.3, umpire_out_1 = 0.3, umpire_yourOuttaHere_1 = 0.6 }
+# The music that plays on the menu, and the crowd that is heard under a
+# game.
+music = "introMusic_loop"
+crowd = "crowd_loop_1"
