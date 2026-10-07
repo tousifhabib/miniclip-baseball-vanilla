@@ -5,7 +5,9 @@
 
 use std::collections::HashMap;
 
+use bb_engine::display::Path;
 use bb_engine::library::Library;
+use bb_engine::stage::Stage;
 use bb_format::{Op, PlaceAction, SymbolId, SymbolInfo};
 
 /// The clip that holds every screen, one per labelled frame.
@@ -25,6 +27,16 @@ pub const INSTRUCTIONS: [SymbolId; 3] = [2026, 1988, 2000];
 /// known by number: the ones on the result screens that lead back to the
 /// menu, such as the "restart game" badge.
 pub const CONTINUE_BUTTONS: [SymbolId; 4] = [493, 1725, 1767, 1847];
+
+/// Where the shell is in the tree, once the art has reached it.
+pub fn shell(stage: &Stage) -> Option<Path> {
+    stage.find_symbol(&[], SHELL)
+}
+
+/// A clip that sits directly inside the shell: the screen that is showing.
+pub fn in_shell(stage: &Stage, symbol: SymbolId) -> Option<Path> {
+    stage.find_symbol(&shell(stage)?, symbol)
+}
 
 /// The words on each button, in capitals, for telling buttons apart.
 pub struct ButtonLabels(HashMap<SymbolId, String>);
